@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+node_modules/
+dist/
+build/
+.env
+*.db
+*.sqlite
+backend/app/db/radar.db
+.idea/
+.vscode/
