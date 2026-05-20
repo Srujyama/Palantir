@@ -6,6 +6,7 @@ export interface PatientSummary {
   sex: "M" | "F";
   chief_complaint: string;
   arrival_time: string;
+  room?: string | null;
   primary_category: string;
   primary_label: string;
   primary_urgency: Urgency;
@@ -91,6 +92,11 @@ export interface Extraction {
   dispo: Finding[];
   symptoms: Finding[];
   risk_factors: Finding[];
+  code_status?: Finding[];
+  mobility?: Finding[];
+  pain?: Finding[];
+  advance_directives?: Finding[];
+  social?: Finding[];
 }
 
 export interface PatientDetail {
@@ -99,6 +105,7 @@ export interface PatientDetail {
   sex: "M" | "F";
   chief_complaint: string;
   arrival_time: string;
+  room?: string | null;
   note_text: string;
   primary: Bottleneck;
   secondary: Bottleneck[];
@@ -107,6 +114,90 @@ export interface PatientDetail {
   icd_candidates: ICDCandidate[];
   extraction: Extraction;
   actions: ActionItem[];
+}
+
+export interface FloorBed {
+  room: string;
+  wing: string;
+  bed_number: number;
+  patient_id?: string | null;
+  urgency?: Urgency | null;
+  primary_category?: string | null;
+  primary_owner?: string | null;
+  chief_complaint?: string | null;
+  age?: number | null;
+  sex?: "M" | "F" | null;
+  open_actions: number;
+}
+
+export interface FloorMap {
+  wings: string[];
+  beds_per_wing: number;
+  beds: FloorBed[];
+}
+
+export interface ProtocolGapBreakdown {
+  protocol_key: string;
+  protocol_name: string;
+  total_triggered: number;
+  total_gaps: number;
+  missing_by_action: Record<string, number>;
+}
+
+export interface Analytics {
+  total_patients: number;
+  by_urgency: Record<string, number>;
+  by_category: Record<string, number>;
+  by_owner: Record<string, number>;
+  by_protocol: ProtocolGapBreakdown[];
+  arrival_age_buckets: Record<string, number>;
+  action_status: Record<string, number>;
+  actions_per_owner: Record<string, number>;
+  silent_failures_by_protocol: Record<string, number>;
+}
+
+export interface TimelineEvent {
+  timestamp: string;
+  kind: "arrival" | "triage" | "gap_detected" | "action_created" | "action_state" | "note";
+  title: string;
+  detail?: string | null;
+  urgency?: Urgency | null;
+  actor?: string | null;
+}
+
+export interface PatientTimeline {
+  patient_id: string;
+  events: TimelineEvent[];
+}
+
+export interface ActionEventItem {
+  id: number;
+  action_id: number;
+  event_type: string;
+  from_value?: string | null;
+  to_value?: string | null;
+  actor: string;
+  note?: string | null;
+  created_at: string;
+}
+
+export interface HandoffSection {
+  title: string;
+  patient_id?: string | null;
+  room?: string | null;
+  urgency?: Urgency | null;
+  bullets: string[];
+}
+
+export interface HandoffReport {
+  generated_at: string;
+  shift_label: string;
+  floor: string;
+  summary: Record<string, number>;
+  critical: HandoffSection[];
+  open_protocol_gaps: HandoffSection[];
+  awaiting_dispo: HandoffSection[];
+  open_actions_by_owner: Record<string, HandoffSection[]>;
 }
 
 export interface WhyStuck {

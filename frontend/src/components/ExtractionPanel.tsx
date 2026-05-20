@@ -32,6 +32,12 @@ function block(label: string, items: { label: string; value?: string | null; met
 }
 
 export function ExtractionPanel({ ext }: { ext: Extraction }) {
+  const hasContext =
+    (ext.code_status?.length ?? 0) > 0
+    || (ext.mobility?.length ?? 0) > 0
+    || (ext.pain?.length ?? 0) > 0
+    || (ext.advance_directives?.length ?? 0) > 0
+    || (ext.social?.length ?? 0) > 0;
   return (
     <div>
       {block("Vitals", ext.vitals.map((f) => ({ label: f.label, value: f.value })))}
@@ -45,6 +51,15 @@ export function ExtractionPanel({ ext }: { ext: Extraction }) {
       {block("Imaging", ext.imaging.map((f) => ({ label: f.label.toUpperCase(), value: f.value ?? undefined })))}
       {block("Dispo signals", ext.dispo.map((f) => ({ label: f.label.replace(/_/g, " ") })))}
       {block("Risk markers", ext.risk_factors.map((f) => ({ label: f.label.replace(/_/g, " ") })))}
+      {hasContext && (
+        <>
+          {block("Code status", (ext.code_status ?? []).map((f) => ({ label: f.label.replace(/_/g, " ") })))}
+          {block("Mobility", (ext.mobility ?? []).map((f) => ({ label: f.label.replace(/_/g, " ") })))}
+          {block("Pain", (ext.pain ?? []).map((f) => ({ label: f.label.replace(/_/g, " "), value: f.value ?? undefined })))}
+          {block("Advance directives", (ext.advance_directives ?? []).map((f) => ({ label: f.label.replace(/_/g, " ") })))}
+          {block("Social context", (ext.social ?? []).map((f) => ({ label: f.label.replace(/_/g, " ") })))}
+        </>
+      )}
     </div>
   );
 }

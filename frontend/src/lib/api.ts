@@ -1,7 +1,12 @@
 import type {
+  ActionEventItem,
   ActionItem,
+  Analytics,
+  FloorMap,
+  HandoffReport,
   PatientDetail,
   PatientSummary,
+  PatientTimeline,
   Stats,
   WhyStuck,
 } from "../types/api";
@@ -62,5 +67,39 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify(body),
     });
+  },
+  actionEvents(actionId: number): Promise<ActionEventItem[]> {
+    return request<ActionEventItem[]>(`/actions/${actionId}/events`);
+  },
+  bulkCreateActions(body: {
+    patient_ids: string[];
+    title: string;
+    description: string;
+    owner: string;
+    urgency: string;
+    source_category: string;
+  }): Promise<ActionItem[]> {
+    return request<ActionItem[]>("/actions/bulk", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  },
+  bulkUpdateActions(body: { action_ids: number[]; status?: string; owner?: string }): Promise<ActionItem[]> {
+    return request<ActionItem[]>("/actions/bulk", {
+      method: "PATCH",
+      body: JSON.stringify(body),
+    });
+  },
+  floor(): Promise<FloorMap> {
+    return request<FloorMap>("/floor");
+  },
+  analytics(): Promise<Analytics> {
+    return request<Analytics>("/analytics");
+  },
+  handoff(): Promise<HandoffReport> {
+    return request<HandoffReport>("/handoff");
+  },
+  timeline(patientId: string): Promise<PatientTimeline> {
+    return request<PatientTimeline>(`/patients/${patientId}/timeline`);
   },
 };

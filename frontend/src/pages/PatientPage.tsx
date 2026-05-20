@@ -10,6 +10,7 @@ import { ExtractionPanel } from "../components/ExtractionPanel";
 import { WhyStuckPanel } from "../components/WhyStuckPanel";
 import { ActionsList } from "../components/ActionsList";
 import { UrgencyPill } from "../components/UrgencyPill";
+import { Timeline } from "../components/Timeline";
 
 export function PatientPage() {
   const { patientId } = useParams<{ patientId: string }>();
@@ -50,6 +51,7 @@ export function PatientPage() {
           <div className="title">
             <span className="pid">{data.id}</span>
             <span className="demog">{data.age}{data.sex} · arrived {fmtTime(data.arrival_time)} ({hoursAgo(data.arrival_time)} ago)</span>
+            {data.room && <span className="tag mono" style={{ marginLeft: 8 }}>{data.room}</span>}
             <div style={{ marginLeft: "auto" }}><UrgencyPill urgency={data.primary.urgency} /></div>
           </div>
           <div className="cc">{data.chief_complaint}</div>
@@ -86,6 +88,13 @@ export function PatientPage() {
               primaryBottleneck={data.primary}
               onChange={reload}
             />
+          </div>
+        </div>
+
+        <div className="section">
+          <div className="head"><span className="label bright">Timeline</span></div>
+          <div className="body">
+            <Timeline patientId={data.id} />
           </div>
         </div>
       </div>
