@@ -1,0 +1,177 @@
+patient_id,arrival_time,age,sex,chief_complaint,icd10_hints,truth_bottleneck,truth_protocol,expected_owner
+P-1105,2026-05-17T18:54,68,M,"COPD exacerbation, increased sputum",J44.1,missing_soc,copd,physician
+P-1111,2026-05-19T13:21,74,F,"Slow GI bleed, awaiting endoscopy",K92.1,awaiting_consult,,physician
+P-1002,2026-05-17T10:13,73,M,"Fever, hypotension, altered mental status",A41.9|N39.0|R65.20,missing_soc,sepsis,physician
+P-1089,2026-05-19T12:30,75,M,"Rising creatinine, oliguria",N17.9,missing_soc,aki,physician
+P-1025,2026-05-16T09:07,38,F,First-time seizure,R56.9|G40.909,awaiting_imaging,,physician
+P-1018,2026-05-18T07:17,73,M,"Decreased urine output, rising creatinine",N17.9|T36.91XA,awaiting_consult,,physician
+P-1045,2026-05-19T06:52,31,M,"DKA, third admission this year",E10.10|Z91.120,readmit_risk,,case_manager
+P-1022,2026-05-16T21:55,29,F,Right lower quadrant pain,K35.80|R10.31,awaiting_imaging,,physician
+P-1067,2026-05-16T15:04,28,F,"Migraine, treated and ready to leave",G43.909,clear,,
+P-1039,2026-05-17T08:47,75,M,Worsening renal function on home meds,N17.9|T39.395A,med_risk,,pharmacist
+P-1090,2026-05-19T02:09,75,F,"Rising creatinine, oliguria",N17.9,missing_soc,aki,physician
+P-1029,2026-05-19T09:39,73,M,"COPD exacerbation, now resolved",J44.1|Z74.09,dispo_delay,,case_manager
+P-1081,2026-05-17T20:33,57,M,"Pleuritic chest pain, dyspnea",I26.99,missing_soc,pe,physician
+P-1094,2026-05-18T14:58,52,M,"Alcohol withdrawal, tremulous",F10.230,missing_soc,ciwa,physician
+P-1136,2026-05-16T13:08,54,M,"Cellulitis, completed IV antibiotics",L03.115,clear,,
+P-1121,2026-05-19T20:53,39,M,"Fever, IVDU, suspected endocarditis",I33.0,awaiting_imaging,,physician
+P-1037,2026-05-19T08:00,77,M,Worsening renal function on home meds,N17.9|T39.395A,med_risk,,pharmacist
+P-1123,2026-05-18T10:46,35,M,"Fever, IVDU, suspected endocarditis",I33.0,awaiting_imaging,,physician
+P-1058,2026-05-17T10:05,21,M,"Hyperglycemia, ketosis",E10.10,missing_soc,dka,physician
+P-1049,2026-05-19T11:32,71,M,CHF readmission within 14 days,I50.32,readmit_risk,,case_manager
+P-1004,2026-05-17T20:23,63,F,Substernal chest pressure,I21.4|I20.0,missing_soc,acs,physician
+P-1149,2026-05-16T18:45,71,M,"Old stroke, residual deficits, dispo",I69.351,dispo_delay,,case_manager
+P-1128,2026-05-18T18:27,26,M,"Post-TBI, awaiting rehab placement",S06.9X9A,dispo_delay,,case_manager
+P-1044,2026-05-16T22:23,32,M,"DKA, third admission this year",E10.10|Z91.120,readmit_risk,,case_manager
+P-1014,2026-05-18T18:36,84,F,"Post-fall left hip pain, unable to bear weight",S72.141A,awaiting_consult,,physician
+P-1056,2026-05-18T16:53,19,M,"Hyperglycemia, ketosis",E10.10,missing_soc,dka,physician
+P-1027,2026-05-17T15:04,42,F,First-time seizure,R56.9|G40.909,awaiting_imaging,,physician
+P-1157,2026-05-17T12:10,62,M,"Free air on CT, surgery not yet seen",K65.9,awaiting_consult,,physician
+P-1007,2026-05-19T09:08,63,F,Substernal chest pressure,I21.4|I20.0,missing_soc,acs,physician
+P-1069,2026-05-19T00:56,28,M,"Suicidal ideation, awaiting psychiatry",R45.851,awaiting_consult,,physician
+P-1160,2026-05-16T03:56,80,M,"Diabetic admission, hypoglycemia event",E11.9|E16.2,med_risk,,pharmacist
+P-1066,2026-05-18T23:56,35,F,"Migraine, treated and ready to leave",G43.909,clear,,
+P-1173,2026-05-17T09:58,70,M,Acute limb ischemia,I74.3,awaiting_consult,,physician
+P-1085,2026-05-17T17:37,66,F,Hematemesis x 2 episodes overnight,K92.0|K92.2,missing_soc,gi_bleed,physician
+P-1008,2026-05-19T10:50,80,M,Acute right-sided weakness,I63.9|G81.91,missing_soc,stroke,physician
+P-1122,2026-05-19T06:10,38,M,"Fever, IVDU, suspected endocarditis",I33.0,awaiting_imaging,,physician
+P-1102,2026-05-19T08:57,67,F,Severe hyperkalemia on routine labs,E87.5|N18.6,missing_soc,hyperkalemia,physician
+P-1041,2026-05-17T23:01,85,F,GIB on apixaban,K92.2|I48.91|D62,med_risk,,pharmacist
+P-1126,2026-05-18T18:24,59,M,"ESRD, dispo delayed by outpatient HD slot",N18.6|Z99.2,dispo_delay,,case_manager
+P-1114,2026-05-17T05:28,31,M,"Manic episode, on involuntary hold",F31.2,awaiting_consult,,physician
+P-1167,2026-05-19T18:55,60,M,"Discharge teaching delayed, no interpreter",I50.32,dispo_delay,,case_manager
+P-1117,2026-05-18T16:25,46,F,"Dyspnea, contrast contraindication",R06.02|O88.211,awaiting_imaging,,physician
+P-1046,2026-05-16T20:25,31,F,"DKA, third admission this year",E10.10|Z91.120,readmit_risk,,case_manager
+P-1129,2026-05-16T14:59,30,F,"Post-TBI, awaiting rehab placement",S06.9X9A,dispo_delay,,case_manager
+P-1150,2026-05-16T06:29,71,F,"Old stroke, residual deficits, dispo",I69.351,dispo_delay,,case_manager
+P-1048,2026-05-18T05:48,68,M,CHF readmission within 14 days,I50.32,readmit_risk,,case_manager
+P-1159,2026-05-19T14:44,62,M,"Free air on CT, surgery not yet seen",K65.9,awaiting_consult,,physician
+P-1072,2026-05-19T15:40,70,F,"POD 2 from THA, awaiting PT clearance",Z47.1,dispo_delay,,case_manager
+P-1118,2026-05-19T15:48,41,F,"Dyspnea, contrast contraindication",R06.02|O88.211,awaiting_imaging,,physician
+P-1001,2026-05-17T06:20,68,F,"Fever, hypotension, altered mental status",A41.9|N39.0|R65.20,missing_soc,sepsis,physician
+P-1132,2026-05-16T07:40,66,F,"COPD readmit, lost inhaler",J44.1,readmit_risk,,case_manager
+P-1087,2026-05-16T06:19,60,M,Hematemesis x 2 episodes overnight,K92.0|K92.2,missing_soc,gi_bleed,physician
+P-1112,2026-05-19T03:09,31,M,"Manic episode, on involuntary hold",F31.2,awaiting_consult,,physician
+P-1155,2026-05-18T01:33,65,M,Septic shock with AKI,A41.9|N17.9|R65.21,missing_soc,sepsis,physician
+P-1023,2026-05-19T17:33,31,F,Right lower quadrant pain,K35.80|R10.31,awaiting_imaging,,physician
+P-1140,2026-05-18T11:13,50,M,"Chest pain, ruled out for ACS",R07.9,clear,,
+P-1142,2026-05-17T09:45,46,M,"Chest pain, ruled out for ACS",R07.9,clear,,
+P-1079,2026-05-18T23:25,72,F,Syncope on multiple QT-prolonging meds,I49.8|T50.905A,med_risk,,pharmacist
+P-1035,2026-05-16T14:12,66,F,"CHF exacerbation, awaiting home O2 setup",I50.32|Z99.81,dispo_delay,,case_manager
+P-1075,2026-05-16T21:56,65,F,"POD 2 from THA, awaiting PT clearance",Z47.1,dispo_delay,,case_manager
+P-1011,2026-05-16T07:22,79,M,Acute right-sided weakness,I63.9|G81.91,missing_soc,stroke,physician
+P-1005,2026-05-16T17:46,61,M,Substernal chest pressure,I21.4|I20.0,missing_soc,acs,physician
+P-1076,2026-05-17T04:18,74,F,Syncope on multiple QT-prolonging meds,I49.8|T50.905A,med_risk,,pharmacist
+P-1120,2026-05-17T04:00,35,M,"Fever, IVDU, suspected endocarditis",I33.0,awaiting_imaging,,physician
+P-1119,2026-05-19T10:57,43,M,"Dyspnea, contrast contraindication",R06.02|O88.211,awaiting_imaging,,physician
+P-1116,2026-05-16T10:15,41,F,"Dyspnea, contrast contraindication",R06.02|O88.211,awaiting_imaging,,physician
+P-1068,2026-05-19T10:28,23,M,"Suicidal ideation, awaiting psychiatry",R45.851,awaiting_consult,,physician
+P-1042,2026-05-17T23:23,78,F,GIB on apixaban,K92.2|I48.91|D62,med_risk,,pharmacist
+P-1146,2026-05-17T06:32,67,M,Resolved sepsis from prior admission,A41.9|N39.0,dispo_delay,,case_manager
+P-1169,2026-05-18T12:41,79,F,Discharge delayed by warfarin issue,I48.91|D68.32,med_risk,,pharmacist
+P-1063,2026-05-16T21:04,38,F,"Uncomplicated UTI, ready for discharge",N30.00,clear,,
+P-1141,2026-05-18T08:02,50,M,"Chest pain, ruled out for ACS",R07.9,clear,,
+P-1107,2026-05-18T04:25,70,F,"COPD exacerbation, increased sputum",J44.1,missing_soc,copd,physician
+P-1009,2026-05-16T11:15,78,F,Acute right-sided weakness,I63.9|G81.91,missing_soc,stroke,physician
+P-1020,2026-05-17T00:36,32,F,Right lower quadrant pain,K35.80|R10.31,awaiting_imaging,,physician
+P-1091,2026-05-17T09:58,67,M,"Rising creatinine, oliguria",N17.9,missing_soc,aki,physician
+P-1015,2026-05-18T19:21,79,F,"Post-fall left hip pain, unable to bear weight",S72.141A,awaiting_consult,,physician
+P-1144,2026-05-19T08:01,68,F,Resolved sepsis from prior admission,A41.9|N39.0,dispo_delay,,case_manager
+P-1131,2026-05-18T21:05,27,M,"Post-TBI, awaiting rehab placement",S06.9X9A,dispo_delay,,case_manager
+P-1061,2026-05-17T11:04,37,F,"Uncomplicated UTI, ready for discharge",N30.00,clear,,
+P-1147,2026-05-16T06:36,66,F,Resolved sepsis from prior admission,A41.9|N39.0,dispo_delay,,case_manager
+P-1145,2026-05-18T12:07,64,F,Resolved sepsis from prior admission,A41.9|N39.0,dispo_delay,,case_manager
+P-1110,2026-05-19T18:19,75,F,"Slow GI bleed, awaiting endoscopy",K92.1,awaiting_consult,,physician
+P-1174,2026-05-19T00:22,70,M,Acute limb ischemia,I74.3,awaiting_consult,,physician
+P-1148,2026-05-16T05:55,75,M,"Old stroke, residual deficits, dispo",I69.351,dispo_delay,,case_manager
+P-1032,2026-05-17T04:09,66,F,"CHF exacerbation, awaiting home O2 setup",I50.32|Z99.81,dispo_delay,,case_manager
+P-1166,2026-05-16T10:07,62,F,"Discharge teaching delayed, no interpreter",I50.32,dispo_delay,,case_manager
+P-1137,2026-05-19T20:57,51,M,"Cellulitis, completed IV antibiotics",L03.115,clear,,
+P-1043,2026-05-18T23:58,80,M,GIB on apixaban,K92.2|I48.91|D62,med_risk,,pharmacist
+P-1053,2026-05-18T23:53,56,F,"Cough, fever, hypoxia",J18.9,missing_soc,cap,physician
+P-1060,2026-05-16T03:35,37,F,"Uncomplicated UTI, ready for discharge",N30.00,clear,,
+P-1021,2026-05-18T06:42,29,F,Right lower quadrant pain,K35.80|R10.31,awaiting_imaging,,physician
+P-1139,2026-05-18T07:51,52,M,"Cellulitis, completed IV antibiotics",L03.115,clear,,
+P-1108,2026-05-17T17:41,76,F,"Slow GI bleed, awaiting endoscopy",K92.1,awaiting_consult,,physician
+P-1104,2026-05-16T12:33,72,M,"COPD exacerbation, increased sputum",J44.1,missing_soc,copd,physician
+P-1062,2026-05-18T14:56,34,F,"Uncomplicated UTI, ready for discharge",N30.00,clear,,
+P-1156,2026-05-16T18:25,61,M,"Free air on CT, surgery not yet seen",K65.9,awaiting_consult,,physician
+P-1082,2026-05-16T04:04,54,F,"Pleuritic chest pain, dyspnea",I26.99,missing_soc,pe,physician
+P-1017,2026-05-19T17:19,72,M,"Decreased urine output, rising creatinine",N17.9|T36.91XA,awaiting_consult,,physician
+P-1153,2026-05-19T23:34,68,M,Septic shock with AKI,A41.9|N17.9|R65.21,missing_soc,sepsis,physician
+P-1078,2026-05-19T08:59,70,F,Syncope on multiple QT-prolonging meds,I49.8|T50.905A,med_risk,,pharmacist
+P-1057,2026-05-18T04:37,23,M,"Hyperglycemia, ketosis",E10.10,missing_soc,dka,physician
+P-1052,2026-05-17T12:33,59,F,"Cough, fever, hypoxia",J18.9,missing_soc,cap,physician
+P-1168,2026-05-19T13:42,80,F,Discharge delayed by warfarin issue,I48.91|D68.32,med_risk,,pharmacist
+P-1163,2026-05-19T16:56,79,F,"Diabetic admission, hypoglycemia event",E11.9|E16.2,med_risk,,pharmacist
+P-1010,2026-05-16T17:14,75,F,Acute right-sided weakness,I63.9|G81.91,missing_soc,stroke,physician
+P-1135,2026-05-19T19:21,67,F,"COPD readmit, lost inhaler",J44.1,readmit_risk,,case_manager
+P-1171,2026-05-17T04:14,77,F,Discharge delayed by warfarin issue,I48.91|D68.32,med_risk,,pharmacist
+P-1134,2026-05-16T17:39,65,M,"COPD readmit, lost inhaler",J44.1,readmit_risk,,case_manager
+P-1133,2026-05-18T06:23,65,F,"COPD readmit, lost inhaler",J44.1,readmit_risk,,case_manager
+P-1051,2026-05-19T08:20,73,M,CHF readmission within 14 days,I50.32,readmit_risk,,case_manager
+P-1152,2026-05-17T06:38,68,F,Septic shock with AKI,A41.9|N17.9|R65.21,missing_soc,sepsis,physician
+P-1097,2026-05-19T00:33,58,F,"Fever on chemotherapy, ANC 200",D70.9|R50.9,missing_soc,neutropenic_fever,physician
+P-1158,2026-05-19T17:39,54,M,"Free air on CT, surgery not yet seen",K65.9,awaiting_consult,,physician
+P-1143,2026-05-20T02:21,48,M,"Chest pain, ruled out for ACS",R07.9,clear,,
+P-1113,2026-05-16T11:34,29,M,"Manic episode, on involuntary hold",F31.2,awaiting_consult,,physician
+P-1054,2026-05-17T04:28,59,M,"Cough, fever, hypoxia",J18.9,missing_soc,cap,physician
+P-1138,2026-05-17T17:26,50,M,"Cellulitis, completed IV antibiotics",L03.115,clear,,
+P-1047,2026-05-16T20:02,31,F,"DKA, third admission this year",E10.10|Z91.120,readmit_risk,,case_manager
+P-1098,2026-05-19T11:01,57,M,"Fever on chemotherapy, ANC 200",D70.9|R50.9,missing_soc,neutropenic_fever,physician
+P-1024,2026-05-17T13:42,38,M,First-time seizure,R56.9|G40.909,awaiting_imaging,,physician
+P-1162,2026-05-16T14:57,75,F,"Diabetic admission, hypoglycemia event",E11.9|E16.2,med_risk,,pharmacist
+P-1065,2026-05-19T13:12,33,M,"Migraine, treated and ready to leave",G43.909,clear,,
+P-1055,2026-05-18T11:45,54,F,"Cough, fever, hypoxia",J18.9,missing_soc,cap,physician
+P-1034,2026-05-19T07:21,70,F,"CHF exacerbation, awaiting home O2 setup",I50.32|Z99.81,dispo_delay,,case_manager
+P-1165,2026-05-19T08:05,61,M,"Discharge teaching delayed, no interpreter",I50.32,dispo_delay,,case_manager
+P-1031,2026-05-17T04:09,72,M,"COPD exacerbation, now resolved",J44.1|Z74.09,dispo_delay,,case_manager
+P-1038,2026-05-17T02:06,81,M,Worsening renal function on home meds,N17.9|T39.395A,med_risk,,pharmacist
+P-1073,2026-05-19T10:25,65,F,"POD 2 from THA, awaiting PT clearance",Z47.1,dispo_delay,,case_manager
+P-1013,2026-05-18T09:57,85,F,"Post-fall left hip pain, unable to bear weight",S72.141A,awaiting_consult,,physician
+P-1026,2026-05-18T00:30,44,M,First-time seizure,R56.9|G40.909,awaiting_imaging,,physician
+P-1170,2026-05-17T14:57,84,F,Discharge delayed by warfarin issue,I48.91|D68.32,med_risk,,pharmacist
+P-1012,2026-05-17T10:43,77,F,"Post-fall left hip pain, unable to bear weight",S72.141A,awaiting_consult,,physician
+P-1070,2026-05-16T17:05,24,M,"Suicidal ideation, awaiting psychiatry",R45.851,awaiting_consult,,physician
+P-1109,2026-05-17T07:47,71,F,"Slow GI bleed, awaiting endoscopy",K92.1,awaiting_consult,,physician
+P-1175,2026-05-17T07:10,67,F,Acute limb ischemia,I74.3,awaiting_consult,,physician
+P-1019,2026-05-16T13:22,72,M,"Decreased urine output, rising creatinine",N17.9|T36.91XA,awaiting_consult,,physician
+P-1099,2026-05-16T13:11,57,F,"Fever on chemotherapy, ANC 200",D70.9|R50.9,missing_soc,neutropenic_fever,physician
+P-1164,2026-05-16T19:46,62,F,"Discharge teaching delayed, no interpreter",I50.32,dispo_delay,,case_manager
+P-1016,2026-05-18T06:40,69,M,"Decreased urine output, rising creatinine",N17.9|T36.91XA,awaiting_consult,,physician
+P-1095,2026-05-17T12:54,52,M,"Alcohol withdrawal, tremulous",F10.230,missing_soc,ciwa,physician
+P-1064,2026-05-16T06:04,35,F,"Migraine, treated and ready to leave",G43.909,clear,,
+P-1074,2026-05-17T14:35,65,F,"POD 2 from THA, awaiting PT clearance",Z47.1,dispo_delay,,case_manager
+P-1003,2026-05-17T21:22,68,F,"Fever, hypotension, altered mental status",A41.9|N39.0|R65.20,missing_soc,sepsis,physician
+P-1050,2026-05-17T14:56,73,M,CHF readmission within 14 days,I50.32,readmit_risk,,case_manager
+P-1151,2026-05-16T04:42,77,M,"Old stroke, residual deficits, dispo",I69.351,dispo_delay,,case_manager
+P-1101,2026-05-19T06:41,63,M,Severe hyperkalemia on routine labs,E87.5|N18.6,missing_soc,hyperkalemia,physician
+P-1086,2026-05-19T07:15,60,M,Hematemesis x 2 episodes overnight,K92.0|K92.2,missing_soc,gi_bleed,physician
+P-1083,2026-05-17T08:00,59,M,"Pleuritic chest pain, dyspnea",I26.99,missing_soc,pe,physician
+P-1172,2026-05-17T14:25,70,M,Acute limb ischemia,I74.3,awaiting_consult,,physician
+P-1084,2026-05-19T06:53,66,F,Hematemesis x 2 episodes overnight,K92.0|K92.2,missing_soc,gi_bleed,physician
+P-1030,2026-05-17T11:21,73,M,"COPD exacerbation, now resolved",J44.1|Z74.09,dispo_delay,,case_manager
+P-1080,2026-05-17T10:11,56,M,"Pleuritic chest pain, dyspnea",I26.99,missing_soc,pe,physician
+P-1096,2026-05-18T16:27,53,F,"Fever on chemotherapy, ANC 200",D70.9|R50.9,missing_soc,neutropenic_fever,physician
+P-1088,2026-05-16T10:53,75,F,"Rising creatinine, oliguria",N17.9,missing_soc,aki,physician
+P-1106,2026-05-19T01:04,71,M,"COPD exacerbation, increased sputum",J44.1,missing_soc,copd,physician
+P-1036,2026-05-16T23:15,73,M,Worsening renal function on home meds,N17.9|T39.395A,med_risk,,pharmacist
+P-1077,2026-05-16T05:45,69,M,Syncope on multiple QT-prolonging meds,I49.8|T50.905A,med_risk,,pharmacist
+P-1103,2026-05-19T14:01,65,M,Severe hyperkalemia on routine labs,E87.5|N18.6,missing_soc,hyperkalemia,physician
+P-1115,2026-05-16T09:06,35,M,"Manic episode, on involuntary hold",F31.2,awaiting_consult,,physician
+P-1125,2026-05-19T04:09,61,M,"ESRD, dispo delayed by outpatient HD slot",N18.6|Z99.2,dispo_delay,,case_manager
+P-1000,2026-05-17T23:45,73,M,"Fever, hypotension, altered mental status",A41.9|N39.0|R65.20,missing_soc,sepsis,physician
+P-1040,2026-05-16T10:35,77,F,GIB on apixaban,K92.2|I48.91|D62,med_risk,,pharmacist
+P-1006,2026-05-18T00:23,60,M,Substernal chest pressure,I21.4|I20.0,missing_soc,acs,physician
+P-1100,2026-05-16T13:07,68,F,Severe hyperkalemia on routine labs,E87.5|N18.6,missing_soc,hyperkalemia,physician
+P-1124,2026-05-19T00:08,58,M,"ESRD, dispo delayed by outpatient HD slot",N18.6|Z99.2,dispo_delay,,case_manager
+P-1127,2026-05-17T09:51,54,F,"ESRD, dispo delayed by outpatient HD slot",N18.6|Z99.2,dispo_delay,,case_manager
+P-1059,2026-05-19T01:35,21,M,"Hyperglycemia, ketosis",E10.10,missing_soc,dka,physician
+P-1093,2026-05-17T09:48,49,M,"Alcohol withdrawal, tremulous",F10.230,missing_soc,ciwa,physician
+P-1028,2026-05-17T11:23,72,M,"COPD exacerbation, now resolved",J44.1|Z74.09,dispo_delay,,case_manager
+P-1071,2026-05-16T06:01,23,M,"Suicidal ideation, awaiting psychiatry",R45.851,awaiting_consult,,physician
+P-1130,2026-05-17T23:54,30,M,"Post-TBI, awaiting rehab placement",S06.9X9A,dispo_delay,,case_manager
+P-1161,2026-05-18T17:11,76,F,"Diabetic admission, hypoglycemia event",E11.9|E16.2,med_risk,,pharmacist
+P-1154,2026-05-19T21:18,63,F,Septic shock with AKI,A41.9|N17.9|R65.21,missing_soc,sepsis,physician
+P-1033,2026-05-16T10:30,70,F,"CHF exacerbation, awaiting home O2 setup",I50.32|Z99.81,dispo_delay,,case_manager
+P-1092,2026-05-19T17:58,52,F,"Alcohol withdrawal, tremulous",F10.230,missing_soc,ciwa,physician

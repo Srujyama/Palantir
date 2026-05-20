@@ -1,0 +1,40 @@
+code,description,category
+A41.9,"Sepsis, unspecified organism",infection
+R65.20,Severe sepsis without septic shock,infection
+R65.21,Severe sepsis with septic shock,infection
+N39.0,"Urinary tract infection, site not specified",infection
+N30.00,Acute cystitis without hematuria,infection
+J18.9,"Pneumonia, unspecified organism",infection
+J15.9,Unspecified bacterial pneumonia,infection
+I21.4,Non-ST elevation (NSTEMI) myocardial infarction,cardiac
+I21.3,"ST elevation myocardial infarction (STEMI), unspecified site",cardiac
+I20.0,Unstable angina,cardiac
+I50.32,Chronic diastolic (congestive) heart failure,cardiac
+I50.22,Chronic systolic (congestive) heart failure,cardiac
+I48.91,Unspecified atrial fibrillation,cardiac
+I49.8,Other specified cardiac arrhythmias,cardiac
+I63.9,"Cerebral infarction, unspecified",neuro
+G81.91,"Hemiplegia, unspecified affecting right dominant side",neuro
+R56.9,Unspecified convulsions,neuro
+G40.909,"Epilepsy, unspecified, not intractable, without status epilepticus",neuro
+G43.909,"Migraine, unspecified, not intractable, without status migrainosus",neuro
+R45.851,Suicidal ideations,psych
+N17.9,"Acute kidney failure, unspecified",renal
+N18.6,End stage renal disease,renal
+E10.10,Type 1 diabetes mellitus with ketoacidosis without coma,endocrine
+E11.9,Type 2 diabetes mellitus without complications,endocrine
+E11.65,Type 2 diabetes mellitus with hyperglycemia,endocrine
+J44.1,Chronic obstructive pulmonary disease with (acute) exacerbation,respiratory
+J45.901,Unspecified asthma with (acute) exacerbation,respiratory
+Z99.81,Dependence on supplemental oxygen,respiratory
+K35.80,Unspecified acute appendicitis,surgical
+K92.2,"Gastrointestinal hemorrhage, unspecified",gi
+R10.31,Right lower quadrant pain,symptom
+S72.141A,"Displaced intertrochanteric fracture of left femur, initial",trauma
+Z47.1,Aftercare following joint replacement surgery,post_op
+T36.91XA,"Adverse effect of unspecified systemic antibiotic, initial",adverse_effect
+T39.395A,"Adverse effect of other propionic acid derivatives, initial",adverse_effect
+T50.905A,"Adverse effect of unspecified drugs, medicaments and biological substances, initial",adverse_effect
+D62,Acute posthemorrhagic anemia,hematology
+Z74.09,Other reduced mobility,social
+Z91.120,Patient's intentional underdosing of medication regimen due to financial hardship,social

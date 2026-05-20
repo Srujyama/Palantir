@@ -1,0 +1,905 @@
+patient_id,note_text
+P-1105,"HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.
+Exam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.
+Labs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.
+Imaging: CXR no infiltrate.
+Assessment: COPD exacerbation, moderate.
+Plan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry."
+P-1111,"HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.
+Exam: stable, soft non-tender abdomen.
+Labs: hgb 8.8, plt 220, INR 1.1.
+Assessment: chronic GI blood loss, likely NSAID gastropathy.
+Plan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling."
+P-1002,"HPI: 72yo presenting from SNF with fever to 39.4C, BP 88/52, HR 122, RR 24, SpO2 91% on room air. Family reports two days of decreased PO intake and confusion. PMH: HTN, DM2, recurrent UTI.
+Exam: ill-appearing, dry mucous membranes, no focal infection on skin exam. Lung exam clear. Mild suprapubic tenderness.
+Labs: WBC 18.2, lactate 3.1, creatinine 1.9 (baseline 1.0), UA cloudy with many bacteria and 50+ WBC/hpf. Blood cultures drawn.
+Imaging: CXR no infiltrate.
+Assessment: severe sepsis, urinary source. Meets SIRS criteria with end-organ dysfunction.
+Plan: IV fluids 30 mL/kg bolus initiated. Will trend lactate. Admit to medicine."
+P-1089,"HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.
+Exam: euvolemic.
+Labs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.
+Assessment: acute kidney injury, multifactorial.
+Plan: continue current regimen. Trend renal function."
+P-1025,"HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.
+Exam: nonfocal neuro exam, tongue laceration on left lateral.
+Labs: glucose 96, sodium 138, alcohol negative, tox screen pending.
+Imaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.
+Assessment: new-onset seizure, etiology undetermined.
+Plan: admit for observation, MRI in AM, neurology to see post-MRI."
+P-1018,"HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.
+Exam: euvolemic, no edema, lungs improving.
+Labs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.
+Imaging: renal US no hydronephrosis.
+Assessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.
+Plan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart."
+P-1045,"HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.
+Exam: improved, anion gap closed.
+Labs: glucose 142, gap 8, bicarbonate 22.
+Assessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.
+Plan: standard DM follow-up. No outpatient endocrinology arranged."
+P-1022,"HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.
+Exam: RLQ tenderness with rebound, positive Rovsing.
+Labs: WBC 14.1, beta-hCG negative, lipase normal.
+Imaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.
+Assessment: clinical suspicion for acute appendicitis pending imaging.
+Plan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition."
+P-1067,"HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.
+Exam: nonfocal neuro, comfortable.
+Assessment: migraine, treated.
+Plan: discharge home with abortive medications, neurology follow-up scheduled."
+P-1039,"HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.
+Exam: stable, lungs improving.
+Labs: Cr 1.7, K 5.1, BUN 38.
+Assessment: developing AKI, likely multifactorial.
+Plan: continue current antibiotics, monitor renal function."
+P-1090,"HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.
+Exam: euvolemic.
+Labs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.
+Assessment: acute kidney injury, multifactorial.
+Plan: continue current regimen. Trend renal function."
+P-1029,"HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.
+Exam: lungs with mild expiratory wheeze, no distress.
+Assessment: COPD exacerbation, resolved. Deconditioned.
+Plan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone."
+P-1081,"HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.
+Exam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.
+Labs: D-dimer 4.8 (elevated).
+Imaging: CT-PA confirms bilateral segmental PE.
+Assessment: acute pulmonary embolism, hemodynamically stable.
+Plan: started on heparin drip. Admit to medicine."
+P-1094,"HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.
+Exam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.
+Labs: AST 142, ALT 88, lipase 38.
+Assessment: alcohol withdrawal, moderate. AUD.
+Plan: thiamine 100mg IV given. Banana bag running. Admit to medicine."
+P-1136,"HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.
+Exam: improving erythema, no streaking, no fluctuance.
+Assessment: cellulitis, resolving.
+Plan: transition to PO antibiotics. Discharge home with follow-up in 1 week."
+P-1121,"HPI: 39yo male with history of IV drug use presents with fevers x 1 week.
+Exam: febrile, new systolic murmur at LSB. Track marks both arms.
+Labs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.
+Imaging: TTE ordered, scheduled for tomorrow. CXR clear.
+Assessment: suspected infective endocarditis.
+Plan: vancomycin + cefepime empiric. ID consult."
+P-1037,"HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.
+Exam: stable, lungs improving.
+Labs: Cr 1.7, K 5.1, BUN 38.
+Assessment: developing AKI, likely multifactorial.
+Plan: continue current antibiotics, monitor renal function."
+P-1123,"HPI: 39yo male with history of IV drug use presents with fevers x 1 week.
+Exam: febrile, new systolic murmur at LSB. Track marks both arms.
+Labs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.
+Imaging: TTE ordered, scheduled for tomorrow. CXR clear.
+Assessment: suspected infective endocarditis.
+Plan: vancomycin + cefepime empiric. ID consult."
+P-1058,"HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.
+Exam: kussmaul respirations, dry mucous membranes.
+Labs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.
+Assessment: DKA, severe.
+Plan: IV fluids initiated. Repeat labs in 2h."
+P-1049,"HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.
+Exam: 2+ lower extremity edema, lungs with bibasilar crackles.
+Labs: BNP 1840, Cr 1.4.
+Assessment: ADHF, recurrent. Knowledge and adherence gaps.
+Plan: diurese, optimize GDMT, plan discharge to home."
+P-1004,"HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.
+Exam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.
+ECG: ST depression V4-V6, T-wave inversion lateral leads.
+Labs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.
+Assessment: NSTEMI, intermediate-to-high risk.
+Plan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist."
+P-1149,"HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.
+Exam: residual right-sided weakness 4/5, otherwise nonfocal.
+Assessment: ischemic stroke, residual deficits. Stroke window expired.
+Plan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following."
+P-1128,"HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.
+Exam: oriented x2, walks with assist, follows commands.
+Assessment: TBI, neurocognitive deficits, requires inpatient rehab.
+Plan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily."
+P-1044,"HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.
+Exam: improved, anion gap closed.
+Labs: glucose 142, gap 8, bicarbonate 22.
+Assessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.
+Plan: standard DM follow-up. No outpatient endocrinology arranged."
+P-1014,"HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.
+Exam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.
+Imaging: pelvis XR confirms left intertrochanteric fracture.
+Labs: hgb 10.8, INR 1.1, basic metabolic unremarkable.
+Assessment: left intertrochanteric hip fracture, surgical candidate.
+Plan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR."
+P-1056,"HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.
+Exam: kussmaul respirations, dry mucous membranes.
+Labs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.
+Assessment: DKA, severe.
+Plan: IV fluids initiated. Repeat labs in 2h."
+P-1027,"HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.
+Exam: nonfocal neuro exam, tongue laceration on left lateral.
+Labs: glucose 96, sodium 138, alcohol negative, tox screen pending.
+Imaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.
+Assessment: new-onset seizure, etiology undetermined.
+Plan: admit for observation, MRI in AM, neurology to see post-MRI."
+P-1157,"HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.
+Exam: rigid abdomen, rebound tenderness, BP 102/68.
+Labs: WBC 16.4, lactate 2.8.
+Imaging: CT abdomen shows free air, concern for perforated viscus.
+Assessment: perforated viscus.
+Plan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed."
+P-1007,"HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.
+Exam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.
+ECG: ST depression V4-V6, T-wave inversion lateral leads.
+Labs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.
+Assessment: NSTEMI, intermediate-to-high risk.
+Plan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist."
+P-1069,"HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.
+Exam: stable vitals, no acute medical issues.
+Assessment: acute SI, requires inpatient psychiatric evaluation.
+Plan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter."
+P-1160,"HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.
+Exam: episode of hypoglycemia overnight, glucose 42, treated with D50.
+Labs: glucose 42 (overnight), now 156. A1c 9.8.
+Assessment: hypoglycemia related to insulin without adequate glucose monitoring.
+Plan: continue insulin, recheck POC glucose Q4."
+P-1066,"HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.
+Exam: nonfocal neuro, comfortable.
+Assessment: migraine, treated.
+Plan: discharge home with abortive medications, neurology follow-up scheduled."
+P-1173,"HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.
+Exam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.
+Labs: lactate 2.2.
+Imaging: CTA shows right popliteal occlusion.
+Assessment: acute limb ischemia.
+Plan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR."
+P-1085,"HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.
+Exam: pale, BP 96/58, HR 108. Abdominal exam soft.
+Labs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.
+Assessment: upper GI bleed, likely variceal vs ulcer source.
+Plan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy."
+P-1008,"HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.
+Exam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.
+Vitals: BP 192/104, HR 78, glucose 142.
+Imaging: head CT non-contrast pending.
+Assessment: acute ischemic stroke, within tPA window.
+Plan: BP control, monitor in ED."
+P-1122,"HPI: 39yo male with history of IV drug use presents with fevers x 1 week.
+Exam: febrile, new systolic murmur at LSB. Track marks both arms.
+Labs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.
+Imaging: TTE ordered, scheduled for tomorrow. CXR clear.
+Assessment: suspected infective endocarditis.
+Plan: vancomycin + cefepime empiric. ID consult."
+P-1102,"HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.
+Exam: stable, no chest pain, no weakness.
+Labs: K 6.8, Cr 8.2, bicarb 16.
+Assessment: severe hyperkalemia, missed dialysis.
+Plan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered."
+P-1041,"HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.
+Exam: pale, tachycardic to 108, BP 102/64.
+Labs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.
+Assessment: upper GI bleed on dual antiplatelet plus DOAC.
+Plan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain."
+P-1126,"HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.
+Exam: stable, no edema.
+Labs: K 4.2, Cr 6.8 (post-HD baseline).
+Assessment: ESRD, hyperkalemia resolved.
+Plan: medically optimized. Awaiting outpatient HD chair assignment — case management following, no slot available until next week. Insurance authorization in progress."
+P-1114,"HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.
+Exam: agitated but cooperative now after IM olanzapine. Vitals stable.
+Labs: tox screen positive for amphetamines. Otherwise unremarkable.
+Assessment: acute mania.
+Plan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified."
+P-1167,"HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.
+Exam: stable, no edema.
+Assessment: HFpEF, ready for discharge.
+Plan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following."
+P-1117,"HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.
+Exam: RR 20, SpO2 95% RA, HR 102.
+Labs: D-dimer 3.2.
+Imaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.
+Assessment: workup for PE.
+Plan: empiric heparin drip while awaiting study."
+P-1046,"HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.
+Exam: improved, anion gap closed.
+Labs: glucose 142, gap 8, bicarbonate 22.
+Assessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.
+Plan: standard DM follow-up. No outpatient endocrinology arranged."
+P-1129,"HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.
+Exam: oriented x2, walks with assist, follows commands.
+Assessment: TBI, neurocognitive deficits, requires inpatient rehab.
+Plan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily."
+P-1150,"HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.
+Exam: residual right-sided weakness 4/5, otherwise nonfocal.
+Assessment: ischemic stroke, residual deficits. Stroke window expired.
+Plan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following."
+P-1048,"HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.
+Exam: 2+ lower extremity edema, lungs with bibasilar crackles.
+Labs: BNP 1840, Cr 1.4.
+Assessment: ADHF, recurrent. Knowledge and adherence gaps.
+Plan: diurese, optimize GDMT, plan discharge to home."
+P-1159,"HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.
+Exam: rigid abdomen, rebound tenderness, BP 102/68.
+Labs: WBC 16.4, lactate 2.8.
+Imaging: CT abdomen shows free air, concern for perforated viscus.
+Assessment: perforated viscus.
+Plan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed."
+P-1072,"HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.
+Exam: incision clean dry intact, no calf tenderness.
+Assessment: uncomplicated post-op course.
+Plan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen."
+P-1118,"HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.
+Exam: RR 20, SpO2 95% RA, HR 102.
+Labs: D-dimer 3.2.
+Imaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.
+Assessment: workup for PE.
+Plan: empiric heparin drip while awaiting study."
+P-1001,"HPI: 72yo presenting from SNF with fever to 39.4C, BP 88/52, HR 122, RR 24, SpO2 91% on room air. Family reports two days of decreased PO intake and confusion. PMH: HTN, DM2, recurrent UTI.
+Exam: ill-appearing, dry mucous membranes, no focal infection on skin exam. Lung exam clear. Mild suprapubic tenderness.
+Labs: WBC 18.2, lactate 3.1, creatinine 1.9 (baseline 1.0), UA cloudy with many bacteria and 50+ WBC/hpf. Blood cultures drawn.
+Imaging: CXR no infiltrate.
+Assessment: severe sepsis, urinary source. Meets SIRS criteria with end-organ dysfunction.
+Plan: IV fluids 30 mL/kg bolus initiated. Will trend lactate. Admit to medicine."
+P-1132,"HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.
+Exam: improved, mild expiratory wheeze.
+Assessment: COPD, severe. Recurrent admissions, social factors.
+Plan: optimize inhaler regimen. Discharge to home with brief rehab if approved."
+P-1087,"HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.
+Exam: pale, BP 96/58, HR 108. Abdominal exam soft.
+Labs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.
+Assessment: upper GI bleed, likely variceal vs ulcer source.
+Plan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy."
+P-1112,"HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.
+Exam: agitated but cooperative now after IM olanzapine. Vitals stable.
+Labs: tox screen positive for amphetamines. Otherwise unremarkable.
+Assessment: acute mania.
+Plan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified."
+P-1155,"HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.
+Exam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.
+Labs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.
+Assessment: septic shock with AKI. Multifactorial.
+Plan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission."
+P-1023,"HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.
+Exam: RLQ tenderness with rebound, positive Rovsing.
+Labs: WBC 14.1, beta-hCG negative, lipase normal.
+Imaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.
+Assessment: clinical suspicion for acute appendicitis pending imaging.
+Plan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition."
+P-1140,"HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.
+Exam: nonfocal, comfortable.
+Labs: troponin x 2 negative.
+Imaging: stress echo no inducible ischemia.
+Assessment: non-cardiac chest pain, likely musculoskeletal.
+Plan: discharge home with PCP follow-up. NSAIDs as needed."
+P-1142,"HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.
+Exam: nonfocal, comfortable.
+Labs: troponin x 2 negative.
+Imaging: stress echo no inducible ischemia.
+Assessment: non-cardiac chest pain, likely musculoskeletal.
+Plan: discharge home with PCP follow-up. NSAIDs as needed."
+P-1079,"HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.
+Exam: stable, no focal findings.
+Labs: K 3.4, Mg 1.6.
+ECG: QTc 540 ms (prior 460).
+Assessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.
+Plan: telemetry, repeat ECG in AM."
+P-1035,"HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.
+Exam: lungs clear, no edema, JVP normal.
+Assessment: HFpEF, optimized. Requires home oxygen.
+Plan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following."
+P-1075,"HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.
+Exam: incision clean dry intact, no calf tenderness.
+Assessment: uncomplicated post-op course.
+Plan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen."
+P-1011,"HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.
+Exam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.
+Vitals: BP 192/104, HR 78, glucose 142.
+Imaging: head CT non-contrast pending.
+Assessment: acute ischemic stroke, within tPA window.
+Plan: BP control, monitor in ED."
+P-1005,"HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.
+Exam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.
+ECG: ST depression V4-V6, T-wave inversion lateral leads.
+Labs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.
+Assessment: NSTEMI, intermediate-to-high risk.
+Plan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist."
+P-1076,"HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.
+Exam: stable, no focal findings.
+Labs: K 3.4, Mg 1.6.
+ECG: QTc 540 ms (prior 460).
+Assessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.
+Plan: telemetry, repeat ECG in AM."
+P-1120,"HPI: 39yo male with history of IV drug use presents with fevers x 1 week.
+Exam: febrile, new systolic murmur at LSB. Track marks both arms.
+Labs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.
+Imaging: TTE ordered, scheduled for tomorrow. CXR clear.
+Assessment: suspected infective endocarditis.
+Plan: vancomycin + cefepime empiric. ID consult."
+P-1119,"HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.
+Exam: RR 20, SpO2 95% RA, HR 102.
+Labs: D-dimer 3.2.
+Imaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.
+Assessment: workup for PE.
+Plan: empiric heparin drip while awaiting study."
+P-1116,"HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.
+Exam: RR 20, SpO2 95% RA, HR 102.
+Labs: D-dimer 3.2.
+Imaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.
+Assessment: workup for PE.
+Plan: empiric heparin drip while awaiting study."
+P-1068,"HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.
+Exam: stable vitals, no acute medical issues.
+Assessment: acute SI, requires inpatient psychiatric evaluation.
+Plan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter."
+P-1042,"HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.
+Exam: pale, tachycardic to 108, BP 102/64.
+Labs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.
+Assessment: upper GI bleed on dual antiplatelet plus DOAC.
+Plan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain."
+P-1146,"HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.
+Exam: comfortable, vitals stable.
+Labs: WBC normalized at 7.4, lactate 1.2.
+Assessment: sepsis resolved. Awaiting SNF placement.
+Plan: SNF placement requested 2 days ago. Case management pursuing."
+P-1169,"HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.
+Exam: stable, no bleeding.
+Labs: INR 4.6 (target 2-3), hgb 11.0.
+Assessment: supratherapeutic INR from drug interaction.
+Plan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization."
+P-1063,"HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.
+Exam: afebrile, no CVA tenderness, mild suprapubic discomfort.
+Labs: UA positive nitrites and leukocyte esterase, urine culture pending.
+Assessment: uncomplicated cystitis.
+Plan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home."
+P-1141,"HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.
+Exam: nonfocal, comfortable.
+Labs: troponin x 2 negative.
+Imaging: stress echo no inducible ischemia.
+Assessment: non-cardiac chest pain, likely musculoskeletal.
+Plan: discharge home with PCP follow-up. NSAIDs as needed."
+P-1107,"HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.
+Exam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.
+Labs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.
+Imaging: CXR no infiltrate.
+Assessment: COPD exacerbation, moderate.
+Plan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry."
+P-1009,"HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.
+Exam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.
+Vitals: BP 192/104, HR 78, glucose 142.
+Imaging: head CT non-contrast pending.
+Assessment: acute ischemic stroke, within tPA window.
+Plan: BP control, monitor in ED."
+P-1020,"HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.
+Exam: RLQ tenderness with rebound, positive Rovsing.
+Labs: WBC 14.1, beta-hCG negative, lipase normal.
+Imaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.
+Assessment: clinical suspicion for acute appendicitis pending imaging.
+Plan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition."
+P-1091,"HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.
+Exam: euvolemic.
+Labs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.
+Assessment: acute kidney injury, multifactorial.
+Plan: continue current regimen. Trend renal function."
+P-1015,"HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.
+Exam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.
+Imaging: pelvis XR confirms left intertrochanteric fracture.
+Labs: hgb 10.8, INR 1.1, basic metabolic unremarkable.
+Assessment: left intertrochanteric hip fracture, surgical candidate.
+Plan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR."
+P-1144,"HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.
+Exam: comfortable, vitals stable.
+Labs: WBC normalized at 7.4, lactate 1.2.
+Assessment: sepsis resolved. Awaiting SNF placement.
+Plan: SNF placement requested 2 days ago. Case management pursuing."
+P-1131,"HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.
+Exam: oriented x2, walks with assist, follows commands.
+Assessment: TBI, neurocognitive deficits, requires inpatient rehab.
+Plan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily."
+P-1061,"HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.
+Exam: afebrile, no CVA tenderness, mild suprapubic discomfort.
+Labs: UA positive nitrites and leukocyte esterase, urine culture pending.
+Assessment: uncomplicated cystitis.
+Plan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home."
+P-1147,"HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.
+Exam: comfortable, vitals stable.
+Labs: WBC normalized at 7.4, lactate 1.2.
+Assessment: sepsis resolved. Awaiting SNF placement.
+Plan: SNF placement requested 2 days ago. Case management pursuing."
+P-1145,"HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.
+Exam: comfortable, vitals stable.
+Labs: WBC normalized at 7.4, lactate 1.2.
+Assessment: sepsis resolved. Awaiting SNF placement.
+Plan: SNF placement requested 2 days ago. Case management pursuing."
+P-1110,"HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.
+Exam: stable, soft non-tender abdomen.
+Labs: hgb 8.8, plt 220, INR 1.1.
+Assessment: chronic GI blood loss, likely NSAID gastropathy.
+Plan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling."
+P-1174,"HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.
+Exam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.
+Labs: lactate 2.2.
+Imaging: CTA shows right popliteal occlusion.
+Assessment: acute limb ischemia.
+Plan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR."
+P-1148,"HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.
+Exam: residual right-sided weakness 4/5, otherwise nonfocal.
+Assessment: ischemic stroke, residual deficits. Stroke window expired.
+Plan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following."
+P-1032,"HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.
+Exam: lungs clear, no edema, JVP normal.
+Assessment: HFpEF, optimized. Requires home oxygen.
+Plan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following."
+P-1166,"HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.
+Exam: stable, no edema.
+Assessment: HFpEF, ready for discharge.
+Plan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following."
+P-1137,"HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.
+Exam: improving erythema, no streaking, no fluctuance.
+Assessment: cellulitis, resolving.
+Plan: transition to PO antibiotics. Discharge home with follow-up in 1 week."
+P-1043,"HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.
+Exam: pale, tachycardic to 108, BP 102/64.
+Labs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.
+Assessment: upper GI bleed on dual antiplatelet plus DOAC.
+Plan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain."
+P-1053,"HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.
+Exam: RR 22, SpO2 92% RA, right basilar crackles.
+Labs: WBC 14.8, lactate 1.6, procalcitonin 2.1.
+Imaging: CXR with right lower lobe consolidation.
+Assessment: community-acquired pneumonia, CURB-65 = 1.
+Plan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor."
+P-1060,"HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.
+Exam: afebrile, no CVA tenderness, mild suprapubic discomfort.
+Labs: UA positive nitrites and leukocyte esterase, urine culture pending.
+Assessment: uncomplicated cystitis.
+Plan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home."
+P-1021,"HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.
+Exam: RLQ tenderness with rebound, positive Rovsing.
+Labs: WBC 14.1, beta-hCG negative, lipase normal.
+Imaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.
+Assessment: clinical suspicion for acute appendicitis pending imaging.
+Plan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition."
+P-1139,"HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.
+Exam: improving erythema, no streaking, no fluctuance.
+Assessment: cellulitis, resolving.
+Plan: transition to PO antibiotics. Discharge home with follow-up in 1 week."
+P-1108,"HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.
+Exam: stable, soft non-tender abdomen.
+Labs: hgb 8.8, plt 220, INR 1.1.
+Assessment: chronic GI blood loss, likely NSAID gastropathy.
+Plan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling."
+P-1104,"HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.
+Exam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.
+Labs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.
+Imaging: CXR no infiltrate.
+Assessment: COPD exacerbation, moderate.
+Plan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry."
+P-1062,"HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.
+Exam: afebrile, no CVA tenderness, mild suprapubic discomfort.
+Labs: UA positive nitrites and leukocyte esterase, urine culture pending.
+Assessment: uncomplicated cystitis.
+Plan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home."
+P-1156,"HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.
+Exam: rigid abdomen, rebound tenderness, BP 102/68.
+Labs: WBC 16.4, lactate 2.8.
+Imaging: CT abdomen shows free air, concern for perforated viscus.
+Assessment: perforated viscus.
+Plan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed."
+P-1082,"HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.
+Exam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.
+Labs: D-dimer 4.8 (elevated).
+Imaging: CT-PA confirms bilateral segmental PE.
+Assessment: acute pulmonary embolism, hemodynamically stable.
+Plan: started on heparin drip. Admit to medicine."
+P-1017,"HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.
+Exam: euvolemic, no edema, lungs improving.
+Labs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.
+Imaging: renal US no hydronephrosis.
+Assessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.
+Plan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart."
+P-1153,"HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.
+Exam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.
+Labs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.
+Assessment: septic shock with AKI. Multifactorial.
+Plan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission."
+P-1078,"HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.
+Exam: stable, no focal findings.
+Labs: K 3.4, Mg 1.6.
+ECG: QTc 540 ms (prior 460).
+Assessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.
+Plan: telemetry, repeat ECG in AM."
+P-1057,"HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.
+Exam: kussmaul respirations, dry mucous membranes.
+Labs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.
+Assessment: DKA, severe.
+Plan: IV fluids initiated. Repeat labs in 2h."
+P-1052,"HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.
+Exam: RR 22, SpO2 92% RA, right basilar crackles.
+Labs: WBC 14.8, lactate 1.6, procalcitonin 2.1.
+Imaging: CXR with right lower lobe consolidation.
+Assessment: community-acquired pneumonia, CURB-65 = 1.
+Plan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor."
+P-1168,"HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.
+Exam: stable, no bleeding.
+Labs: INR 4.6 (target 2-3), hgb 11.0.
+Assessment: supratherapeutic INR from drug interaction.
+Plan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization."
+P-1163,"HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.
+Exam: episode of hypoglycemia overnight, glucose 42, treated with D50.
+Labs: glucose 42 (overnight), now 156. A1c 9.8.
+Assessment: hypoglycemia related to insulin without adequate glucose monitoring.
+Plan: continue insulin, recheck POC glucose Q4."
+P-1010,"HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.
+Exam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.
+Vitals: BP 192/104, HR 78, glucose 142.
+Imaging: head CT non-contrast pending.
+Assessment: acute ischemic stroke, within tPA window.
+Plan: BP control, monitor in ED."
+P-1135,"HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.
+Exam: improved, mild expiratory wheeze.
+Assessment: COPD, severe. Recurrent admissions, social factors.
+Plan: optimize inhaler regimen. Discharge to home with brief rehab if approved."
+P-1171,"HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.
+Exam: stable, no bleeding.
+Labs: INR 4.6 (target 2-3), hgb 11.0.
+Assessment: supratherapeutic INR from drug interaction.
+Plan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization."
+P-1134,"HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.
+Exam: improved, mild expiratory wheeze.
+Assessment: COPD, severe. Recurrent admissions, social factors.
+Plan: optimize inhaler regimen. Discharge to home with brief rehab if approved."
+P-1133,"HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.
+Exam: improved, mild expiratory wheeze.
+Assessment: COPD, severe. Recurrent admissions, social factors.
+Plan: optimize inhaler regimen. Discharge to home with brief rehab if approved."
+P-1051,"HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.
+Exam: 2+ lower extremity edema, lungs with bibasilar crackles.
+Labs: BNP 1840, Cr 1.4.
+Assessment: ADHF, recurrent. Knowledge and adherence gaps.
+Plan: diurese, optimize GDMT, plan discharge to home."
+P-1152,"HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.
+Exam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.
+Labs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.
+Assessment: septic shock with AKI. Multifactorial.
+Plan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission."
+P-1097,"HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.
+Exam: well-appearing, no overt source. Port site without erythema.
+Labs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.
+Assessment: neutropenic fever, no localizing source.
+Plan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics."
+P-1158,"HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.
+Exam: rigid abdomen, rebound tenderness, BP 102/68.
+Labs: WBC 16.4, lactate 2.8.
+Imaging: CT abdomen shows free air, concern for perforated viscus.
+Assessment: perforated viscus.
+Plan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed."
+P-1143,"HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.
+Exam: nonfocal, comfortable.
+Labs: troponin x 2 negative.
+Imaging: stress echo no inducible ischemia.
+Assessment: non-cardiac chest pain, likely musculoskeletal.
+Plan: discharge home with PCP follow-up. NSAIDs as needed."
+P-1113,"HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.
+Exam: agitated but cooperative now after IM olanzapine. Vitals stable.
+Labs: tox screen positive for amphetamines. Otherwise unremarkable.
+Assessment: acute mania.
+Plan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified."
+P-1054,"HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.
+Exam: RR 22, SpO2 92% RA, right basilar crackles.
+Labs: WBC 14.8, lactate 1.6, procalcitonin 2.1.
+Imaging: CXR with right lower lobe consolidation.
+Assessment: community-acquired pneumonia, CURB-65 = 1.
+Plan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor."
+P-1138,"HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.
+Exam: improving erythema, no streaking, no fluctuance.
+Assessment: cellulitis, resolving.
+Plan: transition to PO antibiotics. Discharge home with follow-up in 1 week."
+P-1047,"HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.
+Exam: improved, anion gap closed.
+Labs: glucose 142, gap 8, bicarbonate 22.
+Assessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.
+Plan: standard DM follow-up. No outpatient endocrinology arranged."
+P-1098,"HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.
+Exam: well-appearing, no overt source. Port site without erythema.
+Labs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.
+Assessment: neutropenic fever, no localizing source.
+Plan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics."
+P-1024,"HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.
+Exam: nonfocal neuro exam, tongue laceration on left lateral.
+Labs: glucose 96, sodium 138, alcohol negative, tox screen pending.
+Imaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.
+Assessment: new-onset seizure, etiology undetermined.
+Plan: admit for observation, MRI in AM, neurology to see post-MRI."
+P-1162,"HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.
+Exam: episode of hypoglycemia overnight, glucose 42, treated with D50.
+Labs: glucose 42 (overnight), now 156. A1c 9.8.
+Assessment: hypoglycemia related to insulin without adequate glucose monitoring.
+Plan: continue insulin, recheck POC glucose Q4."
+P-1065,"HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.
+Exam: nonfocal neuro, comfortable.
+Assessment: migraine, treated.
+Plan: discharge home with abortive medications, neurology follow-up scheduled."
+P-1055,"HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.
+Exam: RR 22, SpO2 92% RA, right basilar crackles.
+Labs: WBC 14.8, lactate 1.6, procalcitonin 2.1.
+Imaging: CXR with right lower lobe consolidation.
+Assessment: community-acquired pneumonia, CURB-65 = 1.
+Plan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor."
+P-1034,"HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.
+Exam: lungs clear, no edema, JVP normal.
+Assessment: HFpEF, optimized. Requires home oxygen.
+Plan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following."
+P-1165,"HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.
+Exam: stable, no edema.
+Assessment: HFpEF, ready for discharge.
+Plan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following."
+P-1031,"HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.
+Exam: lungs with mild expiratory wheeze, no distress.
+Assessment: COPD exacerbation, resolved. Deconditioned.
+Plan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone."
+P-1038,"HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.
+Exam: stable, lungs improving.
+Labs: Cr 1.7, K 5.1, BUN 38.
+Assessment: developing AKI, likely multifactorial.
+Plan: continue current antibiotics, monitor renal function."
+P-1073,"HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.
+Exam: incision clean dry intact, no calf tenderness.
+Assessment: uncomplicated post-op course.
+Plan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen."
+P-1013,"HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.
+Exam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.
+Imaging: pelvis XR confirms left intertrochanteric fracture.
+Labs: hgb 10.8, INR 1.1, basic metabolic unremarkable.
+Assessment: left intertrochanteric hip fracture, surgical candidate.
+Plan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR."
+P-1026,"HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.
+Exam: nonfocal neuro exam, tongue laceration on left lateral.
+Labs: glucose 96, sodium 138, alcohol negative, tox screen pending.
+Imaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.
+Assessment: new-onset seizure, etiology undetermined.
+Plan: admit for observation, MRI in AM, neurology to see post-MRI."
+P-1170,"HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.
+Exam: stable, no bleeding.
+Labs: INR 4.6 (target 2-3), hgb 11.0.
+Assessment: supratherapeutic INR from drug interaction.
+Plan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization."
+P-1012,"HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.
+Exam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.
+Imaging: pelvis XR confirms left intertrochanteric fracture.
+Labs: hgb 10.8, INR 1.1, basic metabolic unremarkable.
+Assessment: left intertrochanteric hip fracture, surgical candidate.
+Plan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR."
+P-1070,"HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.
+Exam: stable vitals, no acute medical issues.
+Assessment: acute SI, requires inpatient psychiatric evaluation.
+Plan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter."
+P-1109,"HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.
+Exam: stable, soft non-tender abdomen.
+Labs: hgb 8.8, plt 220, INR 1.1.
+Assessment: chronic GI blood loss, likely NSAID gastropathy.
+Plan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling."
+P-1175,"HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.
+Exam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.
+Labs: lactate 2.2.
+Imaging: CTA shows right popliteal occlusion.
+Assessment: acute limb ischemia.
+Plan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR."
+P-1019,"HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.
+Exam: euvolemic, no edema, lungs improving.
+Labs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.
+Imaging: renal US no hydronephrosis.
+Assessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.
+Plan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart."
+P-1099,"HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.
+Exam: well-appearing, no overt source. Port site without erythema.
+Labs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.
+Assessment: neutropenic fever, no localizing source.
+Plan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics."
+P-1164,"HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.
+Exam: stable, no edema.
+Assessment: HFpEF, ready for discharge.
+Plan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following."
+P-1016,"HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.
+Exam: euvolemic, no edema, lungs improving.
+Labs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.
+Imaging: renal US no hydronephrosis.
+Assessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.
+Plan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart."
+P-1095,"HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.
+Exam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.
+Labs: AST 142, ALT 88, lipase 38.
+Assessment: alcohol withdrawal, moderate. AUD.
+Plan: thiamine 100mg IV given. Banana bag running. Admit to medicine."
+P-1064,"HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.
+Exam: nonfocal neuro, comfortable.
+Assessment: migraine, treated.
+Plan: discharge home with abortive medications, neurology follow-up scheduled."
+P-1074,"HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.
+Exam: incision clean dry intact, no calf tenderness.
+Assessment: uncomplicated post-op course.
+Plan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen."
+P-1003,"HPI: 72yo presenting from SNF with fever to 39.4C, BP 88/52, HR 122, RR 24, SpO2 91% on room air. Family reports two days of decreased PO intake and confusion. PMH: HTN, DM2, recurrent UTI.
+Exam: ill-appearing, dry mucous membranes, no focal infection on skin exam. Lung exam clear. Mild suprapubic tenderness.
+Labs: WBC 18.2, lactate 3.1, creatinine 1.9 (baseline 1.0), UA cloudy with many bacteria and 50+ WBC/hpf. Blood cultures drawn.
+Imaging: CXR no infiltrate.
+Assessment: severe sepsis, urinary source. Meets SIRS criteria with end-organ dysfunction.
+Plan: IV fluids 30 mL/kg bolus initiated. Will trend lactate. Admit to medicine."
+P-1050,"HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.
+Exam: 2+ lower extremity edema, lungs with bibasilar crackles.
+Labs: BNP 1840, Cr 1.4.
+Assessment: ADHF, recurrent. Knowledge and adherence gaps.
+Plan: diurese, optimize GDMT, plan discharge to home."
+P-1151,"HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.
+Exam: residual right-sided weakness 4/5, otherwise nonfocal.
+Assessment: ischemic stroke, residual deficits. Stroke window expired.
+Plan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following."
+P-1101,"HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.
+Exam: stable, no chest pain, no weakness.
+Labs: K 6.8, Cr 8.2, bicarb 16.
+Assessment: severe hyperkalemia, missed dialysis.
+Plan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered."
+P-1086,"HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.
+Exam: pale, BP 96/58, HR 108. Abdominal exam soft.
+Labs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.
+Assessment: upper GI bleed, likely variceal vs ulcer source.
+Plan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy."
+P-1083,"HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.
+Exam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.
+Labs: D-dimer 4.8 (elevated).
+Imaging: CT-PA confirms bilateral segmental PE.
+Assessment: acute pulmonary embolism, hemodynamically stable.
+Plan: started on heparin drip. Admit to medicine."
+P-1172,"HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.
+Exam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.
+Labs: lactate 2.2.
+Imaging: CTA shows right popliteal occlusion.
+Assessment: acute limb ischemia.
+Plan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR."
+P-1084,"HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.
+Exam: pale, BP 96/58, HR 108. Abdominal exam soft.
+Labs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.
+Assessment: upper GI bleed, likely variceal vs ulcer source.
+Plan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy."
+P-1030,"HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.
+Exam: lungs with mild expiratory wheeze, no distress.
+Assessment: COPD exacerbation, resolved. Deconditioned.
+Plan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone."
+P-1080,"HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.
+Exam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.
+Labs: D-dimer 4.8 (elevated).
+Imaging: CT-PA confirms bilateral segmental PE.
+Assessment: acute pulmonary embolism, hemodynamically stable.
+Plan: started on heparin drip. Admit to medicine."
+P-1096,"HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.
+Exam: well-appearing, no overt source. Port site without erythema.
+Labs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.
+Assessment: neutropenic fever, no localizing source.
+Plan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics."
+P-1088,"HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.
+Exam: euvolemic.
+Labs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.
+Assessment: acute kidney injury, multifactorial.
+Plan: continue current regimen. Trend renal function."
+P-1106,"HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.
+Exam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.
+Labs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.
+Imaging: CXR no infiltrate.
+Assessment: COPD exacerbation, moderate.
+Plan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry."
+P-1036,"HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.
+Exam: stable, lungs improving.
+Labs: Cr 1.7, K 5.1, BUN 38.
+Assessment: developing AKI, likely multifactorial.
+Plan: continue current antibiotics, monitor renal function."
+P-1077,"HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.
+Exam: stable, no focal findings.
+Labs: K 3.4, Mg 1.6.
+ECG: QTc 540 ms (prior 460).
+Assessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.
+Plan: telemetry, repeat ECG in AM."
+P-1103,"HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.
+Exam: stable, no chest pain, no weakness.
+Labs: K 6.8, Cr 8.2, bicarb 16.
+Assessment: severe hyperkalemia, missed dialysis.
+Plan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered."
+P-1115,"HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.
+Exam: agitated but cooperative now after IM olanzapine. Vitals stable.
+Labs: tox screen positive for amphetamines. Otherwise unremarkable.
+Assessment: acute mania.
+Plan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified."
+P-1125,"HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.
+Exam: stable, no edema.
+Labs: K 4.2, Cr 6.8 (post-HD baseline).
+Assessment: ESRD, hyperkalemia resolved.
+Plan: medically optimized. Awaiting outpatient HD chair assignment — case management following, no slot available until next week. Insurance authorization in progress."
+P-1000,"HPI: 72yo presenting from SNF with fever to 39.4C, BP 88/52, HR 122, RR 24, SpO2 91% on room air. Family reports two days of decreased PO intake and confusion. PMH: HTN, DM2, recurrent UTI.
+Exam: ill-appearing, dry mucous membranes, no focal infection on skin exam. Lung exam clear. Mild suprapubic tenderness.
+Labs: WBC 18.2, lactate 3.1, creatinine 1.9 (baseline 1.0), UA cloudy with many bacteria and 50+ WBC/hpf. Blood cultures drawn.
+Imaging: CXR no infiltrate.
+Assessment: severe sepsis, urinary source. Meets SIRS criteria with end-organ dysfunction.
+Plan: IV fluids 30 mL/kg bolus initiated. Will trend lactate. Admit to medicine."
+P-1040,"HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.
+Exam: pale, tachycardic to 108, BP 102/64.
+Labs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.
+Assessment: upper GI bleed on dual antiplatelet plus DOAC.
+Plan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain."
+P-1006,"HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.
+Exam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.
+ECG: ST depression V4-V6, T-wave inversion lateral leads.
+Labs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.
+Assessment: NSTEMI, intermediate-to-high risk.
+Plan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist."
+P-1100,"HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.
+Exam: stable, no chest pain, no weakness.
+Labs: K 6.8, Cr 8.2, bicarb 16.
+Assessment: severe hyperkalemia, missed dialysis.
+Plan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered."
+P-1124,"HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.
+Exam: stable, no edema.
+Labs: K 4.2, Cr 6.8 (post-HD baseline).
+Assessment: ESRD, hyperkalemia resolved.
+Plan: medically optimized. Awaiting outpatient HD chair assignment — case management following, no slot available until next week. Insurance authorization in progress."
+P-1127,"HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.
+Exam: stable, no edema.
+Labs: K 4.2, Cr 6.8 (post-HD baseline).
+Assessment: ESRD, hyperkalemia resolved.
+Plan: medically optimized. Awaiting outpatient HD chair assignment — case management following, no slot available until next week. Insurance authorization in progress."
+P-1059,"HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.
+Exam: kussmaul respirations, dry mucous membranes.
+Labs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.
+Assessment: DKA, severe.
+Plan: IV fluids initiated. Repeat labs in 2h."
+P-1093,"HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.
+Exam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.
+Labs: AST 142, ALT 88, lipase 38.
+Assessment: alcohol withdrawal, moderate. AUD.
+Plan: thiamine 100mg IV given. Banana bag running. Admit to medicine."
+P-1028,"HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.
+Exam: lungs with mild expiratory wheeze, no distress.
+Assessment: COPD exacerbation, resolved. Deconditioned.
+Plan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone."
+P-1071,"HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.
+Exam: stable vitals, no acute medical issues.
+Assessment: acute SI, requires inpatient psychiatric evaluation.
+Plan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter."
+P-1130,"HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.
+Exam: oriented x2, walks with assist, follows commands.
+Assessment: TBI, neurocognitive deficits, requires inpatient rehab.
+Plan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily."
+P-1161,"HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.
+Exam: episode of hypoglycemia overnight, glucose 42, treated with D50.
+Labs: glucose 42 (overnight), now 156. A1c 9.8.
+Assessment: hypoglycemia related to insulin without adequate glucose monitoring.
+Plan: continue insulin, recheck POC glucose Q4."
+P-1154,"HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.
+Exam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.
+Labs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.
+Assessment: septic shock with AKI. Multifactorial.
+Plan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission."
+P-1033,"HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.
+Exam: lungs clear, no edema, JVP normal.
+Assessment: HFpEF, optimized. Requires home oxygen.
+Plan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following."
+P-1092,"HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.
+Exam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.
+Labs: AST 142, ALT 88, lipase 38.
+Assessment: alcohol withdrawal, moderate. AUD.
+Plan: thiamine 100mg IV given. Banana bag running. Admit to medicine."
