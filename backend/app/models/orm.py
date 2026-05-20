@@ -32,6 +32,7 @@ class Patient(Base):
     arrival_time = Column(DateTime, nullable=False)
     template_name = Column(String, nullable=True)     # debug provenance
     truth_bottleneck = Column(String, nullable=True)  # for eval; not exposed in UI
+    room = Column(String, nullable=True)              # e.g. "3E-12" floor-east bed 12
 
     triage = relationship("Triage", back_populates="patient", uselist=False, cascade="all, delete-orphan")
     actions = relationship("Action", back_populates="patient", cascade="all, delete-orphan")
@@ -71,3 +72,25 @@ class Action(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
     patient = relationship("Patient", back_populates="actions")
+    events = relationship("ActionEvent", back_populates="action", cascade="all, delete-orphan", order_by="ActionEvent.created_at")
+
+
+class ActionEvent(Base):
+    """Audit-trail row for every state change on an Action.
+
+    Real ops tools need an immutable log of who did what when. We record
+    creation, status transitions, owner reassignments and free-text notes.
+    """
+
+    __tablename__ = "action_events"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    action_id = Column(Integer, ForeignKey("actions.id", ondelete="CASCADE"), nullable=False)
+    event_type = Column(String, nullable=False)              # created | status_change | reassigned | note
+    from_value = Column(String, nullable=True)
+    to_value = Column(String, nullable=True)
+    actor = Column(String, nullable=False, default="charge-rn")  # demo synthetic actor
+    note = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+    action = relationship("Action", back_populates="events")

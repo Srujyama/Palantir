@@ -10,16 +10,18 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
-from app.models.orm import Action, Patient, Triage
+from app.models.orm import Action, ActionEvent, Patient, Triage
 from app.models.schemas import (
     ActionResponse,
     BottleneckPayload,
     ICDCandidate,
     PatientDetail,
     PatientSummary,
+    PatientTimeline,
     ProtocolMatchPayload,
     SilentFailurePayload,
     Span,
+    TimelineEvent,
     WhyStuckResponse,
 )
 
@@ -46,7 +48,7 @@ def _silent_failure_count(triage: Triage) -> int:
 @router.get("", response_model=List[PatientSummary])
 def list_patients(
     db: Session = Depends(get_db),
-    urgency: Optional[str] = Query(None, regex="^(red|amber|green)$"),
+    urgency: Optional[str] = Query(None, pattern="^(red|amber|green)$"),
     owner: Optional[str] = Query(None),
     category: Optional[str] = Query(None),
     search: Optional[str] = Query(None, min_length=1, max_length=80),
@@ -76,6 +78,7 @@ def list_patients(
                 sex=p.sex,
                 chief_complaint=p.chief_complaint,
                 arrival_time=p.arrival_time,
+                room=p.room,
                 primary_category=t.primary_category,
                 primary_label=t.primary_label,
                 primary_urgency=t.primary_urgency,
@@ -103,6 +106,7 @@ def patient_detail(patient_id: str, db: Session = Depends(get_db)):
         sex=p.sex,
         chief_complaint=p.chief_complaint,
         arrival_time=p.arrival_time,
+        room=p.room,
         note_text=p.note_text,
         primary=BottleneckPayload(**payload["primary"]),
         secondary=[BottleneckPayload(**b) for b in payload["secondary"]],
@@ -120,6 +124,76 @@ def patient_detail(patient_id: str, db: Session = Depends(get_db)):
             for a in sorted(p.actions, key=lambda a: a.created_at, reverse=True)
         ],
     )
+
+
+@router.get("/{patient_id}/timeline", response_model=PatientTimeline)
+def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
+    """Builds an ordered timeline of events for this patient: arrival, triage,
+    each gap detected, each action lifecycle event. Used by the timeline view
+    on the patient detail page."""
+
+    p = db.query(Patient).filter(Patient.id == patient_id).one_or_none()
+    if not p:
+        raise HTTPException(404, f"Patient {patient_id} not found")
+    payload = p.triage.payload
+
+    events: List[TimelineEvent] = [
+        TimelineEvent(
+            timestamp=p.arrival_time,
+            kind="arrival",
+            title=f"Arrived on floor — {p.chief_complaint}",
+            detail=f"Room {p.room or 'unassigned'} · {p.age}{p.sex}",
+        ),
+        TimelineEvent(
+            timestamp=p.triage.computed_at,
+            kind="triage",
+            title="Pipeline ran on note",
+            detail=f"{payload['primary']['label']} ({payload['primary']['urgency']})",
+            urgency=payload["primary"]["urgency"],
+            actor="pipeline",
+        ),
+    ]
+    for sf in payload.get("silent_failures", []):
+        events.append(
+            TimelineEvent(
+                timestamp=p.triage.computed_at,
+                kind="gap_detected",
+                title=f"Gap surfaced: {sf['missing_action']}",
+                detail=f"{sf['protocol_name']} · {sf['citation']}",
+                urgency=sf["urgency"],
+                actor="pipeline",
+            )
+        )
+    actions = (
+        db.query(Action)
+        .filter(Action.patient_id == patient_id)
+        .order_by(Action.created_at.asc())
+        .all()
+    )
+    for a in actions:
+        events.append(
+            TimelineEvent(
+                timestamp=a.created_at,
+                kind="action_created",
+                title=f"Action opened: {a.title}",
+                detail=f"Owner: {a.owner} · {a.description[:120]}",
+                urgency=a.urgency,
+                actor="charge-rn",
+            )
+        )
+        for ev in a.events:
+            events.append(
+                TimelineEvent(
+                    timestamp=ev.created_at,
+                    kind="action_state",
+                    title=f"Action #{a.id}: {ev.event_type.replace('_', ' ')}",
+                    detail=f"{ev.from_value or '—'} → {ev.to_value or '—'}",
+                    actor=ev.actor,
+                )
+            )
+
+    events.sort(key=lambda e: e.timestamp)
+    return PatientTimeline(patient_id=p.id, events=events)
 
 
 @router.get("/{patient_id}/why", response_model=WhyStuckResponse)

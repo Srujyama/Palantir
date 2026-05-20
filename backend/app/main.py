@@ -6,6 +6,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.actions import router as actions_router
+from app.api.analytics import router as analytics_router
+from app.api.floor import router as floor_router
+from app.api.handoff import router as handoff_router
 from app.api.patients import router as patients_router
 from app.api.stats import router as stats_router
 from app.db.database import Base, engine
@@ -41,3 +44,6 @@ def health():
 app.include_router(patients_router)
 app.include_router(actions_router)
 app.include_router(stats_router)
+app.include_router(floor_router)
+app.include_router(analytics_router)
+app.include_router(handoff_router)
