@@ -1,132 +1,37 @@
 [
   {
-    "patient_id": "P-1009",
-    "arrival_time": "2026-04-26T17:37",
-    "age": 79,
+    "patient_id": "P-1105",
+    "arrival_time": "2026-05-17T18:54",
+    "age": 68,
     "sex": "M",
-    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
-    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
+    "chief_complaint": "COPD exacerbation, increased sputum",
+    "note_text": "HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.\nExam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.\nLabs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.\nImaging: CXR no infiltrate.\nAssessment: COPD exacerbation, moderate.\nPlan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry.",
     "icd10_hints": [
-      "S72.141A"
+      "J44.1"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "copd",
+    "expected_owner": "physician",
+    "template_name": "copd_no_steroids"
+  },
+  {
+    "patient_id": "P-1111",
+    "arrival_time": "2026-05-19T13:21",
+    "age": 74,
+    "sex": "F",
+    "chief_complaint": "Slow GI bleed, awaiting endoscopy",
+    "note_text": "HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.\nExam: stable, soft non-tender abdomen.\nLabs: hgb 8.8, plt 220, INR 1.1.\nAssessment: chronic GI blood loss, likely NSAID gastropathy.\nPlan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling.",
+    "icd10_hints": [
+      "K92.1"
     ],
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
-  },
-  {
-    "patient_id": "P-1003",
-    "arrival_time": "2026-04-26T03:56",
-    "age": 60,
-    "sex": "F",
-    "chief_complaint": "Substernal chest pressure",
-    "note_text": "HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.\nExam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.\nECG: ST depression V4-V6, T-wave inversion lateral leads.\nLabs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.\nAssessment: NSTEMI, intermediate-to-high risk.\nPlan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist.",
-    "icd10_hints": [
-      "I21.4",
-      "I20.0"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "acs",
-    "expected_owner": "physician",
-    "template_name": "acs_no_consult"
-  },
-  {
-    "patient_id": "P-1016",
-    "arrival_time": "2026-04-26T01:42",
-    "age": 29,
-    "sex": "F",
-    "chief_complaint": "Right lower quadrant pain",
-    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
-    "icd10_hints": [
-      "K35.80",
-      "R10.31"
-    ],
-    "truth_bottleneck": "awaiting_imaging",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
-  },
-  {
-    "patient_id": "P-1040",
-    "arrival_time": "2026-04-27T02:54",
-    "age": 56,
-    "sex": "M",
-    "chief_complaint": "Cough, fever, hypoxia",
-    "note_text": "HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.\nExam: RR 22, SpO2 92% RA, right basilar crackles.\nLabs: WBC 14.8, lactate 1.6, procalcitonin 2.1.\nImaging: CXR with right lower lobe consolidation.\nAssessment: community-acquired pneumonia, CURB-65 = 1.\nPlan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor.",
-    "icd10_hints": [
-      "J18.9"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "cap",
-    "expected_owner": "physician",
-    "template_name": "cap_late_abx"
-  },
-  {
-    "patient_id": "P-1034",
-    "arrival_time": "2026-04-26T03:26",
-    "age": 34,
-    "sex": "M",
-    "chief_complaint": "DKA, third admission this year",
-    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
-    "icd10_hints": [
-      "E10.10",
-      "Z91.120"
-    ],
-    "truth_bottleneck": "readmit_risk",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
-  },
-  {
-    "patient_id": "P-1057",
-    "arrival_time": "2026-04-26T17:16",
-    "age": 73,
-    "sex": "F",
-    "chief_complaint": "Syncope on multiple QT-prolonging meds",
-    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
-    "icd10_hints": [
-      "I49.8",
-      "T50.905A"
-    ],
-    "truth_bottleneck": "med_risk",
-    "truth_protocol": "",
-    "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
-  },
-  {
-    "patient_id": "P-1045",
-    "arrival_time": "2026-04-25T22:31",
-    "age": 35,
-    "sex": "M",
-    "chief_complaint": "Uncomplicated UTI, ready for discharge",
-    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
-    "icd10_hints": [
-      "N30.00"
-    ],
-    "truth_bottleneck": "clear",
-    "truth_protocol": "",
-    "expected_owner": "",
-    "template_name": "clear_uti"
-  },
-  {
-    "patient_id": "P-1006",
-    "arrival_time": "2026-04-26T15:58",
-    "age": 80,
-    "sex": "M",
-    "chief_complaint": "Acute right-sided weakness",
-    "note_text": "HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.\nExam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.\nVitals: BP 192/104, HR 78, glucose 142.\nImaging: head CT non-contrast pending.\nAssessment: acute ischemic stroke, within tPA window.\nPlan: BP control, monitor in ED.",
-    "icd10_hints": [
-      "I63.9",
-      "G81.91"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "stroke",
-    "expected_owner": "physician",
-    "template_name": "stroke_no_neuro"
+    "template_name": "gib_awaiting_gi"
   },
   {
     "patient_id": "P-1002",
-    "arrival_time": "2026-04-25T21:47",
+    "arrival_time": "2026-05-17T10:13",
     "age": 73,
     "sex": "M",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -142,9 +47,534 @@
     "template_name": "sepsis_no_abx"
   },
   {
-    "patient_id": "P-1031",
-    "arrival_time": "2026-04-26T05:46",
-    "age": 83,
+    "patient_id": "P-1089",
+    "arrival_time": "2026-05-19T12:30",
+    "age": 75,
+    "sex": "M",
+    "chief_complaint": "Rising creatinine, oliguria",
+    "note_text": "HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.\nExam: euvolemic.\nLabs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.\nAssessment: acute kidney injury, multifactorial.\nPlan: continue current regimen. Trend renal function.",
+    "icd10_hints": [
+      "N17.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "aki",
+    "expected_owner": "physician",
+    "template_name": "aki_no_med_review"
+  },
+  {
+    "patient_id": "P-1025",
+    "arrival_time": "2026-05-16T09:07",
+    "age": 38,
+    "sex": "F",
+    "chief_complaint": "First-time seizure",
+    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
+    "icd10_hints": [
+      "R56.9",
+      "G40.909"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "seizure_awaiting_mri"
+  },
+  {
+    "patient_id": "P-1018",
+    "arrival_time": "2026-05-18T07:17",
+    "age": 73,
+    "sex": "M",
+    "chief_complaint": "Decreased urine output, rising creatinine",
+    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
+    "icd10_hints": [
+      "N17.9",
+      "T36.91XA"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "aki_awaiting_renal"
+  },
+  {
+    "patient_id": "P-1045",
+    "arrival_time": "2026-05-19T06:52",
+    "age": 31,
+    "sex": "M",
+    "chief_complaint": "DKA, third admission this year",
+    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
+    "icd10_hints": [
+      "E10.10",
+      "Z91.120"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dm_readmit_risk"
+  },
+  {
+    "patient_id": "P-1022",
+    "arrival_time": "2026-05-16T21:55",
+    "age": 29,
+    "sex": "F",
+    "chief_complaint": "Right lower quadrant pain",
+    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
+    "icd10_hints": [
+      "K35.80",
+      "R10.31"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "rlq_pain_awaiting_ct"
+  },
+  {
+    "patient_id": "P-1067",
+    "arrival_time": "2026-05-16T15:04",
+    "age": 28,
+    "sex": "F",
+    "chief_complaint": "Migraine, treated and ready to leave",
+    "note_text": "HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.\nExam: nonfocal neuro, comfortable.\nAssessment: migraine, treated.\nPlan: discharge home with abortive medications, neurology follow-up scheduled.",
+    "icd10_hints": [
+      "G43.909"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_migraine"
+  },
+  {
+    "patient_id": "P-1039",
+    "arrival_time": "2026-05-17T08:47",
+    "age": 75,
+    "sex": "M",
+    "chief_complaint": "Worsening renal function on home meds",
+    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
+    "icd10_hints": [
+      "N17.9",
+      "T39.395A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "nephrotoxic_med"
+  },
+  {
+    "patient_id": "P-1090",
+    "arrival_time": "2026-05-19T02:09",
+    "age": 75,
+    "sex": "F",
+    "chief_complaint": "Rising creatinine, oliguria",
+    "note_text": "HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.\nExam: euvolemic.\nLabs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.\nAssessment: acute kidney injury, multifactorial.\nPlan: continue current regimen. Trend renal function.",
+    "icd10_hints": [
+      "N17.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "aki",
+    "expected_owner": "physician",
+    "template_name": "aki_no_med_review"
+  },
+  {
+    "patient_id": "P-1029",
+    "arrival_time": "2026-05-19T09:39",
+    "age": 73,
+    "sex": "M",
+    "chief_complaint": "COPD exacerbation, now resolved",
+    "note_text": "HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.\nExam: lungs with mild expiratory wheeze, no distress.\nAssessment: COPD exacerbation, resolved. Deconditioned.\nPlan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone.",
+    "icd10_hints": [
+      "J44.1",
+      "Z74.09"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_dispo_snf"
+  },
+  {
+    "patient_id": "P-1081",
+    "arrival_time": "2026-05-17T20:33",
+    "age": 57,
+    "sex": "M",
+    "chief_complaint": "Pleuritic chest pain, dyspnea",
+    "note_text": "HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.\nExam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.\nLabs: D-dimer 4.8 (elevated).\nImaging: CT-PA confirms bilateral segmental PE.\nAssessment: acute pulmonary embolism, hemodynamically stable.\nPlan: started on heparin drip. Admit to medicine.",
+    "icd10_hints": [
+      "I26.99"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "pe",
+    "expected_owner": "physician",
+    "template_name": "pe_no_risk_strat"
+  },
+  {
+    "patient_id": "P-1094",
+    "arrival_time": "2026-05-18T14:58",
+    "age": 52,
+    "sex": "M",
+    "chief_complaint": "Alcohol withdrawal, tremulous",
+    "note_text": "HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.\nExam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.\nLabs: AST 142, ALT 88, lipase 38.\nAssessment: alcohol withdrawal, moderate. AUD.\nPlan: thiamine 100mg IV given. Banana bag running. Admit to medicine.",
+    "icd10_hints": [
+      "F10.230"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "ciwa",
+    "expected_owner": "physician",
+    "template_name": "ciwa_no_scoring"
+  },
+  {
+    "patient_id": "P-1136",
+    "arrival_time": "2026-05-16T13:08",
+    "age": 54,
+    "sex": "M",
+    "chief_complaint": "Cellulitis, completed IV antibiotics",
+    "note_text": "HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.\nExam: improving erythema, no streaking, no fluctuance.\nAssessment: cellulitis, resolving.\nPlan: transition to PO antibiotics. Discharge home with follow-up in 1 week.",
+    "icd10_hints": [
+      "L03.115"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_cellulitis"
+  },
+  {
+    "patient_id": "P-1121",
+    "arrival_time": "2026-05-19T20:53",
+    "age": 39,
+    "sex": "M",
+    "chief_complaint": "Fever, IVDU, suspected endocarditis",
+    "note_text": "HPI: 39yo male with history of IV drug use presents with fevers x 1 week.\nExam: febrile, new systolic murmur at LSB. Track marks both arms.\nLabs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.\nImaging: TTE ordered, scheduled for tomorrow. CXR clear.\nAssessment: suspected infective endocarditis.\nPlan: vancomycin + cefepime empiric. ID consult.",
+    "icd10_hints": [
+      "I33.0"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "ie_awaiting_tte"
+  },
+  {
+    "patient_id": "P-1037",
+    "arrival_time": "2026-05-19T08:00",
+    "age": 77,
+    "sex": "M",
+    "chief_complaint": "Worsening renal function on home meds",
+    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
+    "icd10_hints": [
+      "N17.9",
+      "T39.395A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "nephrotoxic_med"
+  },
+  {
+    "patient_id": "P-1123",
+    "arrival_time": "2026-05-18T10:46",
+    "age": 35,
+    "sex": "M",
+    "chief_complaint": "Fever, IVDU, suspected endocarditis",
+    "note_text": "HPI: 39yo male with history of IV drug use presents with fevers x 1 week.\nExam: febrile, new systolic murmur at LSB. Track marks both arms.\nLabs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.\nImaging: TTE ordered, scheduled for tomorrow. CXR clear.\nAssessment: suspected infective endocarditis.\nPlan: vancomycin + cefepime empiric. ID consult.",
+    "icd10_hints": [
+      "I33.0"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "ie_awaiting_tte"
+  },
+  {
+    "patient_id": "P-1058",
+    "arrival_time": "2026-05-17T10:05",
+    "age": 21,
+    "sex": "M",
+    "chief_complaint": "Hyperglycemia, ketosis",
+    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
+    "icd10_hints": [
+      "E10.10"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "dka",
+    "expected_owner": "physician",
+    "template_name": "dka_no_drip"
+  },
+  {
+    "patient_id": "P-1049",
+    "arrival_time": "2026-05-19T11:32",
+    "age": 71,
+    "sex": "M",
+    "chief_complaint": "CHF readmission within 14 days",
+    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_readmit_risk"
+  },
+  {
+    "patient_id": "P-1004",
+    "arrival_time": "2026-05-17T20:23",
+    "age": 63,
+    "sex": "F",
+    "chief_complaint": "Substernal chest pressure",
+    "note_text": "HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.\nExam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.\nECG: ST depression V4-V6, T-wave inversion lateral leads.\nLabs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.\nAssessment: NSTEMI, intermediate-to-high risk.\nPlan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist.",
+    "icd10_hints": [
+      "I21.4",
+      "I20.0"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "acs",
+    "expected_owner": "physician",
+    "template_name": "acs_no_consult"
+  },
+  {
+    "patient_id": "P-1149",
+    "arrival_time": "2026-05-16T18:45",
+    "age": 71,
+    "sex": "M",
+    "chief_complaint": "Old stroke, residual deficits, dispo",
+    "note_text": "HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.\nExam: residual right-sided weakness 4/5, otherwise nonfocal.\nAssessment: ischemic stroke, residual deficits. Stroke window expired.\nPlan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following.",
+    "icd10_hints": [
+      "I69.351"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "stroke_window_expired"
+  },
+  {
+    "patient_id": "P-1128",
+    "arrival_time": "2026-05-18T18:27",
+    "age": 26,
+    "sex": "M",
+    "chief_complaint": "Post-TBI, awaiting rehab placement",
+    "note_text": "HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.\nExam: oriented x2, walks with assist, follows commands.\nAssessment: TBI, neurocognitive deficits, requires inpatient rehab.\nPlan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily.",
+    "icd10_hints": [
+      "S06.9X9A"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_rehab_tbi"
+  },
+  {
+    "patient_id": "P-1044",
+    "arrival_time": "2026-05-16T22:23",
+    "age": 32,
+    "sex": "M",
+    "chief_complaint": "DKA, third admission this year",
+    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
+    "icd10_hints": [
+      "E10.10",
+      "Z91.120"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dm_readmit_risk"
+  },
+  {
+    "patient_id": "P-1014",
+    "arrival_time": "2026-05-18T18:36",
+    "age": 84,
+    "sex": "F",
+    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
+    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
+    "icd10_hints": [
+      "S72.141A"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "hip_fx_awaiting_ortho"
+  },
+  {
+    "patient_id": "P-1056",
+    "arrival_time": "2026-05-18T16:53",
+    "age": 19,
+    "sex": "M",
+    "chief_complaint": "Hyperglycemia, ketosis",
+    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
+    "icd10_hints": [
+      "E10.10"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "dka",
+    "expected_owner": "physician",
+    "template_name": "dka_no_drip"
+  },
+  {
+    "patient_id": "P-1027",
+    "arrival_time": "2026-05-17T15:04",
+    "age": 42,
+    "sex": "F",
+    "chief_complaint": "First-time seizure",
+    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
+    "icd10_hints": [
+      "R56.9",
+      "G40.909"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "seizure_awaiting_mri"
+  },
+  {
+    "patient_id": "P-1157",
+    "arrival_time": "2026-05-17T12:10",
+    "age": 62,
+    "sex": "M",
+    "chief_complaint": "Free air on CT, surgery not yet seen",
+    "note_text": "HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.\nExam: rigid abdomen, rebound tenderness, BP 102/68.\nLabs: WBC 16.4, lactate 2.8.\nImaging: CT abdomen shows free air, concern for perforated viscus.\nAssessment: perforated viscus.\nPlan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed.",
+    "icd10_hints": [
+      "K65.9"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "perf_awaiting_surgery"
+  },
+  {
+    "patient_id": "P-1007",
+    "arrival_time": "2026-05-19T09:08",
+    "age": 63,
+    "sex": "F",
+    "chief_complaint": "Substernal chest pressure",
+    "note_text": "HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.\nExam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.\nECG: ST depression V4-V6, T-wave inversion lateral leads.\nLabs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.\nAssessment: NSTEMI, intermediate-to-high risk.\nPlan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist.",
+    "icd10_hints": [
+      "I21.4",
+      "I20.0"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "acs",
+    "expected_owner": "physician",
+    "template_name": "acs_no_consult"
+  },
+  {
+    "patient_id": "P-1069",
+    "arrival_time": "2026-05-19T00:56",
+    "age": 28,
+    "sex": "M",
+    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
+    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
+    "icd10_hints": [
+      "R45.851"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_consult_delay"
+  },
+  {
+    "patient_id": "P-1160",
+    "arrival_time": "2026-05-16T03:56",
+    "age": 80,
+    "sex": "M",
+    "chief_complaint": "Diabetic admission, hypoglycemia event",
+    "note_text": "HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.\nExam: episode of hypoglycemia overnight, glucose 42, treated with D50.\nLabs: glucose 42 (overnight), now 156. A1c 9.8.\nAssessment: hypoglycemia related to insulin without adequate glucose monitoring.\nPlan: continue insulin, recheck POC glucose Q4.",
+    "icd10_hints": [
+      "E11.9",
+      "E16.2"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "insulin_no_glucose_monitor"
+  },
+  {
+    "patient_id": "P-1066",
+    "arrival_time": "2026-05-18T23:56",
+    "age": 35,
+    "sex": "F",
+    "chief_complaint": "Migraine, treated and ready to leave",
+    "note_text": "HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.\nExam: nonfocal neuro, comfortable.\nAssessment: migraine, treated.\nPlan: discharge home with abortive medications, neurology follow-up scheduled.",
+    "icd10_hints": [
+      "G43.909"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_migraine"
+  },
+  {
+    "patient_id": "P-1173",
+    "arrival_time": "2026-05-17T09:58",
+    "age": 70,
+    "sex": "M",
+    "chief_complaint": "Acute limb ischemia",
+    "note_text": "HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.\nExam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.\nLabs: lactate 2.2.\nImaging: CTA shows right popliteal occlusion.\nAssessment: acute limb ischemia.\nPlan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR.",
+    "icd10_hints": [
+      "I74.3"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "limb_ischemia_awaiting_vasc"
+  },
+  {
+    "patient_id": "P-1085",
+    "arrival_time": "2026-05-17T17:37",
+    "age": 66,
+    "sex": "F",
+    "chief_complaint": "Hematemesis x 2 episodes overnight",
+    "note_text": "HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.\nExam: pale, BP 96/58, HR 108. Abdominal exam soft.\nLabs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.\nAssessment: upper GI bleed, likely variceal vs ulcer source.\nPlan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy.",
+    "icd10_hints": [
+      "K92.0",
+      "K92.2"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "gi_bleed",
+    "expected_owner": "physician",
+    "template_name": "gib_no_ppi"
+  },
+  {
+    "patient_id": "P-1008",
+    "arrival_time": "2026-05-19T10:50",
+    "age": 80,
+    "sex": "M",
+    "chief_complaint": "Acute right-sided weakness",
+    "note_text": "HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.\nExam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.\nVitals: BP 192/104, HR 78, glucose 142.\nImaging: head CT non-contrast pending.\nAssessment: acute ischemic stroke, within tPA window.\nPlan: BP control, monitor in ED.",
+    "icd10_hints": [
+      "I63.9",
+      "G81.91"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "stroke",
+    "expected_owner": "physician",
+    "template_name": "stroke_no_neuro"
+  },
+  {
+    "patient_id": "P-1122",
+    "arrival_time": "2026-05-19T06:10",
+    "age": 38,
+    "sex": "M",
+    "chief_complaint": "Fever, IVDU, suspected endocarditis",
+    "note_text": "HPI: 39yo male with history of IV drug use presents with fevers x 1 week.\nExam: febrile, new systolic murmur at LSB. Track marks both arms.\nLabs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.\nImaging: TTE ordered, scheduled for tomorrow. CXR clear.\nAssessment: suspected infective endocarditis.\nPlan: vancomycin + cefepime empiric. ID consult.",
+    "icd10_hints": [
+      "I33.0"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "ie_awaiting_tte"
+  },
+  {
+    "patient_id": "P-1102",
+    "arrival_time": "2026-05-19T08:57",
+    "age": 67,
+    "sex": "F",
+    "chief_complaint": "Severe hyperkalemia on routine labs",
+    "note_text": "HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.\nExam: stable, no chest pain, no weakness.\nLabs: K 6.8, Cr 8.2, bicarb 16.\nAssessment: severe hyperkalemia, missed dialysis.\nPlan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered.",
+    "icd10_hints": [
+      "E87.5",
+      "N18.6"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "hyperkalemia",
+    "expected_owner": "physician",
+    "template_name": "hyperk_no_ecg"
+  },
+  {
+    "patient_id": "P-1041",
+    "arrival_time": "2026-05-17T23:01",
+    "age": 85,
     "sex": "F",
     "chief_complaint": "GIB on apixaban",
     "note_text": "HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.\nExam: pale, tachycardic to 108, BP 102/64.\nLabs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.\nAssessment: upper GI bleed on dual antiplatelet plus DOAC.\nPlan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain.",
@@ -159,8 +589,177 @@
     "template_name": "anticoag_bleed_risk"
   },
   {
+    "patient_id": "P-1126",
+    "arrival_time": "2026-05-18T18:24",
+    "age": 59,
+    "sex": "M",
+    "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
+    "note_text": "HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.\nExam: stable, no edema.\nLabs: K 4.2, Cr 6.8 (post-HD baseline).\nAssessment: ESRD, hyperkalemia resolved.\nPlan: medically optimized. Awaiting outpatient HD chair assignment \u2014 case management following, no slot available until next week. Insurance authorization in progress.",
+    "icd10_hints": [
+      "N18.6",
+      "Z99.2"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_dialysis_chair"
+  },
+  {
+    "patient_id": "P-1114",
+    "arrival_time": "2026-05-17T05:28",
+    "age": 31,
+    "sex": "M",
+    "chief_complaint": "Manic episode, on involuntary hold",
+    "note_text": "HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.\nExam: agitated but cooperative now after IM olanzapine. Vitals stable.\nLabs: tox screen positive for amphetamines. Otherwise unremarkable.\nAssessment: acute mania.\nPlan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified.",
+    "icd10_hints": [
+      "F31.2"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_medical_clear"
+  },
+  {
+    "patient_id": "P-1167",
+    "arrival_time": "2026-05-19T18:55",
+    "age": 60,
+    "sex": "M",
+    "chief_complaint": "Discharge teaching delayed, no interpreter",
+    "note_text": "HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.\nExam: stable, no edema.\nAssessment: HFpEF, ready for discharge.\nPlan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_language_barrier"
+  },
+  {
+    "patient_id": "P-1117",
+    "arrival_time": "2026-05-18T16:25",
+    "age": 46,
+    "sex": "F",
+    "chief_complaint": "Dyspnea, contrast contraindication",
+    "note_text": "HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.\nExam: RR 20, SpO2 95% RA, HR 102.\nLabs: D-dimer 3.2.\nImaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.\nAssessment: workup for PE.\nPlan: empiric heparin drip while awaiting study.",
+    "icd10_hints": [
+      "R06.02",
+      "O88.211"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "pe_awaiting_vq"
+  },
+  {
+    "patient_id": "P-1046",
+    "arrival_time": "2026-05-16T20:25",
+    "age": 31,
+    "sex": "F",
+    "chief_complaint": "DKA, third admission this year",
+    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
+    "icd10_hints": [
+      "E10.10",
+      "Z91.120"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dm_readmit_risk"
+  },
+  {
+    "patient_id": "P-1129",
+    "arrival_time": "2026-05-16T14:59",
+    "age": 30,
+    "sex": "F",
+    "chief_complaint": "Post-TBI, awaiting rehab placement",
+    "note_text": "HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.\nExam: oriented x2, walks with assist, follows commands.\nAssessment: TBI, neurocognitive deficits, requires inpatient rehab.\nPlan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily.",
+    "icd10_hints": [
+      "S06.9X9A"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_rehab_tbi"
+  },
+  {
+    "patient_id": "P-1150",
+    "arrival_time": "2026-05-16T06:29",
+    "age": 71,
+    "sex": "F",
+    "chief_complaint": "Old stroke, residual deficits, dispo",
+    "note_text": "HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.\nExam: residual right-sided weakness 4/5, otherwise nonfocal.\nAssessment: ischemic stroke, residual deficits. Stroke window expired.\nPlan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following.",
+    "icd10_hints": [
+      "I69.351"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "stroke_window_expired"
+  },
+  {
+    "patient_id": "P-1048",
+    "arrival_time": "2026-05-18T05:48",
+    "age": 68,
+    "sex": "M",
+    "chief_complaint": "CHF readmission within 14 days",
+    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_readmit_risk"
+  },
+  {
+    "patient_id": "P-1159",
+    "arrival_time": "2026-05-19T14:44",
+    "age": 62,
+    "sex": "M",
+    "chief_complaint": "Free air on CT, surgery not yet seen",
+    "note_text": "HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.\nExam: rigid abdomen, rebound tenderness, BP 102/68.\nLabs: WBC 16.4, lactate 2.8.\nImaging: CT abdomen shows free air, concern for perforated viscus.\nAssessment: perforated viscus.\nPlan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed.",
+    "icd10_hints": [
+      "K65.9"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "perf_awaiting_surgery"
+  },
+  {
+    "patient_id": "P-1072",
+    "arrival_time": "2026-05-19T15:40",
+    "age": 70,
+    "sex": "F",
+    "chief_complaint": "POD 2 from THA, awaiting PT clearance",
+    "note_text": "HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.\nExam: incision clean dry intact, no calf tenderness.\nAssessment: uncomplicated post-op course.\nPlan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen.",
+    "icd10_hints": [
+      "Z47.1"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "post_op_pt_clearance"
+  },
+  {
+    "patient_id": "P-1118",
+    "arrival_time": "2026-05-19T15:48",
+    "age": 41,
+    "sex": "F",
+    "chief_complaint": "Dyspnea, contrast contraindication",
+    "note_text": "HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.\nExam: RR 20, SpO2 95% RA, HR 102.\nLabs: D-dimer 3.2.\nImaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.\nAssessment: workup for PE.\nPlan: empiric heparin drip while awaiting study.",
+    "icd10_hints": [
+      "R06.02",
+      "O88.211"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "pe_awaiting_vq"
+  },
+  {
     "patient_id": "P-1001",
-    "arrival_time": "2026-04-25T19:54",
+    "arrival_time": "2026-05-17T06:20",
     "age": 68,
     "sex": "F",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -176,25 +775,133 @@
     "template_name": "sepsis_no_abx"
   },
   {
-    "patient_id": "P-1032",
-    "arrival_time": "2026-04-26T20:46",
-    "age": 79,
-    "sex": "M",
-    "chief_complaint": "GIB on apixaban",
-    "note_text": "HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.\nExam: pale, tachycardic to 108, BP 102/64.\nLabs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.\nAssessment: upper GI bleed on dual antiplatelet plus DOAC.\nPlan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain.",
+    "patient_id": "P-1132",
+    "arrival_time": "2026-05-16T07:40",
+    "age": 66,
+    "sex": "F",
+    "chief_complaint": "COPD readmit, lost inhaler",
+    "note_text": "HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.\nExam: improved, mild expiratory wheeze.\nAssessment: COPD, severe. Recurrent admissions, social factors.\nPlan: optimize inhaler regimen. Discharge to home with brief rehab if approved.",
     "icd10_hints": [
-      "K92.2",
-      "I48.91",
-      "D62"
+      "J44.1"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_readmit_no_inhaler"
+  },
+  {
+    "patient_id": "P-1087",
+    "arrival_time": "2026-05-16T06:19",
+    "age": 60,
+    "sex": "M",
+    "chief_complaint": "Hematemesis x 2 episodes overnight",
+    "note_text": "HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.\nExam: pale, BP 96/58, HR 108. Abdominal exam soft.\nLabs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.\nAssessment: upper GI bleed, likely variceal vs ulcer source.\nPlan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy.",
+    "icd10_hints": [
+      "K92.0",
+      "K92.2"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "gi_bleed",
+    "expected_owner": "physician",
+    "template_name": "gib_no_ppi"
+  },
+  {
+    "patient_id": "P-1112",
+    "arrival_time": "2026-05-19T03:09",
+    "age": 31,
+    "sex": "M",
+    "chief_complaint": "Manic episode, on involuntary hold",
+    "note_text": "HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.\nExam: agitated but cooperative now after IM olanzapine. Vitals stable.\nLabs: tox screen positive for amphetamines. Otherwise unremarkable.\nAssessment: acute mania.\nPlan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified.",
+    "icd10_hints": [
+      "F31.2"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_medical_clear"
+  },
+  {
+    "patient_id": "P-1155",
+    "arrival_time": "2026-05-18T01:33",
+    "age": 65,
+    "sex": "M",
+    "chief_complaint": "Septic shock with AKI",
+    "note_text": "HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.\nExam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.\nLabs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.\nAssessment: septic shock with AKI. Multifactorial.\nPlan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission.",
+    "icd10_hints": [
+      "A41.9",
+      "N17.9",
+      "R65.21"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "sepsis",
+    "expected_owner": "physician",
+    "template_name": "sepsis_aki_combo"
+  },
+  {
+    "patient_id": "P-1023",
+    "arrival_time": "2026-05-19T17:33",
+    "age": 31,
+    "sex": "F",
+    "chief_complaint": "Right lower quadrant pain",
+    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
+    "icd10_hints": [
+      "K35.80",
+      "R10.31"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "rlq_pain_awaiting_ct"
+  },
+  {
+    "patient_id": "P-1140",
+    "arrival_time": "2026-05-18T11:13",
+    "age": 50,
+    "sex": "M",
+    "chief_complaint": "Chest pain, ruled out for ACS",
+    "note_text": "HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.\nExam: nonfocal, comfortable.\nLabs: troponin x 2 negative.\nImaging: stress echo no inducible ischemia.\nAssessment: non-cardiac chest pain, likely musculoskeletal.\nPlan: discharge home with PCP follow-up. NSAIDs as needed.",
+    "icd10_hints": [
+      "R07.9"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_chest_pain_rule_out"
+  },
+  {
+    "patient_id": "P-1142",
+    "arrival_time": "2026-05-17T09:45",
+    "age": 46,
+    "sex": "M",
+    "chief_complaint": "Chest pain, ruled out for ACS",
+    "note_text": "HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.\nExam: nonfocal, comfortable.\nLabs: troponin x 2 negative.\nImaging: stress echo no inducible ischemia.\nAssessment: non-cardiac chest pain, likely musculoskeletal.\nPlan: discharge home with PCP follow-up. NSAIDs as needed.",
+    "icd10_hints": [
+      "R07.9"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_chest_pain_rule_out"
+  },
+  {
+    "patient_id": "P-1079",
+    "arrival_time": "2026-05-18T23:25",
+    "age": 72,
+    "sex": "F",
+    "chief_complaint": "Syncope on multiple QT-prolonging meds",
+    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
+    "icd10_hints": [
+      "I49.8",
+      "T50.905A"
     ],
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "anticoag_bleed_risk"
+    "template_name": "qt_prolong_combo"
   },
   {
-    "patient_id": "P-1026",
-    "arrival_time": "2026-04-25T22:57",
+    "patient_id": "P-1035",
+    "arrival_time": "2026-05-16T14:12",
     "age": 66,
     "sex": "F",
     "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
@@ -209,24 +916,9 @@
     "template_name": "chf_dispo_o2"
   },
   {
-    "patient_id": "P-1043",
-    "arrival_time": "2026-04-26T20:20",
-    "age": 21,
-    "sex": "M",
-    "chief_complaint": "Hyperglycemia, ketosis",
-    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
-    "icd10_hints": [
-      "E10.10"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "dka",
-    "expected_owner": "physician",
-    "template_name": "dka_no_drip"
-  },
-  {
-    "patient_id": "P-1054",
-    "arrival_time": "2026-04-26T17:09",
-    "age": 66,
+    "patient_id": "P-1075",
+    "arrival_time": "2026-05-16T21:56",
+    "age": 65,
     "sex": "F",
     "chief_complaint": "POD 2 from THA, awaiting PT clearance",
     "note_text": "HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.\nExam: incision clean dry intact, no calf tenderness.\nAssessment: uncomplicated post-op course.\nPlan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen.",
@@ -239,478 +931,10 @@
     "template_name": "post_op_pt_clearance"
   },
   {
-    "patient_id": "P-1046",
-    "arrival_time": "2026-04-27T00:51",
-    "age": 41,
-    "sex": "F",
-    "chief_complaint": "Uncomplicated UTI, ready for discharge",
-    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
-    "icd10_hints": [
-      "N30.00"
-    ],
-    "truth_bottleneck": "clear",
-    "truth_protocol": "",
-    "expected_owner": "",
-    "template_name": "clear_uti"
-  },
-  {
-    "patient_id": "P-1049",
-    "arrival_time": "2026-04-25T19:02",
-    "age": 33,
-    "sex": "M",
-    "chief_complaint": "Migraine, treated and ready to leave",
-    "note_text": "HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.\nExam: nonfocal neuro, comfortable.\nAssessment: migraine, treated.\nPlan: discharge home with abortive medications, neurology follow-up scheduled.",
-    "icd10_hints": [
-      "G43.909"
-    ],
-    "truth_bottleneck": "clear",
-    "truth_protocol": "",
-    "expected_owner": "",
-    "template_name": "clear_migraine"
-  },
-  {
-    "patient_id": "P-1028",
-    "arrival_time": "2026-04-25T22:55",
-    "age": 76,
-    "sex": "M",
-    "chief_complaint": "Worsening renal function on home meds",
-    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
-    "icd10_hints": [
-      "N17.9",
-      "T39.395A"
-    ],
-    "truth_bottleneck": "med_risk",
-    "truth_protocol": "",
-    "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
-  },
-  {
-    "patient_id": "P-1017",
-    "arrival_time": "2026-04-26T22:28",
-    "age": 25,
-    "sex": "F",
-    "chief_complaint": "Right lower quadrant pain",
-    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
-    "icd10_hints": [
-      "K35.80",
-      "R10.31"
-    ],
-    "truth_bottleneck": "awaiting_imaging",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
-  },
-  {
-    "patient_id": "P-1044",
-    "arrival_time": "2026-04-26T06:30",
-    "age": 22,
-    "sex": "M",
-    "chief_complaint": "Hyperglycemia, ketosis",
-    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
-    "icd10_hints": [
-      "E10.10"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "dka",
-    "expected_owner": "physician",
-    "template_name": "dka_no_drip"
-  },
-  {
-    "patient_id": "P-1048",
-    "arrival_time": "2026-04-26T16:27",
-    "age": 30,
-    "sex": "F",
-    "chief_complaint": "Migraine, treated and ready to leave",
-    "note_text": "HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.\nExam: nonfocal neuro, comfortable.\nAssessment: migraine, treated.\nPlan: discharge home with abortive medications, neurology follow-up scheduled.",
-    "icd10_hints": [
-      "G43.909"
-    ],
-    "truth_bottleneck": "clear",
-    "truth_protocol": "",
-    "expected_owner": "",
-    "template_name": "clear_migraine"
-  },
-  {
-    "patient_id": "P-1015",
-    "arrival_time": "2026-04-25T20:29",
-    "age": 28,
-    "sex": "F",
-    "chief_complaint": "Right lower quadrant pain",
-    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
-    "icd10_hints": [
-      "K35.80",
-      "R10.31"
-    ],
-    "truth_bottleneck": "awaiting_imaging",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
-  },
-  {
-    "patient_id": "P-1023",
-    "arrival_time": "2026-04-26T10:19",
-    "age": 71,
-    "sex": "F",
-    "chief_complaint": "COPD exacerbation, now resolved",
-    "note_text": "HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.\nExam: lungs with mild expiratory wheeze, no distress.\nAssessment: COPD exacerbation, resolved. Deconditioned.\nPlan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone.",
-    "icd10_hints": [
-      "J44.1",
-      "Z74.09"
-    ],
-    "truth_bottleneck": "dispo_delay",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "copd_dispo_snf"
-  },
-  {
-    "patient_id": "P-1019",
-    "arrival_time": "2026-04-27T01:12",
-    "age": 44,
-    "sex": "M",
-    "chief_complaint": "First-time seizure",
-    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
-    "icd10_hints": [
-      "R56.9",
-      "G40.909"
-    ],
-    "truth_bottleneck": "awaiting_imaging",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
-  },
-  {
-    "patient_id": "P-1036",
-    "arrival_time": "2026-04-27T02:31",
-    "age": 74,
-    "sex": "M",
-    "chief_complaint": "CHF readmission within 14 days",
-    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
-    "icd10_hints": [
-      "I50.32"
-    ],
-    "truth_bottleneck": "readmit_risk",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
-  },
-  {
-    "patient_id": "P-1020",
-    "arrival_time": "2026-04-26T09:39",
-    "age": 45,
-    "sex": "M",
-    "chief_complaint": "First-time seizure",
-    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
-    "icd10_hints": [
-      "R56.9",
-      "G40.909"
-    ],
-    "truth_bottleneck": "awaiting_imaging",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
-  },
-  {
-    "patient_id": "P-1035",
-    "arrival_time": "2026-04-26T09:52",
-    "age": 35,
-    "sex": "F",
-    "chief_complaint": "DKA, third admission this year",
-    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
-    "icd10_hints": [
-      "E10.10",
-      "Z91.120"
-    ],
-    "truth_bottleneck": "readmit_risk",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
-  },
-  {
-    "patient_id": "P-1014",
-    "arrival_time": "2026-04-26T14:55",
-    "age": 67,
-    "sex": "M",
-    "chief_complaint": "Decreased urine output, rising creatinine",
-    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
-    "icd10_hints": [
-      "N17.9",
-      "T36.91XA"
-    ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
-  },
-  {
-    "patient_id": "P-1018",
-    "arrival_time": "2026-04-26T08:51",
-    "age": 43,
-    "sex": "M",
-    "chief_complaint": "First-time seizure",
-    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
-    "icd10_hints": [
-      "R56.9",
-      "G40.909"
-    ],
-    "truth_bottleneck": "awaiting_imaging",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
-  },
-  {
-    "patient_id": "P-1004",
-    "arrival_time": "2026-04-26T02:57",
-    "age": 63,
-    "sex": "F",
-    "chief_complaint": "Substernal chest pressure",
-    "note_text": "HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.\nExam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.\nECG: ST depression V4-V6, T-wave inversion lateral leads.\nLabs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.\nAssessment: NSTEMI, intermediate-to-high risk.\nPlan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist.",
-    "icd10_hints": [
-      "I21.4",
-      "I20.0"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "acs",
-    "expected_owner": "physician",
-    "template_name": "acs_no_consult"
-  },
-  {
-    "patient_id": "P-1052",
-    "arrival_time": "2026-04-26T07:11",
-    "age": 27,
-    "sex": "M",
-    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
-    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
-    "icd10_hints": [
-      "R45.851"
-    ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
-  },
-  {
-    "patient_id": "P-1008",
-    "arrival_time": "2026-04-26T10:25",
-    "age": 76,
-    "sex": "F",
-    "chief_complaint": "Acute right-sided weakness",
-    "note_text": "HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.\nExam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.\nVitals: BP 192/104, HR 78, glucose 142.\nImaging: head CT non-contrast pending.\nAssessment: acute ischemic stroke, within tPA window.\nPlan: BP control, monitor in ED.",
-    "icd10_hints": [
-      "I63.9",
-      "G81.91"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "stroke",
-    "expected_owner": "physician",
-    "template_name": "stroke_no_neuro"
-  },
-  {
-    "patient_id": "P-1033",
-    "arrival_time": "2026-04-26T18:44",
-    "age": 33,
-    "sex": "M",
-    "chief_complaint": "DKA, third admission this year",
-    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
-    "icd10_hints": [
-      "E10.10",
-      "Z91.120"
-    ],
-    "truth_bottleneck": "readmit_risk",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
-  },
-  {
-    "patient_id": "P-1010",
-    "arrival_time": "2026-04-27T01:24",
-    "age": 78,
-    "sex": "F",
-    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
-    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
-    "icd10_hints": [
-      "S72.141A"
-    ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
-  },
-  {
-    "patient_id": "P-1038",
-    "arrival_time": "2026-04-26T04:57",
-    "age": 67,
-    "sex": "M",
-    "chief_complaint": "CHF readmission within 14 days",
-    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
-    "icd10_hints": [
-      "I50.32"
-    ],
-    "truth_bottleneck": "readmit_risk",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
-  },
-  {
-    "patient_id": "P-1037",
-    "arrival_time": "2026-04-26T04:35",
-    "age": 74,
-    "sex": "M",
-    "chief_complaint": "CHF readmission within 14 days",
-    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
-    "icd10_hints": [
-      "I50.32"
-    ],
-    "truth_bottleneck": "readmit_risk",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
-  },
-  {
-    "patient_id": "P-1029",
-    "arrival_time": "2026-04-25T18:43",
-    "age": 75,
-    "sex": "M",
-    "chief_complaint": "Worsening renal function on home meds",
-    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
-    "icd10_hints": [
-      "N17.9",
-      "T39.395A"
-    ],
-    "truth_bottleneck": "med_risk",
-    "truth_protocol": "",
-    "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
-  },
-  {
-    "patient_id": "P-1025",
-    "arrival_time": "2026-04-26T00:38",
-    "age": 69,
-    "sex": "M",
-    "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
-    "note_text": "HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.\nExam: lungs clear, no edema, JVP normal.\nAssessment: HFpEF, optimized. Requires home oxygen.\nPlan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following.",
-    "icd10_hints": [
-      "I50.32",
-      "Z99.81"
-    ],
-    "truth_bottleneck": "dispo_delay",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "chf_dispo_o2"
-  },
-  {
-    "patient_id": "P-1047",
-    "arrival_time": "2026-04-26T13:30",
-    "age": 35,
-    "sex": "F",
-    "chief_complaint": "Uncomplicated UTI, ready for discharge",
-    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
-    "icd10_hints": [
-      "N30.00"
-    ],
-    "truth_bottleneck": "clear",
-    "truth_protocol": "",
-    "expected_owner": "",
-    "template_name": "clear_uti"
-  },
-  {
-    "patient_id": "P-1058",
-    "arrival_time": "2026-04-26T07:37",
-    "age": 74,
-    "sex": "F",
-    "chief_complaint": "Syncope on multiple QT-prolonging meds",
-    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
-    "icd10_hints": [
-      "I49.8",
-      "T50.905A"
-    ],
-    "truth_bottleneck": "med_risk",
-    "truth_protocol": "",
-    "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
-  },
-  {
-    "patient_id": "P-1027",
-    "arrival_time": "2026-04-26T21:13",
-    "age": 76,
-    "sex": "M",
-    "chief_complaint": "Worsening renal function on home meds",
-    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
-    "icd10_hints": [
-      "N17.9",
-      "T39.395A"
-    ],
-    "truth_bottleneck": "med_risk",
-    "truth_protocol": "",
-    "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
-  },
-  {
     "patient_id": "P-1011",
-    "arrival_time": "2026-04-25T22:17",
-    "age": 77,
-    "sex": "F",
-    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
-    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
-    "icd10_hints": [
-      "S72.141A"
-    ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
-  },
-  {
-    "patient_id": "P-1051",
-    "arrival_time": "2026-04-26T13:27",
-    "age": 23,
+    "arrival_time": "2026-05-16T07:22",
+    "age": 79,
     "sex": "M",
-    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
-    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
-    "icd10_hints": [
-      "R45.851"
-    ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
-  },
-  {
-    "patient_id": "P-1059",
-    "arrival_time": "2026-04-26T15:30",
-    "age": 70,
-    "sex": "F",
-    "chief_complaint": "Syncope on multiple QT-prolonging meds",
-    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
-    "icd10_hints": [
-      "I49.8",
-      "T50.905A"
-    ],
-    "truth_bottleneck": "med_risk",
-    "truth_protocol": "",
-    "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
-  },
-  {
-    "patient_id": "P-1024",
-    "arrival_time": "2026-04-26T05:04",
-    "age": 71,
-    "sex": "F",
-    "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
-    "note_text": "HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.\nExam: lungs clear, no edema, JVP normal.\nAssessment: HFpEF, optimized. Requires home oxygen.\nPlan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following.",
-    "icd10_hints": [
-      "I50.32",
-      "Z99.81"
-    ],
-    "truth_bottleneck": "dispo_delay",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "chf_dispo_o2"
-  },
-  {
-    "patient_id": "P-1007",
-    "arrival_time": "2026-04-26T11:34",
-    "age": 82,
-    "sex": "F",
     "chief_complaint": "Acute right-sided weakness",
     "note_text": "HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.\nExam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.\nVitals: BP 192/104, HR 78, glucose 142.\nImaging: head CT non-contrast pending.\nAssessment: acute ischemic stroke, within tPA window.\nPlan: BP control, monitor in ED.",
     "icd10_hints": [
@@ -721,25 +945,10 @@
     "truth_protocol": "stroke",
     "expected_owner": "physician",
     "template_name": "stroke_no_neuro"
-  },
-  {
-    "patient_id": "P-1042",
-    "arrival_time": "2026-04-27T01:05",
-    "age": 23,
-    "sex": "M",
-    "chief_complaint": "Hyperglycemia, ketosis",
-    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
-    "icd10_hints": [
-      "E10.10"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "dka",
-    "expected_owner": "physician",
-    "template_name": "dka_no_drip"
   },
   {
     "patient_id": "P-1005",
-    "arrival_time": "2026-04-27T02:24",
+    "arrival_time": "2026-05-16T17:46",
     "age": 61,
     "sex": "M",
     "chief_complaint": "Substernal chest pressure",
@@ -754,10 +963,941 @@
     "template_name": "acs_no_consult"
   },
   {
-    "patient_id": "P-1050",
-    "arrival_time": "2026-04-26T10:19",
-    "age": 28,
+    "patient_id": "P-1076",
+    "arrival_time": "2026-05-17T04:18",
+    "age": 74,
     "sex": "F",
+    "chief_complaint": "Syncope on multiple QT-prolonging meds",
+    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
+    "icd10_hints": [
+      "I49.8",
+      "T50.905A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "qt_prolong_combo"
+  },
+  {
+    "patient_id": "P-1120",
+    "arrival_time": "2026-05-17T04:00",
+    "age": 35,
+    "sex": "M",
+    "chief_complaint": "Fever, IVDU, suspected endocarditis",
+    "note_text": "HPI: 39yo male with history of IV drug use presents with fevers x 1 week.\nExam: febrile, new systolic murmur at LSB. Track marks both arms.\nLabs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.\nImaging: TTE ordered, scheduled for tomorrow. CXR clear.\nAssessment: suspected infective endocarditis.\nPlan: vancomycin + cefepime empiric. ID consult.",
+    "icd10_hints": [
+      "I33.0"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "ie_awaiting_tte"
+  },
+  {
+    "patient_id": "P-1119",
+    "arrival_time": "2026-05-19T10:57",
+    "age": 43,
+    "sex": "M",
+    "chief_complaint": "Dyspnea, contrast contraindication",
+    "note_text": "HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.\nExam: RR 20, SpO2 95% RA, HR 102.\nLabs: D-dimer 3.2.\nImaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.\nAssessment: workup for PE.\nPlan: empiric heparin drip while awaiting study.",
+    "icd10_hints": [
+      "R06.02",
+      "O88.211"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "pe_awaiting_vq"
+  },
+  {
+    "patient_id": "P-1116",
+    "arrival_time": "2026-05-16T10:15",
+    "age": 41,
+    "sex": "F",
+    "chief_complaint": "Dyspnea, contrast contraindication",
+    "note_text": "HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. Cr 1.6, breastfeeding, declined CT-PA.\nExam: RR 20, SpO2 95% RA, HR 102.\nLabs: D-dimer 3.2.\nImaging: V/Q scan ordered yesterday, scheduled for today PM. Lower extremity dopplers negative.\nAssessment: workup for PE.\nPlan: empiric heparin drip while awaiting study.",
+    "icd10_hints": [
+      "R06.02",
+      "O88.211"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "pe_awaiting_vq"
+  },
+  {
+    "patient_id": "P-1068",
+    "arrival_time": "2026-05-19T10:28",
+    "age": 23,
+    "sex": "M",
+    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
+    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
+    "icd10_hints": [
+      "R45.851"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_consult_delay"
+  },
+  {
+    "patient_id": "P-1042",
+    "arrival_time": "2026-05-17T23:23",
+    "age": 78,
+    "sex": "F",
+    "chief_complaint": "GIB on apixaban",
+    "note_text": "HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.\nExam: pale, tachycardic to 108, BP 102/64.\nLabs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.\nAssessment: upper GI bleed on dual antiplatelet plus DOAC.\nPlan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain.",
+    "icd10_hints": [
+      "K92.2",
+      "I48.91",
+      "D62"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "anticoag_bleed_risk"
+  },
+  {
+    "patient_id": "P-1146",
+    "arrival_time": "2026-05-17T06:32",
+    "age": 67,
+    "sex": "M",
+    "chief_complaint": "Resolved sepsis from prior admission",
+    "note_text": "HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.\nExam: comfortable, vitals stable.\nLabs: WBC normalized at 7.4, lactate 1.2.\nAssessment: sepsis resolved. Awaiting SNF placement.\nPlan: SNF placement requested 2 days ago. Case management pursuing.",
+    "icd10_hints": [
+      "A41.9",
+      "N39.0"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "sepsis_resolved_negative"
+  },
+  {
+    "patient_id": "P-1169",
+    "arrival_time": "2026-05-18T12:41",
+    "age": 79,
+    "sex": "F",
+    "chief_complaint": "Discharge delayed by warfarin issue",
+    "note_text": "HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.\nExam: stable, no bleeding.\nLabs: INR 4.6 (target 2-3), hgb 11.0.\nAssessment: supratherapeutic INR from drug interaction.\nPlan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization.",
+    "icd10_hints": [
+      "I48.91",
+      "D68.32"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "med_risk_dispo_combo"
+  },
+  {
+    "patient_id": "P-1063",
+    "arrival_time": "2026-05-16T21:04",
+    "age": 38,
+    "sex": "F",
+    "chief_complaint": "Uncomplicated UTI, ready for discharge",
+    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
+    "icd10_hints": [
+      "N30.00"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_uti"
+  },
+  {
+    "patient_id": "P-1141",
+    "arrival_time": "2026-05-18T08:02",
+    "age": 50,
+    "sex": "M",
+    "chief_complaint": "Chest pain, ruled out for ACS",
+    "note_text": "HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.\nExam: nonfocal, comfortable.\nLabs: troponin x 2 negative.\nImaging: stress echo no inducible ischemia.\nAssessment: non-cardiac chest pain, likely musculoskeletal.\nPlan: discharge home with PCP follow-up. NSAIDs as needed.",
+    "icd10_hints": [
+      "R07.9"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_chest_pain_rule_out"
+  },
+  {
+    "patient_id": "P-1107",
+    "arrival_time": "2026-05-18T04:25",
+    "age": 70,
+    "sex": "F",
+    "chief_complaint": "COPD exacerbation, increased sputum",
+    "note_text": "HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.\nExam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.\nLabs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.\nImaging: CXR no infiltrate.\nAssessment: COPD exacerbation, moderate.\nPlan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry.",
+    "icd10_hints": [
+      "J44.1"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "copd",
+    "expected_owner": "physician",
+    "template_name": "copd_no_steroids"
+  },
+  {
+    "patient_id": "P-1009",
+    "arrival_time": "2026-05-16T11:15",
+    "age": 78,
+    "sex": "F",
+    "chief_complaint": "Acute right-sided weakness",
+    "note_text": "HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.\nExam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.\nVitals: BP 192/104, HR 78, glucose 142.\nImaging: head CT non-contrast pending.\nAssessment: acute ischemic stroke, within tPA window.\nPlan: BP control, monitor in ED.",
+    "icd10_hints": [
+      "I63.9",
+      "G81.91"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "stroke",
+    "expected_owner": "physician",
+    "template_name": "stroke_no_neuro"
+  },
+  {
+    "patient_id": "P-1020",
+    "arrival_time": "2026-05-17T00:36",
+    "age": 32,
+    "sex": "F",
+    "chief_complaint": "Right lower quadrant pain",
+    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
+    "icd10_hints": [
+      "K35.80",
+      "R10.31"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "rlq_pain_awaiting_ct"
+  },
+  {
+    "patient_id": "P-1091",
+    "arrival_time": "2026-05-17T09:58",
+    "age": 67,
+    "sex": "M",
+    "chief_complaint": "Rising creatinine, oliguria",
+    "note_text": "HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.\nExam: euvolemic.\nLabs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.\nAssessment: acute kidney injury, multifactorial.\nPlan: continue current regimen. Trend renal function.",
+    "icd10_hints": [
+      "N17.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "aki",
+    "expected_owner": "physician",
+    "template_name": "aki_no_med_review"
+  },
+  {
+    "patient_id": "P-1015",
+    "arrival_time": "2026-05-18T19:21",
+    "age": 79,
+    "sex": "F",
+    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
+    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
+    "icd10_hints": [
+      "S72.141A"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "hip_fx_awaiting_ortho"
+  },
+  {
+    "patient_id": "P-1144",
+    "arrival_time": "2026-05-19T08:01",
+    "age": 68,
+    "sex": "F",
+    "chief_complaint": "Resolved sepsis from prior admission",
+    "note_text": "HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.\nExam: comfortable, vitals stable.\nLabs: WBC normalized at 7.4, lactate 1.2.\nAssessment: sepsis resolved. Awaiting SNF placement.\nPlan: SNF placement requested 2 days ago. Case management pursuing.",
+    "icd10_hints": [
+      "A41.9",
+      "N39.0"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "sepsis_resolved_negative"
+  },
+  {
+    "patient_id": "P-1131",
+    "arrival_time": "2026-05-18T21:05",
+    "age": 27,
+    "sex": "M",
+    "chief_complaint": "Post-TBI, awaiting rehab placement",
+    "note_text": "HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.\nExam: oriented x2, walks with assist, follows commands.\nAssessment: TBI, neurocognitive deficits, requires inpatient rehab.\nPlan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily.",
+    "icd10_hints": [
+      "S06.9X9A"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_rehab_tbi"
+  },
+  {
+    "patient_id": "P-1061",
+    "arrival_time": "2026-05-17T11:04",
+    "age": 37,
+    "sex": "F",
+    "chief_complaint": "Uncomplicated UTI, ready for discharge",
+    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
+    "icd10_hints": [
+      "N30.00"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_uti"
+  },
+  {
+    "patient_id": "P-1147",
+    "arrival_time": "2026-05-16T06:36",
+    "age": 66,
+    "sex": "F",
+    "chief_complaint": "Resolved sepsis from prior admission",
+    "note_text": "HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.\nExam: comfortable, vitals stable.\nLabs: WBC normalized at 7.4, lactate 1.2.\nAssessment: sepsis resolved. Awaiting SNF placement.\nPlan: SNF placement requested 2 days ago. Case management pursuing.",
+    "icd10_hints": [
+      "A41.9",
+      "N39.0"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "sepsis_resolved_negative"
+  },
+  {
+    "patient_id": "P-1145",
+    "arrival_time": "2026-05-18T12:07",
+    "age": 64,
+    "sex": "F",
+    "chief_complaint": "Resolved sepsis from prior admission",
+    "note_text": "HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. Sepsis resolved with antibiotics. Afebrile for 72 hours. Hemodynamics back to baseline. Now medically ready.\nExam: comfortable, vitals stable.\nLabs: WBC normalized at 7.4, lactate 1.2.\nAssessment: sepsis resolved. Awaiting SNF placement.\nPlan: SNF placement requested 2 days ago. Case management pursuing.",
+    "icd10_hints": [
+      "A41.9",
+      "N39.0"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "sepsis_resolved_negative"
+  },
+  {
+    "patient_id": "P-1110",
+    "arrival_time": "2026-05-19T18:19",
+    "age": 75,
+    "sex": "F",
+    "chief_complaint": "Slow GI bleed, awaiting endoscopy",
+    "note_text": "HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.\nExam: stable, soft non-tender abdomen.\nLabs: hgb 8.8, plt 220, INR 1.1.\nAssessment: chronic GI blood loss, likely NSAID gastropathy.\nPlan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling.",
+    "icd10_hints": [
+      "K92.1"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "gib_awaiting_gi"
+  },
+  {
+    "patient_id": "P-1174",
+    "arrival_time": "2026-05-19T00:22",
+    "age": 70,
+    "sex": "M",
+    "chief_complaint": "Acute limb ischemia",
+    "note_text": "HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.\nExam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.\nLabs: lactate 2.2.\nImaging: CTA shows right popliteal occlusion.\nAssessment: acute limb ischemia.\nPlan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR.",
+    "icd10_hints": [
+      "I74.3"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "limb_ischemia_awaiting_vasc"
+  },
+  {
+    "patient_id": "P-1148",
+    "arrival_time": "2026-05-16T05:55",
+    "age": 75,
+    "sex": "M",
+    "chief_complaint": "Old stroke, residual deficits, dispo",
+    "note_text": "HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.\nExam: residual right-sided weakness 4/5, otherwise nonfocal.\nAssessment: ischemic stroke, residual deficits. Stroke window expired.\nPlan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following.",
+    "icd10_hints": [
+      "I69.351"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "stroke_window_expired"
+  },
+  {
+    "patient_id": "P-1032",
+    "arrival_time": "2026-05-17T04:09",
+    "age": 66,
+    "sex": "F",
+    "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
+    "note_text": "HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.\nExam: lungs clear, no edema, JVP normal.\nAssessment: HFpEF, optimized. Requires home oxygen.\nPlan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32",
+      "Z99.81"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_dispo_o2"
+  },
+  {
+    "patient_id": "P-1166",
+    "arrival_time": "2026-05-16T10:07",
+    "age": 62,
+    "sex": "F",
+    "chief_complaint": "Discharge teaching delayed, no interpreter",
+    "note_text": "HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.\nExam: stable, no edema.\nAssessment: HFpEF, ready for discharge.\nPlan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_language_barrier"
+  },
+  {
+    "patient_id": "P-1137",
+    "arrival_time": "2026-05-19T20:57",
+    "age": 51,
+    "sex": "M",
+    "chief_complaint": "Cellulitis, completed IV antibiotics",
+    "note_text": "HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.\nExam: improving erythema, no streaking, no fluctuance.\nAssessment: cellulitis, resolving.\nPlan: transition to PO antibiotics. Discharge home with follow-up in 1 week.",
+    "icd10_hints": [
+      "L03.115"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_cellulitis"
+  },
+  {
+    "patient_id": "P-1043",
+    "arrival_time": "2026-05-18T23:58",
+    "age": 80,
+    "sex": "M",
+    "chief_complaint": "GIB on apixaban",
+    "note_text": "HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.\nExam: pale, tachycardic to 108, BP 102/64.\nLabs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.\nAssessment: upper GI bleed on dual antiplatelet plus DOAC.\nPlan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain.",
+    "icd10_hints": [
+      "K92.2",
+      "I48.91",
+      "D62"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "anticoag_bleed_risk"
+  },
+  {
+    "patient_id": "P-1053",
+    "arrival_time": "2026-05-18T23:53",
+    "age": 56,
+    "sex": "F",
+    "chief_complaint": "Cough, fever, hypoxia",
+    "note_text": "HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.\nExam: RR 22, SpO2 92% RA, right basilar crackles.\nLabs: WBC 14.8, lactate 1.6, procalcitonin 2.1.\nImaging: CXR with right lower lobe consolidation.\nAssessment: community-acquired pneumonia, CURB-65 = 1.\nPlan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor.",
+    "icd10_hints": [
+      "J18.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "cap",
+    "expected_owner": "physician",
+    "template_name": "cap_late_abx"
+  },
+  {
+    "patient_id": "P-1060",
+    "arrival_time": "2026-05-16T03:35",
+    "age": 37,
+    "sex": "F",
+    "chief_complaint": "Uncomplicated UTI, ready for discharge",
+    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
+    "icd10_hints": [
+      "N30.00"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_uti"
+  },
+  {
+    "patient_id": "P-1021",
+    "arrival_time": "2026-05-18T06:42",
+    "age": 29,
+    "sex": "F",
+    "chief_complaint": "Right lower quadrant pain",
+    "note_text": "HPI: 28yo female, 18 hours of progressive RLQ pain, anorexia, low-grade fever 38.1.\nExam: RLQ tenderness with rebound, positive Rovsing.\nLabs: WBC 14.1, beta-hCG negative, lipase normal.\nImaging: CT abd/pelvis with contrast ordered 5h ago, still in queue per radiology. US RLQ inconclusive.\nAssessment: clinical suspicion for acute appendicitis pending imaging.\nPlan: NPO, IV fluids, surgery aware. Awaiting CT for definitive disposition.",
+    "icd10_hints": [
+      "K35.80",
+      "R10.31"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "rlq_pain_awaiting_ct"
+  },
+  {
+    "patient_id": "P-1139",
+    "arrival_time": "2026-05-18T07:51",
+    "age": 52,
+    "sex": "M",
+    "chief_complaint": "Cellulitis, completed IV antibiotics",
+    "note_text": "HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.\nExam: improving erythema, no streaking, no fluctuance.\nAssessment: cellulitis, resolving.\nPlan: transition to PO antibiotics. Discharge home with follow-up in 1 week.",
+    "icd10_hints": [
+      "L03.115"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_cellulitis"
+  },
+  {
+    "patient_id": "P-1108",
+    "arrival_time": "2026-05-17T17:41",
+    "age": 76,
+    "sex": "F",
+    "chief_complaint": "Slow GI bleed, awaiting endoscopy",
+    "note_text": "HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.\nExam: stable, soft non-tender abdomen.\nLabs: hgb 8.8, plt 220, INR 1.1.\nAssessment: chronic GI blood loss, likely NSAID gastropathy.\nPlan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling.",
+    "icd10_hints": [
+      "K92.1"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "gib_awaiting_gi"
+  },
+  {
+    "patient_id": "P-1104",
+    "arrival_time": "2026-05-16T12:33",
+    "age": 72,
+    "sex": "M",
+    "chief_complaint": "COPD exacerbation, increased sputum",
+    "note_text": "HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.\nExam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.\nLabs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.\nImaging: CXR no infiltrate.\nAssessment: COPD exacerbation, moderate.\nPlan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry.",
+    "icd10_hints": [
+      "J44.1"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "copd",
+    "expected_owner": "physician",
+    "template_name": "copd_no_steroids"
+  },
+  {
+    "patient_id": "P-1062",
+    "arrival_time": "2026-05-18T14:56",
+    "age": 34,
+    "sex": "F",
+    "chief_complaint": "Uncomplicated UTI, ready for discharge",
+    "note_text": "HPI: 38yo female, 2 days of dysuria and urinary frequency, no fever, no flank pain.\nExam: afebrile, no CVA tenderness, mild suprapubic discomfort.\nLabs: UA positive nitrites and leukocyte esterase, urine culture pending.\nAssessment: uncomplicated cystitis.\nPlan: nitrofurantoin 100mg BID x 5 days, follow up with PCP if symptoms persist. Discharge home.",
+    "icd10_hints": [
+      "N30.00"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_uti"
+  },
+  {
+    "patient_id": "P-1156",
+    "arrival_time": "2026-05-16T18:25",
+    "age": 61,
+    "sex": "M",
+    "chief_complaint": "Free air on CT, surgery not yet seen",
+    "note_text": "HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.\nExam: rigid abdomen, rebound tenderness, BP 102/68.\nLabs: WBC 16.4, lactate 2.8.\nImaging: CT abdomen shows free air, concern for perforated viscus.\nAssessment: perforated viscus.\nPlan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed.",
+    "icd10_hints": [
+      "K65.9"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "perf_awaiting_surgery"
+  },
+  {
+    "patient_id": "P-1082",
+    "arrival_time": "2026-05-16T04:04",
+    "age": 54,
+    "sex": "F",
+    "chief_complaint": "Pleuritic chest pain, dyspnea",
+    "note_text": "HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.\nExam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.\nLabs: D-dimer 4.8 (elevated).\nImaging: CT-PA confirms bilateral segmental PE.\nAssessment: acute pulmonary embolism, hemodynamically stable.\nPlan: started on heparin drip. Admit to medicine.",
+    "icd10_hints": [
+      "I26.99"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "pe",
+    "expected_owner": "physician",
+    "template_name": "pe_no_risk_strat"
+  },
+  {
+    "patient_id": "P-1017",
+    "arrival_time": "2026-05-19T17:19",
+    "age": 72,
+    "sex": "M",
+    "chief_complaint": "Decreased urine output, rising creatinine",
+    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
+    "icd10_hints": [
+      "N17.9",
+      "T36.91XA"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "aki_awaiting_renal"
+  },
+  {
+    "patient_id": "P-1153",
+    "arrival_time": "2026-05-19T23:34",
+    "age": 68,
+    "sex": "M",
+    "chief_complaint": "Septic shock with AKI",
+    "note_text": "HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.\nExam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.\nLabs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.\nAssessment: septic shock with AKI. Multifactorial.\nPlan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission.",
+    "icd10_hints": [
+      "A41.9",
+      "N17.9",
+      "R65.21"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "sepsis",
+    "expected_owner": "physician",
+    "template_name": "sepsis_aki_combo"
+  },
+  {
+    "patient_id": "P-1078",
+    "arrival_time": "2026-05-19T08:59",
+    "age": 70,
+    "sex": "F",
+    "chief_complaint": "Syncope on multiple QT-prolonging meds",
+    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
+    "icd10_hints": [
+      "I49.8",
+      "T50.905A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "qt_prolong_combo"
+  },
+  {
+    "patient_id": "P-1057",
+    "arrival_time": "2026-05-18T04:37",
+    "age": 23,
+    "sex": "M",
+    "chief_complaint": "Hyperglycemia, ketosis",
+    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
+    "icd10_hints": [
+      "E10.10"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "dka",
+    "expected_owner": "physician",
+    "template_name": "dka_no_drip"
+  },
+  {
+    "patient_id": "P-1052",
+    "arrival_time": "2026-05-17T12:33",
+    "age": 59,
+    "sex": "F",
+    "chief_complaint": "Cough, fever, hypoxia",
+    "note_text": "HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.\nExam: RR 22, SpO2 92% RA, right basilar crackles.\nLabs: WBC 14.8, lactate 1.6, procalcitonin 2.1.\nImaging: CXR with right lower lobe consolidation.\nAssessment: community-acquired pneumonia, CURB-65 = 1.\nPlan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor.",
+    "icd10_hints": [
+      "J18.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "cap",
+    "expected_owner": "physician",
+    "template_name": "cap_late_abx"
+  },
+  {
+    "patient_id": "P-1168",
+    "arrival_time": "2026-05-19T13:42",
+    "age": 80,
+    "sex": "F",
+    "chief_complaint": "Discharge delayed by warfarin issue",
+    "note_text": "HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.\nExam: stable, no bleeding.\nLabs: INR 4.6 (target 2-3), hgb 11.0.\nAssessment: supratherapeutic INR from drug interaction.\nPlan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization.",
+    "icd10_hints": [
+      "I48.91",
+      "D68.32"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "med_risk_dispo_combo"
+  },
+  {
+    "patient_id": "P-1163",
+    "arrival_time": "2026-05-19T16:56",
+    "age": 79,
+    "sex": "F",
+    "chief_complaint": "Diabetic admission, hypoglycemia event",
+    "note_text": "HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.\nExam: episode of hypoglycemia overnight, glucose 42, treated with D50.\nLabs: glucose 42 (overnight), now 156. A1c 9.8.\nAssessment: hypoglycemia related to insulin without adequate glucose monitoring.\nPlan: continue insulin, recheck POC glucose Q4.",
+    "icd10_hints": [
+      "E11.9",
+      "E16.2"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "insulin_no_glucose_monitor"
+  },
+  {
+    "patient_id": "P-1010",
+    "arrival_time": "2026-05-16T17:14",
+    "age": 75,
+    "sex": "F",
+    "chief_complaint": "Acute right-sided weakness",
+    "note_text": "HPI: 78yo female, last known well 90 minutes ago. Husband witnessed acute onset right hemiparesis and expressive aphasia at breakfast.\nExam: NIHSS 14. Right facial droop, right arm 1/5, right leg 2/5. Aphasic.\nVitals: BP 192/104, HR 78, glucose 142.\nImaging: head CT non-contrast pending.\nAssessment: acute ischemic stroke, within tPA window.\nPlan: BP control, monitor in ED.",
+    "icd10_hints": [
+      "I63.9",
+      "G81.91"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "stroke",
+    "expected_owner": "physician",
+    "template_name": "stroke_no_neuro"
+  },
+  {
+    "patient_id": "P-1135",
+    "arrival_time": "2026-05-19T19:21",
+    "age": 67,
+    "sex": "F",
+    "chief_complaint": "COPD readmit, lost inhaler",
+    "note_text": "HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.\nExam: improved, mild expiratory wheeze.\nAssessment: COPD, severe. Recurrent admissions, social factors.\nPlan: optimize inhaler regimen. Discharge to home with brief rehab if approved.",
+    "icd10_hints": [
+      "J44.1"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_readmit_no_inhaler"
+  },
+  {
+    "patient_id": "P-1171",
+    "arrival_time": "2026-05-17T04:14",
+    "age": 77,
+    "sex": "F",
+    "chief_complaint": "Discharge delayed by warfarin issue",
+    "note_text": "HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.\nExam: stable, no bleeding.\nLabs: INR 4.6 (target 2-3), hgb 11.0.\nAssessment: supratherapeutic INR from drug interaction.\nPlan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization.",
+    "icd10_hints": [
+      "I48.91",
+      "D68.32"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "med_risk_dispo_combo"
+  },
+  {
+    "patient_id": "P-1134",
+    "arrival_time": "2026-05-16T17:39",
+    "age": 65,
+    "sex": "M",
+    "chief_complaint": "COPD readmit, lost inhaler",
+    "note_text": "HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.\nExam: improved, mild expiratory wheeze.\nAssessment: COPD, severe. Recurrent admissions, social factors.\nPlan: optimize inhaler regimen. Discharge to home with brief rehab if approved.",
+    "icd10_hints": [
+      "J44.1"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_readmit_no_inhaler"
+  },
+  {
+    "patient_id": "P-1133",
+    "arrival_time": "2026-05-18T06:23",
+    "age": 65,
+    "sex": "F",
+    "chief_complaint": "COPD readmit, lost inhaler",
+    "note_text": "HPI: 67yo female with COPD, fourth admission this year for exacerbation. Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. Lives alone. Limited mobility, unable to get to pharmacy.\nExam: improved, mild expiratory wheeze.\nAssessment: COPD, severe. Recurrent admissions, social factors.\nPlan: optimize inhaler regimen. Discharge to home with brief rehab if approved.",
+    "icd10_hints": [
+      "J44.1"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_readmit_no_inhaler"
+  },
+  {
+    "patient_id": "P-1051",
+    "arrival_time": "2026-05-19T08:20",
+    "age": 73,
+    "sex": "M",
+    "chief_complaint": "CHF readmission within 14 days",
+    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_readmit_risk"
+  },
+  {
+    "patient_id": "P-1152",
+    "arrival_time": "2026-05-17T06:38",
+    "age": 68,
+    "sex": "F",
+    "chief_complaint": "Septic shock with AKI",
+    "note_text": "HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.\nExam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.\nLabs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.\nAssessment: septic shock with AKI. Multifactorial.\nPlan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission.",
+    "icd10_hints": [
+      "A41.9",
+      "N17.9",
+      "R65.21"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "sepsis",
+    "expected_owner": "physician",
+    "template_name": "sepsis_aki_combo"
+  },
+  {
+    "patient_id": "P-1097",
+    "arrival_time": "2026-05-19T00:33",
+    "age": 58,
+    "sex": "F",
+    "chief_complaint": "Fever on chemotherapy, ANC 200",
+    "note_text": "HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.\nExam: well-appearing, no overt source. Port site without erythema.\nLabs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.\nAssessment: neutropenic fever, no localizing source.\nPlan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics.",
+    "icd10_hints": [
+      "D70.9",
+      "R50.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "neutropenic_fever",
+    "expected_owner": "physician",
+    "template_name": "neutropenic_fever_late_abx"
+  },
+  {
+    "patient_id": "P-1158",
+    "arrival_time": "2026-05-19T17:39",
+    "age": 54,
+    "sex": "M",
+    "chief_complaint": "Free air on CT, surgery not yet seen",
+    "note_text": "HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.\nExam: rigid abdomen, rebound tenderness, BP 102/68.\nLabs: WBC 16.4, lactate 2.8.\nImaging: CT abdomen shows free air, concern for perforated viscus.\nAssessment: perforated viscus.\nPlan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, awaiting callback. NG tube placed.",
+    "icd10_hints": [
+      "K65.9"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "perf_awaiting_surgery"
+  },
+  {
+    "patient_id": "P-1143",
+    "arrival_time": "2026-05-20T02:21",
+    "age": 48,
+    "sex": "M",
+    "chief_complaint": "Chest pain, ruled out for ACS",
+    "note_text": "HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and normal stress test.\nExam: nonfocal, comfortable.\nLabs: troponin x 2 negative.\nImaging: stress echo no inducible ischemia.\nAssessment: non-cardiac chest pain, likely musculoskeletal.\nPlan: discharge home with PCP follow-up. NSAIDs as needed.",
+    "icd10_hints": [
+      "R07.9"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_chest_pain_rule_out"
+  },
+  {
+    "patient_id": "P-1113",
+    "arrival_time": "2026-05-16T11:34",
+    "age": 29,
+    "sex": "M",
+    "chief_complaint": "Manic episode, on involuntary hold",
+    "note_text": "HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.\nExam: agitated but cooperative now after IM olanzapine. Vitals stable.\nLabs: tox screen positive for amphetamines. Otherwise unremarkable.\nAssessment: acute mania.\nPlan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified.",
+    "icd10_hints": [
+      "F31.2"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_medical_clear"
+  },
+  {
+    "patient_id": "P-1054",
+    "arrival_time": "2026-05-17T04:28",
+    "age": 59,
+    "sex": "M",
+    "chief_complaint": "Cough, fever, hypoxia",
+    "note_text": "HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.\nExam: RR 22, SpO2 92% RA, right basilar crackles.\nLabs: WBC 14.8, lactate 1.6, procalcitonin 2.1.\nImaging: CXR with right lower lobe consolidation.\nAssessment: community-acquired pneumonia, CURB-65 = 1.\nPlan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor.",
+    "icd10_hints": [
+      "J18.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "cap",
+    "expected_owner": "physician",
+    "template_name": "cap_late_abx"
+  },
+  {
+    "patient_id": "P-1138",
+    "arrival_time": "2026-05-17T17:26",
+    "age": 50,
+    "sex": "M",
+    "chief_complaint": "Cellulitis, completed IV antibiotics",
+    "note_text": "HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. Erythema receding, no fever, tolerating PO.\nExam: improving erythema, no streaking, no fluctuance.\nAssessment: cellulitis, resolving.\nPlan: transition to PO antibiotics. Discharge home with follow-up in 1 week.",
+    "icd10_hints": [
+      "L03.115"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_cellulitis"
+  },
+  {
+    "patient_id": "P-1047",
+    "arrival_time": "2026-05-16T20:02",
+    "age": 31,
+    "sex": "F",
+    "chief_complaint": "DKA, third admission this year",
+    "note_text": "HPI: 34yo female with type 1 DM, third DKA admission in 8 months. Reports running out of insulin again, no PCP follow-up since last discharge. Lives alone, no family support, intermittent housing.\nExam: improved, anion gap closed.\nLabs: glucose 142, gap 8, bicarbonate 22.\nAssessment: DKA resolved. High risk for early readmission given social factors and medication non-adherence pattern.\nPlan: standard DM follow-up. No outpatient endocrinology arranged.",
+    "icd10_hints": [
+      "E10.10",
+      "Z91.120"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dm_readmit_risk"
+  },
+  {
+    "patient_id": "P-1098",
+    "arrival_time": "2026-05-19T11:01",
+    "age": 57,
+    "sex": "M",
+    "chief_complaint": "Fever on chemotherapy, ANC 200",
+    "note_text": "HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.\nExam: well-appearing, no overt source. Port site without erythema.\nLabs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.\nAssessment: neutropenic fever, no localizing source.\nPlan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics.",
+    "icd10_hints": [
+      "D70.9",
+      "R50.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "neutropenic_fever",
+    "expected_owner": "physician",
+    "template_name": "neutropenic_fever_late_abx"
+  },
+  {
+    "patient_id": "P-1024",
+    "arrival_time": "2026-05-17T13:42",
+    "age": 38,
+    "sex": "M",
+    "chief_complaint": "First-time seizure",
+    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
+    "icd10_hints": [
+      "R56.9",
+      "G40.909"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "seizure_awaiting_mri"
+  },
+  {
+    "patient_id": "P-1162",
+    "arrival_time": "2026-05-16T14:57",
+    "age": 75,
+    "sex": "F",
+    "chief_complaint": "Diabetic admission, hypoglycemia event",
+    "note_text": "HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.\nExam: episode of hypoglycemia overnight, glucose 42, treated with D50.\nLabs: glucose 42 (overnight), now 156. A1c 9.8.\nAssessment: hypoglycemia related to insulin without adequate glucose monitoring.\nPlan: continue insulin, recheck POC glucose Q4.",
+    "icd10_hints": [
+      "E11.9",
+      "E16.2"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "insulin_no_glucose_monitor"
+  },
+  {
+    "patient_id": "P-1065",
+    "arrival_time": "2026-05-19T13:12",
+    "age": 33,
+    "sex": "M",
     "chief_complaint": "Migraine, treated and ready to leave",
     "note_text": "HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.\nExam: nonfocal neuro, comfortable.\nAssessment: migraine, treated.\nPlan: discharge home with abortive medications, neurology follow-up scheduled.",
     "icd10_hints": [
@@ -769,24 +1909,8 @@
     "template_name": "clear_migraine"
   },
   {
-    "patient_id": "P-1022",
-    "arrival_time": "2026-04-25T23:16",
-    "age": 71,
-    "sex": "M",
-    "chief_complaint": "COPD exacerbation, now resolved",
-    "note_text": "HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.\nExam: lungs with mild expiratory wheeze, no distress.\nAssessment: COPD exacerbation, resolved. Deconditioned.\nPlan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone.",
-    "icd10_hints": [
-      "J44.1",
-      "Z74.09"
-    ],
-    "truth_bottleneck": "dispo_delay",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "copd_dispo_snf"
-  },
-  {
-    "patient_id": "P-1041",
-    "arrival_time": "2026-04-25T19:54",
+    "patient_id": "P-1055",
+    "arrival_time": "2026-05-18T11:45",
     "age": 54,
     "sex": "F",
     "chief_complaint": "Cough, fever, hypoxia",
@@ -800,9 +1924,72 @@
     "template_name": "cap_late_abx"
   },
   {
-    "patient_id": "P-1056",
-    "arrival_time": "2026-04-27T04:59",
-    "age": 71,
+    "patient_id": "P-1034",
+    "arrival_time": "2026-05-19T07:21",
+    "age": 70,
+    "sex": "F",
+    "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
+    "note_text": "HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.\nExam: lungs clear, no edema, JVP normal.\nAssessment: HFpEF, optimized. Requires home oxygen.\nPlan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32",
+      "Z99.81"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_dispo_o2"
+  },
+  {
+    "patient_id": "P-1165",
+    "arrival_time": "2026-05-19T08:05",
+    "age": 61,
+    "sex": "M",
+    "chief_complaint": "Discharge teaching delayed, no interpreter",
+    "note_text": "HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.\nExam: stable, no edema.\nAssessment: HFpEF, ready for discharge.\nPlan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_language_barrier"
+  },
+  {
+    "patient_id": "P-1031",
+    "arrival_time": "2026-05-17T04:09",
+    "age": 72,
+    "sex": "M",
+    "chief_complaint": "COPD exacerbation, now resolved",
+    "note_text": "HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.\nExam: lungs with mild expiratory wheeze, no distress.\nAssessment: COPD exacerbation, resolved. Deconditioned.\nPlan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone.",
+    "icd10_hints": [
+      "J44.1",
+      "Z74.09"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_dispo_snf"
+  },
+  {
+    "patient_id": "P-1038",
+    "arrival_time": "2026-05-17T02:06",
+    "age": 81,
+    "sex": "M",
+    "chief_complaint": "Worsening renal function on home meds",
+    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
+    "icd10_hints": [
+      "N17.9",
+      "T39.395A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "nephrotoxic_med"
+  },
+  {
+    "patient_id": "P-1073",
+    "arrival_time": "2026-05-19T10:25",
+    "age": 65,
     "sex": "F",
     "chief_complaint": "POD 2 from THA, awaiting PT clearance",
     "note_text": "HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.\nExam: incision clean dry intact, no calf tenderness.\nAssessment: uncomplicated post-op course.\nPlan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen.",
@@ -815,8 +2002,504 @@
     "template_name": "post_op_pt_clearance"
   },
   {
+    "patient_id": "P-1013",
+    "arrival_time": "2026-05-18T09:57",
+    "age": 85,
+    "sex": "F",
+    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
+    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
+    "icd10_hints": [
+      "S72.141A"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "hip_fx_awaiting_ortho"
+  },
+  {
+    "patient_id": "P-1026",
+    "arrival_time": "2026-05-18T00:30",
+    "age": 44,
+    "sex": "M",
+    "chief_complaint": "First-time seizure",
+    "note_text": "HPI: 41yo male, witnessed generalized tonic-clonic seizure x2 minutes at work. Postictal x 30 min, now at baseline. No prior seizure history.\nExam: nonfocal neuro exam, tongue laceration on left lateral.\nLabs: glucose 96, sodium 138, alcohol negative, tox screen pending.\nImaging: head CT no acute findings. MRI brain ordered, scheduled for tomorrow AM.\nAssessment: new-onset seizure, etiology undetermined.\nPlan: admit for observation, MRI in AM, neurology to see post-MRI.",
+    "icd10_hints": [
+      "R56.9",
+      "G40.909"
+    ],
+    "truth_bottleneck": "awaiting_imaging",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "seizure_awaiting_mri"
+  },
+  {
+    "patient_id": "P-1170",
+    "arrival_time": "2026-05-17T14:57",
+    "age": 84,
+    "sex": "F",
+    "chief_complaint": "Discharge delayed by warfarin issue",
+    "note_text": "HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after starting bactrim 3 days ago. SNF placement also requested but pending.\nExam: stable, no bleeding.\nLabs: INR 4.6 (target 2-3), hgb 11.0.\nAssessment: supratherapeutic INR from drug interaction.\nPlan: hold warfarin, stop bactrim. Recheck INR tomorrow. SNF placement also pending insurance authorization.",
+    "icd10_hints": [
+      "I48.91",
+      "D68.32"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "med_risk_dispo_combo"
+  },
+  {
+    "patient_id": "P-1012",
+    "arrival_time": "2026-05-17T10:43",
+    "age": 77,
+    "sex": "F",
+    "chief_complaint": "Post-fall left hip pain, unable to bear weight",
+    "note_text": "HPI: 81yo female, mechanical fall from standing at home. Severe left hip pain, unable to bear weight. No head strike, no LOC.\nExam: left leg shortened and externally rotated. Distal pulses intact. Sensation intact.\nImaging: pelvis XR confirms left intertrochanteric fracture.\nLabs: hgb 10.8, INR 1.1, basic metabolic unremarkable.\nAssessment: left intertrochanteric hip fracture, surgical candidate.\nPlan: NPO. Pain control. Orthopedic consult requested 14h ago, awaiting callback. Patient otherwise medically optimized for OR.",
+    "icd10_hints": [
+      "S72.141A"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "hip_fx_awaiting_ortho"
+  },
+  {
+    "patient_id": "P-1070",
+    "arrival_time": "2026-05-16T17:05",
+    "age": 24,
+    "sex": "M",
+    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
+    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
+    "icd10_hints": [
+      "R45.851"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_consult_delay"
+  },
+  {
+    "patient_id": "P-1109",
+    "arrival_time": "2026-05-17T07:47",
+    "age": 71,
+    "sex": "F",
+    "chief_complaint": "Slow GI bleed, awaiting endoscopy",
+    "note_text": "HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, now hemodynamically stable. Hgb 8.8 from baseline 11.2.\nExam: stable, soft non-tender abdomen.\nLabs: hgb 8.8, plt 220, INR 1.1.\nAssessment: chronic GI blood loss, likely NSAID gastropathy.\nPlan: IV pantoprazole drip. Type and screen sent. NPO. GI consult placed 16h ago, awaiting callback for endoscopy scheduling.",
+    "icd10_hints": [
+      "K92.1"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "gib_awaiting_gi"
+  },
+  {
+    "patient_id": "P-1175",
+    "arrival_time": "2026-05-17T07:10",
+    "age": 67,
+    "sex": "F",
+    "chief_complaint": "Acute limb ischemia",
+    "note_text": "HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.\nExam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.\nLabs: lactate 2.2.\nImaging: CTA shows right popliteal occlusion.\nAssessment: acute limb ischemia.\nPlan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR.",
+    "icd10_hints": [
+      "I74.3"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "limb_ischemia_awaiting_vasc"
+  },
+  {
+    "patient_id": "P-1019",
+    "arrival_time": "2026-05-16T13:22",
+    "age": 72,
+    "sex": "M",
+    "chief_complaint": "Decreased urine output, rising creatinine",
+    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
+    "icd10_hints": [
+      "N17.9",
+      "T36.91XA"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "aki_awaiting_renal"
+  },
+  {
+    "patient_id": "P-1099",
+    "arrival_time": "2026-05-16T13:11",
+    "age": 57,
+    "sex": "F",
+    "chief_complaint": "Fever on chemotherapy, ANC 200",
+    "note_text": "HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.\nExam: well-appearing, no overt source. Port site without erythema.\nLabs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.\nAssessment: neutropenic fever, no localizing source.\nPlan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics.",
+    "icd10_hints": [
+      "D70.9",
+      "R50.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "neutropenic_fever",
+    "expected_owner": "physician",
+    "template_name": "neutropenic_fever_late_abx"
+  },
+  {
+    "patient_id": "P-1164",
+    "arrival_time": "2026-05-16T19:46",
+    "age": 62,
+    "sex": "F",
+    "chief_complaint": "Discharge teaching delayed, no interpreter",
+    "note_text": "HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. Family unable to be present for teaching today.\nExam: stable, no edema.\nAssessment: HFpEF, ready for discharge.\nPlan: discharge teaching pending Mandarin interpreter availability. Family training not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_language_barrier"
+  },
+  {
+    "patient_id": "P-1016",
+    "arrival_time": "2026-05-18T06:40",
+    "age": 69,
+    "sex": "M",
+    "chief_complaint": "Decreased urine output, rising creatinine",
+    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
+    "icd10_hints": [
+      "N17.9",
+      "T36.91XA"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "aki_awaiting_renal"
+  },
+  {
+    "patient_id": "P-1095",
+    "arrival_time": "2026-05-17T12:54",
+    "age": 52,
+    "sex": "M",
+    "chief_complaint": "Alcohol withdrawal, tremulous",
+    "note_text": "HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.\nExam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.\nLabs: AST 142, ALT 88, lipase 38.\nAssessment: alcohol withdrawal, moderate. AUD.\nPlan: thiamine 100mg IV given. Banana bag running. Admit to medicine.",
+    "icd10_hints": [
+      "F10.230"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "ciwa",
+    "expected_owner": "physician",
+    "template_name": "ciwa_no_scoring"
+  },
+  {
+    "patient_id": "P-1064",
+    "arrival_time": "2026-05-16T06:04",
+    "age": 35,
+    "sex": "F",
+    "chief_complaint": "Migraine, treated and ready to leave",
+    "note_text": "HPI: 32yo female with known migraine, presents with typical aura then severe HA, now resolved after IV fluids, ketorolac, and metoclopramide.\nExam: nonfocal neuro, comfortable.\nAssessment: migraine, treated.\nPlan: discharge home with abortive medications, neurology follow-up scheduled.",
+    "icd10_hints": [
+      "G43.909"
+    ],
+    "truth_bottleneck": "clear",
+    "truth_protocol": "",
+    "expected_owner": "",
+    "template_name": "clear_migraine"
+  },
+  {
+    "patient_id": "P-1074",
+    "arrival_time": "2026-05-17T14:35",
+    "age": 65,
+    "sex": "F",
+    "chief_complaint": "POD 2 from THA, awaiting PT clearance",
+    "note_text": "HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.\nExam: incision clean dry intact, no calf tenderness.\nAssessment: uncomplicated post-op course.\nPlan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen.",
+    "icd10_hints": [
+      "Z47.1"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "post_op_pt_clearance"
+  },
+  {
+    "patient_id": "P-1003",
+    "arrival_time": "2026-05-17T21:22",
+    "age": 68,
+    "sex": "F",
+    "chief_complaint": "Fever, hypotension, altered mental status",
+    "note_text": "HPI: 72yo presenting from SNF with fever to 39.4C, BP 88/52, HR 122, RR 24, SpO2 91% on room air. Family reports two days of decreased PO intake and confusion. PMH: HTN, DM2, recurrent UTI.\nExam: ill-appearing, dry mucous membranes, no focal infection on skin exam. Lung exam clear. Mild suprapubic tenderness.\nLabs: WBC 18.2, lactate 3.1, creatinine 1.9 (baseline 1.0), UA cloudy with many bacteria and 50+ WBC/hpf. Blood cultures drawn.\nImaging: CXR no infiltrate.\nAssessment: severe sepsis, urinary source. Meets SIRS criteria with end-organ dysfunction.\nPlan: IV fluids 30 mL/kg bolus initiated. Will trend lactate. Admit to medicine.",
+    "icd10_hints": [
+      "A41.9",
+      "N39.0",
+      "R65.20"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "sepsis",
+    "expected_owner": "physician",
+    "template_name": "sepsis_no_abx"
+  },
+  {
+    "patient_id": "P-1050",
+    "arrival_time": "2026-05-17T14:56",
+    "age": 73,
+    "sex": "M",
+    "chief_complaint": "CHF readmission within 14 days",
+    "note_text": "HPI: 70yo male, second CHF admission in 14 days. Reports unable to weigh self at home (no scale), unsure of fluid restriction, taking furosemide 'when I feel puffy.' Lives with elderly spouse, no home health.\nExam: 2+ lower extremity edema, lungs with bibasilar crackles.\nLabs: BNP 1840, Cr 1.4.\nAssessment: ADHF, recurrent. Knowledge and adherence gaps.\nPlan: diurese, optimize GDMT, plan discharge to home.",
+    "icd10_hints": [
+      "I50.32"
+    ],
+    "truth_bottleneck": "readmit_risk",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_readmit_risk"
+  },
+  {
+    "patient_id": "P-1151",
+    "arrival_time": "2026-05-16T04:42",
+    "age": 77,
+    "sex": "M",
+    "chief_complaint": "Old stroke, residual deficits, dispo",
+    "note_text": "HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. Medically ready.\nExam: residual right-sided weakness 4/5, otherwise nonfocal.\nAssessment: ischemic stroke, residual deficits. Stroke window expired.\nPlan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. Case management following.",
+    "icd10_hints": [
+      "I69.351"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "stroke_window_expired"
+  },
+  {
+    "patient_id": "P-1101",
+    "arrival_time": "2026-05-19T06:41",
+    "age": 63,
+    "sex": "M",
+    "chief_complaint": "Severe hyperkalemia on routine labs",
+    "note_text": "HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.\nExam: stable, no chest pain, no weakness.\nLabs: K 6.8, Cr 8.2, bicarb 16.\nAssessment: severe hyperkalemia, missed dialysis.\nPlan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered.",
+    "icd10_hints": [
+      "E87.5",
+      "N18.6"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "hyperkalemia",
+    "expected_owner": "physician",
+    "template_name": "hyperk_no_ecg"
+  },
+  {
+    "patient_id": "P-1086",
+    "arrival_time": "2026-05-19T07:15",
+    "age": 60,
+    "sex": "M",
+    "chief_complaint": "Hematemesis x 2 episodes overnight",
+    "note_text": "HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.\nExam: pale, BP 96/58, HR 108. Abdominal exam soft.\nLabs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.\nAssessment: upper GI bleed, likely variceal vs ulcer source.\nPlan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy.",
+    "icd10_hints": [
+      "K92.0",
+      "K92.2"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "gi_bleed",
+    "expected_owner": "physician",
+    "template_name": "gib_no_ppi"
+  },
+  {
+    "patient_id": "P-1083",
+    "arrival_time": "2026-05-17T08:00",
+    "age": 59,
+    "sex": "M",
+    "chief_complaint": "Pleuritic chest pain, dyspnea",
+    "note_text": "HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.\nExam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.\nLabs: D-dimer 4.8 (elevated).\nImaging: CT-PA confirms bilateral segmental PE.\nAssessment: acute pulmonary embolism, hemodynamically stable.\nPlan: started on heparin drip. Admit to medicine.",
+    "icd10_hints": [
+      "I26.99"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "pe",
+    "expected_owner": "physician",
+    "template_name": "pe_no_risk_strat"
+  },
+  {
+    "patient_id": "P-1172",
+    "arrival_time": "2026-05-17T14:25",
+    "age": 70,
+    "sex": "M",
+    "chief_complaint": "Acute limb ischemia",
+    "note_text": "HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg x 4 hours.\nExam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.\nLabs: lactate 2.2.\nImaging: CTA shows right popliteal occlusion.\nAssessment: acute limb ischemia.\nPlan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. Patient NPO for OR.",
+    "icd10_hints": [
+      "I74.3"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "limb_ischemia_awaiting_vasc"
+  },
+  {
+    "patient_id": "P-1084",
+    "arrival_time": "2026-05-19T06:53",
+    "age": 66,
+    "sex": "F",
+    "chief_complaint": "Hematemesis x 2 episodes overnight",
+    "note_text": "HPI: 62yo male with history of alcohol use disorder presenting with two episodes of frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.\nExam: pale, BP 96/58, HR 108. Abdominal exam soft.\nLabs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.\nAssessment: upper GI bleed, likely variceal vs ulcer source.\nPlan: two large-bore IV access placed, IV fluids running. NPO. Will arrange GI consult in AM for endoscopy.",
+    "icd10_hints": [
+      "K92.0",
+      "K92.2"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "gi_bleed",
+    "expected_owner": "physician",
+    "template_name": "gib_no_ppi"
+  },
+  {
+    "patient_id": "P-1030",
+    "arrival_time": "2026-05-17T11:21",
+    "age": 73,
+    "sex": "M",
+    "chief_complaint": "COPD exacerbation, now resolved",
+    "note_text": "HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.\nExam: lungs with mild expiratory wheeze, no distress.\nAssessment: COPD exacerbation, resolved. Deconditioned.\nPlan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone.",
+    "icd10_hints": [
+      "J44.1",
+      "Z74.09"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "copd_dispo_snf"
+  },
+  {
+    "patient_id": "P-1080",
+    "arrival_time": "2026-05-17T10:11",
+    "age": 56,
+    "sex": "M",
+    "chief_complaint": "Pleuritic chest pain, dyspnea",
+    "note_text": "HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.\nExam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.\nLabs: D-dimer 4.8 (elevated).\nImaging: CT-PA confirms bilateral segmental PE.\nAssessment: acute pulmonary embolism, hemodynamically stable.\nPlan: started on heparin drip. Admit to medicine.",
+    "icd10_hints": [
+      "I26.99"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "pe",
+    "expected_owner": "physician",
+    "template_name": "pe_no_risk_strat"
+  },
+  {
+    "patient_id": "P-1096",
+    "arrival_time": "2026-05-18T16:27",
+    "age": 53,
+    "sex": "F",
+    "chief_complaint": "Fever on chemotherapy, ANC 200",
+    "note_text": "HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. Reports mild fatigue, no localizing symptoms. Port-a-cath in place.\nExam: well-appearing, no overt source. Port site without erythema.\nLabs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.\nAssessment: neutropenic fever, no localizing source.\nPlan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics.",
+    "icd10_hints": [
+      "D70.9",
+      "R50.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "neutropenic_fever",
+    "expected_owner": "physician",
+    "template_name": "neutropenic_fever_late_abx"
+  },
+  {
+    "patient_id": "P-1088",
+    "arrival_time": "2026-05-16T10:53",
+    "age": 75,
+    "sex": "F",
+    "chief_complaint": "Rising creatinine, oliguria",
+    "note_text": "HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Home medications include lisinopril 40mg, naproxen 500mg BID, and recently received iodinated contrast for a CT angiogram.\nExam: euvolemic.\nLabs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.\nAssessment: acute kidney injury, multifactorial.\nPlan: continue current regimen. Trend renal function.",
+    "icd10_hints": [
+      "N17.9"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "aki",
+    "expected_owner": "physician",
+    "template_name": "aki_no_med_review"
+  },
+  {
+    "patient_id": "P-1106",
+    "arrival_time": "2026-05-19T01:04",
+    "age": 71,
+    "sex": "M",
+    "chief_complaint": "COPD exacerbation, increased sputum",
+    "note_text": "HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.\nExam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.\nLabs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.\nImaging: CXR no infiltrate.\nAssessment: COPD exacerbation, moderate.\nPlan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry.",
+    "icd10_hints": [
+      "J44.1"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "copd",
+    "expected_owner": "physician",
+    "template_name": "copd_no_steroids"
+  },
+  {
+    "patient_id": "P-1036",
+    "arrival_time": "2026-05-16T23:15",
+    "age": 73,
+    "sex": "M",
+    "chief_complaint": "Worsening renal function on home meds",
+    "note_text": "HPI: 77yo male admitted with pneumonia, now 4 days in. Creatinine has risen from 1.0 to 1.7. Patient continues home lisinopril 40mg daily and ibuprofen 800mg TID for chronic back pain. Started on IV contrast CT yesterday. Vancomycin and tobramycin per infectious disease.\nExam: stable, lungs improving.\nLabs: Cr 1.7, K 5.1, BUN 38.\nAssessment: developing AKI, likely multifactorial.\nPlan: continue current antibiotics, monitor renal function.",
+    "icd10_hints": [
+      "N17.9",
+      "T39.395A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "nephrotoxic_med"
+  },
+  {
+    "patient_id": "P-1077",
+    "arrival_time": "2026-05-16T05:45",
+    "age": 69,
+    "sex": "M",
+    "chief_complaint": "Syncope on multiple QT-prolonging meds",
+    "note_text": "HPI: 73yo female with witnessed syncope. Currently on amiodarone, citalopram 40mg, ondansetron PRN nausea, and started azithromycin 3 days ago for bronchitis.\nExam: stable, no focal findings.\nLabs: K 3.4, Mg 1.6.\nECG: QTc 540 ms (prior 460).\nAssessment: drug-induced QT prolongation, near-syncope concerning for TdP risk.\nPlan: telemetry, repeat ECG in AM.",
+    "icd10_hints": [
+      "I49.8",
+      "T50.905A"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "qt_prolong_combo"
+  },
+  {
+    "patient_id": "P-1103",
+    "arrival_time": "2026-05-19T14:01",
+    "age": 65,
+    "sex": "M",
+    "chief_complaint": "Severe hyperkalemia on routine labs",
+    "note_text": "HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.\nExam: stable, no chest pain, no weakness.\nLabs: K 6.8, Cr 8.2, bicarb 16.\nAssessment: severe hyperkalemia, missed dialysis.\nPlan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered.",
+    "icd10_hints": [
+      "E87.5",
+      "N18.6"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "hyperkalemia",
+    "expected_owner": "physician",
+    "template_name": "hyperk_no_ecg"
+  },
+  {
+    "patient_id": "P-1115",
+    "arrival_time": "2026-05-16T09:06",
+    "age": 35,
+    "sex": "M",
+    "chief_complaint": "Manic episode, on involuntary hold",
+    "note_text": "HPI: 31yo male brought in by police on 5150 for grandiose delusions and agitation, history of bipolar I.\nExam: agitated but cooperative now after IM olanzapine. Vitals stable.\nLabs: tox screen positive for amphetamines. Otherwise unremarkable.\nAssessment: acute mania.\nPlan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED with sitter, no inpatient psych bed identified.",
+    "icd10_hints": [
+      "F31.2"
+    ],
+    "truth_bottleneck": "awaiting_consult",
+    "truth_protocol": "",
+    "expected_owner": "physician",
+    "template_name": "psych_medical_clear"
+  },
+  {
+    "patient_id": "P-1125",
+    "arrival_time": "2026-05-19T04:09",
+    "age": 61,
+    "sex": "M",
+    "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
+    "note_text": "HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.\nExam: stable, no edema.\nLabs: K 4.2, Cr 6.8 (post-HD baseline).\nAssessment: ESRD, hyperkalemia resolved.\nPlan: medically optimized. Awaiting outpatient HD chair assignment \u2014 case management following, no slot available until next week. Insurance authorization in progress.",
+    "icd10_hints": [
+      "N18.6",
+      "Z99.2"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_dialysis_chair"
+  },
+  {
     "patient_id": "P-1000",
-    "arrival_time": "2026-04-26T04:19",
+    "arrival_time": "2026-05-17T23:45",
     "age": 73,
     "sex": "M",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -832,54 +2515,9 @@
     "template_name": "sepsis_no_abx"
   },
   {
-    "patient_id": "P-1053",
-    "arrival_time": "2026-04-25T21:39",
-    "age": 25,
-    "sex": "M",
-    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
-    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
-    "icd10_hints": [
-      "R45.851"
-    ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
-    "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
-  },
-  {
-    "patient_id": "P-1055",
-    "arrival_time": "2026-04-26T15:48",
-    "age": 66,
-    "sex": "F",
-    "chief_complaint": "POD 2 from THA, awaiting PT clearance",
-    "note_text": "HPI: 67yo female, post-op day 2 from elective right total hip arthroplasty. Pain controlled, tolerating diet, voiding spontaneously, hemoglobin stable.\nExam: incision clean dry intact, no calf tenderness.\nAssessment: uncomplicated post-op course.\nPlan: medically ready for discharge home with home health. Awaiting PT to clear for stairs - eval requested yesterday, not yet seen.",
-    "icd10_hints": [
-      "Z47.1"
-    ],
-    "truth_bottleneck": "dispo_delay",
-    "truth_protocol": "",
-    "expected_owner": "case_manager",
-    "template_name": "post_op_pt_clearance"
-  },
-  {
-    "patient_id": "P-1039",
-    "arrival_time": "2026-04-26T16:32",
-    "age": 57,
-    "sex": "M",
-    "chief_complaint": "Cough, fever, hypoxia",
-    "note_text": "HPI: 58yo female, 3 days of productive cough, fever to 38.7, dyspnea on exertion. Arrived to ED 7 hours ago.\nExam: RR 22, SpO2 92% RA, right basilar crackles.\nLabs: WBC 14.8, lactate 1.6, procalcitonin 2.1.\nImaging: CXR with right lower lobe consolidation.\nAssessment: community-acquired pneumonia, CURB-65 = 1.\nPlan: admit to medicine. IV fluids running. Antibiotic selection to be determined on the floor.",
-    "icd10_hints": [
-      "J18.9"
-    ],
-    "truth_bottleneck": "missing_soc",
-    "truth_protocol": "cap",
-    "expected_owner": "physician",
-    "template_name": "cap_late_abx"
-  },
-  {
-    "patient_id": "P-1030",
-    "arrival_time": "2026-04-25T18:43",
-    "age": 79,
+    "patient_id": "P-1040",
+    "arrival_time": "2026-05-16T10:35",
+    "age": 77,
     "sex": "F",
     "chief_complaint": "GIB on apixaban",
     "note_text": "HPI: 81yo female on apixaban 5mg BID for AFib presents with melena x 2 days, hgb dropped from baseline 12 to 8.4. Also on aspirin 81mg and ibuprofen PRN.\nExam: pale, tachycardic to 108, BP 102/64.\nLabs: hgb 8.4, plt 198, INR 1.0, anti-Xa pending.\nAssessment: upper GI bleed on dual antiplatelet plus DOAC.\nPlan: hold apixaban, hold aspirin, GI consult. Continue ibuprofen for arthritis pain.",
@@ -894,25 +2532,103 @@
     "template_name": "anticoag_bleed_risk"
   },
   {
-    "patient_id": "P-1013",
-    "arrival_time": "2026-04-26T14:10",
-    "age": 72,
+    "patient_id": "P-1006",
+    "arrival_time": "2026-05-18T00:23",
+    "age": 60,
     "sex": "M",
-    "chief_complaint": "Decreased urine output, rising creatinine",
-    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
+    "chief_complaint": "Substernal chest pressure",
+    "note_text": "HPI: 64yo male, smoker, with 2 hours of substernal chest pressure radiating to left arm, associated diaphoresis and nausea. No prior cardiac history. Symptoms ongoing in ED.\nExam: diaphoretic, BP 148/92, HR 96, lungs clear, no JVD, no edema.\nECG: ST depression V4-V6, T-wave inversion lateral leads.\nLabs: troponin I 0.42 (ref <0.04), repeat at 3h pending. CK-MB elevated.\nAssessment: NSTEMI, intermediate-to-high risk.\nPlan: ASA 325 given. Admit to telemetry. Will discuss with hospitalist.",
     "icd10_hints": [
-      "N17.9",
-      "T36.91XA"
+      "I21.4",
+      "I20.0"
     ],
-    "truth_bottleneck": "awaiting_consult",
-    "truth_protocol": "",
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "acs",
     "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
+    "template_name": "acs_no_consult"
   },
   {
-    "patient_id": "P-1021",
-    "arrival_time": "2026-04-26T00:56",
-    "age": 75,
+    "patient_id": "P-1100",
+    "arrival_time": "2026-05-16T13:07",
+    "age": 68,
+    "sex": "F",
+    "chief_complaint": "Severe hyperkalemia on routine labs",
+    "note_text": "HPI: 66yo male with ESRD on hemodialysis, missed last HD session. Routine labs in clinic showed K 6.8.\nExam: stable, no chest pain, no weakness.\nLabs: K 6.8, Cr 8.2, bicarb 16.\nAssessment: severe hyperkalemia, missed dialysis.\nPlan: arranging emergent HD. Calcium gluconate 1g IV given. Insulin 10 units IV with D50 administered.",
+    "icd10_hints": [
+      "E87.5",
+      "N18.6"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "hyperkalemia",
+    "expected_owner": "physician",
+    "template_name": "hyperk_no_ecg"
+  },
+  {
+    "patient_id": "P-1124",
+    "arrival_time": "2026-05-19T00:08",
+    "age": 58,
+    "sex": "M",
+    "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
+    "note_text": "HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.\nExam: stable, no edema.\nLabs: K 4.2, Cr 6.8 (post-HD baseline).\nAssessment: ESRD, hyperkalemia resolved.\nPlan: medically optimized. Awaiting outpatient HD chair assignment \u2014 case management following, no slot available until next week. Insurance authorization in progress.",
+    "icd10_hints": [
+      "N18.6",
+      "Z99.2"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_dialysis_chair"
+  },
+  {
+    "patient_id": "P-1127",
+    "arrival_time": "2026-05-17T09:51",
+    "age": 54,
+    "sex": "F",
+    "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
+    "note_text": "HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. Medically ready for discharge.\nExam: stable, no edema.\nLabs: K 4.2, Cr 6.8 (post-HD baseline).\nAssessment: ESRD, hyperkalemia resolved.\nPlan: medically optimized. Awaiting outpatient HD chair assignment \u2014 case management following, no slot available until next week. Insurance authorization in progress.",
+    "icd10_hints": [
+      "N18.6",
+      "Z99.2"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_dialysis_chair"
+  },
+  {
+    "patient_id": "P-1059",
+    "arrival_time": "2026-05-19T01:35",
+    "age": 21,
+    "sex": "M",
+    "chief_complaint": "Hyperglycemia, ketosis",
+    "note_text": "HPI: 22yo male T1DM, presents with N/V, abdominal pain, glucose 512.\nExam: kussmaul respirations, dry mucous membranes.\nLabs: glucose 512, bicarb 9, anion gap 24, beta-hydroxybutyrate 6.2, K 5.3, pH 7.18.\nAssessment: DKA, severe.\nPlan: IV fluids initiated. Repeat labs in 2h.",
+    "icd10_hints": [
+      "E10.10"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "dka",
+    "expected_owner": "physician",
+    "template_name": "dka_no_drip"
+  },
+  {
+    "patient_id": "P-1093",
+    "arrival_time": "2026-05-17T09:48",
+    "age": 49,
+    "sex": "M",
+    "chief_complaint": "Alcohol withdrawal, tremulous",
+    "note_text": "HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.\nExam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.\nLabs: AST 142, ALT 88, lipase 38.\nAssessment: alcohol withdrawal, moderate. AUD.\nPlan: thiamine 100mg IV given. Banana bag running. Admit to medicine.",
+    "icd10_hints": [
+      "F10.230"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "ciwa",
+    "expected_owner": "physician",
+    "template_name": "ciwa_no_scoring"
+  },
+  {
+    "patient_id": "P-1028",
+    "arrival_time": "2026-05-17T11:23",
+    "age": 72,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, now resolved",
     "note_text": "HPI: 74yo male, day 5 of admission for COPD exacerbation. Off supplemental O2 x 24h, ambulating with assistance, tolerating PO. Medically ready for discharge per primary team.\nExam: lungs with mild expiratory wheeze, no distress.\nAssessment: COPD exacerbation, resolved. Deconditioned.\nPlan: SNF placement requested 3 days ago. Case management notes 4 SNFs declined due to no insurance authorization. Patient unable to safely return home alone.",
@@ -926,19 +2642,97 @@
     "template_name": "copd_dispo_snf"
   },
   {
-    "patient_id": "P-1012",
-    "arrival_time": "2026-04-26T09:31",
-    "age": 73,
+    "patient_id": "P-1071",
+    "arrival_time": "2026-05-16T06:01",
+    "age": 23,
     "sex": "M",
-    "chief_complaint": "Decreased urine output, rising creatinine",
-    "note_text": "HPI: 69yo male admitted 3 days ago for community-acquired pneumonia, now with creatinine rising from 1.1 to 3.4 over 48h. UOP <300 mL/24h.\nExam: euvolemic, no edema, lungs improving.\nLabs: K 5.8, BUN 62, FENa 0.4%, urine sediment with muddy brown casts.\nImaging: renal US no hydronephrosis.\nAssessment: AKI, likely ATN vs prerenal. Vancomycin trough 28.\nPlan: held vancomycin. Nephrology consult placed yesterday morning, no note in chart.",
+    "chief_complaint": "Suicidal ideation, awaiting psychiatry",
+    "note_text": "HPI: 26yo male brought in by police on 5150 hold for SI with plan. Calm and cooperative now.\nExam: stable vitals, no acute medical issues.\nAssessment: acute SI, requires inpatient psychiatric evaluation.\nPlan: psychiatry consult requested 9 hours ago, no eval yet. Patient sitting in ED with sitter.",
     "icd10_hints": [
-      "N17.9",
-      "T36.91XA"
+      "R45.851"
     ],
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
+    "template_name": "psych_consult_delay"
+  },
+  {
+    "patient_id": "P-1130",
+    "arrival_time": "2026-05-17T23:54",
+    "age": 30,
+    "sex": "M",
+    "chief_complaint": "Post-TBI, awaiting rehab placement",
+    "note_text": "HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. Cognitively improving. Medically stable.\nExam: oriented x2, walks with assist, follows commands.\nAssessment: TBI, neurocognitive deficits, requires inpatient rehab.\nPlan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. Case management following daily.",
+    "icd10_hints": [
+      "S06.9X9A"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "dispo_rehab_tbi"
+  },
+  {
+    "patient_id": "P-1161",
+    "arrival_time": "2026-05-18T17:11",
+    "age": 76,
+    "sex": "F",
+    "chief_complaint": "Diabetic admission, hypoglycemia event",
+    "note_text": "HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. Continued home insulin regimen including lantus 30u and aspart sliding scale.\nExam: episode of hypoglycemia overnight, glucose 42, treated with D50.\nLabs: glucose 42 (overnight), now 156. A1c 9.8.\nAssessment: hypoglycemia related to insulin without adequate glucose monitoring.\nPlan: continue insulin, recheck POC glucose Q4.",
+    "icd10_hints": [
+      "E11.9",
+      "E16.2"
+    ],
+    "truth_bottleneck": "med_risk",
+    "truth_protocol": "",
+    "expected_owner": "pharmacist",
+    "template_name": "insulin_no_glucose_monitor"
+  },
+  {
+    "patient_id": "P-1154",
+    "arrival_time": "2026-05-19T21:18",
+    "age": 63,
+    "sex": "F",
+    "chief_complaint": "Septic shock with AKI",
+    "note_text": "HPI: 64yo male with diabetes, presenting with septic shock from urinary source. Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, and metformin.\nExam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.\nLabs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.\nAssessment: septic shock with AKI. Multifactorial.\nPlan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission.",
+    "icd10_hints": [
+      "A41.9",
+      "N17.9",
+      "R65.21"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "sepsis",
+    "expected_owner": "physician",
+    "template_name": "sepsis_aki_combo"
+  },
+  {
+    "patient_id": "P-1033",
+    "arrival_time": "2026-05-16T10:30",
+    "age": 70,
+    "sex": "F",
+    "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
+    "note_text": "HPI: 68yo female, admitted for acute decompensated heart failure. Diuresed 6L over 4 days, now euvolemic. Walks 100 feet with rolling walker, SpO2 88% on room air with ambulation, 94% on 2L NC.\nExam: lungs clear, no edema, JVP normal.\nAssessment: HFpEF, optimized. Requires home oxygen.\nPlan: home O2 ordered 36h ago, DME vendor backlogged. Family training on equipment not yet completed. Case management following.",
+    "icd10_hints": [
+      "I50.32",
+      "Z99.81"
+    ],
+    "truth_bottleneck": "dispo_delay",
+    "truth_protocol": "",
+    "expected_owner": "case_manager",
+    "template_name": "chf_dispo_o2"
+  },
+  {
+    "patient_id": "P-1092",
+    "arrival_time": "2026-05-19T17:58",
+    "age": 52,
+    "sex": "F",
+    "chief_complaint": "Alcohol withdrawal, tremulous",
+    "note_text": "HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.\nExam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.\nLabs: AST 142, ALT 88, lipase 38.\nAssessment: alcohol withdrawal, moderate. AUD.\nPlan: thiamine 100mg IV given. Banana bag running. Admit to medicine.",
+    "icd10_hints": [
+      "F10.230"
+    ],
+    "truth_bottleneck": "missing_soc",
+    "truth_protocol": "ciwa",
+    "expected_owner": "physician",
+    "template_name": "ciwa_no_scoring"
   }
 ]

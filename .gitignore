@@ -12,3 +12,7 @@ build/
 backend/app/db/radar.db
 .idea/
 .vscode/
+
+# Local generated artifacts
+*.zip
+foundry_export/__pycache__/

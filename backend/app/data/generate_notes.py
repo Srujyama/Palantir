@@ -385,6 +385,415 @@ TEMPLATES: List[Template] = [
         truth_bottleneck="med_risk",
         expected_owner="pharmacist",
     ),
+    # -------- PE: submassive, no risk stratification ------------------------
+    Template(
+        name="pe_no_risk_strat",
+        chief_complaint="Pleuritic chest pain, dyspnea",
+        note=(
+            "HPI: 56yo male, post-op day 10 from L knee arthroplasty, now with sudden pleuritic chest pain "
+            "and dyspnea. Saturating 90% on RA, improved to 96% on 2L NC.\n"
+            "Exam: tachypneic, RR 28, HR 112. Lungs clear. Right calf swelling noted.\n"
+            "Labs: D-dimer 4.8 (elevated).\n"
+            "Imaging: CT-PA confirms bilateral segmental PE.\n"
+            "Assessment: acute pulmonary embolism, hemodynamically stable.\n"
+            "Plan: started on heparin drip. Admit to medicine."
+        ),
+        icd10_hints=["I26.99"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="pe",
+        expected_owner="physician",
+    ),
+    # -------- GI bleed: no PPI, no type/screen ------------------------------
+    Template(
+        name="gib_no_ppi",
+        chief_complaint="Hematemesis x 2 episodes overnight",
+        note=(
+            "HPI: 62yo male with history of alcohol use disorder presenting with two episodes of "
+            "frank hematemesis overnight, melena since this morning. Reports last drink yesterday evening.\n"
+            "Exam: pale, BP 96/58, HR 108. Abdominal exam soft.\n"
+            "Labs: hgb dropped to 7.2 from baseline 11.4, plt 142, INR 1.3.\n"
+            "Assessment: upper GI bleed, likely variceal vs ulcer source.\n"
+            "Plan: two large-bore IV access placed, IV fluids running. NPO. "
+            "Will arrange GI consult in AM for endoscopy."
+        ),
+        icd10_hints=["K92.0", "K92.2"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="gi_bleed",
+        expected_owner="physician",
+    ),
+    # -------- AKI: no medication review -------------------------------------
+    Template(
+        name="aki_no_med_review",
+        chief_complaint="Rising creatinine, oliguria",
+        note=(
+            "HPI: 71yo male admitted 4 days ago for cellulitis on vancomycin and tobramycin. "
+            "Creatinine rising from baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. "
+            "Home medications include lisinopril 40mg, naproxen 500mg BID, and recently "
+            "received iodinated contrast for a CT angiogram.\n"
+            "Exam: euvolemic.\n"
+            "Labs: Cr 2.4, K 4.8, urine sediment with muddy brown casts. FENa 0.8%.\n"
+            "Assessment: acute kidney injury, multifactorial.\n"
+            "Plan: continue current regimen. Trend renal function."
+        ),
+        icd10_hints=["N17.9"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="aki",
+        expected_owner="physician",
+    ),
+    # -------- CIWA: alcohol withdrawal, no scoring documented ---------------
+    Template(
+        name="ciwa_no_scoring",
+        chief_complaint="Alcohol withdrawal, tremulous",
+        note=(
+            "HPI: 48yo male with history of alcohol use disorder, last drink 18 hours ago. "
+            "Presents with tremor, diaphoresis, anxiety. History of DTs in past admission.\n"
+            "Exam: BP 168/96, HR 118, tremulous, mild diaphoresis. Oriented.\n"
+            "Labs: AST 142, ALT 88, lipase 38.\n"
+            "Assessment: alcohol withdrawal, moderate. AUD.\n"
+            "Plan: thiamine 100mg IV given. Banana bag running. Admit to medicine."
+        ),
+        icd10_hints=["F10.230"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="ciwa",
+        expected_owner="physician",
+    ),
+    # -------- Neutropenic fever: late antibiotics ---------------------------
+    Template(
+        name="neutropenic_fever_late_abx",
+        chief_complaint="Fever on chemotherapy, ANC 200",
+        note=(
+            "HPI: 54yo female with AML, day 9 of induction chemotherapy, presenting with fever to 38.6C. "
+            "Reports mild fatigue, no localizing symptoms. Port-a-cath in place.\n"
+            "Exam: well-appearing, no overt source. Port site without erythema.\n"
+            "Labs: ANC 180, WBC 0.8, lactate 1.4. CXR clear.\n"
+            "Assessment: neutropenic fever, no localizing source.\n"
+            "Plan: blood cultures x2 drawn. Awaiting attending review before starting antibiotics."
+        ),
+        icd10_hints=["D70.9", "R50.9"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="neutropenic_fever",
+        expected_owner="physician",
+    ),
+    # -------- Hyperkalemia: severe, no ECG done -----------------------------
+    Template(
+        name="hyperk_no_ecg",
+        chief_complaint="Severe hyperkalemia on routine labs",
+        note=(
+            "HPI: 66yo male with ESRD on hemodialysis, missed last HD session. "
+            "Routine labs in clinic showed K 6.8.\n"
+            "Exam: stable, no chest pain, no weakness.\n"
+            "Labs: K 6.8, Cr 8.2, bicarb 16.\n"
+            "Assessment: severe hyperkalemia, missed dialysis.\n"
+            "Plan: arranging emergent HD. Calcium gluconate 1g IV given. "
+            "Insulin 10 units IV with D50 administered."
+        ),
+        icd10_hints=["E87.5", "N18.6"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="hyperkalemia",
+        expected_owner="physician",
+    ),
+    # -------- COPD: no steroids documented ----------------------------------
+    Template(
+        name="copd_no_steroids",
+        chief_complaint="COPD exacerbation, increased sputum",
+        note=(
+            "HPI: 69yo male with GOLD stage 3 COPD presents with 3 days of increased dyspnea, "
+            "increased sputum production, sputum more purulent than baseline. Home O2 at 2L NC.\n"
+            "Exam: in mild respiratory distress, expiratory wheeze throughout, RR 24, SpO2 86% on 2L NC.\n"
+            "Labs: WBC 11.4, ABG pH 7.32 / PCO2 56 / PO2 64 on 2L NC.\n"
+            "Imaging: CXR no infiltrate.\n"
+            "Assessment: COPD exacerbation, moderate.\n"
+            "Plan: DuoNeb nebulizer treatments. Azithromycin started. Admit to telemetry."
+        ),
+        icd10_hints=["J44.1"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="copd",
+        expected_owner="physician",
+    ),
+    # -------- Awaiting consult: GI bleed, GI not seen -----------------------
+    Template(
+        name="gib_awaiting_gi",
+        chief_complaint="Slow GI bleed, awaiting endoscopy",
+        note=(
+            "HPI: 75yo female with chronic NSAID use presenting with melena x 4 days, "
+            "now hemodynamically stable. Hgb 8.8 from baseline 11.2.\n"
+            "Exam: stable, soft non-tender abdomen.\n"
+            "Labs: hgb 8.8, plt 220, INR 1.1.\n"
+            "Assessment: chronic GI blood loss, likely NSAID gastropathy.\n"
+            "Plan: IV pantoprazole drip. Type and screen sent. NPO. "
+            "GI consult placed 16h ago, awaiting callback for endoscopy scheduling."
+        ),
+        icd10_hints=["K92.1"],
+        truth_bottleneck="awaiting_consult",
+        expected_owner="physician",
+    ),
+    # -------- Awaiting consult: psych medical clearance ---------------------
+    Template(
+        name="psych_medical_clear",
+        chief_complaint="Manic episode, on involuntary hold",
+        note=(
+            "HPI: 31yo male brought in by police on 5150 for grandiose delusions and "
+            "agitation, history of bipolar I.\n"
+            "Exam: agitated but cooperative now after IM olanzapine. Vitals stable.\n"
+            "Labs: tox screen positive for amphetamines. Otherwise unremarkable.\n"
+            "Assessment: acute mania.\n"
+            "Plan: psychiatry consult placed yesterday, awaiting eval. Patient remains in ED "
+            "with sitter, no inpatient psych bed identified."
+        ),
+        icd10_hints=["F31.2"],
+        truth_bottleneck="awaiting_consult",
+        expected_owner="physician",
+    ),
+    # -------- Awaiting imaging: V/Q scan PE workup --------------------------
+    Template(
+        name="pe_awaiting_vq",
+        chief_complaint="Dyspnea, contrast contraindication",
+        note=(
+            "HPI: 44yo female, postpartum day 3 with dyspnea and pleuritic chest pain. "
+            "Cr 1.6, breastfeeding, declined CT-PA.\n"
+            "Exam: RR 20, SpO2 95% RA, HR 102.\n"
+            "Labs: D-dimer 3.2.\n"
+            "Imaging: V/Q scan ordered yesterday, scheduled for today PM. "
+            "Lower extremity dopplers negative.\n"
+            "Assessment: workup for PE.\n"
+            "Plan: empiric heparin drip while awaiting study."
+        ),
+        icd10_hints=["R06.02", "O88.211"],
+        truth_bottleneck="awaiting_imaging",
+        expected_owner="physician",
+    ),
+    # -------- Awaiting imaging: TTE for endocarditis ------------------------
+    Template(
+        name="ie_awaiting_tte",
+        chief_complaint="Fever, IVDU, suspected endocarditis",
+        note=(
+            "HPI: 39yo male with history of IV drug use presents with fevers x 1 week.\n"
+            "Exam: febrile, new systolic murmur at LSB. Track marks both arms.\n"
+            "Labs: WBC 18, blood cultures growing gram-positive cocci in 3/3 bottles.\n"
+            "Imaging: TTE ordered, scheduled for tomorrow. CXR clear.\n"
+            "Assessment: suspected infective endocarditis.\n"
+            "Plan: vancomycin + cefepime empiric. ID consult."
+        ),
+        icd10_hints=["I33.0"],
+        truth_bottleneck="awaiting_imaging",
+        expected_owner="physician",
+    ),
+    # -------- Dispo: dialysis chair, no outpatient slot ---------------------
+    Template(
+        name="dispo_dialysis_chair",
+        chief_complaint="ESRD, dispo delayed by outpatient HD slot",
+        note=(
+            "HPI: 58yo male admitted for hyperkalemia, now corrected after dialysis. "
+            "Medically ready for discharge.\n"
+            "Exam: stable, no edema.\n"
+            "Labs: K 4.2, Cr 6.8 (post-HD baseline).\n"
+            "Assessment: ESRD, hyperkalemia resolved.\n"
+            "Plan: medically optimized. Awaiting outpatient HD chair assignment — case "
+            "management following, no slot available until next week. Insurance authorization in progress."
+        ),
+        icd10_hints=["N18.6", "Z99.2"],
+        truth_bottleneck="dispo_delay",
+        expected_owner="case_manager",
+    ),
+    # -------- Dispo: TBI rehab placement ------------------------------------
+    Template(
+        name="dispo_rehab_tbi",
+        chief_complaint="Post-TBI, awaiting rehab placement",
+        note=(
+            "HPI: 27yo male, status post MVC with traumatic brain injury 12 days ago. "
+            "Cognitively improving. Medically stable.\n"
+            "Exam: oriented x2, walks with assist, follows commands.\n"
+            "Assessment: TBI, neurocognitive deficits, requires inpatient rehab.\n"
+            "Plan: SNF placement requested 5 days ago. 3 SNFs declined due to insurance authorization. "
+            "Case management following daily."
+        ),
+        icd10_hints=["S06.9X9A"],
+        truth_bottleneck="dispo_delay",
+        expected_owner="case_manager",
+    ),
+    # -------- Readmit risk: COPD with no inhaler at home --------------------
+    Template(
+        name="copd_readmit_no_inhaler",
+        chief_complaint="COPD readmit, lost inhaler",
+        note=(
+            "HPI: 67yo female with COPD, fourth admission this year for exacerbation. "
+            "Reports running out of inhalers, no PCP follow-up in 6 months. Smoking 1ppd. "
+            "Lives alone. Limited mobility, unable to get to pharmacy.\n"
+            "Exam: improved, mild expiratory wheeze.\n"
+            "Assessment: COPD, severe. Recurrent admissions, social factors.\n"
+            "Plan: optimize inhaler regimen. Discharge to home with brief rehab if approved."
+        ),
+        icd10_hints=["J44.1"],
+        truth_bottleneck="readmit_risk",
+        expected_owner="case_manager",
+    ),
+    # -------- Clear: cellulitis ready for discharge -------------------------
+    Template(
+        name="clear_cellulitis",
+        chief_complaint="Cellulitis, completed IV antibiotics",
+        note=(
+            "HPI: 52yo male, day 3 of cephalexin for lower extremity cellulitis. "
+            "Erythema receding, no fever, tolerating PO.\n"
+            "Exam: improving erythema, no streaking, no fluctuance.\n"
+            "Assessment: cellulitis, resolving.\n"
+            "Plan: transition to PO antibiotics. Discharge home with follow-up in 1 week."
+        ),
+        icd10_hints=["L03.115"],
+        truth_bottleneck="clear",
+        expected_owner="",
+    ),
+    # -------- Clear: chest pain ruled out -----------------------------------
+    Template(
+        name="clear_chest_pain_rule_out",
+        chief_complaint="Chest pain, ruled out for ACS",
+        note=(
+            "HPI: 49yo male with atypical chest pain, fully ruled out with two negative troponins and "
+            "normal stress test.\n"
+            "Exam: nonfocal, comfortable.\n"
+            "Labs: troponin x 2 negative.\n"
+            "Imaging: stress echo no inducible ischemia.\n"
+            "Assessment: non-cardiac chest pain, likely musculoskeletal.\n"
+            "Plan: discharge home with PCP follow-up. NSAIDs as needed."
+        ),
+        icd10_hints=["R07.9"],
+        truth_bottleneck="clear",
+        expected_owner="",
+    ),
+    # -------- Sepsis already resolved (negative case, edge) -----------------
+    Template(
+        name="sepsis_resolved_negative",
+        chief_complaint="Resolved sepsis from prior admission",
+        note=(
+            "HPI: 68yo female, hospital day 6, admitted for sepsis from UTI on day 1. "
+            "Sepsis resolved with antibiotics. Afebrile for 72 hours. "
+            "Hemodynamics back to baseline. Now medically ready.\n"
+            "Exam: comfortable, vitals stable.\n"
+            "Labs: WBC normalized at 7.4, lactate 1.2.\n"
+            "Assessment: sepsis resolved. Awaiting SNF placement.\n"
+            "Plan: SNF placement requested 2 days ago. Case management pursuing."
+        ),
+        icd10_hints=["A41.9", "N39.0"],
+        truth_bottleneck="dispo_delay",
+        expected_owner="case_manager",
+    ),
+    # -------- Stroke window expired, no longer fires (negative) -------------
+    Template(
+        name="stroke_window_expired",
+        chief_complaint="Old stroke, residual deficits, dispo",
+        note=(
+            "HPI: 73yo male, stroke 5 days ago. Deficits improving but residual. "
+            "Medically ready.\n"
+            "Exam: residual right-sided weakness 4/5, otherwise nonfocal.\n"
+            "Assessment: ischemic stroke, residual deficits. Stroke window expired.\n"
+            "Plan: PT/OT recommend acute rehab. Awaiting bed at rehab facility. "
+            "Case management following."
+        ),
+        icd10_hints=["I69.351"],
+        truth_bottleneck="dispo_delay",
+        expected_owner="case_manager",
+    ),
+    # -------- Multi-protocol case: sepsis + AKI -----------------------------
+    Template(
+        name="sepsis_aki_combo",
+        chief_complaint="Septic shock with AKI",
+        note=(
+            "HPI: 64yo male with diabetes, presenting with septic shock from urinary source. "
+            "Cr rising from 1.1 to 2.6 over 24h. Home meds include lisinopril, ibuprofen, "
+            "and metformin.\n"
+            "Exam: ill-appearing, BP 84/52 on 0.05 norepinephrine. HR 124.\n"
+            "Labs: WBC 22, lactate 4.8, Cr 2.6, K 5.4. Blood cultures sent.\n"
+            "Assessment: septic shock with AKI. Multifactorial.\n"
+            "Plan: IV fluids 30 mL/kg given. Vancomycin and zosyn started. ICU admission."
+        ),
+        icd10_hints=["A41.9", "N17.9", "R65.21"],
+        truth_bottleneck="missing_soc",
+        truth_protocol="sepsis",
+        expected_owner="physician",
+    ),
+    # -------- Awaiting consult: surgery, perforated viscus ------------------
+    Template(
+        name="perf_awaiting_surgery",
+        chief_complaint="Free air on CT, surgery not yet seen",
+        note=(
+            "HPI: 58yo male presenting with sudden severe abdominal pain, peritoneal signs on exam.\n"
+            "Exam: rigid abdomen, rebound tenderness, BP 102/68.\n"
+            "Labs: WBC 16.4, lactate 2.8.\n"
+            "Imaging: CT abdomen shows free air, concern for perforated viscus.\n"
+            "Assessment: perforated viscus.\n"
+            "Plan: NPO, IVF, broad-spectrum antibiotics. Surgical consult placed 90 min ago, "
+            "awaiting callback. NG tube placed."
+        ),
+        icd10_hints=["K65.9"],
+        truth_bottleneck="awaiting_consult",
+        expected_owner="physician",
+    ),
+    # -------- Med risk: insulin without glucose monitoring ------------------
+    Template(
+        name="insulin_no_glucose_monitor",
+        chief_complaint="Diabetic admission, hypoglycemia event",
+        note=(
+            "HPI: 76yo female with type 2 DM admitted for foot infection. NPO for procedure. "
+            "Continued home insulin regimen including lantus 30u and aspart sliding scale.\n"
+            "Exam: episode of hypoglycemia overnight, glucose 42, treated with D50.\n"
+            "Labs: glucose 42 (overnight), now 156. A1c 9.8.\n"
+            "Assessment: hypoglycemia related to insulin without adequate glucose monitoring.\n"
+            "Plan: continue insulin, recheck POC glucose Q4."
+        ),
+        icd10_hints=["E11.9", "E16.2"],
+        truth_bottleneck="med_risk",
+        expected_owner="pharmacist",
+    ),
+    # -------- Dispo: language barrier, no interpreter -----------------------
+    Template(
+        name="dispo_language_barrier",
+        chief_complaint="Discharge teaching delayed, no interpreter",
+        note=(
+            "HPI: 62yo female with new-onset CHF, medically optimized. Mandarin-speaking only. "
+            "Family unable to be present for teaching today.\n"
+            "Exam: stable, no edema.\n"
+            "Assessment: HFpEF, ready for discharge.\n"
+            "Plan: discharge teaching pending Mandarin interpreter availability. "
+            "Family training not yet completed. Case management following."
+        ),
+        icd10_hints=["I50.32"],
+        truth_bottleneck="dispo_delay",
+        expected_owner="case_manager",
+    ),
+    # -------- Multi-bottleneck: med-risk and dispo, take med-risk first -----
+    Template(
+        name="med_risk_dispo_combo",
+        chief_complaint="Discharge delayed by warfarin issue",
+        note=(
+            "HPI: 80yo female admitted for AFib, started on warfarin. INR today is 4.6 after "
+            "starting bactrim 3 days ago. SNF placement also requested but pending.\n"
+            "Exam: stable, no bleeding.\n"
+            "Labs: INR 4.6 (target 2-3), hgb 11.0.\n"
+            "Assessment: supratherapeutic INR from drug interaction.\n"
+            "Plan: hold warfarin, stop bactrim. Recheck INR tomorrow. "
+            "SNF placement also pending insurance authorization."
+        ),
+        icd10_hints=["I48.91", "D68.32"],
+        truth_bottleneck="med_risk",
+        expected_owner="pharmacist",
+    ),
+    # -------- Awaiting consult: vascular surgery, ischemic limb -------------
+    Template(
+        name="limb_ischemia_awaiting_vasc",
+        chief_complaint="Acute limb ischemia",
+        note=(
+            "HPI: 70yo male with AFib, off anticoagulation, presents with cold pale right leg "
+            "x 4 hours.\n"
+            "Exam: right foot mottled, no pedal pulses bilaterally. Sensation decreased.\n"
+            "Labs: lactate 2.2.\n"
+            "Imaging: CTA shows right popliteal occlusion.\n"
+            "Assessment: acute limb ischemia.\n"
+            "Plan: heparin drip initiated. Vascular surgery consult placed 2h ago, awaiting callback. "
+            "Patient NPO for OR."
+        ),
+        icd10_hints=["I74.3"],
+        truth_bottleneck="awaiting_consult",
+        expected_owner="physician",
+    ),
 ]
 
 
@@ -416,11 +825,14 @@ def generate(n_per_template: int = 3) -> List[PatientNote]:
     """Materialize the dataset by lightly varying each template.
 
     Variations stay clinically plausible: age shifts, arrival times spread
-    over the last 36h, occasional sex flip when not pathognomonic.
+    over the last 72h, occasional sex flip when not pathognomonic.
+
+    Arrival times are anchored on the run time so the demo always shows
+    fresh-looking arrivals (the analytics page bucketing depends on this).
     """
     notes: List[PatientNote] = []
     pid = 0
-    base_time = datetime(2026, 4, 27, 7, 0)
+    base_time = datetime.utcnow()
 
     # Templates whose presentation depends on biological sex; don't flip.
     sex_locked = {"rlq_pain_awaiting_ct"}
@@ -441,8 +853,10 @@ def generate(n_per_template: int = 3) -> List[PatientNote]:
             if tmpl.name not in sex_locked and random.random() < 0.15:
                 sex = "M" if sex == "F" else "F"
 
+            # Spread arrivals across roughly the last 96 hours so the
+            # arrival-age histogram has signal across all buckets.
             arrival = base_time - timedelta(
-                hours=random.randint(1, 36),
+                hours=random.randint(1, 96),
                 minutes=random.randint(0, 59),
             )
 
@@ -468,7 +882,7 @@ def generate(n_per_template: int = 3) -> List[PatientNote]:
 
 
 def main() -> None:
-    notes = generate(n_per_template=3)
+    notes = generate(n_per_template=4)
     OUT_PATH.write_text(json.dumps([asdict(n) for n in notes], indent=2))
     print(f"Wrote {len(notes)} notional patient notes -> {OUT_PATH}")
 

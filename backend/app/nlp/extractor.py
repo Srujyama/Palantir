@@ -66,6 +66,12 @@ LAB_PATTERNS: List[Tuple[str, Pattern]] = [
     ("BNP", re.compile(r"\bBNP\s*[: ]?\s*(\d{2,5})", re.I)),
     ("QTc", re.compile(r"\bQTc\s*[: ]?\s*(\d{3})\s*ms", re.I)),
     ("anion_gap", re.compile(r"\b(?:anion\s+)?gap\s*[: ]?\s*(\d{1,2})\b", re.I)),
+    ("magnesium", re.compile(r"\bMg\s*[: ]?\s*(\d\.\d)", re.I)),
+    ("ANC", re.compile(r"\bANC\s*(?:of)?\s*[: ]?\s*(\d{1,4})", re.I)),
+    ("ph", re.compile(r"\bpH\s*[: ]?\s*(\d\.\d{1,2})", re.I)),
+    ("bicarbonate", re.compile(r"\b(?:bicarb(?:onate)?|HCO3)\s*[: ]?\s*(\d{1,2})", re.I)),
+    ("procalcitonin", re.compile(r"\bprocalcitonin\s*[: ]?\s*(\d+(?:\.\d+)?)", re.I)),
+    ("d_dimer", re.compile(r"\bD-?dimer\s*[: ]?\s*(\d+(?:\.\d+)?)", re.I)),
 ]
 
 # Medication name list (lowercase). Class tag drives downstream interaction
@@ -119,6 +125,48 @@ MEDICATIONS: Dict[str, str] = {
     "metformin": "biguanide",
     # Other
     "contrast": "iodinated_contrast_nephrotox",
+    # GI / fluids
+    "pantoprazole": "ppi",
+    "protonix": "ppi",
+    "esomeprazole": "ppi",
+    "nexium": "ppi",
+    "famotidine": "h2_blocker",
+    # Withdrawal / sedation
+    "lorazepam": "benzodiazepine",
+    "ativan": "benzodiazepine",
+    "diazepam": "benzodiazepine",
+    "valium": "benzodiazepine",
+    "chlordiazepoxide": "benzodiazepine",
+    "thiamine": "vitamin",
+    "olanzapine": "antipsychotic_qt_prolong",
+    # COPD
+    "albuterol": "bronchodilator",
+    "ipratropium": "bronchodilator",
+    "duoneb": "bronchodilator",
+    "combivent": "bronchodilator",
+    "prednisone": "corticosteroid",
+    "methylprednisolone": "corticosteroid",
+    "solu-medrol": "corticosteroid",
+    "dexamethasone": "corticosteroid",
+    # Hyperkalemia
+    "kayexalate": "k_binder",
+    "patiromer": "k_binder",
+    # Anesthesia / sedation
+    "propofol": "sedative",
+    "midazolam": "benzodiazepine",
+    "versed": "benzodiazepine",
+    "fentanyl": "opioid",
+    "morphine": "opioid",
+    "hydromorphone": "opioid",
+    "dilaudid": "opioid",
+    "oxycodone": "opioid",
+    # Vasoactive
+    "norepinephrine": "vasopressor",
+    "vasopressin": "vasopressor",
+    "epinephrine": "vasopressor",
+    "phenylephrine": "vasopressor",
+    "nicardipine": "antihypertensive",
+    "labetalol": "antihypertensive",
 }
 
 # NOTE: physical therapy (PT) and case management are routed through the
@@ -189,7 +237,45 @@ SYMPTOM_PATTERNS: List[Tuple[str, Pattern]] = [
     ("syncope", re.compile(r"\bsyncope\b", re.I)),
     ("hemiparesis", re.compile(r"\b(hemiparesis|hemiplegia|facial\s+droop)\b", re.I)),
     ("melena", re.compile(r"\bmelena\b", re.I)),
+    ("hematemesis", re.compile(r"\b(hematemesis|coffee[- ]ground\s+emesis)\b", re.I)),
     ("suicidal_ideation", re.compile(r"\b(suicidal|SI\b)", re.I)),
+    ("tremor", re.compile(r"\btremor\b", re.I)),
+    ("diaphoresis", re.compile(r"\bdiaphor(?:esis|etic)\b", re.I)),
+]
+
+CODE_STATUS_PATTERNS: List[Tuple[str, Pattern]] = [
+    ("full_code", re.compile(r"\bfull\s+code\b", re.I)),
+    ("dnr", re.compile(r"\bDNR\b", re.I)),
+    ("dni", re.compile(r"\bDNI\b", re.I)),
+    ("comfort_care", re.compile(r"\b(comfort\s+(care|measures\s+only)|CMO)\b", re.I)),
+]
+
+MOBILITY_PATTERNS: List[Tuple[str, Pattern]] = [
+    ("bedbound", re.compile(r"\bbed-?bound\b", re.I)),
+    ("walks_with_assist", re.compile(r"walks?\s+with\s+(assist|walker|cane)", re.I)),
+    ("independent_amb", re.compile(r"\bambulating\s+(independently|without\s+assist)\b", re.I)),
+    ("unable_to_ambulate", re.compile(r"unable\s+to\s+(bear\s+weight|ambulate)", re.I)),
+    ("fall_risk", re.compile(r"\bfall\s+risk\b", re.I)),
+]
+
+PAIN_PATTERNS: List[Tuple[str, Pattern]] = [
+    ("pain_scale", re.compile(r"pain\s+(?:scale\s+)?(\d{1,2})\s*/\s*10", re.I)),
+    ("severe_pain", re.compile(r"\b(severe|excruciating|10/10)\s+pain", re.I)),
+    ("controlled_pain", re.compile(r"pain\s+(controlled|well[- ]managed)", re.I)),
+]
+
+ADVANCE_DIRECTIVE_PATTERNS: List[Tuple[str, Pattern]] = [
+    ("advance_directive_present", re.compile(r"\b(advance\s+directive|POLST|MOLST)\b", re.I)),
+    ("hcp_designated", re.compile(r"\b(healthcare\s+proxy|HCP|surrogate\s+decision-?maker)\b", re.I)),
+]
+
+SOCIAL_PATTERNS: List[Tuple[str, Pattern]] = [
+    ("homeless", re.compile(r"\b(homeless|unhoused|sheltered\s+housing)\b", re.I)),
+    ("intermittent_housing", re.compile(r"intermittent\s+housing", re.I)),
+    ("language_barrier", re.compile(r"(Mandarin|Spanish|Cantonese|Russian|Vietnamese)-?speaking\s+only", re.I)),
+    ("lives_alone", re.compile(r"\blives\s+alone\b", re.I)),
+    ("family_support_limited", re.compile(r"no\s+family\s+support", re.I)),
+    ("primary_caregiver", re.compile(r"primary\s+caregiver", re.I)),
 ]
 
 
@@ -325,11 +411,18 @@ class ExtractionResult:
     dispo: List[Finding]
     symptoms: List[Finding]
     risk_factors: List[Finding]
+    code_status: List[Finding] = field(default_factory=list)
+    mobility: List[Finding] = field(default_factory=list)
+    pain: List[Finding] = field(default_factory=list)
+    advance_directives: List[Finding] = field(default_factory=list)
+    social: List[Finding] = field(default_factory=list)
 
     def all_findings(self) -> List[Finding]:
         return (
             self.vitals + self.labs + self.meds + self.consults
             + self.imaging + self.dispo + self.symptoms + self.risk_factors
+            + self.code_status + self.mobility + self.pain
+            + self.advance_directives + self.social
         )
 
     def to_dict(self) -> Dict:
@@ -354,6 +447,11 @@ class ExtractionResult:
             "dispo": _serialize(self.dispo),
             "symptoms": _serialize(self.symptoms),
             "risk_factors": _serialize(self.risk_factors),
+            "code_status": _serialize(self.code_status),
+            "mobility": _serialize(self.mobility),
+            "pain": _serialize(self.pain),
+            "advance_directives": _serialize(self.advance_directives),
+            "social": _serialize(self.social),
         }
 
 
@@ -367,4 +465,9 @@ def extract(note: str) -> ExtractionResult:
         dispo=_scan_dispo(note),
         symptoms=_scan_symptoms(note),
         risk_factors=_scan_readmit(note),
+        code_status=_scan(note, CODE_STATUS_PATTERNS, "code_status"),
+        mobility=_scan(note, MOBILITY_PATTERNS, "mobility"),
+        pain=_scan(note, PAIN_PATTERNS, "pain"),
+        advance_directives=_scan(note, ADVANCE_DIRECTIVE_PATTERNS, "advance_directive"),
+        social=_scan(note, SOCIAL_PATTERNS, "social"),
     )

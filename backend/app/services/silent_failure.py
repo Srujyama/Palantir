@@ -62,6 +62,13 @@ _PROTOCOL_RESOLUTION_PHRASES = {
     "stroke": [r"stroke\s+resolved", r"deficits\s+resolved"],
     "cap": [r"pneumonia\s+(resolved|improving)"],
     "acs": [r"chest\s+pain\s+resolved", r"troponin\s+down-?trending"],
+    "pe": [r"PE\s+resolved", r"clot\s+burden\s+(decreased|improving)"],
+    "gi_bleed": [r"bleeding\s+(stopped|resolved)", r"hgb\s+(stable|recovered)"],
+    "aki": [r"AKI\s+(resolved|improving)", r"creatinine\s+(returned|back\s+to\s+baseline)", r"renal\s+function\s+recovered"],
+    "ciwa": [r"CIWA\s+(score|scores)\s+(<\s*8|low|0)", r"withdrawal\s+resolved"],
+    "neutropenic_fever": [r"ANC\s+(recovered|>\s*500)", r"afebrile\s+for\s+\d+"],
+    "hyperkalemia": [r"potassium\s+(normalized|corrected|back\s+to)", r"K\s+(3\.\d|4\.\d|5\.[0-2])"],
+    "copd": [r"COPD\s+(exacerbation\s+resolved|stable)", r"back\s+to\s+baseline"],
 }
 # Triggers that are short and ambiguous (e.g. "CVA" can mean costovertebral
 # angle, not stroke). For these we require a stricter contextual confirmation.

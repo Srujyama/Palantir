@@ -233,7 +233,337 @@ DKA = Protocol(
 )
 
 
-PROTOCOLS: List[Protocol] = [SEPSIS, ACS, STROKE, CAP, DKA]
+PE = Protocol(
+    key="pe",
+    name="Pulmonary Embolism Initial Management",
+    triggers=[
+        r"\bpulmonary\s+embol",
+        r"(suspected|confirmed|diagnosed|acute)\s+PE\b",
+        r"\bPE\b\s*(suspected|confirmed|diagnosed)",
+        r"confirms?\s+(bilateral\s+)?(segmental\s+|subsegmental\s+)?PE\b",
+        r"\bCTPA\s+(positive|confirms)",
+        r"right\s+heart\s+strain", r"submassive\s+PE\b", r"massive\s+PE\b",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "anticoag",
+            "Therapeutic anticoagulation initiated",
+            [
+                r"\b(heparin|enoxaparin|lovenox|apixaban|rivaroxaban)\b",
+                r"therapeutic\s+anticoagulation",
+            ],
+        ),
+        ExpectedAction(
+            "imaging",
+            "Confirmatory CT-PA or VQ scan",
+            [r"CT-?PA", r"V/?Q\s+scan", r"pulmonary\s+angiogram"],
+        ),
+        ExpectedAction(
+            "risk_stratify",
+            "Risk stratification (RV strain, troponin, BNP)",
+            [
+                r"\btroponin\b", r"\bBNP\b", r"echocardiogram",
+                r"RV\s+(strain|dysfunction|dilation)",
+            ],
+        ),
+        ExpectedAction(
+            "monitor",
+            "Telemetry / continuous monitoring",
+            [r"telemetry", r"continuous\s+monitoring", r"\bICU\b"],
+        ),
+    ],
+    time_window_hours=2,
+    owner="physician",
+    urgency_if_incomplete="red",
+    citation="ESC/AHA Pulmonary Embolism Guidelines",
+)
+
+
+GI_BLEED = Protocol(
+    key="gi_bleed",
+    name="Upper GI Bleed Initial Management",
+    triggers=[
+        r"\bGIB\b", r"GI\s+bleed", r"melena",
+        r"hematemesis", r"coffee-?ground\s+emesis",
+        r"hemoglobin\s+drop", r"hgb\s+(dropped|decreased)\s+to",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "ivf_access",
+            "Two large-bore IV access + IV fluids",
+            [
+                r"\btwo\s+large-?bore\b", r"large-?bore\s+IV",
+                r"IV\s+fluids?\s+(running|bolus|initiated)",
+            ],
+        ),
+        ExpectedAction(
+            "type_screen",
+            "Type and screen / type and cross",
+            [r"type\s+and\s+(screen|cross)", r"\bT&S\b", r"\bT&C\b"],
+        ),
+        ExpectedAction(
+            "ppi",
+            "IV proton-pump inhibitor",
+            [r"\b(pantoprazole|protonix|esomeprazole|nexium)\b", r"\bPPI\b\s+(drip|infusion)"],
+        ),
+        ExpectedAction(
+            "gi_consult",
+            "GI consult / endoscopy plan",
+            [
+                r"\bGI\s+(consult|notified|aware|to\s+see)",
+                r"\bendoscopy\b", r"\bEGD\b",
+            ],
+        ),
+    ],
+    time_window_hours=2,
+    owner="physician",
+    urgency_if_incomplete="red",
+    citation="ACG Upper GI Bleed Guidelines",
+)
+
+
+AKI = Protocol(
+    key="aki",
+    name="Acute Kidney Injury Workup",
+    triggers=[
+        r"\bAKI\b", r"acute\s+kidney\s+injury",
+        r"creatinine\s+(rising|rose|increased|elevated)",
+        r"creatinine\s+(from\s+)?[01]\.\d\s+to\s+[2-9]",
+        r"UOP\s*<", r"oliguria", r"anuria",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "med_review",
+            "Medication review for nephrotoxins",
+            [
+                r"hold\s+(NSAID|ibuprofen|naproxen|ACE|ARB|lisinopril|losartan)",
+                r"nephrotoxic\s+(review|hold|stop)",
+                r"pharmacy\s+review",
+                r"renal\s+dosing",
+            ],
+        ),
+        ExpectedAction(
+            "volume_assessment",
+            "Volume status assessment",
+            [
+                r"\b(euvolemic|hypovolemic|hypervolemic)\b",
+                r"\bJVP\b", r"orthostatic",
+                r"fluid\s+(challenge|trial|bolus)",
+            ],
+        ),
+        ExpectedAction(
+            "urine_studies",
+            "Urine studies (FENa, sediment, electrolytes)",
+            [r"\bFENa\b", r"urine\s+(sediment|electrolytes|sodium)", r"muddy\s+brown"],
+        ),
+        ExpectedAction(
+            "renal_us",
+            "Renal ultrasound to evaluate obstruction",
+            [r"renal\s+(US|ultrasound)", r"\bhydronephrosis\b"],
+        ),
+    ],
+    time_window_hours=12,
+    owner="physician",
+    urgency_if_incomplete="amber",
+    citation="KDIGO Acute Kidney Injury Guidelines",
+)
+
+
+CIWA = Protocol(
+    key="ciwa",
+    name="Alcohol Withdrawal (CIWA-Ar Protocol)",
+    triggers=[
+        r"alcohol\s+(withdrawal|use\s+disorder)",
+        r"\bCIWA\b", r"last\s+drink\s+\d",
+        r"history\s+of\s+(DTs|delirium\s+tremens|withdrawal\s+seizures?)",
+        r"\bAUD\b",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "ciwa_scoring",
+            "CIWA-Ar scoring documented q1-2h",
+            [r"CIWA(-Ar)?\s+(score|scoring|q\d)", r"withdrawal\s+scoring"],
+        ),
+        ExpectedAction(
+            "benzo",
+            "Benzodiazepine protocol (symptom-triggered)",
+            [
+                r"\b(lorazepam|ativan|diazepam|valium|chlordiazepoxide|librium)\b",
+                r"benzodiazepine\s+(taper|protocol|drip)",
+                r"symptom-?triggered",
+            ],
+        ),
+        ExpectedAction(
+            "thiamine",
+            "Thiamine + multivitamin (banana bag)",
+            [r"\bthiamine\b", r"banana\s+bag", r"\bIV\s+B-?complex\b"],
+        ),
+        ExpectedAction(
+            "seizure_precautions",
+            "Seizure precautions and monitoring",
+            [r"seizure\s+(precautions|monitoring|watch)", r"padded\s+rails"],
+        ),
+    ],
+    time_window_hours=2,
+    owner="physician",
+    urgency_if_incomplete="amber",
+    citation="ASAM Alcohol Withdrawal Management Guidelines",
+)
+
+
+NEUTROPENIC_FEVER = Protocol(
+    key="neutropenic_fever",
+    name="Neutropenic Fever Empiric Management",
+    triggers=[
+        r"neutropenic\s+fever",
+        r"\bANC\s*[<:]?\s*\d{1,3}\b",
+        r"ANC\s+(of\s+)?\d{1,3}\b",
+        r"febrile\s+neutropenia",
+        r"chemo(therapy)?.{0,40}fever",
+        r"fever.{0,40}(chemo|induction|neutropenic)",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "antibiotics",
+            "Empiric broad-spectrum antibiotics within 60 min",
+            [
+                r"\b(cefepime|piperacillin|tazobactam|zosyn|meropenem|imipenem)\b",
+                r"empiric\s+(antibiotics?|abx)",
+            ],
+        ),
+        ExpectedAction(
+            "blood_cx",
+            "Blood cultures x2 (including from line)",
+            [r"blood\s+cultures?\s+x\s*2", r"cultures\s+from\s+(line|port|central)"],
+        ),
+        ExpectedAction(
+            "isolation",
+            "Neutropenic precautions / isolation",
+            [r"neutropenic\s+(precautions|isolation)", r"reverse\s+isolation"],
+        ),
+        ExpectedAction(
+            "oncology_notified",
+            "Oncology team notified",
+            [r"oncology\s+(notified|consult|aware|to\s+see)", r"primary\s+oncologist"],
+        ),
+    ],
+    time_window_hours=1,
+    owner="physician",
+    urgency_if_incomplete="red",
+    citation="IDSA Febrile Neutropenia Guidelines",
+)
+
+
+HYPERKALEMIA = Protocol(
+    key="hyperkalemia",
+    name="Severe Hyperkalemia Treatment",
+    triggers=[
+        r"\bK\s*[: ]?\s*([6-9]\.\d|\d{2}\.\d)",
+        r"hyperkalemia",
+        r"potassium\s+(elevated|high|of)\s+\d",
+        r"peaked\s+T-?waves?",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "ecg",
+            "ECG to assess for hyperkalemic changes",
+            [r"\b(ECG|EKG)\b", r"peaked\s+T", r"\bQRS\s+widening\b"],
+        ),
+        ExpectedAction(
+            "stabilize_membrane",
+            "Calcium gluconate / chloride for membrane stabilization",
+            [r"calcium\s+(gluconate|chloride)", r"\bIV\s+calcium\b"],
+        ),
+        ExpectedAction(
+            "shift_intracellular",
+            "Insulin + dextrose to shift potassium intracellularly",
+            [
+                r"insulin\s+(and|\+)\s+(D50|dextrose|glucose)",
+                r"D50.*insulin",
+                r"\bbeta-?agonist\b", r"albuterol\s+nebulizer",
+            ],
+        ),
+        ExpectedAction(
+            "remove",
+            "Removal: diuretic, kayexalate, or dialysis",
+            [
+                r"\b(furosemide|lasix|patiromer|kayexalate|sodium\s+polystyrene)\b",
+                r"\bdialysis\b", r"\bCRRT\b", r"\bHD\b",
+            ],
+        ),
+    ],
+    time_window_hours=1,
+    owner="physician",
+    urgency_if_incomplete="red",
+    citation="ESC/AHA Hyperkalemia Management Consensus",
+)
+
+
+COPD = Protocol(
+    key="copd",
+    name="COPD Exacerbation Management",
+    triggers=[
+        r"COPD\s+exacerbation",
+        r"acute\s+exacerbation\s+of\s+COPD",
+        r"\bAECOPD\b",
+        r"increased\s+(sputum|dyspnea).*COPD",
+    ],
+    expected_actions=[
+        ExpectedAction(
+            "bronchodilator",
+            "Short-acting bronchodilators (DuoNeb / albuterol-ipratropium)",
+            [
+                r"\b(albuterol|ipratropium|duoneb|combivent|nebulizer)\b",
+                r"bronchodilator",
+            ],
+        ),
+        ExpectedAction(
+            "steroids",
+            "Systemic corticosteroids",
+            [
+                r"\b(prednisone|methylprednisolone|solu-?medrol|dexamethasone)\b",
+                r"systemic\s+steroids",
+            ],
+        ),
+        ExpectedAction(
+            "antibiotics",
+            "Antibiotics if sputum purulence increased",
+            [
+                r"\b(azithromycin|doxycycline|amoxicillin|levofloxacin)\b",
+                r"antibiotic\s+for\s+exacerbation",
+            ],
+        ),
+        ExpectedAction(
+            "oxygen_target",
+            "Controlled oxygen targeted SpO2 88-92%",
+            [
+                r"SpO2\s+(target|goal)\s+88",
+                r"controlled\s+oxygen",
+                r"titrate\s+(O2|oxygen)",
+            ],
+        ),
+    ],
+    time_window_hours=4,
+    owner="physician",
+    urgency_if_incomplete="amber",
+    citation="GOLD COPD Strategy",
+)
+
+
+PROTOCOLS: List[Protocol] = [
+    SEPSIS,
+    ACS,
+    STROKE,
+    CAP,
+    DKA,
+    PE,
+    GI_BLEED,
+    AKI,
+    CIWA,
+    NEUTROPENIC_FEVER,
+    HYPERKALEMIA,
+    COPD,
+]
 
 
 def by_key(key: str) -> Protocol | None:
