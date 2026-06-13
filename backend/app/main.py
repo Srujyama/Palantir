@@ -7,7 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.actions import router as actions_router
 from app.api.analytics import router as analytics_router
+from app.api.audit import router as audit_router
 from app.api.capacity import router as capacity_router
+from app.api.census import router as census_router
 from app.api.evaluation import router as evaluation_router
 from app.api.floor import router as floor_router
 from app.api.handoff import router as handoff_router
@@ -57,3 +59,5 @@ app.include_router(sandbox_router)
 app.include_router(evaluation_router)
 app.include_router(interactions_router)
 app.include_router(simulate_router)
+app.include_router(audit_router)
+app.include_router(census_router)

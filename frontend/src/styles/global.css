@@ -1529,3 +1529,293 @@ table.data tbody tr.cursor {
   gap: var(--s-3);
 }
 .mc-misses { margin-top: var(--s-3); }
+
+/* =========================================================================
+   Story mode — guided demo tour bar (append-only)
+   -------------------------------------------------------------------------
+   Fixed bottom bar. Mono, dark, 1px top border, radius 0, no shadow.
+   ========================================================================= */
+.story-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+  background: var(--bg-1);
+  border-top: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+}
+.story-progress-track {
+  height: 2px;
+  background: var(--bg-3);
+}
+.story-progress-fill {
+  height: 100%;
+  background: var(--signal-blue);
+  transition: width 0.24s ease-out;
+}
+.story-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-5);
+  padding: var(--s-3) var(--s-6);
+}
+.story-count {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg-0);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.story-count-sep {
+  color: var(--fg-4);
+  padding: 0 4px;
+}
+.story-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.story-title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-0);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.story-caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 940px;
+}
+.story-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  white-space: nowrap;
+}
+.story-btn {
+  background: var(--bg-2);
+  color: var(--fg-1);
+  border: 1px solid var(--border-strong);
+  padding: var(--s-2) var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.story-btn:hover { background: var(--bg-3); border-color: var(--border-active); color: var(--fg-0); }
+.story-btn:disabled { opacity: 0.4; cursor: default; }
+.story-btn:disabled:hover { background: var(--bg-2); border-color: var(--border-strong); color: var(--fg-1); }
+.story-btn-primary {
+  background: var(--signal-blue-bg);
+  border-color: var(--signal-blue);
+  color: var(--fg-0);
+}
+.story-btn-primary:hover { background: var(--signal-blue); color: #000; border-color: var(--signal-blue); }
+.story-btn-exit {
+  color: var(--fg-3);
+}
+
+/* Best-effort highlight ring applied to a step's target element. */
+.story-highlight {
+  outline: 1px solid var(--signal-blue);
+  outline-offset: 2px;
+  animation: story-glow 1.6s ease-in-out infinite;
+}
+@keyframes story-glow {
+  0%, 100% { outline-color: var(--signal-blue); }
+  50% { outline-color: var(--border-active); outline-offset: 3px; }
+}
+
+/* =========================================================================
+   Floor pulse — transient urgency-change animation on beds (append-only)
+   -------------------------------------------------------------------------
+   Applied for ~1.2s after a live-tick refetch diffs the map. New/escalating
+   critical beds pulse red; de-escalated or vacated beds fade. Border-driven so
+   there is no layout thrash (no box-shadow spread changing geometry).
+   ========================================================================= */
+.floor-pulse { will-change: border-color, background-color; }
+.floor-pulse-up {
+  animation: floor-pulse-up 1.2s ease-out 1;
+}
+.floor-pulse-down {
+  animation: floor-pulse-down 1.2s ease-out 1;
+}
+@keyframes floor-pulse-up {
+  0% {
+    border-color: var(--signal-red);
+    background-color: var(--signal-red-bg);
+  }
+  35% {
+    border-color: var(--signal-red);
+    background-color: #4a1f24;
+  }
+  100% {
+    border-color: var(--signal-red);
+    background-color: var(--signal-red-bg);
+  }
+}
+@keyframes floor-pulse-down {
+  0% {
+    border-color: var(--signal-green);
+    background-color: var(--signal-green-bg);
+  }
+  60% {
+    border-color: var(--border-strong);
+    background-color: var(--bg-2);
+  }
+  100% {
+    border-color: var(--border-strong);
+    background-color: var(--bg-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floor-pulse-up, .floor-pulse-down, .story-highlight, .story-progress-fill {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* =========================================================================
+   Trajectory panel — longitudinal trends on the patient detail
+   ========================================================================= */
+.traj-section .head { gap: var(--s-3); }
+
+/* Signal chip in the section head */
+.traj-sig {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  padding: 2px var(--s-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-2);
+  background: var(--bg-2);
+  white-space: nowrap;
+}
+.traj-sig.traj-sig-red    { color: var(--signal-red);   border-color: var(--signal-red);   background: var(--signal-red-bg); }
+.traj-sig.traj-sig-green  { color: var(--signal-green); border-color: var(--signal-green); background: var(--signal-green-bg); }
+.traj-sig.traj-sig-amber  { color: var(--signal-amber); border-color: var(--signal-amber); background: var(--signal-amber-bg); }
+.traj-sig.traj-sig-neutral { color: var(--fg-2); border-color: var(--border-strong); background: var(--bg-2); }
+.traj-notecount { margin-left: auto; }
+
+.traj-body { display: flex; flex-direction: column; gap: var(--s-4); }
+
+/* Recurrence / readmit callout */
+.traj-recurrence {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--signal-amber-bg);
+  border: 1px solid var(--signal-amber);
+  border-left-width: 3px;
+}
+.traj-recurrence-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--signal-amber);
+  border: 1px solid var(--signal-amber);
+  padding: 2px var(--s-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.traj-recurrence-text { display: flex; flex-direction: column; gap: 2px; }
+.traj-recurrence-lead { color: var(--signal-amber); font-size: 13px; font-weight: 600; }
+.traj-recurrence-ev { line-height: 1.5; }
+
+/* Lab trend rows */
+.traj-labs { display: flex; flex-direction: column; gap: 2px; }
+.traj-lab {
+  display: grid;
+  grid-template-columns: 92px 1fr 120px;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: 1px dotted var(--border);
+}
+.traj-lab:last-child { border-bottom: 0; }
+.traj-lab-name {
+  color: var(--fg-0);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.traj-lab-narr {
+  color: var(--fg-2);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+.traj-verdict { font-weight: 600; }
+.traj-verdict.traj-red { color: var(--signal-red); }
+.traj-verdict.traj-green { color: var(--signal-green); }
+.traj-verdict.traj-neutral { color: var(--fg-2); }
+.traj-lab-spark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.spark-svg { display: block; }
+
+/* Resolved gaps — the "we caught it, not a silent failure" green block */
+.traj-resolved {
+  background: var(--signal-green-bg);
+  border: 1px solid var(--signal-green);
+  border-left-width: 3px;
+  padding: var(--s-3);
+}
+.traj-resolved-head {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--signal-green);
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+.traj-resolved-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.traj-resolved-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: var(--s-2);
+  align-items: start;
+}
+.traj-resolved-glyph {
+  font-family: var(--font-mono);
+  color: var(--signal-green);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.traj-resolved-body { display: flex; flex-direction: column; gap: 1px; }
+.traj-resolved-action { color: var(--signal-green); font-size: 13px; font-weight: 500; }
+.traj-resolved-meta { color: var(--fg-2); line-height: 1.45; }
+
+.traj-empty { padding: var(--s-1) 0; }
+
+/* prior_note glyph styling on the timeline rail */
+.tl-event.tl-prior_note .tl-glyph {
+  color: var(--fg-3);
+  border-style: dashed;
+}

@@ -125,3 +125,43 @@ class ActionEvent(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     action = relationship("Action", back_populates="events")
+
+
+class CensusSnapshot(Base):
+    """A point-in-time roll-up of the whole floor.
+
+    Written on each simulation tick (and on demand) so the analytics page can
+    draw a real census/acuity time-series instead of a static snapshot. This
+    is what turns the demo from 'a dashboard' into 'a system that's been
+    running.'
+    """
+
+    __tablename__ = "census_snapshots"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    captured_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    census = Column(Integer, nullable=False)            # occupied beds
+    red = Column(Integer, nullable=False)
+    amber = Column(Integer, nullable=False)
+    green = Column(Integer, nullable=False)
+    open_actions = Column(Integer, nullable=False)
+    overdue_actions = Column(Integer, nullable=False)
+    silent_failures = Column(Integer, nullable=False)
+    source = Column(String, nullable=False, default="manual")  # manual | sim_tick | ingest
+
+
+class HandoffSnapshot(Base):
+    """An immutable, frozen handoff artifact.
+
+    Real handoffs are a record of what was said at shift change. Finalizing one
+    freezes the report payload + a label so you can later retrieve 'the handoff
+    given at 19:00 last night' — the auditable artifact a dashboard cannot be.
+    """
+
+    __tablename__ = "handoff_snapshots"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    captured_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    shift_label = Column(String, nullable=False)
+    finalized_by = Column(String, nullable=False, default="charge-rn")
+    payload = Column(JSON, nullable=False)             # frozen HandoffReport.dict()

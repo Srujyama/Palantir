@@ -10,6 +10,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
+from app.nlp.extractor import extract
 from app.models.orm import Action, ActionEvent, NoteVersion, Patient, Triage
 from app.models.schemas import (
     ActionResponse,
@@ -170,11 +171,16 @@ def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
         .all()
     )
     for nv in priors:
-        digest = " · ".join(
-            f"{l['label']} {l['points'][-1]['raw']}"
-            for l in (p.triage.trends or {}).get("labs", [])
-            if l.get("points")
-        ) if p.triage.trends else ""
+        # Digest each prior note's OWN labs (not the current values).
+        prior_labs = extract(nv.note_text).labs
+        seen: set[str] = set()
+        parts: List[str] = []
+        for f in prior_labs:
+            if f.label in seen or f.value is None:
+                continue
+            seen.add(f.label)
+            parts.append(f"{f.label} {f.value}")
+        digest = " · ".join(parts[:5])
         events.append(
             TimelineEvent(
                 timestamp=nv.captured_at,

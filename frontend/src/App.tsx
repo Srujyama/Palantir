@@ -10,6 +10,7 @@ import { SandboxPage } from "./pages/SandboxPage";
 import { CapacityPage } from "./pages/CapacityPage";
 import { CommandPalette } from "./components/CommandPalette";
 import { KeyboardShortcuts } from "./components/KeyboardShortcuts";
+import { StoryMode } from "./components/StoryMode";
 import { NavTabs } from "./components/NavTabs";
 import { api } from "./lib/api";
 
@@ -104,6 +105,18 @@ function Titlebar() {
         <Link to="/" style={{ color: "var(--fg-2)" }}>← Landing</Link>
         <button
           className="kb-hint-pill mono"
+          onClick={() => window.dispatchEvent(new CustomEvent("radar:start-story"))}
+          title="Guided demo tour (Shift+S)"
+          style={{
+            cursor: "pointer",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+          }}
+        >
+          ★ STORY
+        </button>
+        <button
+          className="kb-hint-pill mono"
           onClick={() => void runTick()}
           disabled={ticking}
           style={{
@@ -155,6 +168,23 @@ function AppShell() {
   const location = useLocation();
   const isLanding = location.pathname === "/";
 
+  // Shift+S starts the guided demo tour. Chords (g-…), "?" help, and ⌘K are
+  // already taken; plain Shift+S is free and is ignored while typing in a
+  // field. StoryMode handles its own transport keys once active.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.shiftKey && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("radar:start-story"));
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
   if (isLanding) {
     return (
       <Routes>
@@ -177,6 +207,7 @@ function AppShell() {
       </Routes>
       <CommandPalette />
       <KeyboardShortcuts />
+      <StoryMode />
     </div>
   );
 }

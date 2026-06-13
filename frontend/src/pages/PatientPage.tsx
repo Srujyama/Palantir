@@ -11,6 +11,7 @@ import { WhyStuckPanel } from "../components/WhyStuckPanel";
 import { ActionsList } from "../components/ActionsList";
 import { UrgencyPill } from "../components/UrgencyPill";
 import { Timeline } from "../components/Timeline";
+import { TrajectoryPanel } from "../components/TrajectoryPanel";
 
 export function PatientPage() {
   const { patientId } = useParams<{ patientId: string }>();
@@ -123,6 +124,8 @@ export function PatientPage() {
             <ProtocolTable matches={data.protocol_matches} />
           </div>
         </div>
+
+        <TrajectoryPanel trends={data.trends ?? null} />
 
         {interactions && interactions.flags.length > 0 && (
           <div className="section">

@@ -28,6 +28,7 @@ from sqlalchemy.orm import Session
 from app.data.generate_notes import TEMPLATES, Template
 from app.db.database import get_db
 from app.models.orm import Action, ActionEvent, Patient, Triage
+from app.services.census import capture_census
 from app.services.pipeline import run as run_pipeline
 
 
@@ -284,6 +285,11 @@ def tick(body: Optional[TickRequest] = None, db: Session = Depends(get_db)):
     ] + [
         _progress_action(db, a, "resolved", now) for a in in_progress_rows
     ]
+
+    # Freeze a census snapshot so the analytics time-series fills in as the
+    # floor moves — the demo's "system that's been running" signal.
+    db.flush()
+    capture_census(db, source="sim_tick")
 
     db.commit()
     census_after = db.query(func.count(Patient.id)).scalar() or 0

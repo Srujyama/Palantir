@@ -105,6 +105,50 @@ export interface Extraction {
   social?: Finding[];
 }
 
+// ── Longitudinal trends (patient detail) ────────────────────────────────
+
+export interface TrendPoint {
+  hours_ago: number;
+  captured_at: string | null;
+  value: number | null;
+  raw: string | null;
+  negated: boolean;
+}
+
+export interface LabTrend {
+  label: string;
+  polarity: "down_good" | "up_good" | "context";
+  direction: "rising" | "falling" | "stable" | "insufficient";
+  clinical: "improving" | "worsening" | "stable" | "unknown";
+  delta: number | null;
+  narrative: string;
+  points: TrendPoint[];
+}
+
+export interface ResolvedGap {
+  protocol_key: string;
+  protocol_name: string;
+  action_label: string;
+  opened_seq: number;
+  closed_seq: number;
+}
+
+export interface Recurrence {
+  ordinal: number;
+  window_phrase: string;
+  evidence: string;
+}
+
+export type TrajectorySignal = "worsening" | "improving" | "mixed" | "stable" | "none";
+
+export interface TrendsPayload {
+  labs: LabTrend[];
+  recurrence: Recurrence | null;
+  resolved_gaps: ResolvedGap[];
+  trajectory_signal: TrajectorySignal;
+  note_count: number;
+}
+
 export interface PatientDetail {
   id: string;
   age: number;
@@ -120,6 +164,7 @@ export interface PatientDetail {
   icd_candidates: ICDCandidate[];
   extraction: Extraction;
   actions: ActionItem[];
+  trends?: TrendsPayload | null;
 }
 
 export interface FloorBed {
@@ -164,7 +209,7 @@ export interface Analytics {
 
 export interface TimelineEvent {
   timestamp: string;
-  kind: "arrival" | "triage" | "gap_detected" | "action_created" | "action_state" | "note";
+  kind: "arrival" | "triage" | "gap_detected" | "action_created" | "action_state" | "note" | "prior_note";
   title: string;
   detail?: string | null;
   urgency?: Urgency | null;

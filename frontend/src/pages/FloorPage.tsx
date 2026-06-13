@@ -1,13 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../lib/api";
-import type { FloorBed, FloorMap, Urgency } from "../types/api";
+import type { FloorBed, FloorMap } from "../types/api";
 import { categoryShort, ownerLabel } from "../lib/format";
 
-function bedClass(b: FloorBed): string {
-  if (!b.patient_id) return "bed empty";
-  const u = b.urgency as Urgency | undefined;
-  return `bed occupied ${u ?? ""}`;
+// Transient pulse markers keyed by room. After a live tick refetch we diff the
+// new map against the previous urgency-by-room snapshot and tag changed beds:
+//   "up"   — became (more) critical, or newly occupied with red  → pulses red
+//   "down" — de-escalated or vacated                              → fades
+// The class is removed by a timeout so the keyframe runs once and clears.
+type PulseKind = "up" | "down";
+
+function bedClass(b: FloorBed, pulse?: PulseKind): string {
+  const base = !b.patient_id ? "bed empty" : `bed occupied ${b.urgency ?? ""}`;
+  if (!pulse) return base;
+  return `${base} floor-pulse floor-pulse-${pulse}`;
+}
+
+// Rank urgencies so we can tell escalation (up) from de-escalation (down).
+// Empty/no-patient is the lowest rank.
+const URGENCY_RANK: Record<string, number> = { green: 1, amber: 2, red: 3 };
+function rankOf(b: FloorBed): number {
+  if (!b.patient_id || !b.urgency) return 0;
+  return URGENCY_RANK[b.urgency] ?? 0;
 }
 
 function Legend() {
@@ -21,7 +36,17 @@ function Legend() {
   );
 }
 
-function WingPanel({ wing, beds, onHover }: { wing: string; beds: FloorBed[]; onHover: (b: FloorBed | null) => void }) {
+function WingPanel({
+  wing,
+  beds,
+  onHover,
+  pulses,
+}: {
+  wing: string;
+  beds: FloorBed[];
+  onHover: (b: FloorBed | null) => void;
+  pulses: Record<string, PulseKind>;
+}) {
   // Lay out beds in two columns: odd beds on the left side of the hallway,
   // even beds on the right. Hospital floor plans actually look like this.
   const left = beds.filter((b) => b.bed_number % 2 === 1);
@@ -42,7 +67,7 @@ function WingPanel({ wing, beds, onHover }: { wing: string; beds: FloorBed[]; on
       <div className="hallway">
         <div className="bed-column">
           {left.map((b) => (
-            <BedCell key={b.room} bed={b} onHover={onHover} />
+            <BedCell key={b.room} bed={b} onHover={onHover} pulse={pulses[b.room]} />
           ))}
         </div>
         <div className="hallway-strip">
@@ -50,7 +75,7 @@ function WingPanel({ wing, beds, onHover }: { wing: string; beds: FloorBed[]; on
         </div>
         <div className="bed-column">
           {right.map((b) => (
-            <BedCell key={b.room} bed={b} onHover={onHover} />
+            <BedCell key={b.room} bed={b} onHover={onHover} pulse={pulses[b.room]} />
           ))}
         </div>
       </div>
@@ -58,8 +83,16 @@ function WingPanel({ wing, beds, onHover }: { wing: string; beds: FloorBed[]; on
   );
 }
 
-function BedCell({ bed, onHover }: { bed: FloorBed; onHover: (b: FloorBed | null) => void }) {
-  const cls = bedClass(bed);
+function BedCell({
+  bed,
+  onHover,
+  pulse,
+}: {
+  bed: FloorBed;
+  onHover: (b: FloorBed | null) => void;
+  pulse?: PulseKind;
+}) {
+  const cls = bedClass(bed, pulse);
   if (!bed.patient_id) {
     return (
       <div
@@ -94,10 +127,49 @@ export function FloorPage() {
   const [hover, setHover] = useState<FloorBed | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [pulses, setPulses] = useState<Record<string, PulseKind>>({});
+
+  // Previous urgency-by-room snapshot. null until the first successful load so
+  // we never pulse the whole floor on initial render — only on real changes.
+  const prevRanksRef = useRef<Map<string, number> | null>(null);
+  const pulseTimers = useRef<number[]>([]);
+
+  const applyDiff = (next: FloorMap) => {
+    const nextRanks = new Map<string, number>();
+    for (const b of next.beds) nextRanks.set(b.room, rankOf(b));
+
+    const prev = prevRanksRef.current;
+    // First load establishes the baseline silently.
+    if (prev !== null) {
+      const changed: Record<string, PulseKind> = {};
+      for (const b of next.beds) {
+        const before = prev.get(b.room) ?? 0;
+        const after = nextRanks.get(b.room) ?? 0;
+        if (after > before) changed[b.room] = "up";
+        else if (after < before) changed[b.room] = "down";
+      }
+      if (Object.keys(changed).length > 0) {
+        // Merge so concurrent ticks don't clobber a still-running pulse.
+        setPulses((p) => ({ ...p, ...changed }));
+        const rooms = Object.keys(changed);
+        // Clear the transient class after the keyframe (~1.2s) has played.
+        const t = window.setTimeout(() => {
+          setPulses((p) => {
+            const copy = { ...p };
+            for (const r of rooms) delete copy[r];
+            return copy;
+          });
+        }, 1300);
+        pulseTimers.current.push(t);
+      }
+    }
+    prevRanksRef.current = nextRanks;
+  };
 
   const load = async () => {
     try {
       const d = await api.floor();
+      applyDiff(d);
       setData(d);
       setError(null);
     } catch (err) {
@@ -114,6 +186,12 @@ export function FloorPage() {
     const onRefresh = () => { void load(); };
     window.addEventListener("radar:refresh", onRefresh);
     return () => window.removeEventListener("radar:refresh", onRefresh);
+  }, []);
+
+  // Flush any in-flight pulse timers on unmount.
+  useEffect(() => {
+    const timers = pulseTimers.current;
+    return () => { for (const t of timers) window.clearTimeout(t); };
   }, []);
 
   if (!data) {
@@ -166,6 +244,7 @@ export function FloorPage() {
             wing={wing}
             beds={data.beds.filter((b) => b.wing === wing)}
             onHover={setHover}
+            pulses={pulses}
           />
         ))}
       </div>
