@@ -1,10 +1,13 @@
 """
 Generate Pipeline Builder-ready CSVs from the local backend data.
 
-Outputs five CSVs in this folder:
+Outputs six CSVs in this folder:
 
   patients.csv          one row per patient — demographics, arrival, chief complaint
-  notes.csv             one row per note — patient_id + raw note_text
+  notes.csv             one row per CURRENT note — patient_id + raw note_text
+  note_versions.csv     prior notes (clinical history) — patient_id, sequence,
+                        hours_ago, note_text. Feeds the read-only trajectory
+                        Function; the classifier never reads these.
   protocols.csv         one row per (protocol, expected_action) pair
   icd10_reference.csv   the 39-code reference set
   eval_labels.csv       held-out ground truth per patient — kept OUT of
@@ -42,6 +45,16 @@ with (OUT / "notes.csv").open("w", newline="") as f:
     w.writerow(["patient_id", "note_text"])
     for n in notes:
         w.writerow([n["patient_id"], n["note_text"]])
+
+# ---------- note versions (prior notes — clinical history, never classified) ----------
+n_versions = 0
+with (OUT / "note_versions.csv").open("w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["patient_id", "sequence", "hours_ago", "note_text"])
+    for n in notes:
+        for seq, prior in enumerate(n.get("prior_notes", [])):
+            w.writerow([n["patient_id"], seq, prior["hours_ago"], prior["note_text"]])
+            n_versions += 1
 
 # ---------- eval labels (ground truth — separate from the Patient object) ----------
 with (OUT / "eval_labels.csv").open("w", newline="") as f:
@@ -92,6 +105,7 @@ with (OUT / "icd10_reference.csv").open("w", newline="") as f:
         w.writerow([row["code"], row["description"], row.get("category", "")])
 
 print(f"Wrote {len(notes)} patients, {len(notes)} notes, "
+      f"{n_versions} note versions, "
       f"{len(notes)} eval labels, "
       f"{sum(len(p.expected_actions) for p in PROTOCOLS)} protocol-action rows "
       f"({len(PROTOCOLS)} protocols), "

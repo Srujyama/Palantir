@@ -141,6 +141,22 @@ _SAMPLE_SPECS: List[tuple] = [
     ("clear", "No active bottleneck", "clear", None),
 ]
 
+# A hand-authored sample whose whole point is the NegEx pass: "Denies chest
+# pain. No melena." produces two NEG-tagged findings the demo can point at,
+# while still classifying as a clean sepsis missing_soc/red. Kept first so the
+# negation story is one click away in the sandbox. Verified at module import
+# below that it actually reproduces (no silent drift).
+_NEGATION_SHOWCASE = SampleNote(
+    key="negation_showcase",
+    label="Negation handling — sepsis with ruled-out symptoms",
+    note_text=(
+        "72yo from SNF, fever 39.4, BP 88/52, lactate 3.1, WBC 18. "
+        "Meets SIRS criteria, urinary source. Denies chest pain. No melena. "
+        "Blood cultures drawn, IV fluids started. Antibiotics not yet given."
+    ),
+    expected_category="missing_soc",
+)
+
 _samples_cache: Optional[List[SampleNote]] = None
 
 
@@ -150,7 +166,8 @@ def _load_samples() -> List[SampleNote]:
     Selection rule: the FIRST corpus row (file order) whose truth label
     matches the spec AND whose live classification agrees with that truth
     label — so each sample demonstrably reproduces its expected category
-    when pasted into the sandbox.
+    when pasted into the sandbox. The hand-authored negation-showcase sample
+    is prepended (it reproduces missing_soc and shows two NEG tags).
     """
     global _samples_cache
     if _samples_cache is not None:
@@ -158,6 +175,11 @@ def _load_samples() -> List[SampleNote]:
 
     rows: List[Dict] = json.loads(NOTES_PATH.read_text())
     samples: List[SampleNote] = []
+    # Prepend the negation showcase only if it still reproduces its category
+    # (guards against rule drift silently breaking the demo).
+    _ns = _NEGATION_SHOWCASE
+    if classify(_ns.note_text, extract(_ns.note_text)).primary.category == _ns.expected_category:
+        samples.append(_ns)
     for key, label_prefix, truth, protocol in _SAMPLE_SPECS:
         for row in rows:
             if row.get("truth_bottleneck") != truth:

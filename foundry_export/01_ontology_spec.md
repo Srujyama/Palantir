@@ -35,9 +35,30 @@ Primary key: synthetic `note_id` (use `patient_id` since it's 1:1 in this corpus
 | Property      | Type     |
 |---------------|----------|
 | `patient_id`  | string   | FK → `Patient.patient_id`                         |
-| `note_text`   | string   | Long text. Will run NLP over this.                |
+| `note_text`   | string   | Long text. The CURRENT note. NLP runs over this.  |
 
-**Link**: `Note.patient_id` → `Patient.patient_id`  (one-to-one in this corpus)
+**Link**: `Note.patient_id` → `Patient.patient_id`  (one current note per patient in this corpus)
+
+---
+
+### `NoteVersion`  (prior notes — clinical history)
+Source dataset: `note_versions.csv`
+Primary key: synthesize `version_id = patient_id + "::" + sequence`
+
+| Property      | Type    | Notes                                                 |
+|---------------|---------|-------------------------------------------------------|
+| `patient_id`  | string  | FK → `Patient.patient_id`                             |
+| `sequence`    | integer | 0 = oldest prior, ascending                           |
+| `hours_ago`   | integer | Offset behind the current note                        |
+| `note_text`   | string  | The earlier documented state                          |
+
+**Link**: `NoteVersion.patient_id` → `Patient.patient_id`  (one-to-many)
+
+These power the read-only **trajectory** Function (lab trends across notes,
+gaps-closed-across-notes). CRITICAL: the classifier never reads NoteVersion —
+only `Note.note_text` (the current note) drives `classify_bottleneck`. The
+trajectory is narrative only, so it cannot move the eval. Build after the
+core five if you want the demo's trajectory beat; skip it for a minimal port.
 
 ---
 
@@ -104,7 +125,9 @@ Primary key: `patient_id` (one active bottleneck per patient)
 | `owner`         | string  |                                                      |
 | `protocol_key`  | string  | Optional FK → `Protocol` if rooted in a protocol gap |
 | `evidence_span` | string  | Substring of the note that triggered it             |
-| `summary`       | string  | "Documentation gap, standard-of-care step"           |
+| `recommended_action` | string | The imperative next step, e.g. "Administer broad-spectrum antibiotics". This is what the Create-Action button copies into `Action.title`. |
+| `citation`      | string  | Source guideline, when rooted in a protocol or interaction rule |
+| `summary`       | string  | The rationale narrative ("…triggered by note evidence … but the required step … is not documented"). For the "Why this fired" panel — NOT the Action title. |
 
 ---
 
@@ -127,6 +150,47 @@ object would make the Foundry port disagree with the demoed product. The
 engine is the same kind of asset as the protocol library — 13 declarative,
 citation-backed rules (`backend/app/services/interactions.py`), no LLM.
 Still optional for a first pass: the core queue works without it.
+
+---
+
+### `Icd10Code`  (reference lookup)
+Source dataset: `icd10_reference.csv`
+Primary key: `code`
+
+| Property      | Type   | Notes                                  |
+|---------------|--------|----------------------------------------|
+| `code`        | string | e.g. `A41.9`. Primary key.             |
+| `description` | string | e.g. "Sepsis, unspecified organism"    |
+| `category`    | string | code family grouping                   |
+
+Used as the retrieval reference for the ICD-10 candidate rail (TF-IDF in
+Pipeline 1). This is display/retrieval context only — the recommendation
+path never consumes ICD codes. You may keep it as a plain raw dataset rather
+than an ontology object if you don't want it linkable; the storyboard wires
+it as a lookup either way.
+
+---
+
+### Audit + snapshot objects (build after the core five)
+
+These back the audit trail, the census time-series, and finalized handoffs.
+They are real ORM tables locally (`backend/app/models/orm.py`); declare them
+in the ontology only when you build those surfaces.
+
+- **`ActionEvent`** (audit row) — PK `event_id`; FK `action_id` → `Action`;
+  `event_type` (`created` / `status_change` / `reassigned` / `sla_breach` /
+  `note`), `from_value`, `to_value`, `actor`, `note`, `created_at`. Every
+  mutating Automation/Action writes one. This is the "who did what when" log
+  the demo expands on the audit-trail beat.
+- **`CensusSnapshot`** (floor-level time series) — PK `snapshot_id`;
+  `captured_at`, `census`, `red`, `amber`, `green`, `open_actions`,
+  `overdue_actions`, `silent_failures`, `source`. Written by the
+  census-snapshot Automation (or the live tick). No FK to Patient — it is a
+  floor roll-up that must survive patient churn.
+- **`HandoffSnapshot`** (immutable artifact) — PK `snapshot_id`;
+  `captured_at`, `shift_label`, `finalized_by`, `payload` (frozen handoff
+  JSON). Created by the finalize-handoff Action Type; retrieved verbatim
+  later. This is the auditable record a live dashboard cannot be.
 
 ---
 

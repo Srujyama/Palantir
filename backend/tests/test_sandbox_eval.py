@@ -151,6 +151,19 @@ def test_sandbox_samples(client):
         assert rr.json()["triage"]["primary"]["category"] == s["expected_category"]
 
 
+def test_negation_showcase_sample_shows_neg_tags(client):
+    """The negation-showcase sample is the demo's NegEx beat — it must produce
+    visible NEG-tagged findings (chest pain + melena, both ruled out)."""
+    samples = client.get("/sandbox/samples").json()
+    showcase = next((s for s in samples if s["key"] == "negation_showcase"), None)
+    assert showcase is not None, "negation_showcase sample missing"
+    run = client.post("/sandbox/triage", json={"note_text": showcase["note_text"]}).json()
+    findings = [f for group in run["extraction"].values() for f in group]
+    negated = {f["label"] for f in findings if f.get("metadata", {}).get("negated")}
+    assert negated, "negation showcase must yield at least one NEG-tagged finding"
+    assert run["triage"]["primary"]["category"] == "missing_soc"
+
+
 # ---------------------------------------------------------------------------
 # Eval harness
 # ---------------------------------------------------------------------------

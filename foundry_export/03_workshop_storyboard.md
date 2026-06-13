@@ -4,7 +4,7 @@ Two screens. Match the local React app so the demo video reads as one product.
 
 ---
 
-## Screen 1 — Queue (`/`)
+## Screen 1 — Queue (`/dashboard`)
 
 **Layout** (Workshop sections, top to bottom):
 
@@ -52,8 +52,8 @@ Two-column layout.
 4. **Care-pathway evaluation table** — for each Protocol that triggered:
    protocol name | status (gaps N or N/A) | documented (green ✓) |
    missing (red ●). One row per protocol from `protocol_gaps`.
-5. **Trajectory panel** — bound to the patient's prior `Note` versions
-   (oldest-first) plus the current note. Shows per-lab trend lines
+5. **Trajectory panel** — bound to the patient's `NoteVersion` rows
+   (oldest-first) plus the current `Note`. Shows per-lab trend lines
    (lactate clearing vs. creatinine worsening), recurrent-admission cues,
    and a green **"gaps closed across notes"** block: protocol steps that
    were missing in an earlier note but documented by now. This is the
@@ -61,11 +61,13 @@ Two-column layout.
    step already charted. It is **narrative only** — the `classify_bottleneck`
    Function reads only the current note, never the priors, so the
    trajectory never changes the category. In Foundry it is a read-only
-   Function over the `Note` link set, not an input to classification.
+   Function over the `NoteVersion` link set (source: `note_versions.csv`),
+   not an input to classification.
 6. **Workflow actions** — list of `Action` objects for this patient.
    Buttons:
    - **+ Create action from recommendation** → triggers an Action object
-     with `title = bottleneck.summary`, `owner_role = bottleneck.owner`.
+     with `title = bottleneck.recommended_action` (the imperative step, NOT
+     `summary`/`rationale`), `owner_role = bottleneck.owner`.
    - Each existing Action row: Start / Resolve / Escalate buttons that
      mutate `Action.status`.
 
@@ -149,11 +151,13 @@ posture the rest of the app holds toward the `Patient` record.
 ## Order of operations once your AIP workspace is live
 
 1. Create a Foundry **Project** named `bottleneck-radar`.
-2. Upload the five CSVs from this folder into a `raw/` folder in the project
+2. Upload the six CSVs from this folder into a `raw/` folder in the project
    (run `python build_csvs.py` first to regenerate them from the backend).
 3. Build the Ontology object types per `01_ontology_spec.md`.
 4. Wire `patients.csv` → `Patient`, `notes.csv` → `Note`, `protocols.csv`
    → `Protocol` + `ProtocolStep`, `icd10_reference.csv` → `Icd10Code`.
+   Wire `note_versions.csv` → `NoteVersion` only if you're building the
+   trajectory panel (it's narrative-only history; skip for a minimal port).
    Leave `eval_labels.csv` as a raw dataset — it is the held-out answer
    key and must not back any ontology object the app can read.
 5. Build Pipeline 1 (note enrichment) and Pipeline 2 (gap detection)

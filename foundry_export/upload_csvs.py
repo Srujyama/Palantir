@@ -33,6 +33,10 @@ DATASETS = {
     # dataset in the bottleneck-radar project's raw/ folder, then paste its
     # RID here before running.
     "eval_labels":     "ri.foundry.main.dataset.REPLACE-WITH-EVAL-LABELS-RID",
+    # note_versions holds prior notes (clinical history) for the trajectory
+    # panel. Optional — only needed if you build the trajectory Function.
+    # Create the dataset and paste its RID, or leave the placeholder to skip.
+    "note_versions":   "ri.foundry.main.dataset.REPLACE-WITH-NOTE-VERSIONS-RID",
 }
 
 
