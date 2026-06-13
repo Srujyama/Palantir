@@ -36,6 +36,33 @@ class Patient(Base):
 
     triage = relationship("Triage", back_populates="patient", uselist=False, cascade="all, delete-orphan")
     actions = relationship("Action", back_populates="patient", cascade="all, delete-orphan")
+    note_versions = relationship(
+        "NoteVersion",
+        back_populates="patient",
+        cascade="all, delete-orphan",
+        order_by="NoteVersion.sequence",
+    )
+
+
+class NoteVersion(Base):
+    """An earlier note for a patient — clinical history, not the current state.
+
+    The current note always lives on Patient.note_text and is the *only* thing
+    the classifier reads. NoteVersion rows hold prior snapshots so the trend
+    engine can show trajectory (lactate clearing, creatinine worsening) without
+    ever feeding history into the deterministic classification path.
+    """
+
+    __tablename__ = "note_versions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    patient_id = Column(String, ForeignKey("patients.id", ondelete="CASCADE"), nullable=False, index=True)
+    sequence = Column(Integer, nullable=False)        # 0 = oldest prior, ascending
+    hours_ago = Column(Integer, nullable=False)       # offset from current note, as authored
+    captured_at = Column(DateTime, nullable=False)    # arrival_time - hours_ago
+    note_text = Column(Text, nullable=False)
+
+    patient = relationship("Patient", back_populates="note_versions")
 
 
 class Triage(Base):
@@ -52,6 +79,7 @@ class Triage(Base):
     payload = Column(JSON, nullable=False)                  # full TriageResult.to_dict()
     extraction = Column(JSON, nullable=False)               # full ExtractionResult.to_dict()
     icd_candidates = Column(JSON, nullable=False)
+    trends = Column(JSON, nullable=True)                    # longitudinal trajectory (narrative only)
     computed_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     patient = relationship("Patient", back_populates="triage")

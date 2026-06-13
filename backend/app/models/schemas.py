@@ -93,6 +93,46 @@ class ActionResponse(BaseModel):
     updated_at: datetime
 
 
+class TrendPointPayload(BaseModel):
+    hours_ago: int
+    captured_at: Optional[str] = None
+    value: Optional[float] = None
+    raw: Optional[str] = None
+    negated: bool = False
+
+
+class LabTrendPayload(BaseModel):
+    label: str
+    polarity: str
+    direction: str
+    clinical: str
+    delta: Optional[float] = None
+    narrative: str
+    points: List[TrendPointPayload]
+
+
+class ResolvedGapPayload(BaseModel):
+    protocol_key: str
+    protocol_name: str
+    action_label: str
+    opened_seq: int
+    closed_seq: int
+
+
+class RecurrencePayload(BaseModel):
+    ordinal: int
+    window_phrase: str
+    evidence: str
+
+
+class TrendsPayload(BaseModel):
+    labs: List[LabTrendPayload]
+    recurrence: Optional[RecurrencePayload] = None
+    resolved_gaps: List[ResolvedGapPayload]
+    trajectory_signal: str
+    note_count: int
+
+
 class PatientDetail(BaseModel):
     id: str
     age: int
@@ -108,6 +148,7 @@ class PatientDetail(BaseModel):
     icd_candidates: List[ICDCandidate]
     extraction: Dict[str, Any]
     actions: List[ActionResponse]
+    trends: Optional[TrendsPayload] = None
 
 
 class ActionEventResponse(BaseModel):

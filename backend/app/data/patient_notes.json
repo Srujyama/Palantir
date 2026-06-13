@@ -1,7 +1,7 @@
 [
   {
     "patient_id": "P-1105",
-    "arrival_time": "2026-05-17T18:54",
+    "arrival_time": "2026-06-10T23:01",
     "age": 68,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, increased sputum",
@@ -12,11 +12,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "copd",
     "expected_owner": "physician",
-    "template_name": "copd_no_steroids"
+    "template_name": "copd_no_steroids",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1111",
-    "arrival_time": "2026-05-19T13:21",
+    "arrival_time": "2026-06-12T17:28",
     "age": 74,
     "sex": "F",
     "chief_complaint": "Slow GI bleed, awaiting endoscopy",
@@ -27,11 +28,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "gib_awaiting_gi"
+    "template_name": "gib_awaiting_gi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1002",
-    "arrival_time": "2026-05-17T10:13",
+    "arrival_time": "2026-06-10T14:20",
     "age": 73,
     "sex": "M",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -44,11 +46,21 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_no_abx"
+    "template_name": "sepsis_no_abx",
+    "prior_notes": [
+      {
+        "hours_ago": 6,
+        "note_text": "HPI: 72yo from SNF, febrile to 38.9C, BP 94/58, HR 110. Decreased PO intake.\nLabs: WBC 16.4, lactate 4.1, creatinine 1.4. UA pending.\nAssessment: presumed sepsis, source unclear.\nPlan: cultures pending, fluids started, recheck labs."
+      },
+      {
+        "hours_ago": 3,
+        "note_text": "Interval: febrile 39.2C, BP 90/55, HR 116.\nLabs: WBC 17.6, lactate 3.6, creatinine 1.7. UA cloudy, bacteria present.\nAssessment: severe sepsis, likely urinary source.\nPlan: continue resuscitation, trend lactate."
+      }
+    ]
   },
   {
     "patient_id": "P-1089",
-    "arrival_time": "2026-05-19T12:30",
+    "arrival_time": "2026-06-12T16:37",
     "age": 75,
     "sex": "M",
     "chief_complaint": "Rising creatinine, oliguria",
@@ -59,11 +71,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "aki",
     "expected_owner": "physician",
-    "template_name": "aki_no_med_review"
+    "template_name": "aki_no_med_review",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1025",
-    "arrival_time": "2026-05-16T09:07",
+    "arrival_time": "2026-06-09T13:14",
     "age": 38,
     "sex": "F",
     "chief_complaint": "First-time seizure",
@@ -75,11 +88,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
+    "template_name": "seizure_awaiting_mri",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1018",
-    "arrival_time": "2026-05-18T07:17",
+    "arrival_time": "2026-06-11T11:24",
     "age": 73,
     "sex": "M",
     "chief_complaint": "Decreased urine output, rising creatinine",
@@ -91,11 +105,21 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
+    "template_name": "aki_awaiting_renal",
+    "prior_notes": [
+      {
+        "hours_ago": 48,
+        "note_text": "HD1 for CAP. Labs: creatinine 1.1, K 4.2. UOP adequate.\nPlan: ceftriaxone + azithromycin, IV fluids."
+      },
+      {
+        "hours_ago": 24,
+        "note_text": "HD2. Creatinine 2.2, K 5.1. UOP declining to 600 mL/24h. Vancomycin trough 22.\nAssessment: developing AKI.\nPlan: monitor renal function, recheck vanc trough."
+      }
+    ]
   },
   {
     "patient_id": "P-1045",
-    "arrival_time": "2026-05-19T06:52",
+    "arrival_time": "2026-06-12T10:59",
     "age": 31,
     "sex": "M",
     "chief_complaint": "DKA, third admission this year",
@@ -107,11 +131,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
+    "template_name": "dm_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1022",
-    "arrival_time": "2026-05-16T21:55",
+    "arrival_time": "2026-06-10T02:02",
     "age": 29,
     "sex": "F",
     "chief_complaint": "Right lower quadrant pain",
@@ -123,11 +148,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
+    "template_name": "rlq_pain_awaiting_ct",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1067",
-    "arrival_time": "2026-05-16T15:04",
+    "arrival_time": "2026-06-09T19:11",
     "age": 28,
     "sex": "F",
     "chief_complaint": "Migraine, treated and ready to leave",
@@ -138,11 +164,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_migraine"
+    "template_name": "clear_migraine",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1039",
-    "arrival_time": "2026-05-17T08:47",
+    "arrival_time": "2026-06-10T12:54",
     "age": 75,
     "sex": "M",
     "chief_complaint": "Worsening renal function on home meds",
@@ -154,11 +181,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
+    "template_name": "nephrotoxic_med",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1090",
-    "arrival_time": "2026-05-19T02:09",
+    "arrival_time": "2026-06-12T06:16",
     "age": 75,
     "sex": "F",
     "chief_complaint": "Rising creatinine, oliguria",
@@ -169,11 +197,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "aki",
     "expected_owner": "physician",
-    "template_name": "aki_no_med_review"
+    "template_name": "aki_no_med_review",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1029",
-    "arrival_time": "2026-05-19T09:39",
+    "arrival_time": "2026-06-12T13:46",
     "age": 73,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, now resolved",
@@ -185,11 +214,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_dispo_snf"
+    "template_name": "copd_dispo_snf",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1081",
-    "arrival_time": "2026-05-17T20:33",
+    "arrival_time": "2026-06-11T00:40",
     "age": 57,
     "sex": "M",
     "chief_complaint": "Pleuritic chest pain, dyspnea",
@@ -200,11 +230,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "pe",
     "expected_owner": "physician",
-    "template_name": "pe_no_risk_strat"
+    "template_name": "pe_no_risk_strat",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1094",
-    "arrival_time": "2026-05-18T14:58",
+    "arrival_time": "2026-06-11T19:05",
     "age": 52,
     "sex": "M",
     "chief_complaint": "Alcohol withdrawal, tremulous",
@@ -215,11 +246,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "ciwa",
     "expected_owner": "physician",
-    "template_name": "ciwa_no_scoring"
+    "template_name": "ciwa_no_scoring",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1136",
-    "arrival_time": "2026-05-16T13:08",
+    "arrival_time": "2026-06-09T17:15",
     "age": 54,
     "sex": "M",
     "chief_complaint": "Cellulitis, completed IV antibiotics",
@@ -230,11 +262,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_cellulitis"
+    "template_name": "clear_cellulitis",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1121",
-    "arrival_time": "2026-05-19T20:53",
+    "arrival_time": "2026-06-13T01:00",
     "age": 39,
     "sex": "M",
     "chief_complaint": "Fever, IVDU, suspected endocarditis",
@@ -245,11 +278,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "ie_awaiting_tte"
+    "template_name": "ie_awaiting_tte",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1037",
-    "arrival_time": "2026-05-19T08:00",
+    "arrival_time": "2026-06-12T12:07",
     "age": 77,
     "sex": "M",
     "chief_complaint": "Worsening renal function on home meds",
@@ -261,11 +295,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
+    "template_name": "nephrotoxic_med",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1123",
-    "arrival_time": "2026-05-18T10:46",
+    "arrival_time": "2026-06-11T14:53",
     "age": 35,
     "sex": "M",
     "chief_complaint": "Fever, IVDU, suspected endocarditis",
@@ -276,11 +311,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "ie_awaiting_tte"
+    "template_name": "ie_awaiting_tte",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1058",
-    "arrival_time": "2026-05-17T10:05",
+    "arrival_time": "2026-06-10T14:12",
     "age": 21,
     "sex": "M",
     "chief_complaint": "Hyperglycemia, ketosis",
@@ -291,11 +327,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "dka",
     "expected_owner": "physician",
-    "template_name": "dka_no_drip"
+    "template_name": "dka_no_drip",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1049",
-    "arrival_time": "2026-05-19T11:32",
+    "arrival_time": "2026-06-12T15:39",
     "age": 71,
     "sex": "M",
     "chief_complaint": "CHF readmission within 14 days",
@@ -306,11 +343,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
+    "template_name": "chf_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1004",
-    "arrival_time": "2026-05-17T20:23",
+    "arrival_time": "2026-06-11T00:30",
     "age": 63,
     "sex": "F",
     "chief_complaint": "Substernal chest pressure",
@@ -322,11 +360,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "acs",
     "expected_owner": "physician",
-    "template_name": "acs_no_consult"
+    "template_name": "acs_no_consult",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1149",
-    "arrival_time": "2026-05-16T18:45",
+    "arrival_time": "2026-06-09T22:52",
     "age": 71,
     "sex": "M",
     "chief_complaint": "Old stroke, residual deficits, dispo",
@@ -337,11 +376,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "stroke_window_expired"
+    "template_name": "stroke_window_expired",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1128",
-    "arrival_time": "2026-05-18T18:27",
+    "arrival_time": "2026-06-11T22:34",
     "age": 26,
     "sex": "M",
     "chief_complaint": "Post-TBI, awaiting rehab placement",
@@ -352,11 +392,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_rehab_tbi"
+    "template_name": "dispo_rehab_tbi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1044",
-    "arrival_time": "2026-05-16T22:23",
+    "arrival_time": "2026-06-10T02:30",
     "age": 32,
     "sex": "M",
     "chief_complaint": "DKA, third admission this year",
@@ -368,11 +409,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
+    "template_name": "dm_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1014",
-    "arrival_time": "2026-05-18T18:36",
+    "arrival_time": "2026-06-11T22:43",
     "age": 84,
     "sex": "F",
     "chief_complaint": "Post-fall left hip pain, unable to bear weight",
@@ -383,11 +425,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
+    "template_name": "hip_fx_awaiting_ortho",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1056",
-    "arrival_time": "2026-05-18T16:53",
+    "arrival_time": "2026-06-11T21:00",
     "age": 19,
     "sex": "M",
     "chief_complaint": "Hyperglycemia, ketosis",
@@ -398,11 +441,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "dka",
     "expected_owner": "physician",
-    "template_name": "dka_no_drip"
+    "template_name": "dka_no_drip",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1027",
-    "arrival_time": "2026-05-17T15:04",
+    "arrival_time": "2026-06-10T19:11",
     "age": 42,
     "sex": "F",
     "chief_complaint": "First-time seizure",
@@ -414,11 +458,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
+    "template_name": "seizure_awaiting_mri",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1157",
-    "arrival_time": "2026-05-17T12:10",
+    "arrival_time": "2026-06-10T16:17",
     "age": 62,
     "sex": "M",
     "chief_complaint": "Free air on CT, surgery not yet seen",
@@ -429,11 +474,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "perf_awaiting_surgery"
+    "template_name": "perf_awaiting_surgery",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1007",
-    "arrival_time": "2026-05-19T09:08",
+    "arrival_time": "2026-06-12T13:15",
     "age": 63,
     "sex": "F",
     "chief_complaint": "Substernal chest pressure",
@@ -445,11 +491,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "acs",
     "expected_owner": "physician",
-    "template_name": "acs_no_consult"
+    "template_name": "acs_no_consult",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1069",
-    "arrival_time": "2026-05-19T00:56",
+    "arrival_time": "2026-06-12T05:03",
     "age": 28,
     "sex": "M",
     "chief_complaint": "Suicidal ideation, awaiting psychiatry",
@@ -460,11 +507,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
+    "template_name": "psych_consult_delay",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1160",
-    "arrival_time": "2026-05-16T03:56",
+    "arrival_time": "2026-06-09T08:03",
     "age": 80,
     "sex": "M",
     "chief_complaint": "Diabetic admission, hypoglycemia event",
@@ -476,11 +524,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "insulin_no_glucose_monitor"
+    "template_name": "insulin_no_glucose_monitor",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1066",
-    "arrival_time": "2026-05-18T23:56",
+    "arrival_time": "2026-06-12T04:03",
     "age": 35,
     "sex": "F",
     "chief_complaint": "Migraine, treated and ready to leave",
@@ -491,11 +540,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_migraine"
+    "template_name": "clear_migraine",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1173",
-    "arrival_time": "2026-05-17T09:58",
+    "arrival_time": "2026-06-10T14:05",
     "age": 70,
     "sex": "M",
     "chief_complaint": "Acute limb ischemia",
@@ -506,11 +556,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "limb_ischemia_awaiting_vasc"
+    "template_name": "limb_ischemia_awaiting_vasc",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1085",
-    "arrival_time": "2026-05-17T17:37",
+    "arrival_time": "2026-06-10T21:44",
     "age": 66,
     "sex": "F",
     "chief_complaint": "Hematemesis x 2 episodes overnight",
@@ -522,11 +573,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "gi_bleed",
     "expected_owner": "physician",
-    "template_name": "gib_no_ppi"
+    "template_name": "gib_no_ppi",
+    "prior_notes": [
+      {
+        "hours_ago": 5,
+        "note_text": "HPI: 62yo male, one episode of hematemesis. BP 108/64, HR 96.\nLabs: hgb 9.1, plt 150, INR 1.2.\nAssessment: upper GI bleed.\nPlan: IV access, type and screen sent, monitoring."
+      }
+    ]
   },
   {
     "patient_id": "P-1008",
-    "arrival_time": "2026-05-19T10:50",
+    "arrival_time": "2026-06-12T14:57",
     "age": 80,
     "sex": "M",
     "chief_complaint": "Acute right-sided weakness",
@@ -538,11 +595,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "stroke",
     "expected_owner": "physician",
-    "template_name": "stroke_no_neuro"
+    "template_name": "stroke_no_neuro",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1122",
-    "arrival_time": "2026-05-19T06:10",
+    "arrival_time": "2026-06-12T10:17",
     "age": 38,
     "sex": "M",
     "chief_complaint": "Fever, IVDU, suspected endocarditis",
@@ -553,11 +611,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "ie_awaiting_tte"
+    "template_name": "ie_awaiting_tte",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1102",
-    "arrival_time": "2026-05-19T08:57",
+    "arrival_time": "2026-06-12T13:04",
     "age": 67,
     "sex": "F",
     "chief_complaint": "Severe hyperkalemia on routine labs",
@@ -569,11 +628,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "hyperkalemia",
     "expected_owner": "physician",
-    "template_name": "hyperk_no_ecg"
+    "template_name": "hyperk_no_ecg",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1041",
-    "arrival_time": "2026-05-17T23:01",
+    "arrival_time": "2026-06-11T03:08",
     "age": 85,
     "sex": "F",
     "chief_complaint": "GIB on apixaban",
@@ -586,11 +646,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "anticoag_bleed_risk"
+    "template_name": "anticoag_bleed_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1126",
-    "arrival_time": "2026-05-18T18:24",
+    "arrival_time": "2026-06-11T22:31",
     "age": 59,
     "sex": "M",
     "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
@@ -602,11 +663,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_dialysis_chair"
+    "template_name": "dispo_dialysis_chair",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1114",
-    "arrival_time": "2026-05-17T05:28",
+    "arrival_time": "2026-06-10T09:35",
     "age": 31,
     "sex": "M",
     "chief_complaint": "Manic episode, on involuntary hold",
@@ -617,11 +679,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_medical_clear"
+    "template_name": "psych_medical_clear",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1167",
-    "arrival_time": "2026-05-19T18:55",
+    "arrival_time": "2026-06-12T23:02",
     "age": 60,
     "sex": "M",
     "chief_complaint": "Discharge teaching delayed, no interpreter",
@@ -632,11 +695,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_language_barrier"
+    "template_name": "dispo_language_barrier",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1117",
-    "arrival_time": "2026-05-18T16:25",
+    "arrival_time": "2026-06-11T20:32",
     "age": 46,
     "sex": "F",
     "chief_complaint": "Dyspnea, contrast contraindication",
@@ -648,11 +712,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "pe_awaiting_vq"
+    "template_name": "pe_awaiting_vq",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1046",
-    "arrival_time": "2026-05-16T20:25",
+    "arrival_time": "2026-06-10T00:32",
     "age": 31,
     "sex": "F",
     "chief_complaint": "DKA, third admission this year",
@@ -664,11 +729,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
+    "template_name": "dm_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1129",
-    "arrival_time": "2026-05-16T14:59",
+    "arrival_time": "2026-06-09T19:06",
     "age": 30,
     "sex": "F",
     "chief_complaint": "Post-TBI, awaiting rehab placement",
@@ -679,11 +745,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_rehab_tbi"
+    "template_name": "dispo_rehab_tbi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1150",
-    "arrival_time": "2026-05-16T06:29",
+    "arrival_time": "2026-06-09T10:36",
     "age": 71,
     "sex": "F",
     "chief_complaint": "Old stroke, residual deficits, dispo",
@@ -694,11 +761,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "stroke_window_expired"
+    "template_name": "stroke_window_expired",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1048",
-    "arrival_time": "2026-05-18T05:48",
+    "arrival_time": "2026-06-11T09:55",
     "age": 68,
     "sex": "M",
     "chief_complaint": "CHF readmission within 14 days",
@@ -709,11 +777,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
+    "template_name": "chf_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1159",
-    "arrival_time": "2026-05-19T14:44",
+    "arrival_time": "2026-06-12T18:51",
     "age": 62,
     "sex": "M",
     "chief_complaint": "Free air on CT, surgery not yet seen",
@@ -724,11 +793,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "perf_awaiting_surgery"
+    "template_name": "perf_awaiting_surgery",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1072",
-    "arrival_time": "2026-05-19T15:40",
+    "arrival_time": "2026-06-12T19:47",
     "age": 70,
     "sex": "F",
     "chief_complaint": "POD 2 from THA, awaiting PT clearance",
@@ -739,11 +809,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "post_op_pt_clearance"
+    "template_name": "post_op_pt_clearance",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1118",
-    "arrival_time": "2026-05-19T15:48",
+    "arrival_time": "2026-06-12T19:55",
     "age": 41,
     "sex": "F",
     "chief_complaint": "Dyspnea, contrast contraindication",
@@ -755,11 +826,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "pe_awaiting_vq"
+    "template_name": "pe_awaiting_vq",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1001",
-    "arrival_time": "2026-05-17T06:20",
+    "arrival_time": "2026-06-10T10:27",
     "age": 68,
     "sex": "F",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -772,11 +844,21 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_no_abx"
+    "template_name": "sepsis_no_abx",
+    "prior_notes": [
+      {
+        "hours_ago": 6,
+        "note_text": "HPI: 72yo from SNF, febrile to 38.9C, BP 94/58, HR 110. Decreased PO intake.\nLabs: WBC 16.4, lactate 4.1, creatinine 1.4. UA pending.\nAssessment: presumed sepsis, source unclear.\nPlan: cultures pending, fluids started, recheck labs."
+      },
+      {
+        "hours_ago": 3,
+        "note_text": "Interval: febrile 39.2C, BP 90/55, HR 116.\nLabs: WBC 17.6, lactate 3.6, creatinine 1.7. UA cloudy, bacteria present.\nAssessment: severe sepsis, likely urinary source.\nPlan: continue resuscitation, trend lactate."
+      }
+    ]
   },
   {
     "patient_id": "P-1132",
-    "arrival_time": "2026-05-16T07:40",
+    "arrival_time": "2026-06-09T11:47",
     "age": 66,
     "sex": "F",
     "chief_complaint": "COPD readmit, lost inhaler",
@@ -787,11 +869,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_readmit_no_inhaler"
+    "template_name": "copd_readmit_no_inhaler",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1087",
-    "arrival_time": "2026-05-16T06:19",
+    "arrival_time": "2026-06-09T10:26",
     "age": 60,
     "sex": "M",
     "chief_complaint": "Hematemesis x 2 episodes overnight",
@@ -803,11 +886,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "gi_bleed",
     "expected_owner": "physician",
-    "template_name": "gib_no_ppi"
+    "template_name": "gib_no_ppi",
+    "prior_notes": [
+      {
+        "hours_ago": 5,
+        "note_text": "HPI: 62yo male, one episode of hematemesis. BP 108/64, HR 96.\nLabs: hgb 9.1, plt 150, INR 1.2.\nAssessment: upper GI bleed.\nPlan: IV access, type and screen sent, monitoring."
+      }
+    ]
   },
   {
     "patient_id": "P-1112",
-    "arrival_time": "2026-05-19T03:09",
+    "arrival_time": "2026-06-12T07:16",
     "age": 31,
     "sex": "M",
     "chief_complaint": "Manic episode, on involuntary hold",
@@ -818,11 +907,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_medical_clear"
+    "template_name": "psych_medical_clear",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1155",
-    "arrival_time": "2026-05-18T01:33",
+    "arrival_time": "2026-06-11T05:40",
     "age": 65,
     "sex": "M",
     "chief_complaint": "Septic shock with AKI",
@@ -835,11 +925,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_aki_combo"
+    "template_name": "sepsis_aki_combo",
+    "prior_notes": [
+      {
+        "hours_ago": 12,
+        "note_text": "HPI: 64yo diabetic, fever and dysuria. BP 102/64, HR 98.\nLabs: WBC 15, lactate 2.4, Cr 1.1, K 4.6.\nAssessment: urinary sepsis, hemodynamically stable.\nPlan: cultures sent, fluids, monitor."
+      }
+    ]
   },
   {
     "patient_id": "P-1023",
-    "arrival_time": "2026-05-19T17:33",
+    "arrival_time": "2026-06-12T21:40",
     "age": 31,
     "sex": "F",
     "chief_complaint": "Right lower quadrant pain",
@@ -851,11 +947,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
+    "template_name": "rlq_pain_awaiting_ct",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1140",
-    "arrival_time": "2026-05-18T11:13",
+    "arrival_time": "2026-06-11T15:20",
     "age": 50,
     "sex": "M",
     "chief_complaint": "Chest pain, ruled out for ACS",
@@ -866,11 +963,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_chest_pain_rule_out"
+    "template_name": "clear_chest_pain_rule_out",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1142",
-    "arrival_time": "2026-05-17T09:45",
+    "arrival_time": "2026-06-10T13:52",
     "age": 46,
     "sex": "M",
     "chief_complaint": "Chest pain, ruled out for ACS",
@@ -881,11 +979,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_chest_pain_rule_out"
+    "template_name": "clear_chest_pain_rule_out",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1079",
-    "arrival_time": "2026-05-18T23:25",
+    "arrival_time": "2026-06-12T03:32",
     "age": 72,
     "sex": "F",
     "chief_complaint": "Syncope on multiple QT-prolonging meds",
@@ -897,11 +996,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
+    "template_name": "qt_prolong_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1035",
-    "arrival_time": "2026-05-16T14:12",
+    "arrival_time": "2026-06-09T18:19",
     "age": 66,
     "sex": "F",
     "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
@@ -913,11 +1013,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_dispo_o2"
+    "template_name": "chf_dispo_o2",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1075",
-    "arrival_time": "2026-05-16T21:56",
+    "arrival_time": "2026-06-10T02:03",
     "age": 65,
     "sex": "F",
     "chief_complaint": "POD 2 from THA, awaiting PT clearance",
@@ -928,11 +1029,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "post_op_pt_clearance"
+    "template_name": "post_op_pt_clearance",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1011",
-    "arrival_time": "2026-05-16T07:22",
+    "arrival_time": "2026-06-09T11:29",
     "age": 79,
     "sex": "M",
     "chief_complaint": "Acute right-sided weakness",
@@ -944,11 +1046,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "stroke",
     "expected_owner": "physician",
-    "template_name": "stroke_no_neuro"
+    "template_name": "stroke_no_neuro",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1005",
-    "arrival_time": "2026-05-16T17:46",
+    "arrival_time": "2026-06-09T21:53",
     "age": 61,
     "sex": "M",
     "chief_complaint": "Substernal chest pressure",
@@ -960,11 +1063,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "acs",
     "expected_owner": "physician",
-    "template_name": "acs_no_consult"
+    "template_name": "acs_no_consult",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1076",
-    "arrival_time": "2026-05-17T04:18",
+    "arrival_time": "2026-06-10T08:25",
     "age": 74,
     "sex": "F",
     "chief_complaint": "Syncope on multiple QT-prolonging meds",
@@ -976,11 +1080,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
+    "template_name": "qt_prolong_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1120",
-    "arrival_time": "2026-05-17T04:00",
+    "arrival_time": "2026-06-10T08:07",
     "age": 35,
     "sex": "M",
     "chief_complaint": "Fever, IVDU, suspected endocarditis",
@@ -991,11 +1096,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "ie_awaiting_tte"
+    "template_name": "ie_awaiting_tte",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1119",
-    "arrival_time": "2026-05-19T10:57",
+    "arrival_time": "2026-06-12T15:04",
     "age": 43,
     "sex": "M",
     "chief_complaint": "Dyspnea, contrast contraindication",
@@ -1007,11 +1113,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "pe_awaiting_vq"
+    "template_name": "pe_awaiting_vq",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1116",
-    "arrival_time": "2026-05-16T10:15",
+    "arrival_time": "2026-06-09T14:22",
     "age": 41,
     "sex": "F",
     "chief_complaint": "Dyspnea, contrast contraindication",
@@ -1023,11 +1130,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "pe_awaiting_vq"
+    "template_name": "pe_awaiting_vq",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1068",
-    "arrival_time": "2026-05-19T10:28",
+    "arrival_time": "2026-06-12T14:35",
     "age": 23,
     "sex": "M",
     "chief_complaint": "Suicidal ideation, awaiting psychiatry",
@@ -1038,11 +1146,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
+    "template_name": "psych_consult_delay",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1042",
-    "arrival_time": "2026-05-17T23:23",
+    "arrival_time": "2026-06-11T03:30",
     "age": 78,
     "sex": "F",
     "chief_complaint": "GIB on apixaban",
@@ -1055,11 +1164,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "anticoag_bleed_risk"
+    "template_name": "anticoag_bleed_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1146",
-    "arrival_time": "2026-05-17T06:32",
+    "arrival_time": "2026-06-10T10:39",
     "age": 67,
     "sex": "M",
     "chief_complaint": "Resolved sepsis from prior admission",
@@ -1071,11 +1181,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "sepsis_resolved_negative"
+    "template_name": "sepsis_resolved_negative",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1169",
-    "arrival_time": "2026-05-18T12:41",
+    "arrival_time": "2026-06-11T16:48",
     "age": 79,
     "sex": "F",
     "chief_complaint": "Discharge delayed by warfarin issue",
@@ -1087,11 +1198,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "med_risk_dispo_combo"
+    "template_name": "med_risk_dispo_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1063",
-    "arrival_time": "2026-05-16T21:04",
+    "arrival_time": "2026-06-10T01:11",
     "age": 38,
     "sex": "F",
     "chief_complaint": "Uncomplicated UTI, ready for discharge",
@@ -1102,11 +1214,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_uti"
+    "template_name": "clear_uti",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1141",
-    "arrival_time": "2026-05-18T08:02",
+    "arrival_time": "2026-06-11T12:09",
     "age": 50,
     "sex": "M",
     "chief_complaint": "Chest pain, ruled out for ACS",
@@ -1117,11 +1230,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_chest_pain_rule_out"
+    "template_name": "clear_chest_pain_rule_out",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1107",
-    "arrival_time": "2026-05-18T04:25",
+    "arrival_time": "2026-06-11T08:32",
     "age": 70,
     "sex": "F",
     "chief_complaint": "COPD exacerbation, increased sputum",
@@ -1132,11 +1246,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "copd",
     "expected_owner": "physician",
-    "template_name": "copd_no_steroids"
+    "template_name": "copd_no_steroids",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1009",
-    "arrival_time": "2026-05-16T11:15",
+    "arrival_time": "2026-06-09T15:22",
     "age": 78,
     "sex": "F",
     "chief_complaint": "Acute right-sided weakness",
@@ -1148,11 +1263,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "stroke",
     "expected_owner": "physician",
-    "template_name": "stroke_no_neuro"
+    "template_name": "stroke_no_neuro",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1020",
-    "arrival_time": "2026-05-17T00:36",
+    "arrival_time": "2026-06-10T04:43",
     "age": 32,
     "sex": "F",
     "chief_complaint": "Right lower quadrant pain",
@@ -1164,11 +1280,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
+    "template_name": "rlq_pain_awaiting_ct",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1091",
-    "arrival_time": "2026-05-17T09:58",
+    "arrival_time": "2026-06-10T14:05",
     "age": 67,
     "sex": "M",
     "chief_complaint": "Rising creatinine, oliguria",
@@ -1179,11 +1296,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "aki",
     "expected_owner": "physician",
-    "template_name": "aki_no_med_review"
+    "template_name": "aki_no_med_review",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1015",
-    "arrival_time": "2026-05-18T19:21",
+    "arrival_time": "2026-06-11T23:28",
     "age": 79,
     "sex": "F",
     "chief_complaint": "Post-fall left hip pain, unable to bear weight",
@@ -1194,11 +1312,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
+    "template_name": "hip_fx_awaiting_ortho",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1144",
-    "arrival_time": "2026-05-19T08:01",
+    "arrival_time": "2026-06-12T12:08",
     "age": 68,
     "sex": "F",
     "chief_complaint": "Resolved sepsis from prior admission",
@@ -1210,11 +1329,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "sepsis_resolved_negative"
+    "template_name": "sepsis_resolved_negative",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1131",
-    "arrival_time": "2026-05-18T21:05",
+    "arrival_time": "2026-06-12T01:12",
     "age": 27,
     "sex": "M",
     "chief_complaint": "Post-TBI, awaiting rehab placement",
@@ -1225,11 +1345,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_rehab_tbi"
+    "template_name": "dispo_rehab_tbi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1061",
-    "arrival_time": "2026-05-17T11:04",
+    "arrival_time": "2026-06-10T15:11",
     "age": 37,
     "sex": "F",
     "chief_complaint": "Uncomplicated UTI, ready for discharge",
@@ -1240,11 +1361,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_uti"
+    "template_name": "clear_uti",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1147",
-    "arrival_time": "2026-05-16T06:36",
+    "arrival_time": "2026-06-09T10:43",
     "age": 66,
     "sex": "F",
     "chief_complaint": "Resolved sepsis from prior admission",
@@ -1256,11 +1378,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "sepsis_resolved_negative"
+    "template_name": "sepsis_resolved_negative",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1145",
-    "arrival_time": "2026-05-18T12:07",
+    "arrival_time": "2026-06-11T16:14",
     "age": 64,
     "sex": "F",
     "chief_complaint": "Resolved sepsis from prior admission",
@@ -1272,11 +1395,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "sepsis_resolved_negative"
+    "template_name": "sepsis_resolved_negative",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1110",
-    "arrival_time": "2026-05-19T18:19",
+    "arrival_time": "2026-06-12T22:26",
     "age": 75,
     "sex": "F",
     "chief_complaint": "Slow GI bleed, awaiting endoscopy",
@@ -1287,11 +1411,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "gib_awaiting_gi"
+    "template_name": "gib_awaiting_gi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1174",
-    "arrival_time": "2026-05-19T00:22",
+    "arrival_time": "2026-06-12T04:29",
     "age": 70,
     "sex": "M",
     "chief_complaint": "Acute limb ischemia",
@@ -1302,11 +1427,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "limb_ischemia_awaiting_vasc"
+    "template_name": "limb_ischemia_awaiting_vasc",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1148",
-    "arrival_time": "2026-05-16T05:55",
+    "arrival_time": "2026-06-09T10:02",
     "age": 75,
     "sex": "M",
     "chief_complaint": "Old stroke, residual deficits, dispo",
@@ -1317,11 +1443,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "stroke_window_expired"
+    "template_name": "stroke_window_expired",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1032",
-    "arrival_time": "2026-05-17T04:09",
+    "arrival_time": "2026-06-10T08:16",
     "age": 66,
     "sex": "F",
     "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
@@ -1333,11 +1460,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_dispo_o2"
+    "template_name": "chf_dispo_o2",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1166",
-    "arrival_time": "2026-05-16T10:07",
+    "arrival_time": "2026-06-09T14:14",
     "age": 62,
     "sex": "F",
     "chief_complaint": "Discharge teaching delayed, no interpreter",
@@ -1348,11 +1476,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_language_barrier"
+    "template_name": "dispo_language_barrier",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1137",
-    "arrival_time": "2026-05-19T20:57",
+    "arrival_time": "2026-06-13T01:04",
     "age": 51,
     "sex": "M",
     "chief_complaint": "Cellulitis, completed IV antibiotics",
@@ -1363,11 +1492,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_cellulitis"
+    "template_name": "clear_cellulitis",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1043",
-    "arrival_time": "2026-05-18T23:58",
+    "arrival_time": "2026-06-12T04:05",
     "age": 80,
     "sex": "M",
     "chief_complaint": "GIB on apixaban",
@@ -1380,11 +1510,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "anticoag_bleed_risk"
+    "template_name": "anticoag_bleed_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1053",
-    "arrival_time": "2026-05-18T23:53",
+    "arrival_time": "2026-06-12T04:00",
     "age": 56,
     "sex": "F",
     "chief_complaint": "Cough, fever, hypoxia",
@@ -1395,11 +1526,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "cap",
     "expected_owner": "physician",
-    "template_name": "cap_late_abx"
+    "template_name": "cap_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1060",
-    "arrival_time": "2026-05-16T03:35",
+    "arrival_time": "2026-06-09T07:42",
     "age": 37,
     "sex": "F",
     "chief_complaint": "Uncomplicated UTI, ready for discharge",
@@ -1410,11 +1542,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_uti"
+    "template_name": "clear_uti",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1021",
-    "arrival_time": "2026-05-18T06:42",
+    "arrival_time": "2026-06-11T10:49",
     "age": 29,
     "sex": "F",
     "chief_complaint": "Right lower quadrant pain",
@@ -1426,11 +1559,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "rlq_pain_awaiting_ct"
+    "template_name": "rlq_pain_awaiting_ct",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1139",
-    "arrival_time": "2026-05-18T07:51",
+    "arrival_time": "2026-06-11T11:58",
     "age": 52,
     "sex": "M",
     "chief_complaint": "Cellulitis, completed IV antibiotics",
@@ -1441,11 +1575,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_cellulitis"
+    "template_name": "clear_cellulitis",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1108",
-    "arrival_time": "2026-05-17T17:41",
+    "arrival_time": "2026-06-10T21:48",
     "age": 76,
     "sex": "F",
     "chief_complaint": "Slow GI bleed, awaiting endoscopy",
@@ -1456,11 +1591,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "gib_awaiting_gi"
+    "template_name": "gib_awaiting_gi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1104",
-    "arrival_time": "2026-05-16T12:33",
+    "arrival_time": "2026-06-09T16:40",
     "age": 72,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, increased sputum",
@@ -1471,11 +1607,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "copd",
     "expected_owner": "physician",
-    "template_name": "copd_no_steroids"
+    "template_name": "copd_no_steroids",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1062",
-    "arrival_time": "2026-05-18T14:56",
+    "arrival_time": "2026-06-11T19:03",
     "age": 34,
     "sex": "F",
     "chief_complaint": "Uncomplicated UTI, ready for discharge",
@@ -1486,11 +1623,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_uti"
+    "template_name": "clear_uti",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1156",
-    "arrival_time": "2026-05-16T18:25",
+    "arrival_time": "2026-06-09T22:32",
     "age": 61,
     "sex": "M",
     "chief_complaint": "Free air on CT, surgery not yet seen",
@@ -1501,11 +1639,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "perf_awaiting_surgery"
+    "template_name": "perf_awaiting_surgery",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1082",
-    "arrival_time": "2026-05-16T04:04",
+    "arrival_time": "2026-06-09T08:11",
     "age": 54,
     "sex": "F",
     "chief_complaint": "Pleuritic chest pain, dyspnea",
@@ -1516,11 +1655,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "pe",
     "expected_owner": "physician",
-    "template_name": "pe_no_risk_strat"
+    "template_name": "pe_no_risk_strat",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1017",
-    "arrival_time": "2026-05-19T17:19",
+    "arrival_time": "2026-06-12T21:26",
     "age": 72,
     "sex": "M",
     "chief_complaint": "Decreased urine output, rising creatinine",
@@ -1532,11 +1672,21 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
+    "template_name": "aki_awaiting_renal",
+    "prior_notes": [
+      {
+        "hours_ago": 48,
+        "note_text": "HD1 for CAP. Labs: creatinine 1.1, K 4.2. UOP adequate.\nPlan: ceftriaxone + azithromycin, IV fluids."
+      },
+      {
+        "hours_ago": 24,
+        "note_text": "HD2. Creatinine 2.2, K 5.1. UOP declining to 600 mL/24h. Vancomycin trough 22.\nAssessment: developing AKI.\nPlan: monitor renal function, recheck vanc trough."
+      }
+    ]
   },
   {
     "patient_id": "P-1153",
-    "arrival_time": "2026-05-19T23:34",
+    "arrival_time": "2026-06-13T03:41",
     "age": 68,
     "sex": "M",
     "chief_complaint": "Septic shock with AKI",
@@ -1549,11 +1699,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_aki_combo"
+    "template_name": "sepsis_aki_combo",
+    "prior_notes": [
+      {
+        "hours_ago": 12,
+        "note_text": "HPI: 64yo diabetic, fever and dysuria. BP 102/64, HR 98.\nLabs: WBC 15, lactate 2.4, Cr 1.1, K 4.6.\nAssessment: urinary sepsis, hemodynamically stable.\nPlan: cultures sent, fluids, monitor."
+      }
+    ]
   },
   {
     "patient_id": "P-1078",
-    "arrival_time": "2026-05-19T08:59",
+    "arrival_time": "2026-06-12T13:06",
     "age": 70,
     "sex": "F",
     "chief_complaint": "Syncope on multiple QT-prolonging meds",
@@ -1565,11 +1721,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
+    "template_name": "qt_prolong_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1057",
-    "arrival_time": "2026-05-18T04:37",
+    "arrival_time": "2026-06-11T08:44",
     "age": 23,
     "sex": "M",
     "chief_complaint": "Hyperglycemia, ketosis",
@@ -1580,11 +1737,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "dka",
     "expected_owner": "physician",
-    "template_name": "dka_no_drip"
+    "template_name": "dka_no_drip",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1052",
-    "arrival_time": "2026-05-17T12:33",
+    "arrival_time": "2026-06-10T16:40",
     "age": 59,
     "sex": "F",
     "chief_complaint": "Cough, fever, hypoxia",
@@ -1595,11 +1753,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "cap",
     "expected_owner": "physician",
-    "template_name": "cap_late_abx"
+    "template_name": "cap_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1168",
-    "arrival_time": "2026-05-19T13:42",
+    "arrival_time": "2026-06-12T17:49",
     "age": 80,
     "sex": "F",
     "chief_complaint": "Discharge delayed by warfarin issue",
@@ -1611,11 +1770,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "med_risk_dispo_combo"
+    "template_name": "med_risk_dispo_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1163",
-    "arrival_time": "2026-05-19T16:56",
+    "arrival_time": "2026-06-12T21:03",
     "age": 79,
     "sex": "F",
     "chief_complaint": "Diabetic admission, hypoglycemia event",
@@ -1627,11 +1787,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "insulin_no_glucose_monitor"
+    "template_name": "insulin_no_glucose_monitor",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1010",
-    "arrival_time": "2026-05-16T17:14",
+    "arrival_time": "2026-06-09T21:21",
     "age": 75,
     "sex": "F",
     "chief_complaint": "Acute right-sided weakness",
@@ -1643,11 +1804,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "stroke",
     "expected_owner": "physician",
-    "template_name": "stroke_no_neuro"
+    "template_name": "stroke_no_neuro",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1135",
-    "arrival_time": "2026-05-19T19:21",
+    "arrival_time": "2026-06-12T23:28",
     "age": 67,
     "sex": "F",
     "chief_complaint": "COPD readmit, lost inhaler",
@@ -1658,11 +1820,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_readmit_no_inhaler"
+    "template_name": "copd_readmit_no_inhaler",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1171",
-    "arrival_time": "2026-05-17T04:14",
+    "arrival_time": "2026-06-10T08:21",
     "age": 77,
     "sex": "F",
     "chief_complaint": "Discharge delayed by warfarin issue",
@@ -1674,11 +1837,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "med_risk_dispo_combo"
+    "template_name": "med_risk_dispo_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1134",
-    "arrival_time": "2026-05-16T17:39",
+    "arrival_time": "2026-06-09T21:46",
     "age": 65,
     "sex": "M",
     "chief_complaint": "COPD readmit, lost inhaler",
@@ -1689,11 +1853,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_readmit_no_inhaler"
+    "template_name": "copd_readmit_no_inhaler",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1133",
-    "arrival_time": "2026-05-18T06:23",
+    "arrival_time": "2026-06-11T10:30",
     "age": 65,
     "sex": "F",
     "chief_complaint": "COPD readmit, lost inhaler",
@@ -1704,11 +1869,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_readmit_no_inhaler"
+    "template_name": "copd_readmit_no_inhaler",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1051",
-    "arrival_time": "2026-05-19T08:20",
+    "arrival_time": "2026-06-12T12:27",
     "age": 73,
     "sex": "M",
     "chief_complaint": "CHF readmission within 14 days",
@@ -1719,11 +1885,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
+    "template_name": "chf_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1152",
-    "arrival_time": "2026-05-17T06:38",
+    "arrival_time": "2026-06-10T10:45",
     "age": 68,
     "sex": "F",
     "chief_complaint": "Septic shock with AKI",
@@ -1736,11 +1903,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_aki_combo"
+    "template_name": "sepsis_aki_combo",
+    "prior_notes": [
+      {
+        "hours_ago": 12,
+        "note_text": "HPI: 64yo diabetic, fever and dysuria. BP 102/64, HR 98.\nLabs: WBC 15, lactate 2.4, Cr 1.1, K 4.6.\nAssessment: urinary sepsis, hemodynamically stable.\nPlan: cultures sent, fluids, monitor."
+      }
+    ]
   },
   {
     "patient_id": "P-1097",
-    "arrival_time": "2026-05-19T00:33",
+    "arrival_time": "2026-06-12T04:40",
     "age": 58,
     "sex": "F",
     "chief_complaint": "Fever on chemotherapy, ANC 200",
@@ -1752,11 +1925,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "neutropenic_fever",
     "expected_owner": "physician",
-    "template_name": "neutropenic_fever_late_abx"
+    "template_name": "neutropenic_fever_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1158",
-    "arrival_time": "2026-05-19T17:39",
+    "arrival_time": "2026-06-12T21:46",
     "age": 54,
     "sex": "M",
     "chief_complaint": "Free air on CT, surgery not yet seen",
@@ -1767,11 +1941,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "perf_awaiting_surgery"
+    "template_name": "perf_awaiting_surgery",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1143",
-    "arrival_time": "2026-05-20T02:21",
+    "arrival_time": "2026-06-13T06:28",
     "age": 48,
     "sex": "M",
     "chief_complaint": "Chest pain, ruled out for ACS",
@@ -1782,11 +1957,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_chest_pain_rule_out"
+    "template_name": "clear_chest_pain_rule_out",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1113",
-    "arrival_time": "2026-05-16T11:34",
+    "arrival_time": "2026-06-09T15:41",
     "age": 29,
     "sex": "M",
     "chief_complaint": "Manic episode, on involuntary hold",
@@ -1797,11 +1973,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_medical_clear"
+    "template_name": "psych_medical_clear",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1054",
-    "arrival_time": "2026-05-17T04:28",
+    "arrival_time": "2026-06-10T08:35",
     "age": 59,
     "sex": "M",
     "chief_complaint": "Cough, fever, hypoxia",
@@ -1812,11 +1989,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "cap",
     "expected_owner": "physician",
-    "template_name": "cap_late_abx"
+    "template_name": "cap_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1138",
-    "arrival_time": "2026-05-17T17:26",
+    "arrival_time": "2026-06-10T21:33",
     "age": 50,
     "sex": "M",
     "chief_complaint": "Cellulitis, completed IV antibiotics",
@@ -1827,11 +2005,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_cellulitis"
+    "template_name": "clear_cellulitis",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1047",
-    "arrival_time": "2026-05-16T20:02",
+    "arrival_time": "2026-06-10T00:09",
     "age": 31,
     "sex": "F",
     "chief_complaint": "DKA, third admission this year",
@@ -1843,11 +2022,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dm_readmit_risk"
+    "template_name": "dm_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1098",
-    "arrival_time": "2026-05-19T11:01",
+    "arrival_time": "2026-06-12T15:08",
     "age": 57,
     "sex": "M",
     "chief_complaint": "Fever on chemotherapy, ANC 200",
@@ -1859,11 +2039,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "neutropenic_fever",
     "expected_owner": "physician",
-    "template_name": "neutropenic_fever_late_abx"
+    "template_name": "neutropenic_fever_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1024",
-    "arrival_time": "2026-05-17T13:42",
+    "arrival_time": "2026-06-10T17:49",
     "age": 38,
     "sex": "M",
     "chief_complaint": "First-time seizure",
@@ -1875,11 +2056,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
+    "template_name": "seizure_awaiting_mri",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1162",
-    "arrival_time": "2026-05-16T14:57",
+    "arrival_time": "2026-06-09T19:04",
     "age": 75,
     "sex": "F",
     "chief_complaint": "Diabetic admission, hypoglycemia event",
@@ -1891,11 +2073,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "insulin_no_glucose_monitor"
+    "template_name": "insulin_no_glucose_monitor",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1065",
-    "arrival_time": "2026-05-19T13:12",
+    "arrival_time": "2026-06-12T17:19",
     "age": 33,
     "sex": "M",
     "chief_complaint": "Migraine, treated and ready to leave",
@@ -1906,11 +2089,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_migraine"
+    "template_name": "clear_migraine",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1055",
-    "arrival_time": "2026-05-18T11:45",
+    "arrival_time": "2026-06-11T15:52",
     "age": 54,
     "sex": "F",
     "chief_complaint": "Cough, fever, hypoxia",
@@ -1921,11 +2105,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "cap",
     "expected_owner": "physician",
-    "template_name": "cap_late_abx"
+    "template_name": "cap_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1034",
-    "arrival_time": "2026-05-19T07:21",
+    "arrival_time": "2026-06-12T11:28",
     "age": 70,
     "sex": "F",
     "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
@@ -1937,11 +2122,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_dispo_o2"
+    "template_name": "chf_dispo_o2",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1165",
-    "arrival_time": "2026-05-19T08:05",
+    "arrival_time": "2026-06-12T12:12",
     "age": 61,
     "sex": "M",
     "chief_complaint": "Discharge teaching delayed, no interpreter",
@@ -1952,11 +2138,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_language_barrier"
+    "template_name": "dispo_language_barrier",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1031",
-    "arrival_time": "2026-05-17T04:09",
+    "arrival_time": "2026-06-10T08:16",
     "age": 72,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, now resolved",
@@ -1968,11 +2155,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_dispo_snf"
+    "template_name": "copd_dispo_snf",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1038",
-    "arrival_time": "2026-05-17T02:06",
+    "arrival_time": "2026-06-10T06:13",
     "age": 81,
     "sex": "M",
     "chief_complaint": "Worsening renal function on home meds",
@@ -1984,11 +2172,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
+    "template_name": "nephrotoxic_med",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1073",
-    "arrival_time": "2026-05-19T10:25",
+    "arrival_time": "2026-06-12T14:32",
     "age": 65,
     "sex": "F",
     "chief_complaint": "POD 2 from THA, awaiting PT clearance",
@@ -1999,11 +2188,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "post_op_pt_clearance"
+    "template_name": "post_op_pt_clearance",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1013",
-    "arrival_time": "2026-05-18T09:57",
+    "arrival_time": "2026-06-11T14:04",
     "age": 85,
     "sex": "F",
     "chief_complaint": "Post-fall left hip pain, unable to bear weight",
@@ -2014,11 +2204,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
+    "template_name": "hip_fx_awaiting_ortho",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1026",
-    "arrival_time": "2026-05-18T00:30",
+    "arrival_time": "2026-06-11T04:37",
     "age": 44,
     "sex": "M",
     "chief_complaint": "First-time seizure",
@@ -2030,11 +2221,12 @@
     "truth_bottleneck": "awaiting_imaging",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "seizure_awaiting_mri"
+    "template_name": "seizure_awaiting_mri",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1170",
-    "arrival_time": "2026-05-17T14:57",
+    "arrival_time": "2026-06-10T19:04",
     "age": 84,
     "sex": "F",
     "chief_complaint": "Discharge delayed by warfarin issue",
@@ -2046,11 +2238,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "med_risk_dispo_combo"
+    "template_name": "med_risk_dispo_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1012",
-    "arrival_time": "2026-05-17T10:43",
+    "arrival_time": "2026-06-10T14:50",
     "age": 77,
     "sex": "F",
     "chief_complaint": "Post-fall left hip pain, unable to bear weight",
@@ -2061,11 +2254,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "hip_fx_awaiting_ortho"
+    "template_name": "hip_fx_awaiting_ortho",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1070",
-    "arrival_time": "2026-05-16T17:05",
+    "arrival_time": "2026-06-09T21:12",
     "age": 24,
     "sex": "M",
     "chief_complaint": "Suicidal ideation, awaiting psychiatry",
@@ -2076,11 +2270,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
+    "template_name": "psych_consult_delay",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1109",
-    "arrival_time": "2026-05-17T07:47",
+    "arrival_time": "2026-06-10T11:54",
     "age": 71,
     "sex": "F",
     "chief_complaint": "Slow GI bleed, awaiting endoscopy",
@@ -2091,11 +2286,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "gib_awaiting_gi"
+    "template_name": "gib_awaiting_gi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1175",
-    "arrival_time": "2026-05-17T07:10",
+    "arrival_time": "2026-06-10T11:17",
     "age": 67,
     "sex": "F",
     "chief_complaint": "Acute limb ischemia",
@@ -2106,11 +2302,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "limb_ischemia_awaiting_vasc"
+    "template_name": "limb_ischemia_awaiting_vasc",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1019",
-    "arrival_time": "2026-05-16T13:22",
+    "arrival_time": "2026-06-09T17:29",
     "age": 72,
     "sex": "M",
     "chief_complaint": "Decreased urine output, rising creatinine",
@@ -2122,11 +2319,21 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
+    "template_name": "aki_awaiting_renal",
+    "prior_notes": [
+      {
+        "hours_ago": 48,
+        "note_text": "HD1 for CAP. Labs: creatinine 1.1, K 4.2. UOP adequate.\nPlan: ceftriaxone + azithromycin, IV fluids."
+      },
+      {
+        "hours_ago": 24,
+        "note_text": "HD2. Creatinine 2.2, K 5.1. UOP declining to 600 mL/24h. Vancomycin trough 22.\nAssessment: developing AKI.\nPlan: monitor renal function, recheck vanc trough."
+      }
+    ]
   },
   {
     "patient_id": "P-1099",
-    "arrival_time": "2026-05-16T13:11",
+    "arrival_time": "2026-06-09T17:18",
     "age": 57,
     "sex": "F",
     "chief_complaint": "Fever on chemotherapy, ANC 200",
@@ -2138,11 +2345,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "neutropenic_fever",
     "expected_owner": "physician",
-    "template_name": "neutropenic_fever_late_abx"
+    "template_name": "neutropenic_fever_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1164",
-    "arrival_time": "2026-05-16T19:46",
+    "arrival_time": "2026-06-09T23:53",
     "age": 62,
     "sex": "F",
     "chief_complaint": "Discharge teaching delayed, no interpreter",
@@ -2153,11 +2361,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_language_barrier"
+    "template_name": "dispo_language_barrier",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1016",
-    "arrival_time": "2026-05-18T06:40",
+    "arrival_time": "2026-06-11T10:47",
     "age": 69,
     "sex": "M",
     "chief_complaint": "Decreased urine output, rising creatinine",
@@ -2169,11 +2378,21 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "aki_awaiting_renal"
+    "template_name": "aki_awaiting_renal",
+    "prior_notes": [
+      {
+        "hours_ago": 48,
+        "note_text": "HD1 for CAP. Labs: creatinine 1.1, K 4.2. UOP adequate.\nPlan: ceftriaxone + azithromycin, IV fluids."
+      },
+      {
+        "hours_ago": 24,
+        "note_text": "HD2. Creatinine 2.2, K 5.1. UOP declining to 600 mL/24h. Vancomycin trough 22.\nAssessment: developing AKI.\nPlan: monitor renal function, recheck vanc trough."
+      }
+    ]
   },
   {
     "patient_id": "P-1095",
-    "arrival_time": "2026-05-17T12:54",
+    "arrival_time": "2026-06-10T17:01",
     "age": 52,
     "sex": "M",
     "chief_complaint": "Alcohol withdrawal, tremulous",
@@ -2184,11 +2403,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "ciwa",
     "expected_owner": "physician",
-    "template_name": "ciwa_no_scoring"
+    "template_name": "ciwa_no_scoring",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1064",
-    "arrival_time": "2026-05-16T06:04",
+    "arrival_time": "2026-06-09T10:11",
     "age": 35,
     "sex": "F",
     "chief_complaint": "Migraine, treated and ready to leave",
@@ -2199,11 +2419,12 @@
     "truth_bottleneck": "clear",
     "truth_protocol": "",
     "expected_owner": "",
-    "template_name": "clear_migraine"
+    "template_name": "clear_migraine",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1074",
-    "arrival_time": "2026-05-17T14:35",
+    "arrival_time": "2026-06-10T18:42",
     "age": 65,
     "sex": "F",
     "chief_complaint": "POD 2 from THA, awaiting PT clearance",
@@ -2214,11 +2435,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "post_op_pt_clearance"
+    "template_name": "post_op_pt_clearance",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1003",
-    "arrival_time": "2026-05-17T21:22",
+    "arrival_time": "2026-06-11T01:29",
     "age": 68,
     "sex": "F",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -2231,11 +2453,21 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_no_abx"
+    "template_name": "sepsis_no_abx",
+    "prior_notes": [
+      {
+        "hours_ago": 6,
+        "note_text": "HPI: 72yo from SNF, febrile to 38.9C, BP 94/58, HR 110. Decreased PO intake.\nLabs: WBC 16.4, lactate 4.1, creatinine 1.4. UA pending.\nAssessment: presumed sepsis, source unclear.\nPlan: cultures pending, fluids started, recheck labs."
+      },
+      {
+        "hours_ago": 3,
+        "note_text": "Interval: febrile 39.2C, BP 90/55, HR 116.\nLabs: WBC 17.6, lactate 3.6, creatinine 1.7. UA cloudy, bacteria present.\nAssessment: severe sepsis, likely urinary source.\nPlan: continue resuscitation, trend lactate."
+      }
+    ]
   },
   {
     "patient_id": "P-1050",
-    "arrival_time": "2026-05-17T14:56",
+    "arrival_time": "2026-06-10T19:03",
     "age": 73,
     "sex": "M",
     "chief_complaint": "CHF readmission within 14 days",
@@ -2246,11 +2478,12 @@
     "truth_bottleneck": "readmit_risk",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_readmit_risk"
+    "template_name": "chf_readmit_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1151",
-    "arrival_time": "2026-05-16T04:42",
+    "arrival_time": "2026-06-09T08:49",
     "age": 77,
     "sex": "M",
     "chief_complaint": "Old stroke, residual deficits, dispo",
@@ -2261,11 +2494,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "stroke_window_expired"
+    "template_name": "stroke_window_expired",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1101",
-    "arrival_time": "2026-05-19T06:41",
+    "arrival_time": "2026-06-12T10:48",
     "age": 63,
     "sex": "M",
     "chief_complaint": "Severe hyperkalemia on routine labs",
@@ -2277,11 +2511,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "hyperkalemia",
     "expected_owner": "physician",
-    "template_name": "hyperk_no_ecg"
+    "template_name": "hyperk_no_ecg",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1086",
-    "arrival_time": "2026-05-19T07:15",
+    "arrival_time": "2026-06-12T11:22",
     "age": 60,
     "sex": "M",
     "chief_complaint": "Hematemesis x 2 episodes overnight",
@@ -2293,11 +2528,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "gi_bleed",
     "expected_owner": "physician",
-    "template_name": "gib_no_ppi"
+    "template_name": "gib_no_ppi",
+    "prior_notes": [
+      {
+        "hours_ago": 5,
+        "note_text": "HPI: 62yo male, one episode of hematemesis. BP 108/64, HR 96.\nLabs: hgb 9.1, plt 150, INR 1.2.\nAssessment: upper GI bleed.\nPlan: IV access, type and screen sent, monitoring."
+      }
+    ]
   },
   {
     "patient_id": "P-1083",
-    "arrival_time": "2026-05-17T08:00",
+    "arrival_time": "2026-06-10T12:07",
     "age": 59,
     "sex": "M",
     "chief_complaint": "Pleuritic chest pain, dyspnea",
@@ -2308,11 +2549,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "pe",
     "expected_owner": "physician",
-    "template_name": "pe_no_risk_strat"
+    "template_name": "pe_no_risk_strat",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1172",
-    "arrival_time": "2026-05-17T14:25",
+    "arrival_time": "2026-06-10T18:32",
     "age": 70,
     "sex": "M",
     "chief_complaint": "Acute limb ischemia",
@@ -2323,11 +2565,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "limb_ischemia_awaiting_vasc"
+    "template_name": "limb_ischemia_awaiting_vasc",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1084",
-    "arrival_time": "2026-05-19T06:53",
+    "arrival_time": "2026-06-12T11:00",
     "age": 66,
     "sex": "F",
     "chief_complaint": "Hematemesis x 2 episodes overnight",
@@ -2339,11 +2582,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "gi_bleed",
     "expected_owner": "physician",
-    "template_name": "gib_no_ppi"
+    "template_name": "gib_no_ppi",
+    "prior_notes": [
+      {
+        "hours_ago": 5,
+        "note_text": "HPI: 62yo male, one episode of hematemesis. BP 108/64, HR 96.\nLabs: hgb 9.1, plt 150, INR 1.2.\nAssessment: upper GI bleed.\nPlan: IV access, type and screen sent, monitoring."
+      }
+    ]
   },
   {
     "patient_id": "P-1030",
-    "arrival_time": "2026-05-17T11:21",
+    "arrival_time": "2026-06-10T15:28",
     "age": 73,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, now resolved",
@@ -2355,11 +2604,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_dispo_snf"
+    "template_name": "copd_dispo_snf",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1080",
-    "arrival_time": "2026-05-17T10:11",
+    "arrival_time": "2026-06-10T14:18",
     "age": 56,
     "sex": "M",
     "chief_complaint": "Pleuritic chest pain, dyspnea",
@@ -2370,11 +2620,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "pe",
     "expected_owner": "physician",
-    "template_name": "pe_no_risk_strat"
+    "template_name": "pe_no_risk_strat",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1096",
-    "arrival_time": "2026-05-18T16:27",
+    "arrival_time": "2026-06-11T20:34",
     "age": 53,
     "sex": "F",
     "chief_complaint": "Fever on chemotherapy, ANC 200",
@@ -2386,11 +2637,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "neutropenic_fever",
     "expected_owner": "physician",
-    "template_name": "neutropenic_fever_late_abx"
+    "template_name": "neutropenic_fever_late_abx",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1088",
-    "arrival_time": "2026-05-16T10:53",
+    "arrival_time": "2026-06-09T15:00",
     "age": 75,
     "sex": "F",
     "chief_complaint": "Rising creatinine, oliguria",
@@ -2401,11 +2653,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "aki",
     "expected_owner": "physician",
-    "template_name": "aki_no_med_review"
+    "template_name": "aki_no_med_review",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1106",
-    "arrival_time": "2026-05-19T01:04",
+    "arrival_time": "2026-06-12T05:11",
     "age": 71,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, increased sputum",
@@ -2416,11 +2669,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "copd",
     "expected_owner": "physician",
-    "template_name": "copd_no_steroids"
+    "template_name": "copd_no_steroids",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1036",
-    "arrival_time": "2026-05-16T23:15",
+    "arrival_time": "2026-06-10T03:22",
     "age": 73,
     "sex": "M",
     "chief_complaint": "Worsening renal function on home meds",
@@ -2432,11 +2686,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "nephrotoxic_med"
+    "template_name": "nephrotoxic_med",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1077",
-    "arrival_time": "2026-05-16T05:45",
+    "arrival_time": "2026-06-09T09:52",
     "age": 69,
     "sex": "M",
     "chief_complaint": "Syncope on multiple QT-prolonging meds",
@@ -2448,11 +2703,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "qt_prolong_combo"
+    "template_name": "qt_prolong_combo",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1103",
-    "arrival_time": "2026-05-19T14:01",
+    "arrival_time": "2026-06-12T18:08",
     "age": 65,
     "sex": "M",
     "chief_complaint": "Severe hyperkalemia on routine labs",
@@ -2464,11 +2720,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "hyperkalemia",
     "expected_owner": "physician",
-    "template_name": "hyperk_no_ecg"
+    "template_name": "hyperk_no_ecg",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1115",
-    "arrival_time": "2026-05-16T09:06",
+    "arrival_time": "2026-06-09T13:13",
     "age": 35,
     "sex": "M",
     "chief_complaint": "Manic episode, on involuntary hold",
@@ -2479,11 +2736,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_medical_clear"
+    "template_name": "psych_medical_clear",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1125",
-    "arrival_time": "2026-05-19T04:09",
+    "arrival_time": "2026-06-12T08:16",
     "age": 61,
     "sex": "M",
     "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
@@ -2495,11 +2753,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_dialysis_chair"
+    "template_name": "dispo_dialysis_chair",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1000",
-    "arrival_time": "2026-05-17T23:45",
+    "arrival_time": "2026-06-11T03:52",
     "age": 73,
     "sex": "M",
     "chief_complaint": "Fever, hypotension, altered mental status",
@@ -2512,11 +2771,21 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_no_abx"
+    "template_name": "sepsis_no_abx",
+    "prior_notes": [
+      {
+        "hours_ago": 6,
+        "note_text": "HPI: 72yo from SNF, febrile to 38.9C, BP 94/58, HR 110. Decreased PO intake.\nLabs: WBC 16.4, lactate 4.1, creatinine 1.4. UA pending.\nAssessment: presumed sepsis, source unclear.\nPlan: cultures pending, fluids started, recheck labs."
+      },
+      {
+        "hours_ago": 3,
+        "note_text": "Interval: febrile 39.2C, BP 90/55, HR 116.\nLabs: WBC 17.6, lactate 3.6, creatinine 1.7. UA cloudy, bacteria present.\nAssessment: severe sepsis, likely urinary source.\nPlan: continue resuscitation, trend lactate."
+      }
+    ]
   },
   {
     "patient_id": "P-1040",
-    "arrival_time": "2026-05-16T10:35",
+    "arrival_time": "2026-06-09T14:42",
     "age": 77,
     "sex": "F",
     "chief_complaint": "GIB on apixaban",
@@ -2529,11 +2798,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "anticoag_bleed_risk"
+    "template_name": "anticoag_bleed_risk",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1006",
-    "arrival_time": "2026-05-18T00:23",
+    "arrival_time": "2026-06-11T04:30",
     "age": 60,
     "sex": "M",
     "chief_complaint": "Substernal chest pressure",
@@ -2545,11 +2815,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "acs",
     "expected_owner": "physician",
-    "template_name": "acs_no_consult"
+    "template_name": "acs_no_consult",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1100",
-    "arrival_time": "2026-05-16T13:07",
+    "arrival_time": "2026-06-09T17:14",
     "age": 68,
     "sex": "F",
     "chief_complaint": "Severe hyperkalemia on routine labs",
@@ -2561,11 +2832,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "hyperkalemia",
     "expected_owner": "physician",
-    "template_name": "hyperk_no_ecg"
+    "template_name": "hyperk_no_ecg",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1124",
-    "arrival_time": "2026-05-19T00:08",
+    "arrival_time": "2026-06-12T04:15",
     "age": 58,
     "sex": "M",
     "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
@@ -2577,11 +2849,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_dialysis_chair"
+    "template_name": "dispo_dialysis_chair",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1127",
-    "arrival_time": "2026-05-17T09:51",
+    "arrival_time": "2026-06-10T13:58",
     "age": 54,
     "sex": "F",
     "chief_complaint": "ESRD, dispo delayed by outpatient HD slot",
@@ -2593,11 +2866,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_dialysis_chair"
+    "template_name": "dispo_dialysis_chair",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1059",
-    "arrival_time": "2026-05-19T01:35",
+    "arrival_time": "2026-06-12T05:42",
     "age": 21,
     "sex": "M",
     "chief_complaint": "Hyperglycemia, ketosis",
@@ -2608,11 +2882,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "dka",
     "expected_owner": "physician",
-    "template_name": "dka_no_drip"
+    "template_name": "dka_no_drip",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1093",
-    "arrival_time": "2026-05-17T09:48",
+    "arrival_time": "2026-06-10T13:55",
     "age": 49,
     "sex": "M",
     "chief_complaint": "Alcohol withdrawal, tremulous",
@@ -2623,11 +2898,12 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "ciwa",
     "expected_owner": "physician",
-    "template_name": "ciwa_no_scoring"
+    "template_name": "ciwa_no_scoring",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1028",
-    "arrival_time": "2026-05-17T11:23",
+    "arrival_time": "2026-06-10T15:30",
     "age": 72,
     "sex": "M",
     "chief_complaint": "COPD exacerbation, now resolved",
@@ -2639,11 +2915,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "copd_dispo_snf"
+    "template_name": "copd_dispo_snf",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1071",
-    "arrival_time": "2026-05-16T06:01",
+    "arrival_time": "2026-06-09T10:08",
     "age": 23,
     "sex": "M",
     "chief_complaint": "Suicidal ideation, awaiting psychiatry",
@@ -2654,11 +2931,12 @@
     "truth_bottleneck": "awaiting_consult",
     "truth_protocol": "",
     "expected_owner": "physician",
-    "template_name": "psych_consult_delay"
+    "template_name": "psych_consult_delay",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1130",
-    "arrival_time": "2026-05-17T23:54",
+    "arrival_time": "2026-06-11T04:01",
     "age": 30,
     "sex": "M",
     "chief_complaint": "Post-TBI, awaiting rehab placement",
@@ -2669,11 +2947,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "dispo_rehab_tbi"
+    "template_name": "dispo_rehab_tbi",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1161",
-    "arrival_time": "2026-05-18T17:11",
+    "arrival_time": "2026-06-11T21:18",
     "age": 76,
     "sex": "F",
     "chief_complaint": "Diabetic admission, hypoglycemia event",
@@ -2685,11 +2964,12 @@
     "truth_bottleneck": "med_risk",
     "truth_protocol": "",
     "expected_owner": "pharmacist",
-    "template_name": "insulin_no_glucose_monitor"
+    "template_name": "insulin_no_glucose_monitor",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1154",
-    "arrival_time": "2026-05-19T21:18",
+    "arrival_time": "2026-06-13T01:25",
     "age": 63,
     "sex": "F",
     "chief_complaint": "Septic shock with AKI",
@@ -2702,11 +2982,17 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "sepsis",
     "expected_owner": "physician",
-    "template_name": "sepsis_aki_combo"
+    "template_name": "sepsis_aki_combo",
+    "prior_notes": [
+      {
+        "hours_ago": 12,
+        "note_text": "HPI: 64yo diabetic, fever and dysuria. BP 102/64, HR 98.\nLabs: WBC 15, lactate 2.4, Cr 1.1, K 4.6.\nAssessment: urinary sepsis, hemodynamically stable.\nPlan: cultures sent, fluids, monitor."
+      }
+    ]
   },
   {
     "patient_id": "P-1033",
-    "arrival_time": "2026-05-16T10:30",
+    "arrival_time": "2026-06-09T14:37",
     "age": 70,
     "sex": "F",
     "chief_complaint": "CHF exacerbation, awaiting home O2 setup",
@@ -2718,11 +3004,12 @@
     "truth_bottleneck": "dispo_delay",
     "truth_protocol": "",
     "expected_owner": "case_manager",
-    "template_name": "chf_dispo_o2"
+    "template_name": "chf_dispo_o2",
+    "prior_notes": []
   },
   {
     "patient_id": "P-1092",
-    "arrival_time": "2026-05-19T17:58",
+    "arrival_time": "2026-06-12T22:05",
     "age": 52,
     "sex": "F",
     "chief_complaint": "Alcohol withdrawal, tremulous",
@@ -2733,6 +3020,7 @@
     "truth_bottleneck": "missing_soc",
     "truth_protocol": "ciwa",
     "expected_owner": "physician",
-    "template_name": "ciwa_no_scoring"
+    "template_name": "ciwa_no_scoring",
+    "prior_notes": []
   }
 ]

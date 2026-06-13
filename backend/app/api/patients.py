@@ -10,7 +10,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
-from app.models.orm import Action, ActionEvent, Patient, Triage
+from app.models.orm import Action, ActionEvent, NoteVersion, Patient, Triage
 from app.models.schemas import (
     ActionResponse,
     BottleneckPayload,
@@ -22,6 +22,7 @@ from app.models.schemas import (
     SilentFailurePayload,
     Span,
     TimelineEvent,
+    TrendsPayload,
     WhyStuckResponse,
 )
 from app.services import sla
@@ -144,6 +145,7 @@ def patient_detail(patient_id: str, db: Session = Depends(get_db)):
             )
             for a in sorted(p.actions, key=lambda a: a.created_at, reverse=True)
         ],
+        trends=TrendsPayload(**t.trends) if t.trends else None,
     )
 
 
@@ -158,13 +160,40 @@ def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
         raise HTTPException(404, f"Patient {patient_id} not found")
     payload = p.triage.payload
 
-    events: List[TimelineEvent] = [
+    events: List[TimelineEvent] = []
+
+    # Prior notes (clinical history) come before arrival on the timeline.
+    priors = (
+        db.query(NoteVersion)
+        .filter(NoteVersion.patient_id == patient_id)
+        .order_by(NoteVersion.sequence)
+        .all()
+    )
+    for nv in priors:
+        digest = " · ".join(
+            f"{l['label']} {l['points'][-1]['raw']}"
+            for l in (p.triage.trends or {}).get("labs", [])
+            if l.get("points")
+        ) if p.triage.trends else ""
+        events.append(
+            TimelineEvent(
+                timestamp=nv.captured_at,
+                kind="prior_note",
+                title=f"Prior note — {nv.hours_ago}h ago",
+                detail=digest[:160] if digest else "Earlier documented state",
+                actor="chart",
+            )
+        )
+
+    events.append(
         TimelineEvent(
             timestamp=p.arrival_time,
             kind="arrival",
             title=f"Arrived on floor — {p.chief_complaint}",
             detail=f"Room {p.room or 'unassigned'} · {p.age}{p.sex}",
         ),
+    )
+    events.append(
         TimelineEvent(
             timestamp=p.triage.computed_at,
             kind="triage",
@@ -173,7 +202,7 @@ def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
             urgency=payload["primary"]["urgency"],
             actor="pipeline",
         ),
-    ]
+    )
     for sf in payload.get("silent_failures", []):
         events.append(
             TimelineEvent(
