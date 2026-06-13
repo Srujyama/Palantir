@@ -139,6 +139,37 @@ def test_resolved_gap_detected_across_notes():
         f"expected antibiotics gap closed, got {resolved_actions}"
 
 
+def test_gap_not_resolved_when_protocol_merely_stops_triggering():
+    """A protocol that stops triggering because the presentation improved is
+    NOT evidence the missing step was performed. We must not claim 'resolved'
+    when antibiotics were never charted — that would be false reassurance."""
+    earlier = (
+        "72yo, fever 39.4, BP 88/52, lactate 4.1. Meets SIRS criteria, "
+        "concern for sepsis. Blood cultures drawn."
+        # antibiotics + fluids never documented
+    )
+    current = (
+        "72yo, afebrile now, BP 110/70, lactate 2.0. Improving. "
+        "Blood cultures pending."
+        # sepsis no longer triggers; antibiotics STILL never given
+    )
+    notes = [NoteInput(earlier, hours_ago=4), NoteInput(current, hours_ago=0)]
+    p = trends.compute(notes)
+    resolved = {g["action_label"] for g in p["resolved_gaps"]}
+    assert not any("antibiotic" in a.lower() for a in resolved), \
+        f"must NOT mark antibiotics resolved when never charted; got {resolved}"
+    assert not any("crystalloid" in a.lower() or "fluid" in a.lower() for a in resolved), \
+        f"must NOT mark fluids resolved when never charted; got {resolved}"
+
+
+def test_recurrence_does_not_false_positive_on_dose_count():
+    """'2nd dose ... this admission' is medication counting, not a 2nd admission."""
+    p = trends.compute(_series("Nurse gave the 2nd dose of antibiotics this admission."))
+    assert p["recurrence"] is None
+    p2 = trends.compute(_series("On her second presentation of symptoms today, she felt dizzy."))
+    assert p2["recurrence"] is None
+
+
 def test_priors_do_not_change_classification():
     """The core safety invariant: compute() reads priors, classify() does not.
     The current-note verdict is identical whether or not priors exist."""

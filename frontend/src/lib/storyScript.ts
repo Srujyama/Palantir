@@ -62,9 +62,9 @@ export const STORY_STEPS: StoryStep[] = [
     route: `/p/${STORY_PATIENT_ID}`,
     title: "Trajectory — lactate clearing, gaps resolved",
     caption:
-      "This isn't a snapshot. The timeline shows the sepsis bundle firing, lactate trending down on the recheck, and the protocol gaps flipping from open to resolved. You can watch the patient get un-stuck.",
+      "This isn't a snapshot. The trajectory panel shows lactate trending down across three notes, creatinine worsening, and the sepsis bundle steps that flipped from open to documented — gaps closed across notes, not silent failures. You can watch the patient get un-stuck.",
     durationMs: 9000,
-    highlightSelector: ".tl-list",
+    highlightSelector: ".traj-section, .traj-labs",
   },
   {
     id: "sandbox",
@@ -73,7 +73,7 @@ export const STORY_STEPS: StoryStep[] = [
     caption:
       "Drop in any free-text note. Extraction, classification, protocol matching, ICD — every stage timed in milliseconds. No language model sits in the recommendation path. The output is deterministic and you can read why.",
     durationMs: 10000,
-    highlightSelector: ".sandbox-stage, .anal-card, .section",
+    highlightSelector: ".sb-stage, .section",
   },
   {
     id: "capacity",

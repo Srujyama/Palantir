@@ -21,6 +21,7 @@ toward or away from the door.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -199,11 +200,16 @@ _ORDINALS = {
     "fifth": 5, "5th": 5,
 }
 
-import re
-
+# Ordinal must directly modify an admission/hospitalization noun, optionally
+# with one short clinical qualifier between (e.g. "third DKA admission"). We
+# deliberately do NOT match "visit"/"presentation" (idiom-collides with "second
+# presentation of symptoms") nor allow arbitrary text between the ordinal and
+# the noun (which let "2nd dose ... this admission" through). A trailing window
+# phrase ("in 8 months") is captured when present.
 _RECUR_RE = re.compile(
-    r"\b(second|third|fourth|fifth|2nd|3rd|4th|5th)\b[^.\n]{0,60}?"
-    r"\b(admission|admitted|presentation|visit|hospitalization)\b"
+    r"\b(second|third|fourth|fifth|2nd|3rd|4th|5th)\s+"
+    r"(?:[A-Za-z/]+\s+){0,2}"                       # up to 2 qualifier words (DKA, CHF…)
+    r"(admission|hospitalization|hospital\s+admission)\b"
     r"([^.\n]{0,40}?\b(?:in|over|within|past)\b[^.\n]{0,30})?",
     re.I,
 )
@@ -227,8 +233,17 @@ def _recurrence(note_texts: List[str]) -> Optional[Recurrence]:
 
 
 def _resolved_gaps(notes: List[NoteInput]) -> List[ResolvedGap]:
-    """Gaps that were missing in the earliest note but documented by the
-    current (last) note. Pure narrative — proves 'done and resolved'."""
+    """Gaps that were missing in the earliest note but DOCUMENTED by the
+    current note. Pure narrative — proves 'done and resolved'.
+
+    Strict definition: the protocol must STILL trigger in the current note and
+    the specific action must have moved out of its missing set (i.e. the step
+    is now documented). A protocol that simply stops triggering — because the
+    presentation changed (vitals improved, SIRS no longer charted) — is NOT
+    evidence the action was performed, so it is deliberately excluded. We will
+    not tell a charge nurse "antibiotics resolved" when antibiotics were never
+    charted; that would be a dangerous false reassurance.
+    """
     if len(notes) < 2:
         return []
     earliest = notes[0].note_text
@@ -248,8 +263,13 @@ def _resolved_gaps(notes: List[NoteInput]) -> List[ResolvedGap]:
     resolved: List[ResolvedGap] = []
     for (pkey, akey), (pname, alabel) in early_missing.items():
         pm = current_matches.get(pkey)
-        still_missing = pm and pm.triggered and any(a.key == akey for a in pm.missing)
-        if not still_missing:
+        if not (pm and pm.triggered):
+            continue  # protocol no longer applies — not evidence the step was done
+        now_documented = (
+            any(a.key == akey for a in pm.documented)
+            and not any(a.key == akey for a in pm.missing)
+        )
+        if now_documented:
             resolved.append(
                 ResolvedGap(
                     protocol_key=pkey,

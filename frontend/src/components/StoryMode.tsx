@@ -119,12 +119,21 @@ export function StoryMode() {
   }, [active, playing, index, step, next]);
 
   // Keyboard transport while active.
+  //
+  // Registered in the CAPTURE phase so it runs before the other window-level
+  // keydown listeners (QueuePage j/k/Enter/x, KeyboardShortcuts g-chords). For
+  // any key while the tour is active we stopImmediatePropagation, so those
+  // handlers stay inert and can't yank the user off the tour route. We still
+  // let typing into form fields through (the tour never focuses one, but be safe).
   useEffect(() => {
     if (!active) return;
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement | null)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      // Swallow the event so no other global handler acts on it during a tour.
+      e.stopImmediatePropagation();
 
       if (e.key === "Escape") {
         e.preventDefault();
@@ -139,9 +148,10 @@ export function StoryMode() {
         e.preventDefault();
         setPlaying((v) => !v);
       }
+      // Other keys are intentionally swallowed (no-op) while the tour is active.
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("keydown", onKey, { capture: true });
+    return () => window.removeEventListener("keydown", onKey, { capture: true });
   }, [active, next, prev, exit]);
 
   if (!active || !step) return null;
