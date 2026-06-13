@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../lib/api";
+import type { Stats } from "../types/api";
 import "../styles/landing.css";
 
 const PROTOCOL_SHOWCASE: Array<{
@@ -173,6 +176,25 @@ const FAQ: Array<{ q: string; a: string }> = [
 ];
 
 export function LandingPage() {
+  // Live snapshot numbers; the static values below are sample figures shown
+  // when the API is unreachable (e.g. static hosting of the landing page alone).
+  // They mirror the current notional corpus so an outage doesn't make this page
+  // contradict the console next door.
+  const [stats, setStats] = useState<Stats | null>(null);
+  const [offline, setOffline] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    api.stats()
+      .then((s) => { if (!cancelled) { setStats(s); setOffline(false); } })
+      .catch(() => { if (!cancelled) setOffline(true); });
+    return () => { cancelled = true; };
+  }, []);
+
+  const patientsTracked = stats?.total_patients ?? 176;
+  const criticalNow = stats?.by_urgency?.red ?? 44;
+  const silentGaps = stats?.silent_failures ?? 192;
+
   return (
     <div className="landing">
       <div className="landing-top">
@@ -219,12 +241,12 @@ export function LandingPage() {
           </div>
 
           <aside className="facts">
-            <h4>Live snapshot · all wings</h4>
+            <h4>{offline ? "Sample figures · live API offline" : "Live snapshot · all wings"}</h4>
             <dl>
-              <dt>Patients tracked</dt><dd>176</dd>
+              <dt>Patients tracked</dt><dd>{patientsTracked}</dd>
               <dt>Beds (6 wings)</dt><dd>180</dd>
-              <dt>Critical right now</dt><dd>64</dd>
-              <dt>Silent protocol gaps</dt><dd>196</dd>
+              <dt>Critical right now</dt><dd>{criticalNow}</dd>
+              <dt>Silent protocol gaps</dt><dd>{silentGaps}</dd>
               <dt>Care pathways modeled</dt><dd>12</dd>
               <dt>ICD-10 reference set</dt><dd>39 codes</dd>
               <dt>Bottleneck categories</dt><dd>7</dd>

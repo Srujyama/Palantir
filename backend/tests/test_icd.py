@@ -1,6 +1,6 @@
 """Tests for the ICD-10 candidate matcher."""
 
-from app.nlp.icd_matcher import matcher
+from app.nlp.icd_matcher import expand_abbreviations, matcher
 
 
 def test_sepsis_note_returns_sepsis_codes():
@@ -35,3 +35,42 @@ def test_scores_descending():
     matches = matcher().match(note, k=5)
     scores = [m.score for m in matches]
     assert scores == sorted(scores, reverse=True)
+
+
+def test_aki_abbreviation_retrieves_kidney_codes():
+    """`AKI` never appears in ICD descriptions — the abbreviation expansion
+    must bridge it to N17 (acute kidney failure) in the top 5."""
+    note = "68yo with AKI, creatinine rising on home lisinopril and ibuprofen."
+    matches = matcher().match(note, k=5)
+    codes = [m.code for m in matches]
+    assert any(c.startswith("N17") for c in codes), \
+        f"expected an N17 code in top 5, got {codes}"
+
+
+def test_gib_abbreviation_retrieves_bleeding_codes():
+    note = "81yo with GIB, hgb dropped to 7.9 overnight."
+    matches = matcher().match(note, k=5)
+    descriptions = " ".join(m.description.lower() for m in matches)
+    assert "hemorrhage" in descriptions or "bleeding" in descriptions, \
+        f"expected GI-bleed retrieval, got {[m.code for m in matches]}"
+
+
+def test_expand_abbreviations_appends_and_preserves_original():
+    note = "68yo with AKI and CHF exacerbation."
+    expanded = expand_abbreviations(note)
+    # Original text is preserved verbatim at the start — offsets unaffected.
+    assert expanded.startswith(note)
+    assert "acute kidney injury" in expanded
+    assert "congestive heart failure" in expanded
+
+
+def test_expand_abbreviations_noop_without_abbreviations():
+    note = "Generic admission note for fever and weakness."
+    assert expand_abbreviations(note) == note
+
+
+def test_expand_abbreviations_uppercase_only_for_acronyms():
+    """Lowercase English words must not trigger all-caps acronym expansions
+    ('af' fragment vs AF, 'us' vs US-style pitfalls)."""
+    note = "Patient safe after transfer; pet care arranged."
+    assert expand_abbreviations(note) == note

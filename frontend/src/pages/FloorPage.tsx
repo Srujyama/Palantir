@@ -93,19 +93,40 @@ export function FloorPage() {
   const [data, setData] = useState<FloorMap | null>(null);
   const [hover, setHover] = useState<FloorBed | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  const load = async () => {
+    try {
+      const d = await api.floor();
+      setData(d);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { void load(); }, []);
+
+  // Titlebar live-tick button dispatches "radar:refresh" — refetch the map.
   useEffect(() => {
-    void (async () => {
-      try {
-        const d = await api.floor();
-        setData(d);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    const onRefresh = () => { void load(); };
+    window.addEventListener("radar:refresh", onRefresh);
+    return () => window.removeEventListener("radar:refresh", onRefresh);
   }, []);
 
-  if (loading || !data) return <div className="empty-state">Loading floor map…</div>;
+  if (!data) {
+    if (loading) return <div className="empty-state">Loading floor map…</div>;
+    return (
+      <div className="floor-page">
+        <div className="error-strip">
+          <span>Floor map failed to load{error ? `: ${error}` : ""}</span>
+          <button className="btn" onClick={() => { setLoading(true); void load(); }}>Retry</button>
+        </div>
+      </div>
+    );
+  }
 
   const occupied = data.beds.filter((b) => b.patient_id).length;
   const red = data.beds.filter((b) => b.urgency === "red").length;
@@ -114,6 +135,12 @@ export function FloorPage() {
 
   return (
     <div className="floor-page">
+      {error && (
+        <div className="error-strip" style={{ marginBottom: "var(--s-3)" }}>
+          <span>Refresh failed: {error}</span>
+          <button className="btn" onClick={() => void load()}>Retry</button>
+        </div>
+      )}
       <div className="floor-topbar">
         <div className="floor-title">
           <div className="t-eyebrow">Operational Coordination · spatial view</div>

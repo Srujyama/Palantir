@@ -49,7 +49,12 @@ SEPSIS = Protocol(
     name="Surviving Sepsis Hour-1 Bundle",
     triggers=[
         r"\bsepsis\b", r"\bseptic\b", r"\bSIRS\b",
-        r"lactate\s*[>:]?\s*[2-9]",      # lactate > 2
+        # A bare lactate only auto-fires the hour-1 bundle at the septic-shock
+        # threshold (>= 4). A moderate lactate (2-3.9) without any sepsis /
+        # SIRS language (surgical abdomen, limb ischemia, seizure...) does not
+        # by itself owe the bundle — those notes trigger via the explicit
+        # sepsis-language patterns above when sepsis is actually suspected.
+        r"lactate\s*[>:]?\s*(?:[4-9]|[1-9]\d)(?:\.\d)?",
         r"hypotension", r"\bMAP\b\s*<", r"BP\s*\d{2}/\d{2}",
     ],
     expected_actions=[
@@ -68,13 +73,15 @@ SEPSIS = Protocol(
             "Administer broad-spectrum antibiotics",
             [
                 r"\b(antibiotic|antibiotics|abx)\b\s*(given|started|administered|initiated|ordered)",
+                r"broad-?spectrum\s+(antibiotics?|abx)",
                 r"\b(vancomycin|piperacillin|tazobactam|cefepime|meropenem|ceftriaxone|zosyn|cefazolin|levofloxacin|azithromycin|ciprofloxacin)\b",
             ],
         ),
         ExpectedAction(
             "fluids",
             "Begin 30 mL/kg crystalloid resuscitation",
-            [r"30\s*mL/kg", r"fluid\s+bolus", r"IV\s+fluids?\s+(initiated|bolus|running)"],
+            # "IVF" is the standard plan-line shorthand for IV fluids.
+            [r"30\s*mL/kg", r"fluid\s+bolus", r"IV\s+fluids?\s+(initiated|bolus|running)", r"\bIVF\b"],
         ),
     ],
     time_window_hours=1,
@@ -165,7 +172,7 @@ CAP = Protocol(
     key="cap",
     name="Community-Acquired Pneumonia Initial Management",
     triggers=[
-        r"community-?acquired\s+pneumonia", r"\bCAP\b\b",
+        r"community-?acquired\s+pneumonia", r"\bCAP\b",
         r"pneumonia.*CURB",
         r"\bpneumonia\b.*(consolidation|infiltrate)",
     ],
@@ -218,7 +225,14 @@ DKA = Protocol(
         ExpectedAction(
             "k_replace",
             "Potassium repletion if K < 5.3",
-            [r"potassium\s+(repletion|replacement|added)", r"\bKCl\b", r"K\s+\d"],
+            # NOTE: a bare K measurement ("K 5.4" in the lab line) is NOT
+            # repletion — require repletion language or an actual KCl order.
+            [
+                r"potassium\s+(repletion|replacement|added|repleted|replaced)",
+                r"\bKCl\b",
+                r"replet\w*\s+K\b",
+                r"\bK\s+(rider|repletion|replacement|repleted|replaced)\b",
+            ],
         ),
         ExpectedAction(
             "monitor_gap",
@@ -336,7 +350,11 @@ AKI = Protocol(
             "med_review",
             "Medication review for nephrotoxins",
             [
-                r"hold\s+(NSAID|ibuprofen|naproxen|ACE|ARB|lisinopril|losartan)",
+                # "hold/held/holding" any common nephrotoxin counts as the
+                # review having happened (aminoglycosides and contrast are
+                # nephrotoxins just like NSAIDs and RAAS blockers).
+                r"h[eo]ld\w*\s+(NSAIDs?|ibuprofen|naproxen|ACE\w*|ARBs?|lisinopril|losartan"
+                r"|vancomycin|tobramycin|gentamicin|aminoglycosides?|contrast|nephrotoxi\w+)",
                 r"nephrotoxic\s+(review|hold|stop)",
                 r"pharmacy\s+review",
                 r"renal\s+dosing",
@@ -488,7 +506,9 @@ HYPERKALEMIA = Protocol(
             "Removal: diuretic, kayexalate, or dialysis",
             [
                 r"\b(furosemide|lasix|patiromer|kayexalate|sodium\s+polystyrene)\b",
-                r"\bdialysis\b", r"\bCRRT\b", r"\bHD\b",
+                # "HD 3" / "HD #3" is hospital-day shorthand, not hemodialysis —
+                # exclude HD followed by a number.
+                r"\bdialysis\b", r"\bCRRT\b", r"\bHD\b(?!\s*#?\s*\d)",
             ],
         ),
     ],

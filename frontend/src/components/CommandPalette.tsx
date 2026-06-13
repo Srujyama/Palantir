@@ -49,7 +49,20 @@ export function CommandPalette() {
       { id: "f", label: "Go to Floor Map", hint: "G then F", kind: "nav", perform: () => navigate("/floor") },
       { id: "a", label: "Go to Analytics", hint: "G then A", kind: "nav", perform: () => navigate("/analytics") },
       { id: "h", label: "Go to Handoff", hint: "G then H", kind: "nav", perform: () => navigate("/handoff") },
+      { id: "y", label: "Go to Capacity", hint: "G then Y", kind: "nav", perform: () => navigate("/capacity") },
+      { id: "s", label: "Go to Sandbox", hint: "G then S", kind: "nav", perform: () => navigate("/sandbox") },
       { id: "l", label: "Back to Landing", hint: "G then L", kind: "nav", perform: () => navigate("/") },
+    ];
+    const actions: CommandItem[] = [
+      {
+        id: "act-tick",
+        label: "Run live tick",
+        hint: "+60 min",
+        kind: "action",
+        // Route through the titlebar's guarded runTick (in-flight lock + toast)
+        // rather than firing the mutation directly with no feedback.
+        perform: () => window.dispatchEvent(new CustomEvent("radar:run-tick")),
+      },
     ];
     const filters: CommandItem[] = [
       { id: "fr", label: "Filter: critical only", hint: "queue", kind: "filter", perform: () => navigate("/dashboard?urgency=red") },
@@ -67,7 +80,7 @@ export function CommandPalette() {
       kind: "patient",
       perform: () => navigate(`/p/${p.id}`),
     }));
-    return [...nav, ...filters, ...patientNav];
+    return [...nav, ...actions, ...filters, ...patientNav];
   }, [navigate, patients]);
 
   const filtered = useMemo(() => {

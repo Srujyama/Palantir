@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { api } from "../lib/api";
 import type { ActionEventItem, ActionItem, Bottleneck } from "../types/api";
-import { ownerLabel } from "../lib/format";
+import { fmtMinutes, ownerLabel } from "../lib/format";
 import { UrgencyPill } from "./UrgencyPill";
 
 interface Props {
@@ -43,6 +43,7 @@ function ActionRow({
 }) {
   const [audit, setAudit] = useState<ActionEventItem[] | null>(null);
   const [showAudit, setShowAudit] = useState(false);
+  const [auditError, setAuditError] = useState<string | null>(null);
 
   const toggleAudit = async () => {
     if (showAudit) {
@@ -51,8 +52,12 @@ function ActionRow({
     }
     setShowAudit(true);
     if (!audit) {
-      const evs = await api.actionEvents(a.id);
-      setAudit(evs);
+      setAuditError(null);
+      try {
+        setAudit(await api.actionEvents(a.id));
+      } catch (err) {
+        setAuditError(err instanceof Error ? err.message : String(err));
+      }
     }
   };
 
@@ -60,7 +65,20 @@ function ActionRow({
     <div className="action-row">
       <UrgencyPill urgency={a.urgency} />
       <div>
-        <div className="title">{a.title}</div>
+        <div className="action-title-row">
+          <div className="title">{a.title}</div>
+          {a.status !== "resolved" && a.overdue && (
+            <span className="sla-chip overdue">
+              OVERDUE{a.minutes_remaining != null ? ` +${fmtMinutes(-a.minutes_remaining)}` : ""}
+            </span>
+          )}
+          {a.status !== "resolved" && !a.overdue && a.due_at && a.minutes_remaining != null && (
+            <span className="sla-chip">due in {fmtMinutes(a.minutes_remaining)}</span>
+          )}
+          {a.escalation_level > 0 && (
+            <span className="sla-chip esc">ESC L{a.escalation_level}</span>
+          )}
+        </div>
         <div className="desc">{a.description}</div>
         <div className="meta" style={{ marginTop: 4 }}>
           {ownerLabel(a.owner)} · {a.status} · #{a.id}
@@ -68,7 +86,12 @@ function ActionRow({
         {showAudit && (
           <div className="audit-block">
             <div className="audit-head mono">Audit trail · {audit ? audit.length : "…"} events</div>
-            {audit ? (
+            {auditError ? (
+              <div className="dim small" style={{ color: "var(--signal-red)" }}>
+                Audit failed: {auditError}{" "}
+                <button className="btn" onClick={() => { setAudit(null); void toggleAudit(); }}>Retry</button>
+              </div>
+            ) : audit ? (
               audit.length === 0
                 ? <div className="dim small">No events recorded yet.</div>
                 : audit.map((ev) => <EventRow key={ev.id} ev={ev} />)
@@ -96,9 +119,11 @@ function ActionRow({
 
 export function ActionsList({ patientId, actions, primaryBottleneck, onChange }: Props) {
   const [creating, setCreating] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const createFromPrimary = async () => {
     setCreating(true);
+    setActionError(null);
     try {
       await api.createAction(patientId, {
         title: primaryBottleneck.recommended_action,
@@ -108,14 +133,21 @@ export function ActionsList({ patientId, actions, primaryBottleneck, onChange }:
         source_category: primaryBottleneck.category,
       });
       onChange();
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : String(err));
     } finally {
       setCreating(false);
     }
   };
 
   const update = async (id: number, status: ActionItem["status"]) => {
-    await api.updateAction(id, { status });
-    onChange();
+    setActionError(null);
+    try {
+      await api.updateAction(id, { status });
+      onChange();
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : String(err));
+    }
   };
 
   return (
@@ -125,6 +157,11 @@ export function ActionsList({ patientId, actions, primaryBottleneck, onChange }:
           {creating ? "CREATING…" : "+ Create action from recommendation"}
         </button>
       </div>
+      {actionError && (
+        <div className="error-strip" style={{ marginBottom: 12 }}>
+          <span>Action failed: {actionError}</span>
+        </div>
+      )}
       {actions.length === 0 ? (
         <div className="empty-state" style={{ padding: 24 }}>No actions yet.</div>
       ) : (

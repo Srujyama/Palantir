@@ -13,6 +13,7 @@ export interface PatientSummary {
   primary_owner: string;
   primary_action: string;
   open_actions: number;
+  overdue_actions: number;
   silent_failure_count: number;
 }
 
@@ -73,6 +74,11 @@ export interface ActionItem {
   source_category: string;
   created_at: string;
   updated_at: string;
+  sla_minutes: number | null;
+  due_at: string | null;
+  escalation_level: number;
+  overdue: boolean;
+  minutes_remaining: number | null;
 }
 
 export interface Finding {
@@ -217,4 +223,182 @@ export interface Stats {
   open_actions: number;
   silent_failures: number;
   median_arrival_age_hours: number;
+}
+
+// ── Capacity forecast / what-if simulation ──────────────────────────────
+
+export interface CensusPoint {
+  hour_offset: number;
+  projected_census: number;
+  projected_discharges_cum: number;
+  projected_admissions_cum: number;
+  projected_free: number;
+}
+
+export interface WingCapacity {
+  wing: string;
+  beds_total: number;
+  occupied: number;
+  free: number;
+  projected_discharges_24h: number;
+}
+
+export interface ModelAssumption {
+  key: string;
+  label: string;
+  value: string;
+  rationale: string;
+}
+
+export interface CapacityForecast {
+  anchor: string;
+  horizon_hours: number;
+  beds_total: number;
+  census_now: number;
+  series: CensusPoint[];
+  wings: WingCapacity[];
+  assumptions: ModelAssumption[];
+}
+
+export interface FreedPatient {
+  patient_id: string;
+  room: string | null;
+  category: string;
+  urgency: Urgency;
+  baseline_eta_hours: number;
+  scenario_eta_hours: number;
+  gained_hours: number;
+}
+
+export interface CapacitySimulation {
+  anchor: string;
+  horizon_hours: number;
+  beds_total: number;
+  baseline: CensusPoint[];
+  scenario: CensusPoint[];
+  freed: FreedPatient[];
+  delta_free_beds: Record<string, number>;
+  assumptions: ModelAssumption[];
+}
+
+// ── Triage sandbox ──────────────────────────────────────────────────────
+
+export interface SandboxTriage {
+  primary: Bottleneck;
+  secondary: Bottleneck[];
+  silent_failures: SilentFailure[];
+  protocol_matches: ProtocolMatch[];
+}
+
+export interface SandboxResult {
+  triage: SandboxTriage;
+  extraction: Extraction;
+  icd_candidates: ICDCandidate[];
+  stage_timings_ms: {
+    extract: number;
+    classify: number;
+    icd: number;
+    total: number;
+  };
+  engine: {
+    protocols_evaluated: number;
+    categories: number;
+    version: string;
+  };
+}
+
+export interface SandboxSample {
+  key: string;
+  label: string;
+  note_text: string;
+  expected_category: string;
+}
+
+// ── Eval / model card ───────────────────────────────────────────────────
+
+export interface EvalCategoryMetrics {
+  category: string;
+  precision: number;
+  recall: number;
+  f1: number;
+  support: number;
+}
+
+export interface EvalConfusionCell {
+  truth: string;
+  predicted: string;
+  count: number;
+}
+
+export interface EvalSummary {
+  n: number;
+  accuracy: number;
+  per_category: EvalCategoryMetrics[];
+  confusion: EvalConfusionCell[];
+  owner_routing: { n: number; accuracy: number };
+}
+
+export interface EvalMiss {
+  patient_id: string;
+  miss_type: "category" | "owner";
+  truth: string;
+  predicted: string;
+  urgency: Urgency;
+  template_name: string | null;
+}
+
+// ── Drug interactions ───────────────────────────────────────────────────
+
+export interface InteractionMed {
+  name: string;
+  class: string;
+  evidence: Span;
+}
+
+export interface InteractionFlag {
+  rule_key: string;
+  name: string;
+  severity: "red" | "amber";
+  mechanism: string;
+  recommendation: string;
+  citation: string;
+  meds_involved: InteractionMed[];
+  context_evidence: Span[];
+}
+
+export interface PatientInteractions {
+  patient_id: string;
+  flags: InteractionFlag[];
+}
+
+// ── Live floor tick ─────────────────────────────────────────────────────
+
+export interface TickResult {
+  admitted: { patient_id: string; room: string; category: string; urgency: Urgency }[];
+  discharged: { patient_id: string; room: string | null }[];
+  actions_progressed: { action_id: number; from: string; to: string }[];
+  census_after: number;
+  tick_minutes: number;
+}
+
+export interface SimStatus {
+  census: number;
+  beds_total: number;
+  beds_free: number;
+  open_actions: number;
+  clear_patients: number;
+}
+
+// ── SLA sweep ───────────────────────────────────────────────────────────
+
+export interface SweepResult {
+  checked: number;
+  breached: number;
+  escalated_ids: number[];
+}
+
+export interface BulkUpdateResult {
+  updated: ActionItem[];
+  missing: number[];
+  skipped: { id: number; reason: string }[];
 }

@@ -1,11 +1,13 @@
 """End-to-end pipeline that takes a Patient row, runs extraction +
 classification + ICD matching, and persists the Triage row.
 
-Kept in one place so both the ingest script and the /reprocess endpoint hit
-the same code path.
+Kept in one place so the ingest script, the live-tick simulator, and the
+sandbox all share one code path.
 """
 
 from __future__ import annotations
+
+from datetime import datetime
 
 from sqlalchemy.orm import Session
 
@@ -43,6 +45,7 @@ def run(db: Session, patient: Patient) -> Triage:
         existing.payload = payload
         existing.extraction = extraction_payload
         existing.icd_candidates = icd_payload
+        existing.computed_at = datetime.utcnow()
         return existing
 
     row = Triage(

@@ -65,19 +65,39 @@ function Block({
 export function HandoffPage() {
   const [data, setData] = useState<HandoffReport | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    void (async () => {
-      try {
-        const d = await api.handoff();
-        setData(d);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    const load = () => {
+      void (async () => {
+        try {
+          const d = await api.handoff();
+          setData(d);
+          setError(null);
+        } catch (err) {
+          setError(err instanceof Error ? err.message : String(err));
+        } finally {
+          setLoading(false);
+        }
+      })();
+    };
+    load();
+    // LIVE TICK changes who is on the floor; rebuild the handoff in place.
+    const onRefresh = () => load();
+    window.addEventListener("radar:refresh", onRefresh);
+    return () => window.removeEventListener("radar:refresh", onRefresh);
   }, []);
 
-  if (loading || !data) return <div className="empty-state">Building handoff report…</div>;
+  if (loading) return <div className="empty-state">Building handoff report…</div>;
+  if (!data) {
+    return (
+      <div className="empty-state">
+        <div className="error-strip" style={{ display: "inline-flex" }}>
+          <span>Handoff failed to load{error ? `: ${error}` : ""}</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="ho-page">

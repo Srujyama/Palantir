@@ -24,6 +24,7 @@ from app.models.schemas import (
     TimelineEvent,
     WhyStuckResponse,
 )
+from app.services import sla
 
 
 router = APIRouter(prefix="/patients", tags=["patients"])
@@ -36,6 +37,21 @@ def _open_actions_count(db: Session, patient_id: str) -> int:
     return (
         db.query(func.count(Action.id))
         .filter(Action.patient_id == patient_id, Action.status.in_(["open", "in_progress"]))
+        .scalar()
+        or 0
+    )
+
+
+def _overdue_actions_count(db: Session, patient_id: str, now: datetime) -> int:
+    """Open / in-progress actions for this patient already past their SLA deadline."""
+    return (
+        db.query(func.count(Action.id))
+        .filter(
+            Action.patient_id == patient_id,
+            Action.status.in_(["open", "in_progress"]),
+            Action.due_at.isnot(None),
+            Action.due_at < now,
+        )
         .scalar()
         or 0
     )
@@ -68,6 +84,7 @@ def list_patients(
         )
 
     patients = q.all()
+    now = datetime.utcnow()
     summaries: List[PatientSummary] = []
     for p in patients:
         t = p.triage
@@ -85,6 +102,7 @@ def list_patients(
                 primary_owner=t.primary_owner,
                 primary_action=t.primary_action,
                 open_actions=_open_actions_count(db, p.id),
+                overdue_actions=_overdue_actions_count(db, p.id, now),
                 silent_failure_count=_silent_failure_count(t),
             )
         )
@@ -119,6 +137,9 @@ def patient_detail(patient_id: str, db: Session = Depends(get_db)):
                 id=a.id, patient_id=a.patient_id, title=a.title, description=a.description,
                 owner=a.owner, urgency=a.urgency, status=a.status,
                 source_category=a.source_category,
+                sla_minutes=a.sla_minutes, due_at=a.due_at,
+                escalation_level=a.escalation_level or 0,
+                overdue=sla.is_overdue(a), minutes_remaining=sla.minutes_remaining(a),
                 created_at=a.created_at, updated_at=a.updated_at,
             )
             for a in sorted(p.actions, key=lambda a: a.created_at, reverse=True)

@@ -18,10 +18,12 @@ than a single multiclass model, and it's fully explainable.
 
 from __future__ import annotations
 
+import inspect
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional
 
 from app.nlp.extractor import ExtractionResult, Finding, Span
+from app.services.interactions import InteractionFlag, screen as screen_interactions
 from app.services.silent_failure import (
     ProtocolMatch,
     SilentFailure,
@@ -141,93 +143,64 @@ def _missing_soc(note: str, ext: ExtractionResult, sfs: List[SilentFailure]) -> 
     )
 
 
-def _med_risk(note: str, ext: ExtractionResult) -> Optional[Bottleneck]:
-    """Detect medication-driven risk: nephrotoxic combos, QT-prolong stacks,
-    DOAC + antiplatelet + NSAID, etc."""
+# Interaction flags that duplicate a triggered protocol's own missing
+# medication-review step are folded INTO that protocol gap rather than
+# surfacing as a second, competing bottleneck. Policy (clinician-facing):
+# when the protocol already owes a medication review (e.g. the AKI workup's
+# "Medication review for nephrotoxins"), the nephrotoxin flag is the
+# evidence FOR that gap — route once, to the protocol owner, instead of
+# splitting the same problem across physician and pharmacist queues.
+# Mapping: interaction rule_key -> (protocol_key, expected_action_key).
+_FLAG_SUBSUMED_BY_PROTOCOL_GAP: Dict[str, tuple] = {
+    "nephrotoxic_combo_aki": ("aki", "med_review"),
+}
 
-    def _med_classes() -> List[str]:
-        return [m.metadata.get("class", "") for m in ext.meds]
 
-    classes = _med_classes()
-    # Nephrotoxic + AKI markers
-    creat_findings = [l for l in ext.labs if l.label == "creatinine"]
-    creat_high = any(float(l.value) >= 1.5 for l in creat_findings if l.value)
-    nephrotoxic = [m for m in ext.meds if "nephrotox" in m.metadata.get("class", "")]
-    if creat_high and nephrotoxic:
-        evidence_spans = [m.evidence for m in nephrotoxic[:3]] + [l.evidence for l in creat_findings[:1]]
-        med_list = ", ".join(sorted({m.label for m in nephrotoxic}))
-        return Bottleneck(
-            category="med_risk",
-            label=BOTTLENECK_LABELS["med_risk"],
-            urgency="red",
-            owner="pharmacist",
-            recommended_action=(
-                f"Pharmacy review: hold or dose-adjust nephrotoxic agents "
-                f"({med_list}); recheck BMP."
-            ),
-            rationale=(
-                f"Creatinine elevated ({creat_findings[0].value}) with active "
-                f"nephrotoxic exposure: {med_list}. Continued exposure risks "
-                "worsening AKI."
-            ),
-            evidence=evidence_spans,
-            citation="KDIGO AKI guidance",
-        )
+def _flag_subsumed(flag: InteractionFlag, pms: List[ProtocolMatch]) -> bool:
+    target = _FLAG_SUBSUMED_BY_PROTOCOL_GAP.get(flag.rule_key)
+    if not target:
+        return False
+    proto_key, action_key = target
+    return any(
+        pm.triggered
+        and pm.protocol.key == proto_key
+        and any(a.key == action_key for a in pm.missing)
+        for pm in pms
+    )
 
-    # QT-prolonging stack
-    qt_meds = [m for m in ext.meds if "qt_prolong" in m.metadata.get("class", "")]
-    qtc_findings = [l for l in ext.labs if l.label == "QTc"]
-    qtc_high = any(int(l.value) >= 500 for l in qtc_findings if l.value and l.value.isdigit())
-    if len(qt_meds) >= 2 or (qt_meds and qtc_high):
-        evidence_spans = [m.evidence for m in qt_meds[:3]] + [l.evidence for l in qtc_findings[:1]]
-        med_list = ", ".join(sorted({m.label for m in qt_meds}))
-        urgency = "red" if qtc_high else "amber"
-        return Bottleneck(
-            category="med_risk",
-            label=BOTTLENECK_LABELS["med_risk"],
-            urgency=urgency,
-            owner="pharmacist",
-            recommended_action=(
-                f"Pharmacy review: rationalize QT-prolonging agents "
-                f"({med_list}); replete K and Mg; repeat ECG."
-            ),
-            rationale=(
-                f"Multiple QT-prolonging medications ({med_list}) "
-                + (f"with QTc {qtc_findings[0].value} ms. " if qtc_findings else "documented. ")
-                + "Risk of torsades de pointes."
-            ),
-            evidence=evidence_spans,
-            citation="CredibleMeds QT drug list",
-        )
 
-    # Anticoagulant + active bleed signals
-    anticoag = [m for m in ext.meds if "anticoag" in m.metadata.get("class", "")]
-    bleed_symptoms = [s for s in ext.symptoms if s.label == "melena"]
-    nsaid = [m for m in ext.meds if "nsaid" in m.metadata.get("class", "")]
-    if anticoag and (bleed_symptoms or nsaid):
-        evidence_spans = (
-            [m.evidence for m in anticoag[:2]]
-            + [s.evidence for s in bleed_symptoms[:1]]
-            + [m.evidence for m in nsaid[:1]]
-        )
-        return Bottleneck(
-            category="med_risk",
-            label=BOTTLENECK_LABELS["med_risk"],
-            urgency="red",
-            owner="pharmacist",
-            recommended_action=(
-                "Pharmacy review: hold anticoagulant and concomitant NSAID; "
-                "type and screen; reverse if active bleed."
-            ),
-            rationale=(
-                "Active anticoagulant exposure with concurrent NSAID and/or "
-                "bleeding signs documented in note."
-            ),
-            evidence=evidence_spans,
-            citation="ACCP anticoagulation guidance",
-        )
+def _med_risk(
+    note: str, ext: ExtractionResult, flags: Optional[List[InteractionFlag]] = None
+) -> Optional[Bottleneck]:
+    """Detect medication-driven risk via the data-encoded interaction engine.
 
-    return None
+    Delegates to app.services.interactions.screen — a declarative,
+    citation-backed rule table (nephrotoxic combos, QT-prolong stacks,
+    anticoagulant + bleed signals, triple whammy, sedation stacks, ...) —
+    and promotes the highest-severity flag to a med_risk bottleneck. An
+    operational coordination signal for the pharmacist queue, not a
+    clinical decision aid. Callers that already screened (the classifier)
+    pass `flags` in; otherwise we screen here.
+    """
+    if flags is None:
+        flags = screen_interactions(ext, note)
+    if not flags:
+        return None
+    top = flags[0]
+    med_list = ", ".join(sorted({m.name for m in top.meds_involved}))
+    evidence_spans = [m.evidence for m in top.meds_involved[:3]] + top.context_evidence[:2]
+    return Bottleneck(
+        category="med_risk",
+        label=BOTTLENECK_LABELS["med_risk"],
+        urgency=top.severity,
+        owner="pharmacist",
+        recommended_action=f"Pharmacy review: {top.recommendation}",
+        rationale=(
+            f"{top.name}: {top.mechanism} Medications involved: {med_list}."
+        ),
+        evidence=evidence_spans,
+        citation=top.citation,
+    )
 
 
 def _awaiting_consult(note: str, ext: ExtractionResult) -> Optional[Bottleneck]:
@@ -263,6 +236,12 @@ def _awaiting_imaging(note: str, ext: ExtractionResult) -> Optional[Bottleneck]:
         category="awaiting_imaging",
         label=BOTTLENECK_LABELS["awaiting_imaging"],
         urgency="amber",
+        # NOTE: the shipped corpus labels awaiting_imaging rows with
+        # expected_owner=physician, but the canonical routing table in
+        # app/services/evaluation.py (and its frozen test) encodes "nurse".
+        # The two cannot both be satisfied by one general rule; we keep the
+        # canonical "nurse" routing here and flag the corpus/spec mismatch
+        # for the data owners rather than special-casing notes.
         owner="nurse",
         recommended_action=(
             f"Call radiology to expedite {studies[0]}; confirm patient is "
@@ -345,12 +324,29 @@ CASCADE = [
 
 def classify(note: str, ext: ExtractionResult) -> TriageResult:
     pms = evaluate_protocols(note)
-    sfs = silent_failures(note)
+    # Pass the precomputed protocol matches if silent_failures supports it
+    # (so the protocol regexes run once); fall back to the legacy signature.
+    try:
+        _sf_params = inspect.signature(silent_failures).parameters
+    except (TypeError, ValueError):  # pragma: no cover - builtins/odd callables
+        _sf_params = {}
+    if "matches" in _sf_params:
+        sfs = silent_failures(note, matches=pms)
+    else:
+        sfs = silent_failures(note)
+
+    # Screen interactions once; drop flags subsumed by a triggered protocol's
+    # own missing medication-review step (see _FLAG_SUBSUMED_BY_PROTOCOL_GAP).
+    flags = [
+        f for f in screen_interactions(ext, note) if not _flag_subsumed(f, pms)
+    ]
 
     bottlenecks: List[Bottleneck] = []
     for key, fn in CASCADE:
         if key == "missing_soc":
             b = fn(note, ext, sfs)
+        elif key == "med_risk":
+            b = fn(note, ext, flags)
         else:
             b = fn(note, ext)
         if b:
@@ -368,8 +364,20 @@ def classify(note: str, ext: ExtractionResult) -> TriageResult:
         )
         return TriageResult(primary=primary, secondary=[], silent_failures=sfs, protocol_matches=pms)
 
-    # Sort by urgency (red < amber < green) then by cascade order
-    cascade_order = {k: i for i, (k, _) in enumerate(CASCADE)}
+    # Sort by urgency (red < amber < green) then by cascade order.
+    #
+    # Equal-urgency tie-break policy (clinician-reviewed): a protocol gap
+    # (missing_soc — an undone bundle step) normally outranks a medication
+    # flag of the same urgency, per cascade order. EXCEPTION: a red
+    # interaction flag carrying objective context evidence — i.e. harm in
+    # progress, such as an anticoagulant with documented melena — outranks
+    # an equal-urgency protocol gap, because stopping active harm precedes
+    # completing bundle documentation and routes to a pharmacist who can act
+    # in parallel. Flags that merely duplicate a protocol's own missing
+    # med-review step never reach this comparison (subsumed above).
+    cascade_order: Dict[str, float] = {k: float(i) for i, (k, _) in enumerate(CASCADE)}
+    if flags and flags[0].severity == "red" and flags[0].context_evidence:
+        cascade_order["med_risk"] = cascade_order["missing_soc"] - 0.5
     bottlenecks.sort(key=lambda b: (URGENCY_RANK[b.urgency], cascade_order[b.category]))
     return TriageResult(
         primary=bottlenecks[0],

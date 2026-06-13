@@ -68,6 +68,9 @@ class Action(Base):
     urgency = Column(String, nullable=False)
     status = Column(String, nullable=False, default="open")  # open | in_progress | resolved | escalated
     source_category = Column(String, nullable=False)         # which bottleneck created it
+    sla_minutes = Column(Integer, nullable=True)             # policy window from app.services.sla
+    due_at = Column(DateTime, nullable=True)                 # created_at + sla_minutes
+    escalation_level = Column(Integer, nullable=False, default=0)  # bumped on each SLA breach
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 

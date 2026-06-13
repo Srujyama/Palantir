@@ -7,9 +7,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.actions import router as actions_router
 from app.api.analytics import router as analytics_router
+from app.api.capacity import router as capacity_router
+from app.api.evaluation import router as evaluation_router
 from app.api.floor import router as floor_router
 from app.api.handoff import router as handoff_router
+from app.api.interactions import router as interactions_router
 from app.api.patients import router as patients_router
+from app.api.sandbox import router as sandbox_router
+from app.api.simulate import router as simulate_router
 from app.api.stats import router as stats_router
 from app.db.database import Base, engine
 
@@ -47,3 +52,8 @@ app.include_router(stats_router)
 app.include_router(floor_router)
 app.include_router(analytics_router)
 app.include_router(handoff_router)
+app.include_router(capacity_router)
+app.include_router(sandbox_router)
+app.include_router(evaluation_router)
+app.include_router(interactions_router)
+app.include_router(simulate_router)

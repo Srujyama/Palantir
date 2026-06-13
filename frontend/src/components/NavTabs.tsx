@@ -11,6 +11,8 @@ const TABS: Tab[] = [
   { to: "/floor", label: "Floor map", hint: "g f" },
   { to: "/analytics", label: "Analytics", hint: "g a" },
   { to: "/handoff", label: "Handoff", hint: "g h" },
+  { to: "/capacity", label: "Capacity", hint: "g y" },
+  { to: "/sandbox", label: "Sandbox", hint: "g s" },
 ];
 
 export function NavTabs() {

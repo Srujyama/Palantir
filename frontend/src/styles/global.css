@@ -1396,3 +1396,136 @@ table.data tbody tr.cursor {
   .tag, .ho-num, .ho-count, .ho-summary-item .n, .ho-sub { color: #000 !important; }
   .ho-block { page-break-inside: avoid; margin-bottom: 24px; }
 }
+
+/* ── wave-2 additions ── */
+
+/* Error strip — visible fetch-failure state, never an eternal "Loading…" */
+.error-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  background: var(--signal-red-bg);
+  border: 1px solid var(--signal-red);
+  color: var(--signal-red);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+.error-strip .btn { margin-left: auto; flex-shrink: 0; }
+
+/* SLA chips on action rows (ActionsList) */
+.action-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+.sla-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border: 1px solid var(--border-strong);
+  color: var(--fg-3);
+  background: var(--bg-1);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.sla-chip.overdue {
+  color: var(--signal-red);
+  border-color: var(--signal-red);
+  background: var(--signal-red-bg);
+  font-weight: 600;
+}
+.sla-chip.esc {
+  color: var(--signal-red);
+  border-color: var(--signal-red);
+  background: transparent;
+  font-weight: 600;
+}
+
+/* Overdue badge in the queue actions column (PatientTable) */
+.pt-actions-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-2);
+}
+.overdue-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--signal-red);
+  background: var(--signal-red-bg);
+  border: 1px solid var(--signal-red);
+  padding: 1px 4px;
+  white-space: nowrap;
+}
+
+/* Drug-interaction panel (PatientPage) */
+.ix-list { display: flex; flex-direction: column; gap: var(--s-2); }
+.ix-flag {
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: var(--s-3);
+}
+.ix-flag.red { border-left: 3px solid var(--signal-red); }
+.ix-flag.amber { border-left: 3px solid var(--signal-amber); }
+.ix-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-2);
+}
+.ix-name { color: var(--fg-0); font-size: 13px; font-weight: 500; }
+.ix-meds { display: inline-flex; gap: var(--s-1); flex-wrap: wrap; }
+.ix-rec { color: var(--fg-1); font-size: 12.5px; line-height: 1.5; }
+.ix-cite { margin-top: var(--s-1); }
+
+/* Model card (AnalyticsPage) */
+.mc-stats {
+  display: flex;
+  gap: var(--s-6);
+  margin-bottom: var(--s-4);
+}
+.mc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 2px solid var(--border-strong);
+  padding-left: var(--s-3);
+}
+.mc-stat .n {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--fg-0);
+  font-variant-numeric: tabular-nums;
+}
+.mc-stat .l {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+}
+.mc-table-wrap { border: 1px solid var(--border); }
+.mc-table-wrap table.data tbody tr { cursor: default; }
+.mc-honesty {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-3);
+  line-height: 1.6;
+}
+.mc-misses-row {
+  margin-top: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.mc-misses { margin-top: var(--s-3); }

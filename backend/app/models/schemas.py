@@ -5,7 +5,11 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
+
+
+VALID_OWNERS = {"physician", "nurse", "pharmacist", "case_manager", "social_worker"}
+VALID_URGENCIES = {"red", "amber", "green"}
 
 
 class PatientSummary(BaseModel):
@@ -21,6 +25,7 @@ class PatientSummary(BaseModel):
     primary_owner: str
     primary_action: str
     open_actions: int
+    overdue_actions: int = 0
     silent_failure_count: int
 
 
@@ -79,6 +84,11 @@ class ActionResponse(BaseModel):
     urgency: str
     status: str
     source_category: str
+    sla_minutes: Optional[int] = None
+    due_at: Optional[datetime] = None
+    escalation_level: int = 0
+    overdue: bool = False
+    minutes_remaining: Optional[int] = None
     created_at: datetime
     updated_at: datetime
 
@@ -205,11 +215,61 @@ class ActionCreate(BaseModel):
     owner: str
     urgency: str
     source_category: str
+    actor: str = "charge-rn"
+
+    @field_validator("owner")
+    @classmethod
+    def _owner_valid(cls, v: str) -> str:
+        if v not in VALID_OWNERS:
+            raise ValueError(f"owner must be one of {sorted(VALID_OWNERS)}")
+        return v
+
+    @field_validator("urgency")
+    @classmethod
+    def _urgency_valid(cls, v: str) -> str:
+        if v not in VALID_URGENCIES:
+            raise ValueError(f"urgency must be one of {sorted(VALID_URGENCIES)}")
+        return v
 
 
 class ActionUpdate(BaseModel):
     status: Optional[str] = None
     owner: Optional[str] = None
+    actor: str = "charge-rn"
+
+    @field_validator("owner")
+    @classmethod
+    def _owner_valid(cls, v):
+        # A reassignment must target a real role; reject empty strings too.
+        # (status transitions are validated against the state machine below.)
+        if v is not None and v not in VALID_OWNERS:
+            raise ValueError(f"owner must be one of {sorted(VALID_OWNERS)}")
+        return v
+
+
+class ActionNoteCreate(BaseModel):
+    note: str
+    actor: str = "charge-rn"
+
+
+class SweepResponse(BaseModel):
+    """Result of one SLA sweep pass."""
+
+    checked: int
+    breached: int
+    escalated_ids: List[int]
+
+
+class BulkUpdateResponse(BaseModel):
+    """Bulk PATCH report: full rows that changed, plus ids we could not act on.
+
+    `missing` lists ids that don't exist; `skipped` lists ids whose requested
+    status change violated the action state machine (with the reason).
+    """
+
+    updated: List[ActionResponse]
+    missing: List[int] = Field(default_factory=list)
+    skipped: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class StatsResponse(BaseModel):

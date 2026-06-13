@@ -1,0 +1,477 @@
+/* =========================================================================
+   Capacity / What-If page (prefix: cap-)
+   48h bed-census forecast + bottleneck-resolution scenario builder.
+   ========================================================================= */
+
+.cap-page {
+  padding: var(--s-5) var(--s-6);
+  overflow: auto;
+  max-height: calc(100vh - 44px);
+}
+
+.cap-topbar {
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--border);
+}
+.cap-topbar h1 {
+  margin: 4px 0;
+  font-size: 28px;
+  color: var(--fg-0);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- KPI strip (4 cells, bordered block) ---------- */
+
+.kpi-strip.cap-kpis {
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border);
+  margin-bottom: var(--s-4);
+}
+
+/* ---------- Layout: left rail + chart ---------- */
+
+.cap-layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: var(--s-4);
+  margin-bottom: var(--s-4);
+  align-items: start;
+}
+@media (max-width: 1100px) {
+  .cap-layout { grid-template-columns: 1fr; }
+}
+
+.cap-rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.cap-card {
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+}
+.cap-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+.cap-card-body {
+  padding: var(--s-4);
+}
+
+.cap-microlabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-3);
+}
+
+/* ---------- Scenario builder ---------- */
+
+.cap-builder-hint {
+  font-size: 11.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+  margin-bottom: var(--s-3);
+}
+
+.cap-chips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin-bottom: var(--s-4);
+}
+.cap-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg-1);
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  padding: var(--s-2) var(--s-3);
+  cursor: pointer;
+}
+.cap-chip:hover {
+  background: var(--bg-3);
+  border-color: var(--border-active);
+}
+.cap-chip.on {
+  background: var(--signal-blue-bg);
+  border-color: var(--signal-blue);
+  color: var(--fg-0);
+}
+.cap-chip-box {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-1);
+}
+.cap-chip.on .cap-chip-box {
+  background: var(--signal-blue);
+  border-color: var(--signal-blue);
+}
+.cap-chip-label { flex: 1; }
+.cap-chip-count {
+  font-size: 10.5px;
+  color: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.cap-chip.on .cap-chip-count { color: var(--signal-blue); }
+
+.cap-run-row {
+  display: flex;
+  gap: var(--s-2);
+}
+.cap-sim-error {
+  margin-top: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  font-size: 10.5px;
+  color: var(--signal-red);
+  background: var(--signal-red-bg);
+  border: 1px solid var(--signal-red);
+}
+
+/* ---------- Delta readout ---------- */
+
+.cap-delta-big {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--fg-0);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s-3);
+}
+.cap-delta-big .pos { color: var(--signal-green); }
+.cap-delta-big .flat { color: var(--fg-2); }
+.cap-delta-big .dim { font-size: 13px; font-weight: 400; }
+
+.cap-delta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border);
+  margin-bottom: var(--s-3);
+}
+.cap-delta-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-2) var(--s-3);
+  border-right: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.cap-delta-cell:last-child { border-right: 0; }
+.cap-delta-cp {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+}
+.cap-delta-val {
+  font-size: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.cap-delta-val.pos { color: var(--signal-green); }
+.cap-delta-val.flat { color: var(--fg-2); }
+
+.cap-delta-note {
+  font-size: 11.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+.cap-empty-tight { padding: var(--s-5); }
+
+/* ---------- Census chart ---------- */
+
+.cap-chart-card { min-width: 0; }
+
+.cap-legend {
+  display: inline-flex;
+  gap: var(--s-4);
+}
+.cap-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-2);
+}
+.cap-legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 0;
+  border-top: 2px solid var(--fg-1);
+}
+.cap-legend-swatch.base.dimmed { border-top-color: var(--fg-4); }
+.cap-legend-swatch.scen { border-top-color: var(--signal-blue); }
+
+.cap-chart-area {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 0 var(--s-2);
+}
+.cap-chart-ylabels {
+  position: relative;
+  height: 220px;
+}
+.cap-chart-ylabels span {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: var(--fg-3);
+}
+
+.cap-plot {
+  position: relative;
+  height: 220px;
+  background: var(--bg-0);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.cap-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.cap-line-base {
+  fill: none;
+  stroke: var(--fg-1);
+  stroke-width: 1.5;
+}
+.cap-line-base.dimmed { stroke: var(--fg-4); }
+.cap-line-scen {
+  fill: none;
+  stroke: var(--signal-blue);
+  stroke-width: 1.5;
+}
+
+.cap-gridline-y {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--border);
+  pointer-events: none;
+}
+.cap-gridline-y.zero { border-top-color: var(--border-strong); }
+.cap-gridline-x {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--border);
+  pointer-events: none;
+}
+.cap-surge-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px dashed var(--signal-amber);
+  opacity: 0.6;
+  pointer-events: none;
+}
+.cap-surge-label {
+  position: absolute;
+  right: 4px;
+  transform: translateY(-110%);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--signal-amber);
+  pointer-events: none;
+}
+
+.cap-chart-xlabels {
+  position: relative;
+  height: 18px;
+  margin-top: var(--s-1);
+}
+.cap-chart-xlabels span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+.cap-chart-xlabels span[data-edge="start"] { transform: none; }
+.cap-chart-xlabels span[data-edge="end"] { transform: translateX(-100%); }
+
+/* ---------- Sections (freed table, wings, assumptions) ---------- */
+
+.cap-section {
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  margin-bottom: var(--s-4);
+}
+.cap-section .head {
+  justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+}
+.cap-section .body { padding: var(--s-4); }
+.cap-head-count {
+  font-size: 10.5px;
+  color: var(--fg-3);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Freed patients table ---------- */
+
+.cap-freed-table tbody tr { cursor: default; }
+.cap-eta-arrow { color: var(--fg-4); }
+.cap-eta-scen { color: var(--signal-blue); }
+.cap-gained { color: var(--signal-green); }
+
+/* ---------- Wings strip ---------- */
+
+.cap-wings {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+@media (max-width: 1100px) {
+  .cap-wings { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.cap-wing {
+  border: 1px solid var(--border-strong);
+  background: var(--bg-2);
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.cap-wing-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.cap-wing-name {
+  font-size: 13px;
+  color: var(--fg-0);
+  letter-spacing: 0.06em;
+}
+.cap-wing-occ {
+  font-size: 11px;
+  color: var(--fg-2);
+}
+.cap-wing-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-3);
+}
+.cap-wing-free { color: var(--signal-green); }
+.cap-wing-dc { color: var(--fg-1); }
+
+/* ---------- Model assumptions ---------- */
+
+.cap-assump-toggle {
+  width: 100%;
+  background: var(--bg-1);
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+}
+.cap-assump-toggle:hover { background: var(--bg-2); }
+.cap-assump-toggle[aria-expanded="false"] { border-bottom: 0; }
+.cap-assump-hint {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--signal-blue);
+}
+
+.cap-assump-intro {
+  font-size: 11.5px;
+  color: var(--fg-2);
+  margin-bottom: var(--s-4);
+  line-height: 1.5;
+}
+.cap-assump-row {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: var(--s-2) var(--s-4);
+  padding: var(--s-3) 0;
+  border-bottom: 1px dotted var(--border);
+}
+.cap-assump-row:last-child { border-bottom: 0; }
+@media (max-width: 900px) {
+  .cap-assump-row { grid-template-columns: 1fr; }
+}
+.cap-assump-label {
+  font-size: 12.5px;
+  color: var(--fg-0);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.cap-assump-key {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--fg-4);
+  margin-top: 2px;
+}
+.cap-assump-value {
+  font-size: 11.5px;
+  color: var(--fg-1);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--signal-blue);
+  padding: var(--s-1) var(--s-2);
+  margin-bottom: var(--s-1);
+  word-break: break-word;
+}
+.cap-assump-rationale {
+  font-size: 11.5px;
+  color: var(--fg-2);
+  line-height: 1.5;
+}
+
+/* ---------- Error state ---------- */
+
+.cap-error {
+  border: 1px solid var(--signal-red);
+  background: var(--signal-red-bg);
+  padding: var(--s-6);
+  max-width: 560px;
+  margin: var(--s-10) auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  align-items: flex-start;
+}
+.cap-error-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--signal-red);
+}
+.cap-error-msg {
+  font-size: 11.5px;
+  color: var(--fg-1);
+  word-break: break-word;
+}
