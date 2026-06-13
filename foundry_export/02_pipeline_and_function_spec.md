@@ -30,6 +30,10 @@ is an **AIP Logic Function** that writes to the `Bottleneck` object set.
    >   "explicit_diagnoses": ["..."]
    > }
    User prompt: `{note_text}`
+
+   *Deterministic alternative: port `app/nlp/extractor.py` as a Python
+   transform node — this is what the local reference implementation runs,
+   and it keeps the enrichment layer LLM-free end to end.*
 3. **Use LLM node** — ICD-10 candidate ranking.
    Pass `note_text` + the `icd10_reference` table (description column)
    as context. Ask for the top 5 candidates as a JSON array:
@@ -50,78 +54,61 @@ is an **AIP Logic Function** that writes to the `Bottleneck` object set.
 
 ### Steps
 1. **Source**: `notes` and `protocols`
-2. **Python transform** — for each (note, protocol) pair:
-   - Check if any `trigger_patterns` regex matches `note_text`.
-     If none match, skip this protocol for this patient.
+2. **Python transform** — paste `pipeline_protocol_gap_transform.py` from
+   this folder verbatim. For each (note, protocol) pair it:
+   - Finds the first `trigger_patterns` regex match that survives the
+     context gates: negation cues suppress only from the LEFT of the
+     trigger, clipped to its sentence; historical/resolution cues suppress
+     from either side; ambiguous triggers (`CVA`, mild-AKI language) need
+     corroborating context elsewhere in the note. If no trigger survives,
+     or a per-protocol resolution phrase is present ("anion gap closed",
+     "two negative troponins"), skip this protocol for this patient.
    - For each `ProtocolStep` of the matching protocol:
      - Check if any `action_documented_patterns` regex matches `note_text`.
      - If none match → emit a row.
-3. **Output schema**:
+3. **Output schema** (matches `OUTPUT_SCHEMA` in the transform file):
    `patient_id, protocol_key, protocol_name, action_key, action_label,
-    urgency, owner, citation, evidence_trigger_span`
+    action_severity, urgency, owner, citation, trigger_pattern,
+    trigger_evidence, trigger_start, trigger_end`
 
-This is a direct port of `backend/app/services/silent_failure.py`.
+The transform file is GENERATED from `backend/app/protocols/library.py` and
+`backend/app/services/silent_failure.py` by `sync_transform.py` — never
+edit it by hand; rerun the generator after any rule change. Parity with the
+local engine is enforced in CI by `backend/tests/test_foundry_parity.py`,
+which (a) re-runs the generator and diffs it against the checked-in file
+and (b) asserts field-for-field agreement with `silent_failures()` on all
+176 corpus notes.
 
 ---
 
-## Function — `classify_bottleneck(patient_id) → Bottleneck`
+## Function — `classify_bottleneck(note_text, age) → Bottleneck`
 
-Lives as an **AIP Logic Function** on the `Patient` object type.
+Lives as an **AIP Logic / Functions (Python)** function, writing back to the
+`Bottleneck` object set.
 
-### Pseudocode
+There is no pseudocode to translate. The complete, executable artifact is
+**`aip_logic_classify_bottleneck.py`** in this directory: a self-contained,
+stdlib-only port of the full decision path — extraction subset, 12-protocol
+silent-failure detector, 13-rule interaction engine, and the cascade with
+its two documented policy exceptions (nephrotoxic-flag subsumption into a
+triggered AKI workup; red interaction flags with objective harm evidence
+outranking equal-urgency protocol gaps). Its module docstring covers
+Functions-repo registration and writeback shape.
 
-```python
-def classify_bottleneck(patient: Patient) -> Bottleneck:
-    note    = patient.note            # via link
-    feats   = note_features[patient.patient_id]
-    gaps    = protocol_gaps.filter(patient_id == patient.patient_id)
+Decision path, in priority order (each branch fully implemented in the
+artifact):
 
-    # priority order — first match wins
-    if gaps.any(urgency == "red"):
-        g = gaps.filter(urgency == "red").first()
-        return Bottleneck(
-            category      = "missing_soc",
-            urgency       = "red",
-            owner         = g.owner,
-            protocol_key  = g.protocol_key,
-            evidence_span = g.evidence_trigger_span,
-            summary       = f"Documented step missing on {g.protocol_name}: {g.action_label}",
-        )
+1. `missing_soc` — highest-urgency protocol gap, owner from the protocol
+2. `med_risk` — top interaction flag (severity → urgency, pharmacist)
+3. `awaiting_consult` → physician, `awaiting_imaging` → nurse
+4. `readmit_risk`, then `dispo_delay` → case manager
+5. `clear`
 
-    if feats.consult_requested and not feats.consult_acknowledged:
-        hours_waiting = now() - patient.arrival_time
-        urgency = "red" if hours_waiting > 12 else "amber"
-        return Bottleneck(
-            category      = "awaiting_consult",
-            urgency       = urgency,
-            owner         = "physician",
-            evidence_span = f"{feats.consult_requested} consult requested",
-            summary       = f"Awaiting {feats.consult_requested} consult, {hours_waiting:.0f}h",
-        )
-
-    if feats.imaging_pending:
-        return Bottleneck("awaiting_imaging", "amber", "physician", evidence_span=feats.imaging_pending,
-                          summary=f"Awaiting {feats.imaging_pending}")
-
-    if feats.placement_need and hours_on_floor(patient) > 24:
-        return Bottleneck("dispo_delay", "amber", "case_manager",
-                          evidence_span=feats.placement_need,
-                          summary=f"Placement gap: {feats.placement_need}")
-
-    if has_med_risk_pattern(feats.labs, feats.explicit_diagnoses):
-        return Bottleneck("med_risk", "amber", "pharmacist", ...)
-
-    if has_readmit_signals(patient, note):
-        return Bottleneck("readmit_risk", "amber", "case_manager", ...)
-
-    if gaps.any(urgency == "amber"):
-        ...
-
-    return Bottleneck("clear", "green", owner=None, summary="No active bottleneck")
-```
-
-The local backend has the full working version at
-`backend/app/services/bottleneck.py` — translate the rules straight across.
+Parity with the local engine is enforced by
+`backend/tests/test_aip_logic_parity.py`: all 176 corpus notes must produce
+the identical (category, urgency, owner) triple as
+`backend/app/services/bottleneck.py`. If a rule changes locally, that test
+names the diverging patients until the artifact is re-frozen.
 Use Function bindings to expose this so Workshop can re-run on demand.
 
 ---

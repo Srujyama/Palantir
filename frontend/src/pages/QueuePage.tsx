@@ -29,6 +29,7 @@ export function QueuePage() {
   const [bulkDesc, setBulkDesc] = useState("Created via bulk coordination from queue.");
   const [bulkUrgency, setBulkUrgency] = useState<"red" | "amber" | "green">("amber");
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const filter: Filter = useMemo(() => ({
     urgency: params.get("urgency") ?? undefined,
@@ -47,20 +48,43 @@ export function QueuePage() {
   };
 
   const reload = async () => {
-    const [s, p] = await Promise.all([api.stats(), api.patients(filter)]);
-    setStats(s);
-    setRows(p);
-    setCursor((c) => Math.min(Math.max(0, c), Math.max(0, p.length - 1)));
+    try {
+      const [s, p] = await Promise.all([api.stats(), api.patients(filter)]);
+      setStats(s);
+      setRows(p);
+      setError(null);
+      setCursor((c) => Math.min(Math.max(0, c), Math.max(0, p.length - 1)));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    }
   };
 
   useEffect(() => { void reload(); /* eslint-disable-line */ }, [JSON.stringify(filter)]);
+
+  // Titlebar live-tick button dispatches "radar:refresh" — reload in place.
+  useEffect(() => {
+    const onRefresh = () => { void reload(); };
+    window.addEventListener("radar:refresh", onRefresh);
+    return () => window.removeEventListener("radar:refresh", onRefresh);
+    // eslint-disable-next-line
+  }, [JSON.stringify(filter)]);
 
   // Keyboard nav: j/k cursor, enter to open, x to select
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement | null)?.tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
+      // When the bulk-action modal is open, let Escape close it but don't let
+      // j/k/x/Enter drive the (hidden) table cursor or navigate away and lose
+      // the half-filled form.
+      if (bulkOpen) {
+        if (e.key === "Escape") {
+          setSelected(new Set());
+          setBulkOpen(false);
+        }
+        return;
+      }
       if (rows.length === 0) return;
 
       if (e.key === "j" || e.key === "ArrowDown") {
@@ -83,7 +107,7 @@ export function QueuePage() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [rows, cursor, navigate]);
+  }, [rows, cursor, navigate, bulkOpen]);
 
   const toggleSelect = (id: string) => {
     setSelected((prev) => {
@@ -144,6 +168,14 @@ export function QueuePage() {
           <div className="spacer" />
           <span className="count">{rows.length} ROWS</span>
         </div>
+        {error && (
+          <div style={{ padding: "var(--s-3) var(--s-5) 0" }}>
+            <div className="error-strip">
+              <span>Queue load failed: {error}</span>
+              <button className="btn" onClick={() => void reload()}>Retry</button>
+            </div>
+          </div>
+        )}
         <PatientTable
           rows={rows}
           selected={selected}

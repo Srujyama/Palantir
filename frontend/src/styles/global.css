@@ -1396,3 +1396,551 @@ table.data tbody tr.cursor {
   .tag, .ho-num, .ho-count, .ho-summary-item .n, .ho-sub { color: #000 !important; }
   .ho-block { page-break-inside: avoid; margin-bottom: 24px; }
 }
+
+/* ── wave-2 additions ── */
+
+/* Error strip — visible fetch-failure state, never an eternal "Loading…" */
+.error-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-3);
+  background: var(--signal-red-bg);
+  border: 1px solid var(--signal-red);
+  color: var(--signal-red);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+.error-strip .btn { margin-left: auto; flex-shrink: 0; }
+
+/* SLA chips on action rows (ActionsList) */
+.action-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+.sla-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border: 1px solid var(--border-strong);
+  color: var(--fg-3);
+  background: var(--bg-1);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.sla-chip.overdue {
+  color: var(--signal-red);
+  border-color: var(--signal-red);
+  background: var(--signal-red-bg);
+  font-weight: 600;
+}
+.sla-chip.esc {
+  color: var(--signal-red);
+  border-color: var(--signal-red);
+  background: transparent;
+  font-weight: 600;
+}
+
+/* Overdue badge in the queue actions column (PatientTable) */
+.pt-actions-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-2);
+}
+.overdue-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--signal-red);
+  background: var(--signal-red-bg);
+  border: 1px solid var(--signal-red);
+  padding: 1px 4px;
+  white-space: nowrap;
+}
+
+/* Drug-interaction panel (PatientPage) */
+.ix-list { display: flex; flex-direction: column; gap: var(--s-2); }
+.ix-flag {
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: var(--s-3);
+}
+.ix-flag.red { border-left: 3px solid var(--signal-red); }
+.ix-flag.amber { border-left: 3px solid var(--signal-amber); }
+.ix-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-2);
+}
+.ix-name { color: var(--fg-0); font-size: 13px; font-weight: 500; }
+.ix-meds { display: inline-flex; gap: var(--s-1); flex-wrap: wrap; }
+.ix-rec { color: var(--fg-1); font-size: 12.5px; line-height: 1.5; }
+.ix-cite { margin-top: var(--s-1); }
+
+/* Model card (AnalyticsPage) */
+.mc-stats {
+  display: flex;
+  gap: var(--s-6);
+  margin-bottom: var(--s-4);
+}
+.mc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 2px solid var(--border-strong);
+  padding-left: var(--s-3);
+}
+.mc-stat .n {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--fg-0);
+  font-variant-numeric: tabular-nums;
+}
+.mc-stat .l {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+}
+.mc-table-wrap { border: 1px solid var(--border); }
+.mc-table-wrap table.data tbody tr { cursor: default; }
+.mc-honesty {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-3);
+  line-height: 1.6;
+}
+.mc-misses-row {
+  margin-top: var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.mc-misses { margin-top: var(--s-3); }
+
+/* =========================================================================
+   Story mode — guided demo tour bar (append-only)
+   -------------------------------------------------------------------------
+   Fixed bottom bar. Mono, dark, 1px top border, radius 0, no shadow.
+   ========================================================================= */
+.story-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+  background: var(--bg-1);
+  border-top: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+}
+.story-progress-track {
+  height: 2px;
+  background: var(--bg-3);
+}
+.story-progress-fill {
+  height: 100%;
+  background: var(--signal-blue);
+  transition: width 0.24s ease-out;
+}
+.story-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-5);
+  padding: var(--s-3) var(--s-6);
+}
+.story-count {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg-0);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.story-count-sep {
+  color: var(--fg-4);
+  padding: 0 4px;
+}
+.story-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.story-title {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-0);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.story-caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--fg-2);
+  max-width: 940px;
+}
+.story-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  white-space: nowrap;
+}
+.story-btn {
+  background: var(--bg-2);
+  color: var(--fg-1);
+  border: 1px solid var(--border-strong);
+  padding: var(--s-2) var(--s-3);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.story-btn:hover { background: var(--bg-3); border-color: var(--border-active); color: var(--fg-0); }
+.story-btn:disabled { opacity: 0.4; cursor: default; }
+.story-btn:disabled:hover { background: var(--bg-2); border-color: var(--border-strong); color: var(--fg-1); }
+.story-btn-primary {
+  background: var(--signal-blue-bg);
+  border-color: var(--signal-blue);
+  color: var(--fg-0);
+}
+.story-btn-primary:hover { background: var(--signal-blue); color: #000; border-color: var(--signal-blue); }
+.story-btn-exit {
+  color: var(--fg-3);
+}
+
+/* Best-effort highlight ring applied to a step's target element. */
+.story-highlight {
+  outline: 1px solid var(--signal-blue);
+  outline-offset: 2px;
+  animation: story-glow 1.6s ease-in-out infinite;
+}
+@keyframes story-glow {
+  0%, 100% { outline-color: var(--signal-blue); }
+  50% { outline-color: var(--border-active); outline-offset: 3px; }
+}
+
+/* =========================================================================
+   Floor pulse — transient urgency-change animation on beds (append-only)
+   -------------------------------------------------------------------------
+   Applied for ~1.2s after a live-tick refetch diffs the map. New/escalating
+   critical beds pulse red; de-escalated or vacated beds fade. Border-driven so
+   there is no layout thrash (no box-shadow spread changing geometry).
+   ========================================================================= */
+.floor-pulse { will-change: border-color, background-color; }
+.floor-pulse-up {
+  animation: floor-pulse-up 1.2s ease-out 1;
+}
+.floor-pulse-down {
+  animation: floor-pulse-down 1.2s ease-out 1;
+}
+@keyframes floor-pulse-up {
+  0% {
+    border-color: var(--signal-red);
+    background-color: var(--signal-red-bg);
+  }
+  35% {
+    border-color: var(--signal-red);
+    background-color: #4a1f24;
+  }
+  100% {
+    border-color: var(--signal-red);
+    background-color: var(--signal-red-bg);
+  }
+}
+@keyframes floor-pulse-down {
+  0% {
+    border-color: var(--signal-green);
+    background-color: var(--signal-green-bg);
+  }
+  60% {
+    border-color: var(--border-strong);
+    background-color: var(--bg-2);
+  }
+  100% {
+    border-color: var(--border-strong);
+    background-color: var(--bg-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floor-pulse-up, .floor-pulse-down, .story-highlight, .story-progress-fill {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* =========================================================================
+   Trajectory panel — longitudinal trends on the patient detail
+   ========================================================================= */
+.traj-section .head { gap: var(--s-3); }
+
+/* Signal chip in the section head */
+.traj-sig {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  padding: 2px var(--s-2);
+  border: 1px solid var(--border-strong);
+  color: var(--fg-2);
+  background: var(--bg-2);
+  white-space: nowrap;
+}
+.traj-sig.traj-sig-red    { color: var(--signal-red);   border-color: var(--signal-red);   background: var(--signal-red-bg); }
+.traj-sig.traj-sig-green  { color: var(--signal-green); border-color: var(--signal-green); background: var(--signal-green-bg); }
+.traj-sig.traj-sig-amber  { color: var(--signal-amber); border-color: var(--signal-amber); background: var(--signal-amber-bg); }
+.traj-sig.traj-sig-neutral { color: var(--fg-2); border-color: var(--border-strong); background: var(--bg-2); }
+.traj-notecount { margin-left: auto; }
+
+.traj-body { display: flex; flex-direction: column; gap: var(--s-4); }
+
+/* Recurrence / readmit callout */
+.traj-recurrence {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--signal-amber-bg);
+  border: 1px solid var(--signal-amber);
+  border-left-width: 3px;
+}
+.traj-recurrence-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--signal-amber);
+  border: 1px solid var(--signal-amber);
+  padding: 2px var(--s-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.traj-recurrence-text { display: flex; flex-direction: column; gap: 2px; }
+.traj-recurrence-lead { color: var(--signal-amber); font-size: 13px; font-weight: 600; }
+.traj-recurrence-ev { line-height: 1.5; }
+
+/* Lab trend rows */
+.traj-labs { display: flex; flex-direction: column; gap: 2px; }
+.traj-lab {
+  display: grid;
+  grid-template-columns: 92px 1fr 120px;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: 1px dotted var(--border);
+}
+.traj-lab:last-child { border-bottom: 0; }
+.traj-lab-name {
+  color: var(--fg-0);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.traj-lab-narr {
+  color: var(--fg-2);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+}
+.traj-verdict { font-weight: 600; }
+.traj-verdict.traj-red { color: var(--signal-red); }
+.traj-verdict.traj-green { color: var(--signal-green); }
+.traj-verdict.traj-neutral { color: var(--fg-2); }
+.traj-lab-spark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.spark-svg { display: block; }
+
+/* Resolved gaps — the "we caught it, not a silent failure" green block */
+.traj-resolved {
+  background: var(--signal-green-bg);
+  border: 1px solid var(--signal-green);
+  border-left-width: 3px;
+  padding: var(--s-3);
+}
+.traj-resolved-head {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--signal-green);
+  font-weight: 600;
+  margin-bottom: var(--s-2);
+}
+.traj-resolved-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.traj-resolved-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: var(--s-2);
+  align-items: start;
+}
+.traj-resolved-glyph {
+  font-family: var(--font-mono);
+  color: var(--signal-green);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.traj-resolved-body { display: flex; flex-direction: column; gap: 1px; }
+.traj-resolved-action { color: var(--signal-green); font-size: 13px; font-weight: 500; }
+.traj-resolved-meta { color: var(--fg-2); line-height: 1.45; }
+
+.traj-empty { padding: var(--s-1) 0; }
+
+/* prior_note glyph styling on the timeline rail */
+.tl-event.tl-prior_note .tl-glyph {
+  color: var(--fg-3);
+  border-style: dashed;
+}
+
+/* =========================================================================
+   census trend + handoff history (append-only)
+   ========================================================================= */
+
+/* Census time-series card (AnalyticsPage · section 09) */
+.census-trend {
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: var(--s-3);
+}
+.census-trend-svg { display: block; width: 100%; }
+.census-axis {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.census-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+}
+.census-legend-item { display: inline-flex; align-items: center; gap: var(--s-2); }
+.census-swatch { width: 12px; height: 2px; display: inline-block; }
+.census-swatch-census { background: var(--fg-1); height: 3px; }
+.census-swatch-red { background: var(--signal-red); }
+.census-swatch-amber { background: var(--signal-amber); }
+.census-legend-count { margin-left: auto; color: var(--fg-3); }
+
+/* Handoff finalize controls + history (HandoffPage · no-print) */
+.ho-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin-bottom: var(--s-6);
+  padding-bottom: var(--s-5);
+  border-bottom: 1px solid var(--border);
+}
+.ho-controls-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.ho-controls-row .btn { padding: 8px 14px; }
+.ho-finalize-msg {
+  font-size: 11px;
+  color: var(--signal-green);
+  letter-spacing: 0.04em;
+}
+
+.ho-history { display: flex; flex-direction: column; gap: var(--s-2); }
+.ho-history-head {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-3);
+}
+.ho-history-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.ho-history-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--s-4);
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-left: 2px solid transparent;
+  padding: var(--s-2) var(--s-3);
+  color: var(--fg-1);
+  font-family: inherit;
+  font-size: 12px;
+}
+.ho-history-row:last-child { border-bottom: 0; }
+.ho-history-row:hover { background: var(--bg-3); }
+.ho-history-row.active {
+  background: var(--bg-3);
+  border-left-color: var(--signal-blue);
+}
+.ho-history-shift { color: var(--fg-0); }
+.ho-history-time { color: var(--fg-2); font-size: 11px; }
+.ho-history-by {
+  color: var(--fg-3);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Frozen-snapshot banner */
+.ho-frozen-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  padding: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-5);
+  background: var(--signal-blue-bg);
+  border: 1px solid var(--signal-blue);
+  border-left-width: 3px;
+}
+.ho-frozen-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--signal-blue);
+}
+.ho-frozen-meta { font-size: 11px; color: var(--fg-2); }
+.ho-frozen-banner .btn { margin-left: auto; }

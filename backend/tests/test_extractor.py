@@ -94,3 +94,85 @@ def test_to_dict_serializable():
     json.dumps(payload)
     assert "vitals" in payload
     assert "code_status" in payload
+
+
+# ---------------------------------------------------------------------------
+# Negation tagging (NegEx-lite)
+# ---------------------------------------------------------------------------
+
+def test_negated_symptom_is_tagged_not_dropped():
+    note = "Patient denies melena. Reports chest pain on exertion."
+    ext = extract(note)
+    melena = [s for s in ext.symptoms if s.label == "melena"]
+    assert melena, "negated findings must still be extracted"
+    assert melena[0].metadata.get("negated") is True
+    chest = [s for s in ext.symptoms if s.label == "chest_pain"]
+    assert chest
+    assert "negated" not in chest[0].metadata
+
+
+def test_negated_med_held_is_tagged():
+    note = "AKI workup underway. Ibuprofen held. Continuing lisinopril."
+    ext = extract(note)
+    ibu = [m for m in ext.meds if m.label == "ibuprofen"]
+    assert ibu
+    assert ibu[0].metadata.get("negated") is True
+    lis = [m for m in ext.meds if m.label == "lisinopril"]
+    assert lis
+    assert "negated" not in lis[0].metadata
+
+
+def test_negation_cues_no_evidence_of_and_not_on():
+    note = "No evidence of hematemesis. Not on warfarin at home."
+    ext = extract(note)
+    hem = [s for s in ext.symptoms if s.label == "hematemesis"]
+    assert hem and hem[0].metadata.get("negated") is True
+    warf = [m for m in ext.meds if m.label == "warfarin"]
+    assert warf and warf[0].metadata.get("negated") is True
+
+
+def test_negation_does_not_cross_sentence_boundary():
+    """A cue in the previous sentence must not negate the next finding."""
+    note = "Denies any nausea today; melena observed overnight per nursing."
+    ext = extract(note)
+    melena = [s for s in ext.symptoms if s.label == "melena"]
+    assert melena
+    # "Denies" is before the semicolon — different sentence, so not negated.
+    assert "negated" not in melena[0].metadata
+
+
+def test_negation_metadata_coexists_with_med_class():
+    note = "Vancomycin discontinued after cultures cleared."
+    ext = extract(note)
+    vanc = [m for m in ext.meds if m.label == "vancomycin"]
+    assert vanc
+    assert vanc[0].metadata.get("negated") is True
+    assert vanc[0].metadata.get("class") == "antibiotic"
+
+
+# ---------------------------------------------------------------------------
+# Imaging regressions
+# ---------------------------------------------------------------------------
+
+def test_english_word_us_is_not_ultrasound():
+    note = "Radiology tells us the scanner is down. Family asks us for updates."
+    ext = extract(note)
+    assert not [i for i in ext.imaging if i.label == "us"]
+
+
+def test_uppercase_us_and_ultrasound_still_match():
+    note = "RUQ US ordered, still in queue. Renal ultrasound scheduled for tomorrow."
+    ext = extract(note)
+    us = [i for i in ext.imaging if i.label == "us"]
+    assert len(us) >= 2
+    assert all(i.value == "pending" for i in us)
+
+
+def test_imaging_result_in_window_beats_pending_hint():
+    """Precedence regression: a local pending hint must not override an
+    already-reported result in the same window."""
+    note = "CT head scheduled for 0800, result now back: no acute hemorrhage."
+    ext = extract(note)
+    ct = [i for i in ext.imaging if i.label == "ct"]
+    assert ct
+    assert ct[0].value == "documented"

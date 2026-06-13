@@ -10,7 +10,8 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.db.database import get_db
-from app.models.orm import Action, ActionEvent, Patient, Triage
+from app.nlp.extractor import extract
+from app.models.orm import Action, ActionEvent, NoteVersion, Patient, Triage
 from app.models.schemas import (
     ActionResponse,
     BottleneckPayload,
@@ -22,8 +23,10 @@ from app.models.schemas import (
     SilentFailurePayload,
     Span,
     TimelineEvent,
+    TrendsPayload,
     WhyStuckResponse,
 )
+from app.services import sla
 
 
 router = APIRouter(prefix="/patients", tags=["patients"])
@@ -36,6 +39,21 @@ def _open_actions_count(db: Session, patient_id: str) -> int:
     return (
         db.query(func.count(Action.id))
         .filter(Action.patient_id == patient_id, Action.status.in_(["open", "in_progress"]))
+        .scalar()
+        or 0
+    )
+
+
+def _overdue_actions_count(db: Session, patient_id: str, now: datetime) -> int:
+    """Open / in-progress actions for this patient already past their SLA deadline."""
+    return (
+        db.query(func.count(Action.id))
+        .filter(
+            Action.patient_id == patient_id,
+            Action.status.in_(["open", "in_progress"]),
+            Action.due_at.isnot(None),
+            Action.due_at < now,
+        )
         .scalar()
         or 0
     )
@@ -68,6 +86,7 @@ def list_patients(
         )
 
     patients = q.all()
+    now = datetime.utcnow()
     summaries: List[PatientSummary] = []
     for p in patients:
         t = p.triage
@@ -85,6 +104,7 @@ def list_patients(
                 primary_owner=t.primary_owner,
                 primary_action=t.primary_action,
                 open_actions=_open_actions_count(db, p.id),
+                overdue_actions=_overdue_actions_count(db, p.id, now),
                 silent_failure_count=_silent_failure_count(t),
             )
         )
@@ -119,10 +139,14 @@ def patient_detail(patient_id: str, db: Session = Depends(get_db)):
                 id=a.id, patient_id=a.patient_id, title=a.title, description=a.description,
                 owner=a.owner, urgency=a.urgency, status=a.status,
                 source_category=a.source_category,
+                sla_minutes=a.sla_minutes, due_at=a.due_at,
+                escalation_level=a.escalation_level or 0,
+                overdue=sla.is_overdue(a), minutes_remaining=sla.minutes_remaining(a),
                 created_at=a.created_at, updated_at=a.updated_at,
             )
             for a in sorted(p.actions, key=lambda a: a.created_at, reverse=True)
         ],
+        trends=TrendsPayload(**t.trends) if t.trends else None,
     )
 
 
@@ -137,13 +161,45 @@ def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
         raise HTTPException(404, f"Patient {patient_id} not found")
     payload = p.triage.payload
 
-    events: List[TimelineEvent] = [
+    events: List[TimelineEvent] = []
+
+    # Prior notes (clinical history) come before arrival on the timeline.
+    priors = (
+        db.query(NoteVersion)
+        .filter(NoteVersion.patient_id == patient_id)
+        .order_by(NoteVersion.sequence)
+        .all()
+    )
+    for nv in priors:
+        # Digest each prior note's OWN labs (not the current values).
+        prior_labs = extract(nv.note_text).labs
+        seen: set[str] = set()
+        parts: List[str] = []
+        for f in prior_labs:
+            if f.label in seen or f.value is None:
+                continue
+            seen.add(f.label)
+            parts.append(f"{f.label} {f.value}")
+        digest = " · ".join(parts[:5])
+        events.append(
+            TimelineEvent(
+                timestamp=nv.captured_at,
+                kind="prior_note",
+                title=f"Prior note — {nv.hours_ago}h ago",
+                detail=digest[:160] if digest else "Earlier documented state",
+                actor="chart",
+            )
+        )
+
+    events.append(
         TimelineEvent(
             timestamp=p.arrival_time,
             kind="arrival",
             title=f"Arrived on floor — {p.chief_complaint}",
             detail=f"Room {p.room or 'unassigned'} · {p.age}{p.sex}",
         ),
+    )
+    events.append(
         TimelineEvent(
             timestamp=p.triage.computed_at,
             kind="triage",
@@ -152,7 +208,7 @@ def patient_timeline(patient_id: str, db: Session = Depends(get_db)):
             urgency=payload["primary"]["urgency"],
             actor="pipeline",
         ),
-    ]
+    )
     for sf in payload.get("silent_failures", []):
         events.append(
             TimelineEvent(

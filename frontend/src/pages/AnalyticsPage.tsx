@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { api } from "../lib/api";
-import type { Analytics, ProtocolGapBreakdown } from "../types/api";
+import type { Analytics, CensusSeries, EvalMiss, EvalSummary, ProtocolGapBreakdown } from "../types/api";
 import { ownerLabel } from "../lib/format";
+import { CensusTrend } from "../components/CensusTrend";
+
+function errMsg(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
+}
 
 function HBar({ value, max, color = "var(--signal-blue)" }: { value: number; max: number; color?: string }) {
   const pct = max === 0 ? 0 : Math.round((value / max) * 100);
@@ -62,19 +68,77 @@ function ProtocolRow({ p, max }: { p: ProtocolGapBreakdown; max: number }) {
 export function AnalyticsPage() {
   const [data, setData] = useState<Analytics | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [evalData, setEvalData] = useState<EvalSummary | null>(null);
+  const [evalError, setEvalError] = useState<string | null>(null);
+  const [misses, setMisses] = useState<EvalMiss[] | null>(null);
+  const [missesError, setMissesError] = useState<string | null>(null);
+  const [missesLoading, setMissesLoading] = useState(false);
+  const [showMisses, setShowMisses] = useState(false);
+  const [census, setCensus] = useState<CensusSeries | null>(null);
+  const [censusError, setCensusError] = useState<string | null>(null);
 
   useEffect(() => {
-    void (async () => {
-      try {
-        const d = await api.analytics();
-        setData(d);
-      } finally {
-        setLoading(false);
-      }
-    })();
+    const loadAll = () => {
+      void (async () => {
+        try {
+          const d = await api.analytics();
+          setData(d);
+        } catch (err) {
+          setError(errMsg(err));
+        } finally {
+          setLoading(false);
+        }
+      })();
+      void api.evalSummary()
+        .then((ev) => setEvalData(ev))
+        .catch((err: unknown) => setEvalError(errMsg(err)));
+      // Census time-series — grows with each live tick / manual snapshot.
+      void api.censusSeries()
+        .then((cs) => {
+          setCensus(cs);
+          setCensusError(null);
+        })
+        .catch((err: unknown) => setCensusError(errMsg(err)));
+      // Re-fetch named misses if the panel is open so they stay current.
+      setMisses(null);
+    };
+    loadAll();
+    // LIVE TICK mutates the floor; refresh cohort metrics + model card in place.
+    const onRefresh = () => loadAll();
+    window.addEventListener("radar:refresh", onRefresh);
+    return () => window.removeEventListener("radar:refresh", onRefresh);
   }, []);
 
-  if (loading || !data) return <div className="empty-state">Loading analytics…</div>;
+  const toggleMisses = async () => {
+    if (showMisses) {
+      setShowMisses(false);
+      return;
+    }
+    setShowMisses(true);
+    if (!misses && !missesLoading) {
+      setMissesLoading(true);
+      setMissesError(null); // clear any prior error so the loading state shows
+      try {
+        setMisses(await api.evalMisses());
+      } catch (err) {
+        setMissesError(errMsg(err));
+      } finally {
+        setMissesLoading(false);
+      }
+    }
+  };
+
+  if (loading) return <div className="empty-state">Loading analytics…</div>;
+  if (!data) {
+    return (
+      <div className="anal-page">
+        <div className="error-strip">
+          <span>Analytics failed to load{error ? `: ${error}` : ""}</span>
+        </div>
+      </div>
+    );
+  }
 
   const urgencyTotal = Object.values(data.by_urgency).reduce((a, b) => a + b, 0);
   const maxGap = Math.max(1, ...data.by_protocol.map((p) => p.total_gaps));
@@ -205,6 +269,157 @@ export function AnalyticsPage() {
           </div>
         </Card>
       </div>
+
+      <Card
+        eyebrow="08 · Model card"
+        title="How well does the classifier actually perform"
+        subtitle="Primary-bottleneck classification scored against hand-labeled ground truth for the full corpus."
+      >
+        {evalError ? (
+          <div className="error-strip">
+            <span>Eval summary failed to load: {evalError}</span>
+          </div>
+        ) : !evalData ? (
+          <div className="dim mono small">Loading eval summary…</div>
+        ) : (
+          <>
+            <div className="mc-stats">
+              <div className="mc-stat">
+                <span className="n">{(evalData.accuracy * 100).toFixed(1)}%</span>
+                <span className="l">Corpus accuracy</span>
+              </div>
+              <div className="mc-stat">
+                <span className="n">{(evalData.owner_routing.accuracy * 100).toFixed(1)}%</span>
+                <span className="l">Owner routing</span>
+              </div>
+              <div className="mc-stat">
+                <span className="n">{evalData.n}</span>
+                <span className="l">Labeled notes</span>
+              </div>
+            </div>
+
+            <div className="mc-table-wrap">
+              <table className="data">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th style={{ textAlign: "right" }}>Precision</th>
+                    <th style={{ textAlign: "right" }}>Recall</th>
+                    <th style={{ textAlign: "right" }}>F1</th>
+                    <th style={{ textAlign: "right" }}>Support</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {evalData.per_category.map((c) => (
+                    <tr key={c.category}>
+                      <td className="mono">{c.category}</td>
+                      <td className="mono" style={{ textAlign: "right" }}>{c.precision.toFixed(2)}</td>
+                      <td className="mono" style={{ textAlign: "right" }}>{c.recall.toFixed(2)}</td>
+                      <td className="mono" style={{ textAlign: "right" }}>{c.f1.toFixed(2)}</td>
+                      <td className="mono" style={{ textAlign: "right" }}>{c.support}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="mc-honesty">
+              Measured against {evalData.n} held-out labels. The regression gate in CI
+              fails any rule change that drops accuracy below the floor.{" "}
+              100% = 44/44 note templates handled (4 generated notes per template) —
+              template coverage, not paraphrase robustness. The owner-routing gap is a
+              documented labeling inconsistency in 4 imaging templates: the corpus labels
+              them physician, the engine routes imaging expediting to the floor nurse.
+              Click <span className="mono">Show misses</span> to see all 16 by name.
+            </div>
+
+            <div className="mc-misses-row">
+              <button className="btn" onClick={() => void toggleMisses()}>
+                {showMisses ? "Hide misses" : "Show misses"}
+              </button>
+            </div>
+
+            {showMisses && (
+              missesError ? (
+                <div className="error-strip" style={{ marginTop: "var(--s-3)" }}>
+                  <span>Misses failed to load: {missesError}</span>
+                </div>
+              ) : missesLoading || !misses ? (
+                <div className="dim mono small" style={{ marginTop: "var(--s-3)" }}>Loading misses…</div>
+              ) : misses.length === 0 ? (
+                <div className="dim mono small" style={{ marginTop: "var(--s-3)" }}>No misclassifications. Every label matched.</div>
+              ) : (
+                <div className="mc-table-wrap mc-misses">
+                  <table className="data">
+                    <thead>
+                      <tr>
+                        <th>Patient</th>
+                        <th>Miss type</th>
+                        <th>Truth</th>
+                        <th>Predicted</th>
+                        <th>Template</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {misses.map((m) => (
+                        <tr key={`${m.miss_type}-${m.patient_id}`}>
+                          <td className="mono"><Link to={`/p/${m.patient_id}`}>{m.patient_id}</Link></td>
+                          <td className="mono dim">{m.miss_type}</td>
+                          <td className="mono">{m.truth}</td>
+                          <td className="mono" style={{ color: "var(--signal-red)" }}>{m.predicted}</td>
+                          <td className="dim small">{m.template_name ?? "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )
+            )}
+          </>
+        )}
+      </Card>
+
+      <Card
+        eyebrow="09 · Census over time"
+        title="How the floor has moved"
+        subtitle="Census and acuity mix at each live tick / manual snapshot. The series is empty until ticks accrue."
+      >
+        {censusError ? (
+          <div className="error-strip">
+            <span>Census series failed to load: {censusError}</span>
+          </div>
+        ) : !census ? (
+          <div className="dim mono small">Loading census series…</div>
+        ) : census.points.length === 0 ? (
+          <div className="empty-state">
+            No census history yet — run a live tick to start the trend.
+          </div>
+        ) : (
+          (() => {
+            const latest = census.points[census.points.length - 1];
+            const peakRed = Math.max(...census.points.map((p) => p.red));
+            return (
+              <>
+                <div className="mc-stats">
+                  <div className="mc-stat">
+                    <span className="n">{latest.census}</span>
+                    <span className="l">Latest census</span>
+                  </div>
+                  <div className="mc-stat">
+                    <span className="n" style={{ color: "var(--signal-red)" }}>{peakRed}</span>
+                    <span className="l">Peak red</span>
+                  </div>
+                  <div className="mc-stat">
+                    <span className="n">{latest.open_actions}</span>
+                    <span className="l">Open actions now</span>
+                  </div>
+                </div>
+                <CensusTrend points={census.points} />
+              </>
+            );
+          })()
+        )}
+      </Card>
     </div>
   );
 }

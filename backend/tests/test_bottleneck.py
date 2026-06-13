@@ -63,6 +63,48 @@ def test_med_risk_anticoag_plus_bleed():
     assert result.primary.category in {"med_risk", "missing_soc"}
 
 
+def test_nephrotoxic_flag_subsumed_by_aki_med_review_gap():
+    """When the AKI workup protocol is triggered and its own medication-review
+    step is missing, the nephrotoxin interaction flag is the evidence FOR that
+    gap — the patient routes once, to the physician owning the protocol gap,
+    not twice (physician + pharmacist) for the same problem."""
+    note = (
+        "Cellulitis day 4 on vancomycin and tobramycin. Creatinine rising from "
+        "baseline 1.0 to 2.4 over 36h. UOP <300 mL/24h. Exam: euvolemic. "
+        "Labs: Cr 2.4. Urine sediment with muddy brown casts. "
+        "Plan: continue current regimen."
+    )
+    result = _classify(note)
+    assert result.primary.category == "missing_soc"
+    assert result.primary.owner == "physician"
+    cats = {b.category for b in [result.primary] + result.secondary}
+    assert "med_risk" not in cats, "subsumed nephrotoxin flag must not split routing"
+
+
+def test_red_flag_with_active_harm_outranks_equal_urgency_protocol_gap():
+    """Tie-break exception: anticoagulant + documented melena is harm in
+    progress (red, with objective context evidence) — it outranks the
+    equally-red GI-bleed bundle gaps and routes to the pharmacist."""
+    note = (
+        "81yo on apixaban for AFib presents with melena x 2 days, hgb 8.4. "
+        "Plan: GI consult."
+    )
+    result = _classify(note)
+    assert result.primary.category == "med_risk"
+    assert result.primary.owner == "pharmacist"
+    assert any(b.category == "missing_soc" for b in result.secondary)
+
+
+def test_red_flag_without_context_evidence_does_not_jump_protocol_gap():
+    """The tie-break exception is narrow: a combination flag with no
+    objective harm evidence (warfarin + ibuprofen, no bleed signs in the
+    interaction context) stays behind the equally-red protocol gap."""
+    note = "On warfarin and ibuprofen at home. Hematemesis this morning."
+    result = _classify(note)
+    assert result.primary.category == "missing_soc"
+    assert any(b.category == "med_risk" for b in result.secondary)
+
+
 def test_to_dict_serializable():
     """Triage result must serialize to JSON for DB storage."""
     import json

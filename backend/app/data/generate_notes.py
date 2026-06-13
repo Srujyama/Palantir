@@ -33,6 +33,18 @@ OUT_PATH = Path(__file__).parent / "patient_notes.json"
 # ---------------------------------------------------------------------------
 
 @dataclass
+class PriorNote:
+    """An earlier note for the same patient — clinical history only.
+
+    Priors narrate trajectory (lactate clearing, creatinine worsening); they
+    are NEVER read by the classifier or the eval, which see only `note` /
+    `note_text`. hours_ago is the offset behind the current note.
+    """
+    hours_ago: int
+    note_text: str
+
+
+@dataclass
 class Template:
     name: str
     chief_complaint: str
@@ -43,6 +55,7 @@ class Template:
                                    # readmit_risk | clear
     truth_protocol: str = ""       # e.g. "sepsis", "acs", "" if none expected
     expected_owner: str = ""       # physician | nurse | pharmacist | case_manager | social_worker
+    prior_notes: List[PriorNote] = field(default_factory=list)  # history; not classified
 
 
 TEMPLATES: List[Template] = [
@@ -66,6 +79,26 @@ TEMPLATES: List[Template] = [
         truth_bottleneck="missing_soc",
         truth_protocol="sepsis",
         expected_owner="physician",
+        prior_notes=[
+            PriorNote(
+                hours_ago=6,
+                note_text=(
+                    "HPI: 72yo from SNF, febrile to 38.9C, BP 94/58, HR 110. Decreased PO intake.\n"
+                    "Labs: WBC 16.4, lactate 4.1, creatinine 1.4. UA pending.\n"
+                    "Assessment: presumed sepsis, source unclear.\n"
+                    "Plan: cultures pending, fluids started, recheck labs."
+                ),
+            ),
+            PriorNote(
+                hours_ago=3,
+                note_text=(
+                    "Interval: febrile 39.2C, BP 90/55, HR 116.\n"
+                    "Labs: WBC 17.6, lactate 3.6, creatinine 1.7. UA cloudy, bacteria present.\n"
+                    "Assessment: severe sepsis, likely urinary source.\n"
+                    "Plan: continue resuscitation, trend lactate."
+                ),
+            ),
+        ],
     ),
     # -------- ACS: silent failure (troponin elevated, no cardio consult) ---
     Template(
@@ -137,6 +170,23 @@ TEMPLATES: List[Template] = [
         icd10_hints=["N17.9", "T36.91XA"],
         truth_bottleneck="awaiting_consult",
         expected_owner="physician",
+        prior_notes=[
+            PriorNote(
+                hours_ago=48,
+                note_text=(
+                    "HD1 for CAP. Labs: creatinine 1.1, K 4.2. UOP adequate.\n"
+                    "Plan: ceftriaxone + azithromycin, IV fluids."
+                ),
+            ),
+            PriorNote(
+                hours_ago=24,
+                note_text=(
+                    "HD2. Creatinine 2.2, K 5.1. UOP declining to 600 mL/24h. Vancomycin trough 22.\n"
+                    "Assessment: developing AKI.\n"
+                    "Plan: monitor renal function, recheck vanc trough."
+                ),
+            ),
+        ],
     ),
     # -------- Awaiting imaging: CT abd --------------------------------------
     Template(
@@ -420,6 +470,17 @@ TEMPLATES: List[Template] = [
         truth_bottleneck="missing_soc",
         truth_protocol="gi_bleed",
         expected_owner="physician",
+        prior_notes=[
+            PriorNote(
+                hours_ago=5,
+                note_text=(
+                    "HPI: 62yo male, one episode of hematemesis. BP 108/64, HR 96.\n"
+                    "Labs: hgb 9.1, plt 150, INR 1.2.\n"
+                    "Assessment: upper GI bleed.\n"
+                    "Plan: IV access, type and screen sent, monitoring."
+                ),
+            ),
+        ],
     ),
     # -------- AKI: no medication review -------------------------------------
     Template(
@@ -709,6 +770,17 @@ TEMPLATES: List[Template] = [
         truth_bottleneck="missing_soc",
         truth_protocol="sepsis",
         expected_owner="physician",
+        prior_notes=[
+            PriorNote(
+                hours_ago=12,
+                note_text=(
+                    "HPI: 64yo diabetic, fever and dysuria. BP 102/64, HR 98.\n"
+                    "Labs: WBC 15, lactate 2.4, Cr 1.1, K 4.6.\n"
+                    "Assessment: urinary sepsis, hemodynamically stable.\n"
+                    "Plan: cultures sent, fluids, monitor."
+                ),
+            ),
+        ],
     ),
     # -------- Awaiting consult: surgery, perforated viscus ------------------
     Template(
@@ -814,6 +886,7 @@ class PatientNote:
     truth_protocol: str
     expected_owner: str
     template_name: str
+    prior_notes: List[dict] = field(default_factory=list)  # [{hours_ago, note_text}]
 
 
 def _alphabet_id(i: int) -> str:
@@ -873,6 +946,7 @@ def generate(n_per_template: int = 3) -> List[PatientNote]:
                     truth_protocol=tmpl.truth_protocol,
                     expected_owner=tmpl.expected_owner,
                     template_name=tmpl.name,
+                    prior_notes=[asdict(pn) for pn in tmpl.prior_notes],
                 )
             )
             pid += 1

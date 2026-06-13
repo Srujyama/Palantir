@@ -12,6 +12,9 @@ Extracts structured signals from a free-text patient note:
 Each finding carries:
   - the exact span and offsets in the source note (for evidence highlighting)
   - a label and a normalized value where applicable
+  - for symptoms and meds, a NegEx-lite negation flag (metadata["negated"])
+    when the evidence is negated in context ("denies melena", "ibuprofen
+    held") — negated findings are kept so consumers can filter explicitly
 
 The extractor is intentionally rules-based and inspectable. Real clinical NLP
 production systems (cTAKES, MedSpaCy) layer ML on top of similar rule cores;
@@ -38,7 +41,10 @@ class Finding:
     label: str                 # human-readable name (e.g. "BP", "troponin", "vancomycin")
     value: Optional[str]       # normalized value (e.g. "88/52", "0.42", None for free text)
     evidence: Span
-    metadata: Dict[str, str] = field(default_factory=dict)
+    # metadata["negated"] is True when a NegEx-lite cue precedes/follows the
+    # evidence in the same sentence ("denies melena", "ibuprofen held").
+    # Negated findings are kept — downstream consumers filter on the flag.
+    metadata: Dict[str, object] = field(default_factory=dict)
 
 
 # ---------------------------------------------------------------------------
@@ -179,7 +185,10 @@ CONSULT_PATTERNS: List[Tuple[str, Pattern]] = [
     ("orthopedics", re.compile(r"\b(orthopedi[ac]s?|ortho)\b", re.I)),
     ("psychiatry", re.compile(r"\bpsychiatry\b", re.I)),
     ("infectious_disease", re.compile(r"\binfectious\s+disease\b", re.I)),
-    ("surgery", re.compile(r"\b(surgery|surgical\s+team)\b", re.I)),
+    # "Surgical consult/service/eval" is how general-surgery consults are
+    # written; bare "surgical" stays excluded ("surgical candidate" is not a
+    # consult signal).
+    ("surgery", re.compile(r"\b(surgery|surgical\s+(?:team|consult|service|eval))\b", re.I)),
     ("gi", re.compile(r"\bGI\s+consult\b", re.I)),
 ]
 
@@ -195,7 +204,10 @@ IMAGING_PATTERNS: List[Tuple[str, Pattern]] = [
     ("ct", re.compile(r"\bCT\b\s*(?:abd|pelvis|head|chest|brain|abdomen)?", re.I)),
     ("mri", re.compile(r"\bMRI\b\s*(?:brain|head|spine)?", re.I)),
     ("xray", re.compile(r"\b(CXR|chest\s+x-?ray|pelvis\s+XR|XR)\b", re.I)),
-    ("us", re.compile(r"\b(ultrasound|US)\b", re.I)),
+    # "US" must stay case-sensitive (uppercase) so the English word "us"
+    # ("per radiology, tells us...") never registers as an ultrasound order;
+    # the spelled-out form stays case-insensitive via a scoped inline flag.
+    ("us", re.compile(r"(?i:\bultrasound\b)|\bUS\b")),
     ("echo", re.compile(r"\b(echocardiogram|echo)\b", re.I)),
 ]
 
@@ -280,6 +292,72 @@ SOCIAL_PATTERNS: List[Tuple[str, Pattern]] = [
 
 
 # ---------------------------------------------------------------------------
+# Negation tagging (NegEx-lite)
+# ---------------------------------------------------------------------------
+# A finding whose evidence sits near a negation cue in the SAME sentence is
+# tagged metadata["negated"] = True. Findings are never dropped: downstream
+# consumers (e.g. the interaction engine) filter on the flag, and the evidence
+# span still supports highlighting "what the note actually says".
+
+# Cues that appear BEFORE the finding: "denies melena", "not on warfarin".
+NEGATION_PRE_CUES: List[Pattern] = [
+    re.compile(r"\bdenie[sd]\b", re.I),
+    re.compile(r"\bdenying\b", re.I),
+    re.compile(r"\bno\s+evidence\s+of\b", re.I),
+    re.compile(r"\bnegative\s+for\b", re.I),
+    re.compile(r"\bwithout\b", re.I),
+    re.compile(r"\bruled\s+out\b", re.I),
+    re.compile(r"\bno\s+signs?\s+of\b", re.I),
+    re.compile(r"\bnot\s+on\b", re.I),
+    re.compile(r"\boff\s+(?:of\s+)?", re.I),
+    re.compile(r"\bdiscontinued?\b", re.I),
+    re.compile(r"\bd/?c'?d\b", re.I),
+    re.compile(r"\bstopp(?:ed|ing)\b", re.I),
+    re.compile(r"\bh[eo]ld(?:ing)?\b", re.I),
+    re.compile(r"\bno\b", re.I),        # standalone token: "no melena"
+    re.compile(r"\bnot\b", re.I),
+    re.compile(r"\bnever\b", re.I),
+    re.compile(r"\bfree\s+of\b", re.I),
+]
+
+# Cues that appear AFTER the finding: "ibuprofen held", "melena ruled out".
+NEGATION_POST_CUES: List[Pattern] = [
+    re.compile(r"\bheld\b", re.I),
+    re.compile(r"\bon\s+hold\b", re.I),
+    re.compile(r"\bdiscontinued\b", re.I),
+    re.compile(r"\bd/?c'?d\b", re.I),
+    re.compile(r"\bstopped\b", re.I),
+    re.compile(r"\bruled\s+out\b", re.I),
+    re.compile(r"\bnot\s+(?:given|administered|started|present)\b", re.I),
+]
+
+# Sentence boundaries cap the negation window: a cue in the previous
+# sentence must not negate a finding in the next one.
+_SENTENCE_BOUNDARY = re.compile(r"[.!?;\n]")
+_NEGATION_WINDOW_CHARS = 40
+
+
+def _is_negated(note: str, span: Span) -> bool:
+    """True if a negation cue precedes (or, for post-cues, follows) the span
+    within the window, without crossing a sentence boundary."""
+    pre = note[max(0, span.start - _NEGATION_WINDOW_CHARS): span.start]
+    pre = _SENTENCE_BOUNDARY.split(pre)[-1]          # same sentence only
+    if any(cue.search(pre) for cue in NEGATION_PRE_CUES):
+        return True
+    post = note[span.end: span.end + _NEGATION_WINDOW_CHARS]
+    post = _SENTENCE_BOUNDARY.split(post)[0]         # same sentence only
+    return any(cue.search(post) for cue in NEGATION_POST_CUES)
+
+
+def _tag_negation(note: str, findings: List[Finding]) -> List[Finding]:
+    """Annotate (never drop) findings whose evidence is negated in context."""
+    for f in findings:
+        if _is_negated(note, f.evidence):
+            f.metadata["negated"] = True
+    return findings
+
+
+# ---------------------------------------------------------------------------
 # Extraction
 # ---------------------------------------------------------------------------
 
@@ -361,7 +439,11 @@ def _scan_imaging(note: str) -> List[Finding]:
         for m in pat.finditer(note):
             window = note[max(0, m.start() - 60): m.end() + 80]
             window_pending = any(p.search(window) for p in IMAGING_PENDING_HINTS)
-            status = "pending" if (window_pending or pending_global and "result" not in window.lower()) else "documented"
+            # Intended semantics: a pending hint (local or note-wide) marks the
+            # study pending UNLESS the local window already reports a result.
+            # Without the parens, `and` bound tighter and a window-level pending
+            # hint ignored the "result" guard entirely.
+            status = "pending" if ((window_pending or pending_global) and "result" not in window.lower()) else "documented"
             # If the result is reported (e.g., "CXR with right lower lobe consolidation"),
             # prefer documented.
             if re.search(rf"{label}\b\s*(with|shows?|confirms?|demonstrates?|no\s+\w)", window, re.I):
@@ -459,11 +541,11 @@ def extract(note: str) -> ExtractionResult:
     return ExtractionResult(
         vitals=_scan(note, VITAL_PATTERNS, "vital"),
         labs=_scan(note, LAB_PATTERNS, "lab"),
-        meds=_scan_meds(note),
+        meds=_tag_negation(note, _scan_meds(note)),
         consults=_scan_consults(note),
         imaging=_scan_imaging(note),
         dispo=_scan_dispo(note),
-        symptoms=_scan_symptoms(note),
+        symptoms=_tag_negation(note, _scan_symptoms(note)),
         risk_factors=_scan_readmit(note),
         code_status=_scan(note, CODE_STATUS_PATTERNS, "code_status"),
         mobility=_scan(note, MOBILITY_PATTERNS, "mobility"),

@@ -14,6 +14,7 @@ function symbolFor(kind: TimelineEvent["kind"]): string {
     case "action_created": return "+";
     case "action_state": return "⇒";
     case "note": return "·";
+    case "prior_note": return "↻";
   }
 }
 

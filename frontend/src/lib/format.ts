@@ -18,6 +18,16 @@ export function fmtTime(iso: string): string {
   });
 }
 
+/** Format a (positive) minute count as a compact duration: 45m, 2h 30m, 1.5d */
+export function fmtMinutes(mins: number): string {
+  const m = Math.max(0, Math.round(mins));
+  if (m < 90) return `${m}m`;
+  const h = Math.floor(m / 60);
+  const r = m % 60;
+  if (h < 48) return r > 0 ? `${h}h ${r}m` : `${h}h`;
+  return `${(m / 1440).toFixed(1)}d`;
+}
+
 const OWNER_DISPLAY: Record<string, string> = {
   physician: "Physician",
   nurse: "Charge nurse",

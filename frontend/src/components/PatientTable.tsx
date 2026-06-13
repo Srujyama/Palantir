@@ -84,7 +84,14 @@ export function PatientTable({ rows, selectedId, selected, onToggleSelect, curso
                 <td className="mono" style={{ textAlign: "right", color: p.silent_failure_count ? "var(--signal-red)" : "var(--fg-3)" }}>
                   {p.silent_failure_count}
                 </td>
-                <td className="mono" style={{ textAlign: "right" }}>{p.open_actions}</td>
+                <td className="mono" style={{ textAlign: "right" }}>
+                  <span className="pt-actions-cell">
+                    {p.overdue_actions > 0 && (
+                      <span className="overdue-badge">{p.overdue_actions} OVERDUE</span>
+                    )}
+                    <span>{p.open_actions}</span>
+                  </span>
+                </td>
               </tr>
             );
           })}

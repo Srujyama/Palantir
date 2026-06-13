@@ -36,6 +36,33 @@ class Patient(Base):
 
     triage = relationship("Triage", back_populates="patient", uselist=False, cascade="all, delete-orphan")
     actions = relationship("Action", back_populates="patient", cascade="all, delete-orphan")
+    note_versions = relationship(
+        "NoteVersion",
+        back_populates="patient",
+        cascade="all, delete-orphan",
+        order_by="NoteVersion.sequence",
+    )
+
+
+class NoteVersion(Base):
+    """An earlier note for a patient — clinical history, not the current state.
+
+    The current note always lives on Patient.note_text and is the *only* thing
+    the classifier reads. NoteVersion rows hold prior snapshots so the trend
+    engine can show trajectory (lactate clearing, creatinine worsening) without
+    ever feeding history into the deterministic classification path.
+    """
+
+    __tablename__ = "note_versions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    patient_id = Column(String, ForeignKey("patients.id", ondelete="CASCADE"), nullable=False, index=True)
+    sequence = Column(Integer, nullable=False)        # 0 = oldest prior, ascending
+    hours_ago = Column(Integer, nullable=False)       # offset from current note, as authored
+    captured_at = Column(DateTime, nullable=False)    # arrival_time - hours_ago
+    note_text = Column(Text, nullable=False)
+
+    patient = relationship("Patient", back_populates="note_versions")
 
 
 class Triage(Base):
@@ -52,6 +79,7 @@ class Triage(Base):
     payload = Column(JSON, nullable=False)                  # full TriageResult.to_dict()
     extraction = Column(JSON, nullable=False)               # full ExtractionResult.to_dict()
     icd_candidates = Column(JSON, nullable=False)
+    trends = Column(JSON, nullable=True)                    # longitudinal trajectory (narrative only)
     computed_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     patient = relationship("Patient", back_populates="triage")
@@ -68,6 +96,9 @@ class Action(Base):
     urgency = Column(String, nullable=False)
     status = Column(String, nullable=False, default="open")  # open | in_progress | resolved | escalated
     source_category = Column(String, nullable=False)         # which bottleneck created it
+    sla_minutes = Column(Integer, nullable=True)             # policy window from app.services.sla
+    due_at = Column(DateTime, nullable=True)                 # created_at + sla_minutes
+    escalation_level = Column(Integer, nullable=False, default=0)  # bumped on each SLA breach
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
 
@@ -94,3 +125,43 @@ class ActionEvent(Base):
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     action = relationship("Action", back_populates="events")
+
+
+class CensusSnapshot(Base):
+    """A point-in-time roll-up of the whole floor.
+
+    Written on each simulation tick (and on demand) so the analytics page can
+    draw a real census/acuity time-series instead of a static snapshot. This
+    is what turns the demo from 'a dashboard' into 'a system that's been
+    running.'
+    """
+
+    __tablename__ = "census_snapshots"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    captured_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    census = Column(Integer, nullable=False)            # occupied beds
+    red = Column(Integer, nullable=False)
+    amber = Column(Integer, nullable=False)
+    green = Column(Integer, nullable=False)
+    open_actions = Column(Integer, nullable=False)
+    overdue_actions = Column(Integer, nullable=False)
+    silent_failures = Column(Integer, nullable=False)
+    source = Column(String, nullable=False, default="manual")  # manual | sim_tick | ingest
+
+
+class HandoffSnapshot(Base):
+    """An immutable, frozen handoff artifact.
+
+    Real handoffs are a record of what was said at shift change. Finalizing one
+    freezes the report payload + a label so you can later retrieve 'the handoff
+    given at 19:00 last night' — the auditable artifact a dashboard cannot be.
+    """
+
+    __tablename__ = "handoff_snapshots"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    captured_at = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    shift_label = Column(String, nullable=False)
+    finalized_by = Column(String, nullable=False, default="charge-rn")
+    payload = Column(JSON, nullable=False)             # frozen HandoffReport.dict()

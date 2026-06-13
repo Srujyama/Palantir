@@ -16,3 +16,4 @@ backend/app/db/radar.db
 # Local generated artifacts
 *.zip
 foundry_export/__pycache__/
+backend/.hypothesis/

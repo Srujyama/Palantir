@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api } from "../lib/api";
-import type { PatientDetail } from "../types/api";
+import type { PatientDetail, PatientInteractions } from "../types/api";
 import { categoryShort, fmtTime, hoursAgo, ownerLabel } from "../lib/format";
 import { BottleneckCard } from "../components/BottleneckCard";
 import { NoteWithEvidence } from "../components/NoteWithEvidence";
@@ -11,27 +11,73 @@ import { WhyStuckPanel } from "../components/WhyStuckPanel";
 import { ActionsList } from "../components/ActionsList";
 import { UrgencyPill } from "../components/UrgencyPill";
 import { Timeline } from "../components/Timeline";
+import { TrajectoryPanel } from "../components/TrajectoryPanel";
 
 export function PatientPage() {
   const { patientId } = useParams<{ patientId: string }>();
   const [data, setData] = useState<PatientDetail | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [interactions, setInteractions] = useState<PatientInteractions | null>(null);
+  const [interactionsError, setInteractionsError] = useState<string | null>(null);
 
-  const reload = async () => {
-    if (!patientId) return;
+  // `reload` is keyed to the patient id it was started for: a response that
+  // arrives after the user has navigated to a different patient is dropped,
+  // so we never paint patient A's chart (or A's interactions) over B.
+  const load = (pid: string, isCurrent: () => boolean) => {
     setLoading(true);
-    try {
-      const d = await api.patient(patientId);
-      setData(d);
-    } finally {
-      setLoading(false);
-    }
+    setError(null);
+    setData(null);
+    setInteractions(null);
+    setInteractionsError(null);
+    // Fire the interactions check alongside the detail load; a failure here
+    // must not block the chart.
+    api.interactions(pid)
+      .then((ix) => { if (isCurrent()) { setInteractions(ix); setInteractionsError(null); } })
+      .catch((err: unknown) => {
+        if (isCurrent()) {
+          setInteractions(null);
+          setInteractionsError(err instanceof Error ? err.message : String(err));
+        }
+      });
+    api.patient(pid)
+      .then((d) => { if (isCurrent()) setData(d); })
+      .catch((err: unknown) => {
+        if (isCurrent()) setError(err instanceof Error ? err.message : String(err));
+      })
+      .finally(() => { if (isCurrent()) setLoading(false); });
   };
 
-  useEffect(() => { void reload(); }, [patientId]); // eslint-disable-line
+  useEffect(() => {
+    if (!patientId) return;
+    let alive = true;
+    const isCurrent = () => alive;
+    load(patientId, isCurrent);
+    // The titlebar LIVE TICK button mutates floor state; refresh in place.
+    const onRefresh = () => { if (alive) load(patientId, isCurrent); };
+    window.addEventListener("radar:refresh", onRefresh);
+    return () => {
+      alive = false;
+      window.removeEventListener("radar:refresh", onRefresh);
+    };
+  }, [patientId]); // eslint-disable-line
 
-  if (loading || !data) {
+  const reload = () => {
+    if (patientId) load(patientId, () => true);
+  };
+
+  if (loading) {
     return <div className="empty-state">Loading patient…</div>;
+  }
+  if (!data) {
+    return (
+      <div className="empty-state">
+        <div className="error-strip" style={{ display: "inline-flex" }}>
+          <span>Patient failed to load{error ? `: ${error}` : ""}</span>
+          <button className="btn" onClick={() => void reload()}>Retry</button>
+        </div>
+      </div>
+    );
   }
 
   // Combine all evidence spans for the note highlight
@@ -78,6 +124,46 @@ export function PatientPage() {
             <ProtocolTable matches={data.protocol_matches} />
           </div>
         </div>
+
+        <TrajectoryPanel trends={data.trends ?? null} />
+
+        {interactions && interactions.flags.length > 0 && (
+          <div className="section">
+            <div className="head">
+              <span className="label bright">Medication interactions</span>
+              <span className="tag subtle">{interactions.flags.length} flagged</span>
+            </div>
+            <div className="body">
+              <div className="ix-list">
+                {interactions.flags.map((f) => (
+                  <div key={f.rule_key} className={`ix-flag ${f.severity}`}>
+                    <div className="ix-head">
+                      <UrgencyPill urgency={f.severity} />
+                      <span className="ix-name">{f.name}</span>
+                      <span className="ix-meds">
+                        {f.meds_involved.map((m) => (
+                          <span key={m.name} className="tag code">{m.name}</span>
+                        ))}
+                      </span>
+                    </div>
+                    <div className="ix-rec">{f.recommendation}</div>
+                    <div className="dim small mono ix-cite">{f.citation}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        {interactionsError && (
+          <div className="section">
+            <div className="head"><span className="label">Medication interactions</span></div>
+            <div className="body">
+              <div className="error-strip">
+                <span>Interaction check failed: {interactionsError}</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="section">
           <div className="head"><span className="label bright">Workflow actions</span></div>

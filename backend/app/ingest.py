@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from app.db.database import Base, SessionLocal, engine
-from app.models.orm import Action, ActionEvent, Patient, Triage  # noqa: F401  (registers tables)
+from app.models.orm import (  # noqa: F401  (registers tables)
+    Action, ActionEvent, NoteVersion, Patient, Triage,
+)
 from app.services.pipeline import run as run_pipeline
 
 
@@ -46,6 +48,21 @@ def main() -> None:
                 room=assign_room(i),
             )
             db.add(p)
+            db.flush()
+            # Attach prior notes (history) before running the pipeline so the
+            # trend engine can see them. Backward compatible: rows without the
+            # key get no priors.
+            for seq, prior in enumerate(n.get("prior_notes", [])):
+                hours_ago = int(prior["hours_ago"])
+                db.add(
+                    NoteVersion(
+                        patient_id=p.id,
+                        sequence=seq,
+                        hours_ago=hours_ago,
+                        captured_at=p.arrival_time - timedelta(hours=hours_ago),
+                        note_text=prior["note_text"],
+                    )
+                )
             db.flush()
             run_pipeline(db, p)
         db.commit()

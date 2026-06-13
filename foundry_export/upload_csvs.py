@@ -1,9 +1,15 @@
 """
-Upload the four CSVs into the four Foundry datasets.
+Upload the five CSVs into the five Foundry datasets.
 
 Uses raw v2 REST (the SDK doesn't expose list-transactions so we'd have a
 chicken-and-egg with stale txns otherwise). Token is unwrapped from the
 JSON envelope that pltr-cli stores in the macOS keyring.
+
+NOTE on schemas: this script only writes files and commits the transaction.
+After the first upload of each dataset, apply/infer the dataset schema in
+Foundry (dataset page → "Apply schema", or Pipeline Builder will prompt on
+first use) so the CSV columns become typed; subsequent snapshot uploads
+keep the applied schema.
 """
 from __future__ import annotations
 
@@ -22,6 +28,15 @@ DATASETS = {
     "notes":           "ri.foundry.main.dataset.190b06d9-958e-497e-be65-ad37ae144335",
     "protocols":       "ri.foundry.main.dataset.f59fec67-924c-45e8-ac9d-fd35170dbfaf",
     "icd10_reference": "ri.foundry.main.dataset.75d3fdec-654a-48e3-b5de-104ad9aef25f",
+    # eval_labels holds the held-out ground truth (split out of patients.csv
+    # so the Workshop Patient object never carries labels). Create a new
+    # dataset in the bottleneck-radar project's raw/ folder, then paste its
+    # RID here before running.
+    "eval_labels":     "ri.foundry.main.dataset.REPLACE-WITH-EVAL-LABELS-RID",
+    # note_versions holds prior notes (clinical history) for the trajectory
+    # panel. Optional — only needed if you build the trajectory Function.
+    # Create the dataset and paste its RID, or leave the placeholder to skip.
+    "note_versions":   "ri.foundry.main.dataset.REPLACE-WITH-NOTE-VERSIONS-RID",
 }
 
 
@@ -52,6 +67,14 @@ def find_open_txn(sess: requests.Session, dataset_rid: str) -> str | None:
     if r.status_code == 200 and r.json().get("status") == "OPEN":
         return txn_rid
     return None
+
+
+def abort_txn(sess: requests.Session, dataset_rid: str, txn_rid: str) -> None:
+    r = sess.post(
+        f"{HOST}/api/v2/datasets/{dataset_rid}/transactions/{txn_rid}/abort",
+        params=PREVIEW,
+    )
+    r.raise_for_status()
 
 
 def start_txn(sess: requests.Session, dataset_rid: str) -> str:
@@ -88,12 +111,15 @@ def upload_one(sess: requests.Session, name: str, dataset_rid: str,
                csv_path: Path) -> None:
     print(f"\n=== {name} ({csv_path.name}, {csv_path.stat().st_size}b) ===")
 
-    txn = find_open_txn(sess, dataset_rid)
-    if txn:
-        print(f"  reusing open txn {txn}")
-    else:
-        txn = start_txn(sess, dataset_rid)
-        print(f"  started txn {txn}")
+    # Never reuse a dangling OPEN transaction — its contents are arbitrary
+    # (a half-finished upload from a previous run, possibly other files).
+    # Abort it and start a fresh SNAPSHOT so every commit is exactly one CSV.
+    stale = find_open_txn(sess, dataset_rid)
+    if stale:
+        abort_txn(sess, dataset_rid, stale)
+        print(f"  aborted stale open txn {stale}")
+    txn = start_txn(sess, dataset_rid)
+    print(f"  started txn {txn}")
 
     upload_file(sess, dataset_rid, txn, csv_path)
     print(f"  uploaded {csv_path.name}")
@@ -108,6 +134,10 @@ def main() -> None:
     sess.headers["Authorization"] = f"Bearer {get_token()}"
 
     for name, rid in DATASETS.items():
+        if "REPLACE-WITH" in rid:
+            print(f"\n=== {name} ===\n  ! placeholder RID — create the dataset "
+                  f"in Foundry and paste its RID into DATASETS; skipping")
+            continue
         csv = here / f"{name}.csv"
         if not csv.exists():
             print(f"  ! {csv} missing; skipping")

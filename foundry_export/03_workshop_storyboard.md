@@ -4,7 +4,7 @@ Two screens. Match the local React app so the demo video reads as one product.
 
 ---
 
-## Screen 1 — Queue (`/`)
+## Screen 1 — Queue (`/dashboard`)
 
 **Layout** (Workshop sections, top to bottom):
 
@@ -32,7 +32,7 @@ Two screens. Match the local React app so the demo video reads as one product.
 
    Row click → navigate to Screen 2 with `patient_id` as a path param.
 
-5. **Footer** — citation block with the 5 protocol citations + "All cases
+5. **Footer** — citation block with the 12 protocol citations + "All cases
    notional. No PHI." + the Use Case Restriction disclosure repeated.
 
 ---
@@ -52,10 +52,22 @@ Two-column layout.
 4. **Care-pathway evaluation table** — for each Protocol that triggered:
    protocol name | status (gaps N or N/A) | documented (green ✓) |
    missing (red ●). One row per protocol from `protocol_gaps`.
-5. **Workflow actions** — list of `Action` objects for this patient.
+5. **Trajectory panel** — bound to the patient's `NoteVersion` rows
+   (oldest-first) plus the current `Note`. Shows per-lab trend lines
+   (lactate clearing vs. creatinine worsening), recurrent-admission cues,
+   and a green **"gaps closed across notes"** block: protocol steps that
+   were missing in an earlier note but documented by now. This is the
+   *done-and-resolved* signal that keeps the board from nagging about a
+   step already charted. It is **narrative only** — the `classify_bottleneck`
+   Function reads only the current note, never the priors, so the
+   trajectory never changes the category. In Foundry it is a read-only
+   Function over the `NoteVersion` link set (source: `note_versions.csv`),
+   not an input to classification.
+6. **Workflow actions** — list of `Action` objects for this patient.
    Buttons:
    - **+ Create action from recommendation** → triggers an Action object
-     with `title = bottleneck.summary`, `owner_role = bottleneck.owner`.
+     with `title = bottleneck.recommended_action` (the imperative step, NOT
+     `summary`/`rationale`), `owner_role = bottleneck.owner`.
    - Each existing Action row: Start / Resolve / Escalate buttons that
      mutate `Action.status`.
 
@@ -85,12 +97,33 @@ look for clean, named actions over generic edits.
 
 ---
 
+## Snapshots — giving the board memory
+
+A live board forgets; an ops record can't. Two writes-as-objects mirror
+the local `census`/handoff snapshot helpers:
+
+- **Finalize handoff** — an Action Type `finalize-handoff` that freezes
+  the current shift-handoff roll-up into a new immutable `HandoffSnapshot`
+  object (`shift_label`, `finalized_by`, `captured_at`, frozen payload).
+  Retrieve it later by id — "the handoff given at 19:00 last night." It is
+  append-only: the Action never mutates an existing snapshot.
+- **Census snapshot** — a scheduled Automation (or the demo's LIVE TICK)
+  writes a `CensusSnapshot` row (occupancy, red/amber/green mix, open and
+  overdue actions, silent-failure count). A Workshop Time Series chart over
+  that object set gives the KPI strip a real trend line instead of one
+  instantaneous number.
+
+Both are raw object writes with no clinical content — the same read-only
+posture the rest of the app holds toward the `Patient` record.
+
+---
+
 ## Demo script (90 seconds, fits the < 4-min video)
 
 1. *(Landing)* "Hospital ops teams already know which patients are slow.
    They don't know which specific coordination step is missing for each
    one. That's what this finds." — click Enter.
-2. *(Queue)* "Sixty patients, 21 critical, 21 with documentation gaps
+2. *(Queue)* "176 patients, 44 critical, 56 with documentation gaps
    against published care pathways. Each row tells me what's missing
    and which role on the floor handles it." — point at the SF column.
 3. *(P-1001 detail)* "This patient has a documented sepsis bundle
@@ -118,12 +151,19 @@ look for clean, named actions over generic edits.
 ## Order of operations once your AIP workspace is live
 
 1. Create a Foundry **Project** named `bottleneck-radar`.
-2. Upload the four CSVs from this folder into a `raw/` folder in the project.
+2. Upload the six CSVs from this folder into a `raw/` folder in the project
+   (run `python build_csvs.py` first to regenerate them from the backend).
 3. Build the Ontology object types per `01_ontology_spec.md`.
 4. Wire `patients.csv` → `Patient`, `notes.csv` → `Note`, `protocols.csv`
    → `Protocol` + `ProtocolStep`, `icd10_reference.csv` → `Icd10Code`.
+   Wire `note_versions.csv` → `NoteVersion` only if you're building the
+   trajectory panel (it's narrative-only history; skip for a minimal port).
+   Leave `eval_labels.csv` as a raw dataset — it is the held-out answer
+   key and must not back any ontology object the app can read.
 5. Build Pipeline 1 (note enrichment) and Pipeline 2 (gap detection)
-   per `02_pipeline_and_function_spec.md`.
+   per `02_pipeline_and_function_spec.md`. Pipeline 2's Python node is
+   `pipeline_protocol_gap_transform.py`, generated by `sync_transform.py`
+   and parity-tested against the local engine on all 176 notes.
 6. Author the Function `classify_bottleneck` and bind it to `Patient`.
 7. Build the Workshop app in two screens per this storyboard.
 8. Record the 90-second narration over a screen capture, post unlisted

@@ -1,12 +1,18 @@
 """
 Generate Pipeline Builder-ready CSVs from the local backend data.
 
-Outputs four CSVs in this folder:
+Outputs six CSVs in this folder:
 
   patients.csv          one row per patient — demographics, arrival, chief complaint
-  notes.csv             one row per note — patient_id + raw note_text
+  notes.csv             one row per CURRENT note — patient_id + raw note_text
+  note_versions.csv     prior notes (clinical history) — patient_id, sequence,
+                        hours_ago, note_text. Feeds the read-only trajectory
+                        Function; the classifier never reads these.
   protocols.csv         one row per (protocol, expected_action) pair
   icd10_reference.csv   the 39-code reference set
+  eval_labels.csv       held-out ground truth per patient — kept OUT of
+                        patients.csv so the Workshop Patient object never
+                        carries labels; wire this only to the eval harness.
 
 Run:  python build_csvs.py
 """
@@ -24,10 +30,7 @@ notes = json.loads((BACKEND / "data" / "patient_notes.json").read_text())
 
 with (OUT / "patients.csv").open("w", newline="") as f:
     w = csv.writer(f)
-    w.writerow([
-        "patient_id", "arrival_time", "age", "sex", "chief_complaint",
-        "icd10_hints", "truth_bottleneck", "truth_protocol", "expected_owner",
-    ])
+    w.writerow(["patient_id", "arrival_time", "age", "sex", "chief_complaint"])
     for n in notes:
         w.writerow([
             n["patient_id"],
@@ -35,10 +38,6 @@ with (OUT / "patients.csv").open("w", newline="") as f:
             n["age"],
             n["sex"],
             n["chief_complaint"],
-            "|".join(n.get("icd10_hints", [])),
-            n.get("truth_bottleneck", ""),
-            n.get("truth_protocol", ""),
-            n.get("expected_owner", ""),
         ])
 
 with (OUT / "notes.csv").open("w", newline="") as f:
@@ -46,6 +45,32 @@ with (OUT / "notes.csv").open("w", newline="") as f:
     w.writerow(["patient_id", "note_text"])
     for n in notes:
         w.writerow([n["patient_id"], n["note_text"]])
+
+# ---------- note versions (prior notes — clinical history, never classified) ----------
+n_versions = 0
+with (OUT / "note_versions.csv").open("w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["patient_id", "sequence", "hours_ago", "note_text"])
+    for n in notes:
+        for seq, prior in enumerate(n.get("prior_notes", [])):
+            w.writerow([n["patient_id"], seq, prior["hours_ago"], prior["note_text"]])
+            n_versions += 1
+
+# ---------- eval labels (ground truth — separate from the Patient object) ----------
+with (OUT / "eval_labels.csv").open("w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow([
+        "patient_id", "truth_bottleneck", "truth_protocol", "expected_owner",
+        "icd10_hints",
+    ])
+    for n in notes:
+        w.writerow([
+            n["patient_id"],
+            n.get("truth_bottleneck", ""),
+            n.get("truth_protocol", ""),
+            n.get("expected_owner", ""),
+            "|".join(n.get("icd10_hints", [])),
+        ])
 
 # ---------- protocols ----------
 # Re-import protocol library from backend
@@ -80,5 +105,8 @@ with (OUT / "icd10_reference.csv").open("w", newline="") as f:
         w.writerow([row["code"], row["description"], row.get("category", "")])
 
 print(f"Wrote {len(notes)} patients, {len(notes)} notes, "
-      f"{sum(len(p.expected_actions) for p in PROTOCOLS)} protocol-action rows, "
+      f"{n_versions} note versions, "
+      f"{len(notes)} eval labels, "
+      f"{sum(len(p.expected_actions) for p in PROTOCOLS)} protocol-action rows "
+      f"({len(PROTOCOLS)} protocols), "
       f"{len(icd)} ICD-10 codes to {OUT}")
