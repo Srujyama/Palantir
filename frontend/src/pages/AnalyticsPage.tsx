@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../lib/api";
-import type { Analytics, EvalMiss, EvalSummary, ProtocolGapBreakdown } from "../types/api";
+import type { Analytics, CensusSeries, EvalMiss, EvalSummary, ProtocolGapBreakdown } from "../types/api";
 import { ownerLabel } from "../lib/format";
+import { CensusTrend } from "../components/CensusTrend";
 
 function errMsg(err: unknown): string {
   return err instanceof Error ? err.message : String(err);
@@ -74,6 +75,8 @@ export function AnalyticsPage() {
   const [missesError, setMissesError] = useState<string | null>(null);
   const [missesLoading, setMissesLoading] = useState(false);
   const [showMisses, setShowMisses] = useState(false);
+  const [census, setCensus] = useState<CensusSeries | null>(null);
+  const [censusError, setCensusError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadAll = () => {
@@ -90,6 +93,13 @@ export function AnalyticsPage() {
       void api.evalSummary()
         .then((ev) => setEvalData(ev))
         .catch((err: unknown) => setEvalError(errMsg(err)));
+      // Census time-series — grows with each live tick / manual snapshot.
+      void api.censusSeries()
+        .then((cs) => {
+          setCensus(cs);
+          setCensusError(null);
+        })
+        .catch((err: unknown) => setCensusError(errMsg(err)));
       // Re-fetch named misses if the panel is open so they stay current.
       setMisses(null);
     };
@@ -366,6 +376,48 @@ export function AnalyticsPage() {
               )
             )}
           </>
+        )}
+      </Card>
+
+      <Card
+        eyebrow="09 · Census over time"
+        title="How the floor has moved"
+        subtitle="Census and acuity mix at each live tick / manual snapshot. The series is empty until ticks accrue."
+      >
+        {censusError ? (
+          <div className="error-strip">
+            <span>Census series failed to load: {censusError}</span>
+          </div>
+        ) : !census ? (
+          <div className="dim mono small">Loading census series…</div>
+        ) : census.points.length === 0 ? (
+          <div className="empty-state">
+            No census history yet — run a live tick to start the trend.
+          </div>
+        ) : (
+          (() => {
+            const latest = census.points[census.points.length - 1];
+            const peakRed = Math.max(...census.points.map((p) => p.red));
+            return (
+              <>
+                <div className="mc-stats">
+                  <div className="mc-stat">
+                    <span className="n">{latest.census}</span>
+                    <span className="l">Latest census</span>
+                  </div>
+                  <div className="mc-stat">
+                    <span className="n" style={{ color: "var(--signal-red)" }}>{peakRed}</span>
+                    <span className="l">Peak red</span>
+                  </div>
+                  <div className="mc-stat">
+                    <span className="n">{latest.open_actions}</span>
+                    <span className="l">Open actions now</span>
+                  </div>
+                </div>
+                <CensusTrend points={census.points} />
+              </>
+            );
+          })()
         )}
       </Card>
     </div>

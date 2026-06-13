@@ -447,3 +447,34 @@ export interface BulkUpdateResult {
   missing: number[];
   skipped: { id: number; reason: string }[];
 }
+
+// ── Census time-series + finalized handoff snapshots ────────────────────
+
+export interface CensusPointOut {
+  captured_at: string;
+  census: number;
+  red: number;
+  amber: number;
+  green: number;
+  open_actions: number;
+  overdue_actions: number;
+  silent_failures: number;
+  source: string;
+}
+
+export interface CensusSeries {
+  points: CensusPointOut[];
+  n: number;
+}
+
+export interface HandoffSnapshotMeta {
+  id: number;
+  captured_at: string;
+  shift_label: string;
+  finalized_by: string;
+}
+
+export interface HandoffHistory {
+  snapshots: HandoffSnapshotMeta[];
+  n: number;
+}

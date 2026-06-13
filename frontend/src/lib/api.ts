@@ -5,10 +5,13 @@ import type {
   BulkUpdateResult,
   CapacityForecast,
   CapacitySimulation,
+  CensusSeries,
   EvalMiss,
   EvalSummary,
   FloorMap,
+  HandoffHistory,
   HandoffReport,
+  HandoffSnapshotMeta,
   PatientDetail,
   PatientInteractions,
   PatientSummary,
@@ -172,5 +175,20 @@ export const api = {
   },
   timeline(patientId: string): Promise<PatientTimeline> {
     return request<PatientTimeline>(`/patients/${patientId}/timeline`);
+  },
+  censusSeries(limit = 200): Promise<CensusSeries> {
+    return request<CensusSeries>(`/census/series?limit=${limit}`);
+  },
+  finalizeHandoff(body: { finalized_by?: string } = {}): Promise<HandoffSnapshotMeta> {
+    return request<HandoffSnapshotMeta>("/census/handoff/finalize", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+  },
+  handoffHistory(): Promise<HandoffHistory> {
+    return request<HandoffHistory>("/census/handoff/history");
+  },
+  handoffSnapshot(id: number): Promise<HandoffReport> {
+    return request<HandoffReport>(`/census/handoff/${id}`);
   },
 };

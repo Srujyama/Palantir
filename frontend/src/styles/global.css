@@ -1819,3 +1819,128 @@ table.data tbody tr.cursor {
   color: var(--fg-3);
   border-style: dashed;
 }
+
+/* =========================================================================
+   census trend + handoff history (append-only)
+   ========================================================================= */
+
+/* Census time-series card (AnalyticsPage · section 09) */
+.census-trend {
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: var(--s-3);
+}
+.census-trend-svg { display: block; width: 100%; }
+.census-axis {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.census-legend {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-3);
+}
+.census-legend-item { display: inline-flex; align-items: center; gap: var(--s-2); }
+.census-swatch { width: 12px; height: 2px; display: inline-block; }
+.census-swatch-census { background: var(--fg-1); height: 3px; }
+.census-swatch-red { background: var(--signal-red); }
+.census-swatch-amber { background: var(--signal-amber); }
+.census-legend-count { margin-left: auto; color: var(--fg-3); }
+
+/* Handoff finalize controls + history (HandoffPage · no-print) */
+.ho-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin-bottom: var(--s-6);
+  padding-bottom: var(--s-5);
+  border-bottom: 1px solid var(--border);
+}
+.ho-controls-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.ho-controls-row .btn { padding: 8px 14px; }
+.ho-finalize-msg {
+  font-size: 11px;
+  color: var(--signal-green);
+  letter-spacing: 0.04em;
+}
+
+.ho-history { display: flex; flex-direction: column; gap: var(--s-2); }
+.ho-history-head {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-3);
+}
+.ho-history-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.ho-history-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--s-4);
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-left: 2px solid transparent;
+  padding: var(--s-2) var(--s-3);
+  color: var(--fg-1);
+  font-family: inherit;
+  font-size: 12px;
+}
+.ho-history-row:last-child { border-bottom: 0; }
+.ho-history-row:hover { background: var(--bg-3); }
+.ho-history-row.active {
+  background: var(--bg-3);
+  border-left-color: var(--signal-blue);
+}
+.ho-history-shift { color: var(--fg-0); }
+.ho-history-time { color: var(--fg-2); font-size: 11px; }
+.ho-history-by {
+  color: var(--fg-3);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Frozen-snapshot banner */
+.ho-frozen-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+  padding: var(--s-2) var(--s-3);
+  margin-bottom: var(--s-5);
+  background: var(--signal-blue-bg);
+  border: 1px solid var(--signal-blue);
+  border-left-width: 3px;
+}
+.ho-frozen-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--signal-blue);
+}
+.ho-frozen-meta { font-size: 11px; color: var(--fg-2); }
+.ho-frozen-banner .btn { margin-left: auto; }

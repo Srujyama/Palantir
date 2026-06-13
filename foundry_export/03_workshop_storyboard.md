@@ -52,7 +52,17 @@ Two-column layout.
 4. **Care-pathway evaluation table** — for each Protocol that triggered:
    protocol name | status (gaps N or N/A) | documented (green ✓) |
    missing (red ●). One row per protocol from `protocol_gaps`.
-5. **Workflow actions** — list of `Action` objects for this patient.
+5. **Trajectory panel** — bound to the patient's prior `Note` versions
+   (oldest-first) plus the current note. Shows per-lab trend lines
+   (lactate clearing vs. creatinine worsening), recurrent-admission cues,
+   and a green **"gaps closed across notes"** block: protocol steps that
+   were missing in an earlier note but documented by now. This is the
+   *done-and-resolved* signal that keeps the board from nagging about a
+   step already charted. It is **narrative only** — the `classify_bottleneck`
+   Function reads only the current note, never the priors, so the
+   trajectory never changes the category. In Foundry it is a read-only
+   Function over the `Note` link set, not an input to classification.
+6. **Workflow actions** — list of `Action` objects for this patient.
    Buttons:
    - **+ Create action from recommendation** → triggers an Action object
      with `title = bottleneck.summary`, `owner_role = bottleneck.owner`.
@@ -82,6 +92,27 @@ In Workshop, the "Create action" button is an **Action Type** invocation:
 The Start / Resolve / Escalate buttons are three more Action Types, each
 mutating only `Action.status`. Keep them tightly scoped — Workshop reviewers
 look for clean, named actions over generic edits.
+
+---
+
+## Snapshots — giving the board memory
+
+A live board forgets; an ops record can't. Two writes-as-objects mirror
+the local `census`/handoff snapshot helpers:
+
+- **Finalize handoff** — an Action Type `finalize-handoff` that freezes
+  the current shift-handoff roll-up into a new immutable `HandoffSnapshot`
+  object (`shift_label`, `finalized_by`, `captured_at`, frozen payload).
+  Retrieve it later by id — "the handoff given at 19:00 last night." It is
+  append-only: the Action never mutates an existing snapshot.
+- **Census snapshot** — a scheduled Automation (or the demo's LIVE TICK)
+  writes a `CensusSnapshot` row (occupancy, red/amber/green mix, open and
+  overdue actions, silent-failure count). A Workshop Time Series chart over
+  that object set gives the KPI strip a real trend line instead of one
+  instantaneous number.
+
+Both are raw object writes with no clinical content — the same read-only
+posture the rest of the app holds toward the `Patient` record.
 
 ---
 

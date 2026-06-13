@@ -41,11 +41,11 @@ The same data backs every screen.
 | `/`            | Landing           | Editorial overview. The CTA is "Enter the operations console." |
 | `/dashboard`   | Queue             | Every patient, ranked by urgency. Filter, search, bulk-route.  |
 | `/floor`       | Floor map         | Spatial view of all 180 beds across 6 wings, colored by urgency. |
-| `/analytics`   | Analytics         | Cohort-level metrics: gap distribution, owner load, LOS buckets — plus the live model card. |
+| `/analytics`   | Analytics         | Cohort-level metrics: gap distribution, owner load, LOS buckets, census-over-time trend — plus the live model card. |
 | `/capacity`    | Capacity / What-If | 48h bed-census forecast + scenario builder: resolve a bottleneck group, see beds freed by when. |
 | `/sandbox`     | Triage sandbox    | Paste any note, watch the 4-stage pipeline run with evidence highlighting and per-stage timings. |
-| `/handoff`     | Shift handoff     | Printable artifact for shift change. Built for paper.          |
-| `/p/{id}`      | Patient detail    | Note + evidence + protocol table + interaction flags + actions + timeline. |
+| `/handoff`     | Shift handoff     | Printable artifact for shift change. Built for paper — and can be finalized into an immutable snapshot. |
+| `/p/{id}`      | Patient detail    | Note + evidence + protocol table + interaction flags + actions + timeline + trajectory (longitudinal trend across prior notes). |
 
 ---
 
@@ -246,6 +246,93 @@ harness (`tools/eval_harness.py`):
 
 ---
 
+## Trajectory — telling never-done from done-and-resolved
+
+A single note is a snapshot. The patient detail page also reads the
+patient's prior notes (oldest-first) and composes a *trajectory*
+narrative (`app/services/trends.py`, surfaced in the `trends` block of
+`GET /patients/{id}` and rendered by `TrajectoryPanel`): which labs are
+rising or falling and whether that is clinically improving or worsening
+(lactate clearing vs. creatinine climbing), recurrent-admission cues,
+and the green **"gaps closed across notes"** block — protocol steps that
+were missing in an earlier note but are documented by now.
+
+That last capability is the operational point: it distinguishes a step
+that was *never done* (a real bottleneck) from one that was *done and
+resolved* (no action needed), so the board doesn't nag a charge nurse
+about antibiotics that are already charted. The resolved-gap rule is
+deliberately strict — the protocol must still trigger in the current
+note and the specific action must have moved out of its missing set; a
+protocol that simply stops firing because the presentation changed is
+*not* counted as resolved, because that would be a dangerous false
+reassurance.
+
+**Narrative only, by construction.** Trajectory is a display/coordination
+signal. The classifier (`app/services/bottleneck.classify`) never sees
+prior notes — it reads only the current `note_text` (see the design
+invariant at the top of `trends.py` and §3 of the model card). History
+changes the story the console tells, not the decision the rules make, so
+the corpus eval stays 1.0 *by construction* rather than by tuning. On
+P-1002, for example, the panel reads lactate 4.1 → 3.6 → 3.1 (clearing),
+creatinine 1.4 → 1.7 → 1.9 (worsening), and two Surviving Sepsis bundle
+steps (blood cultures, crystalloid) closed across notes — without any of
+that touching the category the engine assigns.
+
+---
+
+## Floor memory — census-over-time + finalized handoffs
+
+A live dashboard forgets. Two small persistence helpers
+(`app/services/census.py`, `app/api/census.py`) give the console memory:
+
+- **Census snapshots.** `capture_census` freezes a floor-wide roll-up
+  (occupancy, red/amber/green acuity mix, open and overdue actions,
+  silent-failure count); the LIVE TICK captures one automatically.
+  `GET /census/series` returns the time series so `/analytics` can draw a
+  real census/acuity trend line instead of a single instantaneous
+  number.
+- **Finalized handoffs.** `POST /census/handoff/finalize` freezes the
+  current handoff report into an immutable artifact (`HandoffSnapshot`)
+  retrievable later by id — "the handoff given at 19:00 last night" —
+  the auditable record a live page can't be. `GET /census/handoff/history`
+  lists them; `GET /census/handoff/{id}` returns one exactly as frozen.
+
+---
+
+## Provability — the auditability guarantee, mechanically enforced
+
+"Verifiable, not a black box" is the thesis, so it is made *checkable at
+runtime* rather than asserted. The provenance export
+(`app/services/audit.py`, `GET /audit/patient/{id}`,
+`GET /audit/corpus/summary`) re-derives every surfaced signal's chain of
+custody — signal → recommended action → guideline citation → evidence
+span(s) — and re-checks the auditability invariant against each
+patient's own note:
+
+```
+note_text[start:end] == span.text   →   verified == True
+```
+
+On the live corpus the export reports **404 / 404 evidence spans verify
+(100%, zero offenders)** across all 176 patients — the highlight a
+clinician sees *is* the text the rule fired on, byte for byte. Citation
+coverage is **67.09%** corpus-wide (212 of 316 signals), and that is
+correct *by design*: every `missing_soc` and `med_risk` signal carries a
+literature citation, while purely operational categories
+(`awaiting_consult`, `awaiting_imaging`, `dispo_delay`, `readmit_risk`)
+carry none — there is no guideline to cite for "page cardiology." Among
+guideline-derived signals, citation coverage is 100%.
+
+The guarantee is backed by tests, not just an endpoint: a property test
+(`tests/test_properties.py`) pins determinism (same note → same
+category/urgency/owner) and span integrity; adversarial fuzzing
+(`tests/test_fuzz_notes.py`) proves the pipeline never crashes and never
+emits an invalid span under mutation; `tests/test_audit.py` asserts the
+corpus-wide `pct_verified == 100.0` with an empty offender list. The
+full reasoning lives in `backend/docs/MODEL_CARD.md`.
+
+---
+
 ## Architecture
 
 ```
@@ -254,7 +341,7 @@ palantir/
 │   ├── app/
 │   │   ├── api/                 patients, actions, stats, floor, analytics,
 │   │   │                        handoff, capacity, sandbox, interactions,
-│   │   │                        evaluation, simulate
+│   │   │                        evaluation, simulate, census, audit
 │   │   ├── data/                synthetic note generator + ICD-10 reference
 │   │   ├── db/                  SQLAlchemy + session factory
 │   │   ├── models/              ORM + Pydantic schemas
@@ -262,8 +349,9 @@ palantir/
 │   │   ├── protocols/           library of 12 care pathways
 │   │   └── services/            bottleneck cascade, silent-failure detector,
 │   │                            SLA policy, capacity model, interaction engine,
-│   │                            eval harness
-│   ├── tests/                   pytest suite (335 tests covering all layers)
+│   │                            longitudinal trends, census/handoff snapshots,
+│   │                            provenance/audit export, eval harness
+│   ├── tests/                   pytest suite (382 tests covering all layers)
 │   ├── tools/                   eval_harness.py — offline rule-tuning loop
 │   └── requirements.txt
 ├── frontend/                    React + TypeScript + Vite
@@ -296,9 +384,16 @@ palantir/
 - **scikit-learn** TF-IDF + cosine similarity for ICD-10 retrieval
 - **Pure-Python regex** rule engine for the protocol matcher,
   negation tagging, and interaction screening
-- **SQLAlchemy ORM** with `Patient`, `Triage`, `Action`, `ActionEvent` (audit) tables
-- **pytest** suite, 335 tests, runs in about two seconds; full pipeline
-  classifies a note in single-digit milliseconds
+- **SQLAlchemy ORM** with `Patient`, `Triage`, `Action`, `ActionEvent`
+  (audit), `NoteVersion` (prior notes for trajectory), `CensusSnapshot`,
+  and `HandoffSnapshot` tables
+- **pytest** suite, 382 tests (incl. property, fuzz, and audit-invariant
+  tests), runs in under twenty seconds; full pipeline classifies a note
+  in single-digit milliseconds
+- **Provability layer** — `app/services/audit.py` + `GET /audit/*`
+  re-verify every evidence span against its note
+  (`note_text[start:end] == span.text`); the full method and reproduction
+  commands are in `backend/docs/MODEL_CARD.md`
 
 ### Frontend stack
 
@@ -308,9 +403,18 @@ palantir/
 - No external UI kit, no charting library — every visualization
   (census step chart included) is plain SVG / divs
 - Command palette (`⌘K`), keyboard shortcuts (`g`+letter), bulk select with `x`
+- **TrajectoryPanel** (longitudinal lab trends + sparklines + the
+  "gaps closed across notes" block) on the patient detail page
+- **StoryMode** — a guided, keyboard-driven demo tour (`★ STORY` in the
+  titlebar, the command palette, or `Shift+S`) that walks the whole
+  product as one narrated story: queue → P-1002 drill-down → trajectory →
+  sandbox → capacity → model card → analytics → floor. The script lives
+  as data in `src/lib/storyScript.ts`; `→`/Space advance, `Esc` exits,
+  `p` auto-plays.
 - Titlebar extras: a **LIVE TICK** button (`POST /simulate/tick` —
   seeded, deterministic admits/discharges/action progress so the floor
-  visibly moves during a demo) and a real API-latency health badge
+  visibly moves during a demo, and which also captures a census snapshot)
+  and a real API-latency health badge
 
 ---
 
