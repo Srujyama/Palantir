@@ -51,6 +51,10 @@ Only you can do these. Everything else is in the repo.
    `foundry_export/06_demo_video_script.md`. Do the pre-flight
    checklist completely — especially the re-ingest and the
    create-the-breaching-action step 65+ minutes before recording.
+   To boot the local reference app cleanly for the recording, run
+   `./run-demo.sh` from the repo root (it picks free ports and opens
+   on :5173) rather than starting the two servers by hand — that
+   avoids the port-8000 collision that silently breaks the proxy.
 6. **Upload to YouTube as Unlisted.** Confirm the runtime is under
    4:00. Watch it once end-to-end at full volume before sending.
 7. **Email the recruiter** the unlisted link. One short paragraph:

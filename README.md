@@ -420,6 +420,19 @@ palantir/
 
 ## Running locally
 
+**Fastest path — one command:**
+
+```bash
+./run-demo.sh        # picks free ports, ingests data on first run, opens on :5173
+```
+
+`run-demo.sh` starts the backend on the first free port at/above 8001, points
+the frontend's `/api` proxy at it, waits until the API answers, and prints the
+URL to open. Ctrl-C stops both. Use this for recording — it sidesteps the
+common case where another local app is squatting on port 8000.
+
+**Manual path:**
+
 ```bash
 # Backend
 cd backend
