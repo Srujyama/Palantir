@@ -102,7 +102,7 @@ function Titlebar() {
       </Link>
       <NavTabs />
       <div className="right">
-        <Link to="/" style={{ color: "var(--fg-2)" }}>← Landing</Link>
+        <Link to="/" style={{ color: "var(--fg-2)" }}>Landing</Link>
         <button
           className="kb-hint-pill mono"
           onClick={() => window.dispatchEvent(new CustomEvent("radar:start-story"))}
@@ -113,7 +113,7 @@ function Titlebar() {
             letterSpacing: "0.08em",
           }}
         >
-          ★ STORY
+          Tour
         </button>
         <button
           className="kb-hint-pill mono"
@@ -126,10 +126,10 @@ function Titlebar() {
             letterSpacing: "0.08em",
           }}
         >
-          {ticking ? "TICKING…" : "▸ LIVE TICK"}
+          {ticking ? "Advancing…" : "Advance shift"}
         </button>
         <span className="kb-hint-pill mono">⌘K</span>
-        <span>v0.2 · NOTIONAL DATA</span>
+        <span>Notional data</span>
         {health === null && <span style={{ color: "var(--fg-3)" }}>● API —</span>}
         {health !== null && health.ok && (
           <span style={{ color: "var(--signal-green)" }}>

@@ -56,7 +56,7 @@ export function CommandPalette() {
     const actions: CommandItem[] = [
       {
         id: "act-tick",
-        label: "Run live tick",
+        label: "Advance shift",
         hint: "+60 min",
         kind: "action",
         // Route through the titlebar's guarded runTick (in-flight lock + toast)

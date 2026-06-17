@@ -163,7 +163,7 @@ const FAQ: Array<{ q: string; a: string }> = [
   },
   {
     q: "How real is the data?",
-    a: "Entirely notional. Notes are synthesized from 27 templates that encode realistic bottleneck patterns, then varied for age, sex, and arrival time. 176 patients in the demo, spread across 6 wings and 180 beds. No PHI, no real chart text. The same pipeline runs unchanged on real notes in a Foundry deployment with the appropriate ontology.",
+    a: "Entirely notional. Notes are synthesized from 44 templates that encode realistic bottleneck patterns, then varied for age, sex, and arrival time. 176 patients in the demo, spread across 6 wings and 180 beds. No PHI, no real chart text. The same pipeline runs unchanged on real notes in a Foundry deployment with the appropriate ontology.",
   },
   {
     q: "Why 12 care pathways?",
@@ -216,10 +216,10 @@ export function LandingPage() {
       <section className="hero">
         <div className="container hero-grid">
           <div>
-            <div className="hero-eyebrow">Hospital Operations · Throughput Intelligence</div>
+            <div className="hero-eyebrow">Hospital Operations · Patient Throughput</div>
             <h1 className="hero-title">
               Every patient on the floor has a reason they aren't moving.{" "}
-              <span className="em">Make that reason legible to operations.</span>
+              <span className="em">This surfaces it, and routes it to whoever can clear it.</span>
             </h1>
             <p className="hero-lede">
               Bottleneck Radar is an operational coordination tool for hospital
@@ -322,7 +322,7 @@ export function LandingPage() {
         <div className="container two-col">
           <div>
             <div className="section-eyebrow">Why this exists</div>
-            <h2 className="section-title">Throughput is a triage problem, not a dashboard problem.</h2>
+            <h2 className="section-title">The board tells you who is slow. It doesn't tell you why.</h2>
             <p>
               Every hospital already has census boards, EMR worklists and
               capacity huddles. They tell you a patient has been on the floor
@@ -430,7 +430,7 @@ to medicine.`}
       <section className="section-pad" style={{ background: "var(--paper-2)" }}>
         <div className="container">
           <div className="section-eyebrow">What you see in the console</div>
-          <h2 className="section-title">Five views, one operational pipeline behind them.</h2>
+          <h2 className="section-title">One pipeline behind every screen.</h2>
           <p className="section-blurb">
             The same data backs every screen. The console is intentionally
             calm: monochrome surfaces, signal color reserved for urgency,
@@ -519,10 +519,10 @@ to medicine.`}
             </p>
             <p>
               The Foundry export folder ships everything to lift the same
-              pipeline into AIP: four CSVs for the raw layer, an ontology
-              spec, a self-contained Python transform for the protocol-gap
-              pipeline, the function spec for{" "}
-              <em>classify_bottleneck</em>, and a Workshop storyboard.
+              pipeline into AIP: the raw-layer CSVs, an ontology spec, a
+              self-contained Python transform for the protocol-gap pipeline,
+              the executable AIP Logic port of <em>classify_bottleneck</em>,
+              and a Workshop storyboard.
             </p>
           </div>
           <div>
@@ -565,11 +565,11 @@ to medicine.`}
       <section className="section-pad" style={{ borderBottom: "none" }}>
         <div className="container" style={{ textAlign: "center", maxWidth: 720 }}>
           <h2 className="section-title" style={{ fontSize: 36 }}>
-            The console is open. One-seventy-six patients are on the floor.
+            176 patients are on the floor right now.
           </h2>
           <p className="section-blurb" style={{ margin: "0 auto 32px" }}>
-            One of them has a documented care-pathway step missing from the
-            chart. See if you can find them in under thirty seconds.
+            Open the console and see which ones are stuck, why, and who owns
+            the next move.
           </p>
           <Link to="/dashboard" className="cta-primary">
             <span>Enter the operations console</span>
