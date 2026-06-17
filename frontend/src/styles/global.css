@@ -10,35 +10,35 @@
    ========================================================================= */
 
 :root {
-  /* Surface scale — near-black, increasingly lighter */
-  --bg-0: #0a0c10;             /* page */
-  --bg-1: #0f1218;             /* primary panels */
-  --bg-2: #161a23;             /* nested panels, table headers */
-  --bg-3: #1d2230;             /* hover states */
-  --bg-4: #262c3b;             /* selected row, code blocks */
-  --bg-5: #323948;             /* input borders, dividers */
+  /* Surface scale — warm neutral charcoal, matte, no blue cast */
+  --bg-0: #14140f;             /* page — warm near-black */
+  --bg-1: #1a1a15;             /* primary panels */
+  --bg-2: #21211b;             /* nested panels, table headers */
+  --bg-3: #292922;             /* hover states */
+  --bg-4: #33332b;             /* selected row, code blocks */
+  --bg-5: #3f3f36;             /* input borders, dividers */
 
-  /* Foreground scale */
-  --fg-0: #f4f6fb;             /* highest contrast */
-  --fg-1: #c9d1e0;             /* body */
-  --fg-2: #8b95ab;             /* secondary, labels */
-  --fg-3: #5b6478;             /* tertiary, captions */
-  --fg-4: #3a4254;             /* disabled */
+  /* Foreground scale — warm off-white, never stark */
+  --fg-0: #ece9e1;             /* highest contrast */
+  --fg-1: #c4c0b4;             /* body */
+  --fg-2: #908b7e;             /* secondary, labels */
+  --fg-3: #635f54;             /* tertiary, captions */
+  --fg-4: #423f37;             /* disabled */
 
   /* Hairlines */
-  --border: #232a38;
-  --border-strong: #323a4c;
-  --border-active: #4a85d6;
+  --border: #2b2b23;
+  --border-strong: #3a3a31;
+  --border-active: #6f8a6a;
 
-  /* Signal — only used to encode urgency / status */
-  --signal-red: #f25c5c;
-  --signal-red-bg: #2c1418;
-  --signal-amber: #f0a93b;
-  --signal-amber-bg: #2a1f10;
-  --signal-green: #5dca8a;
-  --signal-green-bg: #102018;
-  --signal-blue: #4a85d6;       /* informational accent — links, focus rings */
-  --signal-blue-bg: #11243d;
+  /* Signal — muted/clinical, not neon. Encodes urgency / status only. */
+  --signal-red: #c96a5e;        /* clay red */
+  --signal-red-bg: #2a1a16;
+  --signal-amber: #c79a55;      /* ochre */
+  --signal-amber-bg: #271f12;
+  --signal-green: #7f9b6f;      /* sage */
+  --signal-green-bg: #1a2017;
+  --signal-blue: #6f8a9e;       /* slate — links, focus rings */
+  --signal-blue-bg: #182127;
 
   /* Type */
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -321,7 +321,7 @@ table.data .truncate { max-width: 320px; overflow: hidden; text-overflow: ellips
   display: inline-block;
 }
 .urgency-pill.red    { color: var(--signal-red);   background: var(--signal-red-bg);   border-color: var(--signal-red); }
-.urgency-pill.red    .dot { background: var(--signal-red); box-shadow: 0 0 6px var(--signal-red); }
+.urgency-pill.red    .dot { background: var(--signal-red); }
 .urgency-pill.amber  { color: var(--signal-amber); background: var(--signal-amber-bg); border-color: var(--signal-amber); }
 .urgency-pill.amber  .dot { background: var(--signal-amber); }
 .urgency-pill.green  { color: var(--signal-green); background: var(--signal-green-bg); border-color: var(--signal-green); }
