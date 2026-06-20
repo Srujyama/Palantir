@@ -1,0 +1,21 @@
+# No third-party dependencies.
+#
+# The Bottleneck Radar classifier is stdlib-only: it uses just `re` and
+# `dataclasses` from the Python standard library. There are ZERO machine-
+# learning dependencies in the recommendation path — no numpy, no pandas,
+# no scikit-learn, no model-serving libraries.
+#
+# This is deliberate and is a selling point: the path that produces a
+# recommendation is fully deterministic and dependency-free, so it cannot
+# drift, has nothing to version-pin, and carries no LLM/ML supply chain.
+#
+# The Foundry-provided Functions runtime supplies the `@function` decorator
+# itself; it is part of the platform image, not a pip dependency you declare
+# here. Add nothing below this comment block.
+#
+# IMPORTANT: do NOT blank out the scaffold's existing dependency file. Foundry
+# Python Functions repos ship a populated requirements (or a meta.yaml /
+# conda recipe) that pins the functions runtime and Python version; deleting
+# those lines breaks the build. Keep whatever the scaffold generated and just
+# refrain from adding third-party packages of your own — the classifier needs
+# none.

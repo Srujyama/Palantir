@@ -17,3 +17,8 @@ backend/app/db/radar.db
 *.zip
 foundry_export/__pycache__/
 backend/.hypothesis/
+
+# Foundry build runbooks are hand-authored deliverables, not compiled output —
+# keep them tracked despite the generic build/ rule above.
+!foundry_export/build/
+!foundry_export/build/**
