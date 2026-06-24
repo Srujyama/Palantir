@@ -90,9 +90,12 @@ They match the local app's live screens 1:1. Quote these on camera with confiden
 
 ### STEP 3 — Apply / infer schema on each dataset  ⏱ ~10 min  · CRITICAL
 > `upload_csvs.py` only writes files + commits. CSV columns are untyped until you apply a schema.
+> **(STEP 1 + 2 are DONE — token authed, all 4 files uploaded & read-back-verified on master 2026-06-24.)**
 
-- [ ] For each of the 4 datasets, open its dataset page in Foundry → **Apply schema** (infer from CSV). Confirm column types look sane (strings/ints/timestamps).
-- [ ] Alternatively, let **Pipeline Builder prompt you** to infer the schema on first use (Step 5) — but doing it now avoids a mid-pipeline surprise.
+- [ ] For each of the 4 datasets, open its dataset page in Foundry → **Apply schema** (infer from CSV). Confirm column types: `age`→Integer, `arrival_time`→Timestamp, rest String.
+- [ ] **`notes` dataset — DO NOT SKIP THIS (verified live):** `note_text` is valid RFC-4180 with quoted multiline cells — **all 176 notes contain embedded newlines.** In the schema/parse dialog, enable **multiline** parsing with **quote char `"`**. Then confirm the dataset shows **exactly 176 rows**. If it shows ~904 rows, multiline parsing is OFF — fix it before continuing, or every note will be shredded across rows and the whole demo breaks.
+- [ ] `patients` should show **176 rows**; `protocols` **47 rows**; `icd10_reference` **39 rows**.
+- [ ] Alternatively, let **Pipeline Builder / Code Repositories prompt you** to infer the schema on first use (Step 5) — but doing it now avoids a mid-pipeline surprise.
 
 ### STEP 4 — Build the core-five ontology  ⏱ ~45–60 min  · CRITICAL
 > Full instructions: **`RUNBOOK_ontology.md`**. Names must match the CSVs 1:1 or the transform won't map.
