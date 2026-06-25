@@ -40,9 +40,19 @@
   --signal-blue: #6f8a9e;       /* slate — links, focus rings */
   --signal-blue-bg: #182127;
 
-  /* Type */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Type — Archivo grotesque (engineered, squared terminals) + JetBrains Mono.
+     Inter retired: it read as default. Archivo carries instrument-grade
+     character while staying legible at dense operational sizes. */
+  --font-sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Archivo Expanded", "Archivo", sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Depth — the flat fills lacked atmosphere. These add subtle layering and a
+     film-grain texture on the shell without breaking the matte console look. */
+  --panel-edge: inset 0 1px 0 rgba(236, 233, 225, 0.03);   /* top inner highlight */
+  --panel-lift: 0 1px 0 rgba(0, 0, 0, 0.4);                /* hairline drop */
+  --glow-red: 0 0 0 1px rgba(201, 106, 94, 0.25), 0 0 12px -4px rgba(201, 106, 94, 0.5);
+  --grain-opacity: 0.025;
 
   /* Spacing scale (4px grid) */
   --s-1: 4px;
@@ -72,6 +82,29 @@ html, body, #root {
 }
 
 .app-shell { background: var(--bg-0); color: var(--fg-1); }
+
+/* Atmosphere: a faint film grain + warm vignette over the whole shell.
+   CSS-only (inline SVG fractal noise) — no asset, no JS. Sits above the
+   background, below content, and is click-through. This is what separates a
+   flat charcoal fill from a surface with depth. */
+.app-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+.app-shell::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% -10%, rgba(199, 154, 85, 0.045), transparent 55%);
+}
 
 a {
   color: var(--signal-blue);
@@ -198,31 +231,48 @@ input:focus, select:focus, textarea:focus {
   border-bottom: 1px solid var(--border);
 }
 .kpi {
+  position: relative;
   padding: var(--s-4) var(--s-5);
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column; gap: var(--s-1);
+  box-shadow: var(--panel-edge);
+  transition: background 120ms ease;
 }
 .kpi:last-child { border-right: 0; }
+.kpi:hover { background: var(--bg-2); }
+/* Hairline status accent on signal cards — a 2px top rule in the signal color,
+   so red/amber/green read instantly across the strip without shouting. */
+.kpi.signal-red::before,
+.kpi.signal-amber::before,
+.kpi.signal-green::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.kpi.signal-red::before   { background: var(--signal-red); }
+.kpi.signal-amber::before { background: var(--signal-amber); }
+.kpi.signal-green::before { background: var(--signal-green); }
 .kpi .label {
   font-family: var(--font-mono);
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--fg-3);
 }
 .kpi .value {
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 600;
+  line-height: 1.1;
   color: var(--fg-0);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 .kpi .delta {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--fg-2);
 }
-.kpi.signal-red .value { color: var(--signal-red); }
+.kpi.signal-red .value   { color: var(--signal-red); }
 .kpi.signal-amber .value { color: var(--signal-amber); }
 .kpi.signal-green .value { color: var(--signal-green); }
 
@@ -319,13 +369,29 @@ table.data .truncate { max-width: 320px; overflow: hidden; text-overflow: ellips
 .urgency-pill .dot {
   width: 6px; height: 6px;
   display: inline-block;
+  border-radius: 50%;
 }
 .urgency-pill.red    { color: var(--signal-red);   background: var(--signal-red-bg);   border-color: var(--signal-red); }
-.urgency-pill.red    .dot { background: var(--signal-red); }
+.urgency-pill.red    .dot {
+  background: var(--signal-red);
+  box-shadow: 0 0 0 0 rgba(201, 106, 94, 0.6);
+  animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 .urgency-pill.amber  { color: var(--signal-amber); background: var(--signal-amber-bg); border-color: var(--signal-amber); }
 .urgency-pill.amber  .dot { background: var(--signal-amber); }
 .urgency-pill.green  { color: var(--signal-green); background: var(--signal-green-bg); border-color: var(--signal-green); }
 .urgency-pill.green  .dot { background: var(--signal-green); }
+
+/* Critical dot breathes — a live-floor signal. Subtle: a single expanding
+   ring, not a strobe. Honors reduced-motion below. */
+@keyframes pulse-red {
+  0%   { box-shadow: 0 0 0 0 rgba(201, 106, 94, 0.55); }
+  70%  { box-shadow: 0 0 0 5px rgba(201, 106, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 106, 94, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .urgency-pill.red .dot { animation: none; }
+}
 
 .tag {
   display: inline-block;
@@ -464,13 +530,23 @@ table.data .truncate { max-width: 320px; overflow: hidden; text-overflow: ellips
   color: var(--fg-1);
   padding: var(--s-4) var(--s-6);
 }
+/* Evidence span — the verifiability proof. A left tick + solid underline reads
+   as "the system is pointing AT this text", stronger than a dotted hint. */
 .note-text .ev {
   background: var(--signal-amber-bg);
-  border-bottom: 1px dotted var(--signal-amber);
+  border-bottom: 2px solid var(--signal-amber);
+  box-shadow: -2px 0 0 var(--signal-amber);
   color: var(--fg-0);
-  padding: 1px 2px;
+  padding: 1px 3px;
+  font-weight: 500;
+  transition: background 140ms ease;
 }
-.note-text .ev.red { background: var(--signal-red-bg); border-bottom-color: var(--signal-red); }
+.note-text .ev:hover { background: var(--bg-4); }
+.note-text .ev.red {
+  background: var(--signal-red-bg);
+  border-bottom-color: var(--signal-red);
+  box-shadow: -2px 0 0 var(--signal-red);
+}
 
 .protocol-table {
   width: 100%;
